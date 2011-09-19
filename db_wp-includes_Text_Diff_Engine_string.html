@@ -1,0 +1,269 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/Text/Diff/Engine/string.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CText_Diff_Engine_string">\Text_Diff_Engine_string</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Parses unified or context diffs output from eg. the diff utility.</p>
+<div class="long-description"><p>Example:</p>
+
+<pre><code>$patch = file_get_contents('example.patch');
+$diff = new Text_Diff('string', array($patch));
+$renderer = new Text_Diff_Renderer_inline();
+echo $renderer->render($diff);
+</code></pre>
+
+<p>Copyright 2005 Örjan Persson <a href="&#109;&#97;&#105;&#x6c;&#x74;o&#58;&#111;&#64;&#x34;&#x32;m&#109;&#46;&#111;&#x72;&#x67;">&#111;&#64;&#x34;&#x32;m&#109;&#46;&#111;&#x72;&#x67;</a>
+Copyright 2005-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:o@42mm.org">Örjan Persson</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>Text_Diff
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.2.0
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\Text_Diff_Engine_string" class="anchor"></a><h2 class="class">\Text_Diff_Engine_string<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description">Parses unified or context diffs output from eg. the diff utility.</p>
+<div class="long-description"><p>Example:</p>
+
+<pre><code>$patch = file_get_contents('example.patch');
+$diff = new Text_Diff('string', array($patch));
+$renderer = new Text_Diff_Renderer_inline();
+echo $renderer->render($diff);
+</code></pre>
+
+<p>Copyright 2005 Örjan Persson <a href="&#109;&#97;&#105;&#x6c;&#x74;o&#58;&#111;&#64;&#x34;&#x32;m&#109;&#46;&#111;&#x72;&#x67;">&#111;&#64;&#x34;&#x32;m&#109;&#46;&#111;&#x72;&#x67;</a>
+Copyright 2005-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+<dl class="class-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:o@42mm.org">Örjan Persson</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.2.0
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Engine_string::diff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">diff</span><span class="nb-faded-text">(
+          string $diff, string $mode
+              =
+              'autodetect'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parses a unified or context diff.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>First param contains the whole diff and the second can be used to force
+a specific diff type. If the second parameter is 'autodetect', the
+diff will be examined to find out which type of diff this is.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$diff</th>
+<td>string</td>
+<td><em><p>The diff content.</p></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>string</td>
+<td><em><p>The diff mode of the content in $diff. One of 'context', 'unified', or 'autodetect'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of all diff operations.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_string::parseContextDiff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">parseContextDiff</span><span class="nb-faded-text">(
+          array $diff
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parses an array containing the context diff.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$diff</th>
+<td>array</td>
+<td><em><p>Array of lines.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of all diff operations.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_string::parseUnifiedDiff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">parseUnifiedDiff</span><span class="nb-faded-text">(
+          array $diff
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parses an array containing the unified diff.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$diff</th>
+<td>array</td>
+<td><em><p>Array of lines.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of all diff operations.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

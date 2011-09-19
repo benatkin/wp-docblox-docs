@@ -1,0 +1,4372 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/link-template.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress Link Template Functions</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Template
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_get_page_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_page_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              false, bool $leavename
+              =
+              false, bool $sample
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the page permalink.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Ignores page_on_front. Internal use only.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$leavename</th>
+<td>bool</td>
+<td><em><p>Optional. Leave name.</p></em></td>
+</tr>
+<tr>
+<th>$sample</th>
+<td>bool</td>
+<td><em><p>Optional. Sample permalink.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::adjacent_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">adjacent_post_link</span><span class="nb-faded-text">(
+          string $format, string $link, bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              '', bool $previous
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display adjacent post link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can be either next post link or previous.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>Link anchor format.</p></em></td>
+</tr>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Link permalink format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+<tr>
+<th>$previous</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether display link to previous post.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::adjacent_posts_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">adjacent_posts_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational links for the posts adjacent to the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::adjacent_posts_rel_link_wp_head()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">adjacent_posts_rel_link_wp_head</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational links for the posts adjacent to the current post for single post pages.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is meant to be attached to actions like 'wp_head'.  Do not call this directly in plugins or theme templates.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::admin_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">admin_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the admin area for the current site.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the admin url</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Admin url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::content_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">content_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the content directory.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the content url.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::edit_bookmark_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">edit_bookmark_link</span><span class="nb-faded-text">(
+          string $link
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              '', int $bookmark
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display edit bookmark (literally a URL external to blog) link anchor content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Anchor text.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Display before edit link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Display after edit link.</p></em></td>
+</tr>
+<tr>
+<th>$bookmark</th>
+<td>int</td>
+<td><em><p>Optional. Bookmark ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::edit_comment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">edit_comment_link</span><span class="nb-faded-text">(
+          string $link
+              =
+              null, string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve edit comment link with formatting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Anchor text.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Display before edit link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Display after edit link.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>HTML content, if $echo is set to false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::edit_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">edit_post_link</span><span class="nb-faded-text">(
+          string $link
+              =
+              null, string $before
+              =
+              '', string $after
+              =
+              '', int $id
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display edit post link for post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Anchor text.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Display before edit link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Display after edit link.</p></em></td>
+</tr>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::edit_tag_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">edit_tag_link</span><span class="nb-faded-text">(
+          string $link
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              '', int|object $tag
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display or retrieve edit tag link with formatting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Anchor text.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Display before edit link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Display after edit link.</p></em></td>
+</tr>
+<tr>
+<th>$tag</th>
+<td>int|object</td>
+<td><em><p>Tag object or ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::edit_term_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">edit_term_link</span><span class="nb-faded-text">(
+          string $link
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              '', object $term
+              =
+              null,  $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display or retrieve edit term link with formatting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Anchor text.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Display before edit link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Display after edit link.</p></em></td>
+</tr>
+<tr>
+<th>$term</th>
+<td>object</td>
+<td><em><p>Term object</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_adjacent_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_adjacent_post</span><span class="nb-faded-text">(
+          bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              '', bool $previous
+              =
+              true
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve adjacent post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can either be next or previous post.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether post should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+<tr>
+<th>$previous</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to retrieve previous post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_adjacent_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_adjacent_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              '', bool $previous
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get adjacent post relational link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can either be next or previous post relational link.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+<tr>
+<th>$previous</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether display link to previous post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_admin_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_admin_url</span><span class="nb-faded-text">(
+          int $blog_id
+              =
+              null, string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the admin area for a given site.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>(optional) Blog ID. Defaults to current blog.</p>
+</em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the admin url</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Admin url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_attachment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_attachment_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve permalink for attachment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This can be used in the WordPress Loop or outside of it.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_author_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_author_feed_link</span><span class="nb-faded-text">(
+          int $author_id, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the feed link for a given author.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns a link to the feed for all posts by a given author. A specific feed
+can be requested or left blank to get the default feed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$author_id</th>
+<td>int</td>
+<td><em><p>ID of an author.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Link to the feed for the author specified by $author_id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Feed
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_boundary_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_boundary_post</span><span class="nb-faded-text">(
+          bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              '', bool $start
+              =
+              true
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Retrieve boundary post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Boundary being either the first or last post by publish date within the constraints specified
+by in same category or excluded categories.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether returned post should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+<tr>
+<th>$start</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to retrieve first or last post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_category_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_category_feed_link</span><span class="nb-faded-text">(
+          int $cat_id, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the feed link for a category.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns a link to the feed for all post in a given category. A specific feed
+can be requested or left blank to get the default feed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_id</th>
+<td>int</td>
+<td><em><p>ID of a category.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Link to the feed for the category specified by $cat_id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Feed
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comments_pagenum_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comments_pagenum_link</span><span class="nb-faded-text">(
+          int $pagenum
+              =
+              1,  $max_page
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve page numbers links.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pagenum</th>
+<td>int</td>
+<td><em><p>Optional. Page number.</p></em></td>
+</tr>
+<tr>
+<th>$max_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_dashboard_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_dashboard_url</span><span class="nb-faded-text">(
+          int $user_id, string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the URL to the user's dashboard.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If a user does not belong to any sites, the global user dashboard is used.  If the user belongs to the current site,
+the dashboard for the current site is returned.  If the user cannot edit the current site, the dashboard to the user's
+primary blog is returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the dashboard. Use only paths known to both blog and user admins.</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Dashboard url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_day_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_day_link</span><span class="nb-faded-text">(
+          bool|int $year, bool|int $month, bool|int $day
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the day archives with year and month.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$year</th>
+<td>bool|int</td>
+<td><em><p>False for current year. Integer of year.</p></em></td>
+</tr>
+<tr>
+<th>$month</th>
+<td>bool|int</td>
+<td><em><p>False for current month. Integer of month.</p></em></td>
+</tr>
+<tr>
+<th>$day</th>
+<td>bool|int</td>
+<td><em><p>False for current day. Integer of day.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_delete_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_delete_post_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, string $deprecated
+              =
+              '', bool $force_delete
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve delete posts link for post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can be used within the WordPress loop or outside of it, with any post type.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Not used.</p></em></td>
+</tr>
+<tr>
+<th>$force_delete</th>
+<td>bool</td>
+<td><em><p>Whether to bypass trash and force deletion. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_bookmark_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_bookmark_link</span><span class="nb-faded-text">(
+          int $link
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display edit bookmark (literally a URL external to blog) link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>int</td>
+<td><em><p>Optional. Bookmark ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_comment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_comment_link</span><span class="nb-faded-text">(
+          int $comment_id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve edit comment link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Optional. Comment ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_post_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve edit posts link for post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can be used within the WordPress loop or outside of it. Can be used with
+pages, posts, attachments, and revisions.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional, default to display. How to write the '&', defaults to '&'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_profile_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_profile_url</span><span class="nb-faded-text">(
+          int $user, string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the URL to the user's profile editor.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Dashboard url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_tag_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_tag_link</span><span class="nb-faded-text">(
+          int $tag_id, string $taxonomy
+              =
+              'post_tag'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve edit tag link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag_id</th>
+<td>int</td>
+<td><em><p>Tag ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_edit_term_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_edit_term_link</span><span class="nb-faded-text">(
+          int $term_id, string $taxonomy, string $object_type
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve edit term url.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>Term ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy</p></em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>string</td>
+<td><em><p>The object type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_feed_link</span><span class="nb-faded-text">(
+          string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the feed type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional, defaults to default feed. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_home_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_home_url</span><span class="nb-faded-text">(
+          int $blog_id
+              =
+              null, string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the home url for a given site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the 'home' option with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>(optional) Blog ID. Defaults to current blog.</p>
+</em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>(optional) Path relative to the home url.</p>
+</em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>(optional) Scheme to give the home url context. Currently 'http','https'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Home url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_month_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_month_link</span><span class="nb-faded-text">(
+          bool|int $year, bool|int $month
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the month archives with year.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$year</th>
+<td>bool|int</td>
+<td><em><p>False for current year. Integer of year.</p></em></td>
+</tr>
+<tr>
+<th>$month</th>
+<td>bool|int</td>
+<td><em><p>False for current month. Integer of month.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_next_comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_next_comments_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              '', int $max_page
+              =
+              0
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Return the link to next comments pages.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Label for link text.</p></em></td>
+</tr>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_next_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_next_post</span><span class="nb-faded-text">(
+          bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve next post that is adjacent to current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether post should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_next_posts_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_next_posts_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              null, int $max_page
+              =
+              0
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Return the next posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Content for link text.</p></em></td>
+</tr>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max pages.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_next_posts_page_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_next_posts_page_link</span><span class="nb-faded-text">(
+          int $max_page
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve next posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Backported from 2.1.3 to 2.0.10.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max pages.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.10
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_page_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_page_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              false, bool $leavename
+              =
+              false, bool $sample
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for current page or page ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Respects page_on_front. Use this one.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$leavename</th>
+<td>bool</td>
+<td><em><p>Optional, defaults to false. Whether to keep page name.</p></em></td>
+</tr>
+<tr>
+<th>$sample</th>
+<td>bool</td>
+<td><em><p>Optional, defaults to false. Is it a sample permalink.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_pagenum_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_pagenum_link</span><span class="nb-faded-text">(
+          int $pagenum
+              =
+              1
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve get links for page numbers.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pagenum</th>
+<td>int</td>
+<td><em><p>Optional. Page ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_permalink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_permalink</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $leavename
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve full permalink for current post or post ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$leavename</th>
+<td>bool</td>
+<td><em><p>Optional, defaults to false. Whether to keep post name or page name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_comments_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_comments_feed_link</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the post comments feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_permalink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_permalink</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $leavename
+              =
+              false, bool $sample
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for a post with a custom post type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$leavename</th>
+<td>bool</td>
+<td><em><p>Optional, defaults to false. Whether to keep post name.</p></em></td>
+</tr>
+<tr>
+<th>$sample</th>
+<td>bool</td>
+<td><em><p>Optional, defaults to false. Is it a sample permalink.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_type_archive_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_type_archive_feed_link</span><span class="nb-faded-text">(
+          string $post_type, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for a post type archive feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_type</th>
+<td>string</td>
+<td><em><p>Post type</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_type_archive_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_type_archive_link</span><span class="nb-faded-text">(
+          string $post_type
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for a post type archive.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_type</th>
+<td>string</td>
+<td><em><p>Post type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_posts_nav_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_posts_nav_link</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Return post pages link navigation for previous and next pages.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional args.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The posts link navigation.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_previous_comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_previous_comments_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Return the previous comments page link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Label for comments link text.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_previous_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_previous_post</span><span class="nb-faded-text">(
+          bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve previous post that is adjacent to current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether post should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_previous_posts_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_previous_posts_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              null
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Return the previous posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Previous page link text.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_previous_posts_page_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_previous_posts_page_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Retrieve previous post pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only return string, if not on a single page or post.</p>
+
+<p>Backported to 2.0.10 from 2.1.3.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.10
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_search_comments_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_search_comments_feed_link</span><span class="nb-faded-text">(
+          string $search_query
+              =
+              '', string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the comments feed of the search results.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$search_query</th>
+<td>string</td>
+<td><em><p>Optional. Search query.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_search_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_search_feed_link</span><span class="nb-faded-text">(
+          string $search_query
+              =
+              '', string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the feed of the search results.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$search_query</th>
+<td>string</td>
+<td><em><p>Optional. Search query.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_search_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_search_link</span><span class="nb-faded-text">(
+          string $query
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve permalink for search.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string</td>
+<td><em><p>Optional. The query string to use. If empty the current query is used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_shortcut_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_shortcut_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve shortcut link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use this in 'a' element 'href' attribute.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_site_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_site_url</span><span class="nb-faded-text">(
+          int $blog_id
+              =
+              null, string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the site url for a given site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the 'site_url' option with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>(optional) Blog ID. Defaults to current blog.</p>
+</em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the site url.</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. Scheme to give the site url context. Currently 'http','https', 'login', 'login_post', or 'admin'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Site url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_tag_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_tag_feed_link</span><span class="nb-faded-text">(
+          int $tag_id, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve permalink for feed of tag.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag_id</th>
+<td>int</td>
+<td><em><p>Tag ID.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_feed_link</span><span class="nb-faded-text">(
+          int $term_id, string $taxonomy
+              =
+              'category', string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the feed link for a taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns a link to the feed for all post in a given term. A specific feed
+can be requested or left blank to get the default feed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>ID of a category.</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Optional. Taxonomy of $term_id</p>
+</em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Link to the feed for the taxonomy specified by $term_id and $taxonomy.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_year_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_year_link</span><span class="nb-faded-text">(
+          int|bool $year
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the permalink for the year archives.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$year</th>
+<td>int|bool</td>
+<td><em><p>False for current year or year for permalink.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::home_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">home_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the home url for the current site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the 'home' option with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>(optional) Path relative to the home url.</p>
+</em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>(optional) Scheme to give the home url context. Currently 'http','https'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Home url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_home_url()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::includes_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">includes_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the includes directory.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the includes url.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Includes url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::network_admin_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">network_admin_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the admin area for the network.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the admin url</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Admin url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::network_home_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">network_home_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the home url for the current network.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the home url with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>(optional) Path relative to the home url.</p>
+</em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>(optional) Scheme to give the home url context. Currently 'http','https'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Home url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::network_site_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">network_site_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the site url for the current network.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the site url with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the site url.</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. Scheme to give the site url context. Currently 'http','https', 'login', 'login_post', or 'admin'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Site url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_comments_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              '', int $max_page
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the link to next comments pages.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Label for link text.</p></em></td>
+</tr>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max page.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_post_link</span><span class="nb-faded-text">(
+          string $format
+              =
+              '%link &raquo;', string $link
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display next post link that is adjacent to the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>Optional. Link anchor format.</p></em></td>
+</tr>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Link permalink format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational link for the next post adjacent to the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_posts</span><span class="nb-faded-text">(
+          int $max_page
+              =
+              0, boolean $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display or return the next posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max pages.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>boolean</td>
+<td><em><p>Optional. Echo or return;</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_posts_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_posts_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              null, int $max_page
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the next posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Content for link text.</p></em></td>
+</tr>
+<tr>
+<th>$max_page</th>
+<td>int</td>
+<td><em><p>Optional. Max pages.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_next_posts_link()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::paginate_comments_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">paginate_comments_links</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Create pagination links for the comments on the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional args. See paginate_links.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Markup for pagination links.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\paginate_links()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::permalink_anchor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">permalink_anchor</span><span class="nb-faded-text">(
+          string $mode
+              =
+              'id'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display permalink anchor for current post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The permalink mode title will use the post title for the 'a' element 'id'
+attribute. The id mode uses 'post-' with the post ID for the 'id' attribute.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td>string</td>
+<td><em><p>Permalink mode can be either 'title', 'id', or default, which is 'id'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::plugins_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">plugins_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $plugin
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the plugins directory or to a specific file within that directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can hardcode the plugin slug in $path or pass <strong>FILE</strong> as a second argument to get the correct folder name.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the plugins url.</p></em></td>
+</tr>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Optional. The plugin file that you want to be relative to - i.e. pass in <strong>FILE</strong></p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Plugins url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_comments_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_comments_feed_link</span><span class="nb-faded-text">(
+          string $link_text
+              =
+              '', int $post_id
+              =
+              '', string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display the comment feed link for a post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Prints out the comment feed link for a post. Link text is placed in the
+anchor. If no link text is specified, default text is used. If no post ID is
+specified, the current post is used.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link_text</th>
+<td>string</td>
+<td><em><p>Descriptive text.</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional post ID. Default to current post.</p></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional. Feed format.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Link to the comment feed for the current post.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Feed
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_permalink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_permalink</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0, mixed $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve permalink from post ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>mixed</td>
+<td><em><p>Not used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::posts_nav_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">posts_nav_link</span><span class="nb-faded-text">(
+          string $sep
+              =
+              '', string $prelabel
+              =
+              '', string $nxtlabel
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display post pages link navigation for previous and next pages.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sep</th>
+<td>string</td>
+<td><em><p>Optional. Separator for posts navigation links.</p></em></td>
+</tr>
+<tr>
+<th>$prelabel</th>
+<td>string</td>
+<td><em><p>Optional. Label for previous pages.</p></em></td>
+</tr>
+<tr>
+<th>$nxtlabel</th>
+<td>string</td>
+<td><em><p>Optional Label for next pages.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::prev_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">prev_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational link for the previous post adjacent to the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_comments_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the previous comments page link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Label for comments link text.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_post_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_post_link</span><span class="nb-faded-text">(
+          string $format
+              =
+              '&laquo; %link', string $link
+              =
+              '%title', bool $in_same_cat
+              =
+              false, array|string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display previous post link that is adjacent to the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>Optional. Link anchor format.</p></em></td>
+</tr>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Optional. Link permalink format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>array|string</td>
+<td><em><p>Optional. Array or comma-separated list of excluded category IDs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_posts</span><span class="nb-faded-text">(
+          boolean $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display or return the previous posts pages link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>boolean</td>
+<td><em><p>Optional. Echo or return;</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_posts_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_posts_link</span><span class="nb-faded-text">(
+          string $label
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the previous posts page link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$label</th>
+<td>string</td>
+<td><em><p>Optional. Previous page link text.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_previous_posts_link()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::rel_canonical()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">rel_canonical</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output rel=canonical for singular queries</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::self_admin_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">self_admin_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the admin area for either the current blog or the network depending on context.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the admin url</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Admin url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::site_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">site_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the site url for the current site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the 'site_url' option with the appropriate protocol,  'https' if
+is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+overridden.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Path relative to the site url.</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. Scheme to give the site url context. Currently 'http','https', 'login', 'login_post', or 'admin'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Site url link with optional path appended.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_site_url()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_feed_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_feed_link</span><span class="nb-faded-text">(
+          string $anchor, string $feed
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the permalink for the feed type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$anchor</th>
+<td>string</td>
+<td><em><p>The link's anchor text.</p>
+</em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em><p>Optional, defaults to default feed. Feed type.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_permalink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_permalink</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the permalink for the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_shortlink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_shortlink</span><span class="nb-faded-text">(
+          string $text
+              =
+              '', string $title
+              =
+              '', string|string $before
+              =
+              '',  $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the Short Link for a Post</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Must be called from inside "The Loop"</p>
+
+<p>Call like the_shortlink(__('Shortlinkage FTW'))</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional The link text or HTML to be displayed. Defaults to 'This is the short link.'</p>
+</em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional The tooltip for the link. Must be sanitized. Defaults to the sanitized post title.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string|string</td>
+<td><em><p>Optional HTML to display before the link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_admin_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_admin_url</span><span class="nb-faded-text">(
+          string $path
+              =
+              '', string $scheme
+              =
+              'admin'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url to the admin area for the current user.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional path relative to the admin url</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Admin url link with optional path appended</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_trailingslashit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_trailingslashit</span><span class="nb-faded-text">(
+          string $string, string $type_of_url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve trailing slash string, if blog set for adding trailing slashes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Conditionally adds a trailing slash if the permalink structure has a trailing
+slash, strips the trailing slash if not. The string is passed through the
+'user_trailingslashit' filter. Will remove trailing slash from string, if
+blog is not set to have them.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>URL with or without a trailing slash.</p></em></td>
+</tr>
+<tr>
+<th>$type_of_url</th>
+<td>string</td>
+<td><em><p>The type of URL being considered (e.g. single, category, etc) for use in the filter.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_rewrite
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_shortlink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_shortlink</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, string $context
+              =
+              'post', bool $allow_slugs
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Return a shortlink for a post, page, attachment, or blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function exists to provide a shortlink tag that all themes and plugins can target.  A plugin must hook in to
+provide the actual shortlinks.  Default shortlink support is limited to providing ?p= style links for posts.
+Plugins can short circuit this function via the pre_get_shortlink filter or filter the output
+via the get_shortlink filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>A post or blog id. Default is 0, which means the current post or blog.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Whether the id is a 'blog' id, 'post' id, or 'media' id. If 'post', the post_type of the post is consulted. If 'query', the current query is consulted to determine the id and context. Default is 'post'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$allow_slugs</th>
+<td>bool</td>
+<td><em><p>Whether to allow post slugs in the shortlink. It is up to the plugin how and whether to honor this.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A shortlink or an empty string if no shortlink exists for the requested resource or if shortlinks are not enabled.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_shortlink_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_shortlink_header</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Send a Link: rel=shortlink header if a shortlink is defined for the current page.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Attached to the wp action.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_shortlink()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_shortlink_wp_head()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_shortlink_wp_head</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Inject rel=shortlink into head if a shortlink is defined for the current page.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Attached to the wp_head action.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_shortlink()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

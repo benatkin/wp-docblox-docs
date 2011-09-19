@@ -1,0 +1,3931 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/formatting.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Main WordPress Formatting API.</p>
+<div class="long-description"><p>Handles many functions for formatting output.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_autop_newline_preservation_helper()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_autop_newline_preservation_helper</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Newline preservation help function for wpautop</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>preg_replace_callback matches array</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Returns</dt>
+<dd>string
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_deep_replace()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_deep_replace</span><span class="nb-faded-text">(
+          string|array $search, string $subject
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Perform a deep string replace operation to ensure the values in $search are no longer present</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Repeats the replacement operation until it no longer replaces anything so as to remove "nested" values
+e.g. $subject = '%0%0%0DDD', $search ='%0D', $result ='' rather than the '%0%0DD' that
+str_replace would return</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$search</th>
+<td>string|array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$subject</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_links_add_base()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_links_add_base</span><span class="nb-faded-text">(
+          string $m
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to add a base url to relative links in passed content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$m</th>
+<td>string</td>
+<td><em><p>The matched link.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed link.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_links_add_target()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_links_add_target</span><span class="nb-faded-text">(
+          string $m
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to add a target attribute to all links in passed content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$m</th>
+<td>string</td>
+<td><em><p>The matched link.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed link.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_make_email_clickable_cb()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_make_email_clickable_cb</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to convert email address match to HTML A element.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function was backported from 2.5.0 to 2.3.2. Regex callback for {@link
+make_clickable()}.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Single Regex Match.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML A element with email address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_make_url_clickable_cb()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_make_url_clickable_cb</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to convert URI match to HTML A element.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function was backported from 2.5.0 to 2.3.2. Regex callback for {@link
+make_clickable()}.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Single Regex Match.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML A element with URI address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_make_web_ftp_clickable_cb()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_make_web_ftp_clickable_cb</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to convert URL match to HTML A element.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function was backported from 2.5.0 to 2.3.2. Regex callback for {@link
+make_clickable()}.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Single Regex Match.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML A element with URL address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_iso_convert()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_iso_convert</span><span class="nb-faded-text">(
+          array $match
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Helper function to convert hex encoded chars to ascii</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td>array</td>
+<td><em><p>the preg_replace_callback matches array</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_specialchars()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_specialchars</span><span class="nb-faded-text">(
+          string $string, mixed $quote_style
+              =
+              ENT_NOQUOTES, string $charset
+              =
+              false, boolean $double_encode
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts a number of special characters into their HTML entities.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Specifically deals with: &amp;, &lt;, >, ", and '.</p>
+
+<p>$quote_style can be set to ENT_COMPAT to encode " to
+&quot;, or ENT_QUOTES to do both. Default is ENT_NOQUOTES where no quotes are encoded.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The text which is to be encoded.</p></em></td>
+</tr>
+<tr>
+<th>$quote_style</th>
+<td>mixed</td>
+<td><em><p>Optional. Converts double quotes if set to ENT_COMPAT, both single and double if set to ENT_QUOTES or none if set to ENT_NOQUOTES. Also compatible with old values; converting single quotes if set to 'single', double if set to 'double' or both if otherwise set. Default is ENT_NOQUOTES.</p>
+</em></td>
+</tr>
+<tr>
+<th>$charset</th>
+<td>string</td>
+<td><em><p>Optional. The character encoding of the string. Default is false.</p></em></td>
+</tr>
+<tr>
+<th>$double_encode</th>
+<td>boolean</td>
+<td><em><p>Optional. Whether to encode existing html entities. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The encoded text with HTML entities.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wptexturize_pushpop_element()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wptexturize_pushpop_element</span><span class="nb-faded-text">(
+          string $text, array $stack, string $disabled_elements, string|string $opening
+              =
+              '<',  $closing
+              =
+              '>'
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Search for disabled element tags. Push element to stack on tag open and pop
+on tag close. Assumes first character of $text is tag opening.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to check. First character is assumed to be $opening</p>
+</em></td>
+</tr>
+<tr>
+<th>$stack</th>
+<td>array</td>
+<td><em><p>Array used as stack of opened tag elements</p></em></td>
+</tr>
+<tr>
+<th>$disabled_elements</th>
+<td>string</td>
+<td><em><p>Tags to match against formatted as regexp sub-expression</p>
+</em></td>
+</tr>
+<tr>
+<th>$opening</th>
+<td>string|string</td>
+<td><em><p>Tag opening character, assumed to be 1 character long</p></em></td>
+</tr>
+<tr>
+<th>$closing</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::addslashes_gpc()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">addslashes_gpc</span><span class="nb-faded-text">(
+          string $gpc
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds slashes to escape strings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Slashes will first be removed if magic_quotes_gpc is set, see {@link
+http://www.php.net/magic_quotes} for more details.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$gpc</th>
+<td>string</td>
+<td><em><p>The string returned from HTTP request data.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Returns a string escaped with slashes.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::antispambot()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">antispambot</span><span class="nb-faded-text">(
+          string $emailaddy, int $mailto
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts email addresses characters to HTML entities to block spam bots.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$emailaddy</th>
+<td>string</td>
+<td><em><p>Email address.</p></em></td>
+</tr>
+<tr>
+<th>$mailto</th>
+<td>int</td>
+<td><em><p>Optional. Range from 0 to 1. Used for encoding.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted email address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::backslashit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">backslashit</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds backslashes before letters and before a number at the start of a string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Value to which backslashes will be added.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>String with backslashes inserted.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::balanceTags()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">balanceTags</span><span class="nb-faded-text">(
+          string $text, bool $force
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Will only balance the tags if forced to and the option is set to balance tags.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The option 'use_balanceTags' is used for whether the tags will be balanced.
+Both the $force parameter and 'use_balanceTags' option will have to be true
+before the tags will be balanced.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to be balanced</p></em></td>
+</tr>
+<tr>
+<th>$force</th>
+<td>bool</td>
+<td><em><p>Forces balancing, ignoring the value of the option. Default false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Balanced text</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::capital_P_dangit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">capital_P_dangit</span><span class="nb-faded-text">(
+           $text
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Forever eliminate "Wordpress" from the planet (or at least the little bit we can influence).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Violating our coding standards for a good function name.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_pre()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_pre</span><span class="nb-faded-text">(
+          array|string $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Accepts matches array from preg_replace_callback in wpautop() or a string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Ensures that the contents of a &lt;</p>
+
+<pre>>...<</pre>
+
+<blockquote>
+  <p>HTML block are not
+  converted into paragraphs or line-breaks.</p>
+</blockquote>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array|string</td>
+<td><em><p>The array or string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The pre block without paragraph/line-break conversion.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::convert_chars()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">convert_chars</span><span class="nb-faded-text">(
+          string $content, string $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts a number of characters from a string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Metadata tags &lt;<title>> and &lt;<category>> are removed, &lt;<br>> and &lt;</p>
+
+<hr>
+
+<blockquote>
+  <p>are
+  converted into correct XHTML and Unicode characters are converted to the
+  valid range.</p>
+</blockquote>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>String of characters to be converted.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Not used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::convert_smilies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">convert_smilies</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert text equivalent of smilies to images.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only convert smilies if the option 'use_smilies' is true and the global
+used in the function isn't empty.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Content to convert smilies from text.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted content with text smilies replaced with images.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_smiliessearch
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::ent2ncr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">ent2ncr</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts named entities into numbered entities.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text within which entities will be converted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Text with converted entities.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_attr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_attr</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escaping for HTML attributes.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_html()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_html</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escaping for HTML blocks.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_js()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_js</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escape single quotes, htmlspecialchar " < > &, and fix line endings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Escapes text strings for echoing in JS. It is intended to be used for inline JS
+(in a tag attribute, for example onclick="..."). Note that the strings have to
+be in single quotes. The filter 'js_escape' is also applied here.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text to be escaped.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Escaped text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_sql()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_sql</span><span class="nb-faded-text">(
+          string $sql
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escapes data for use in a MySQL query</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is just a handy shortcut for $wpdb->escape(), for completeness' sake</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>string</td>
+<td><em><p>Unescaped SQL data</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The cleaned $sql</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_textarea()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_textarea</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escaping for textarea values.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_url</span><span class="nb-faded-text">(
+          string $url, array $protocols
+              =
+              null, string $_context
+              =
+              'display'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Checks and cleans a URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A number of characters are removed from the URL. If the URL is for displaying
+(the default behaviour) ampersands are also replaced. The 'clean_url' filter
+is applied to the returned cleaned URL.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL to be cleaned.</p></em></td>
+</tr>
+<tr>
+<th>$protocols</th>
+<td>array</td>
+<td><em><p>Optional. An array of acceptable protocols. Defaults to 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' if not set.</p>
+</em></td>
+</tr>
+<tr>
+<th>$_context</th>
+<td>string</td>
+<td><em><p>Private. Use esc_url_raw() for database usage.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The cleaned $url after the 'clean_url' filter is applied.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_kses_bad_protocol()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::esc_url_raw()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">esc_url_raw</span><span class="nb-faded-text">(
+          string $url, array $protocols
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Performs esc_url() for database usage.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL to be cleaned.</p></em></td>
+</tr>
+<tr>
+<th>$protocols</th>
+<td>array</td>
+<td><em><p>An array of acceptable protocols.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The cleaned URL.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\esc_url()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::format_to_edit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">format_to_edit</span><span class="nb-faded-text">(
+          string $content, bool $richedit
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Acts on text which is about to be edited.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Unless $richedit is set, it is simply a holder for the 'format_to_edit'
+filter. If $richedit is set true htmlspecialchars(), through esc_textarea(),
+will be run on the content, converting special characters to HTML entities.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>The text about to be edited.</p></em></td>
+</tr>
+<tr>
+<th>$richedit</th>
+<td>bool</td>
+<td><em><p>Whether the $content should pass through htmlspecialchars(). Default false.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text after the filter (and possibly htmlspecialchars()) has been run.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::format_to_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">format_to_post</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Holder for the 'format_to_post' filter.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>The text to pass through the filter.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Text returned from the 'format_to_post' filter.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_date_from_gmt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_date_from_gmt</span><span class="nb-faded-text">(
+          string $string, string $format
+              =
+              'Y-m-d H:i:s'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts a GMT date into the correct format for the blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Requires and returns in the Y-m-d H:i:s format. Simply adds the value of
+gmt_offset.Return format can be overridden using the $format parameter</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The date to be converted.</p></em></td>
+</tr>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>The format string for the returned date (default is Y-m-d H:i:s)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Formatted date relative to the GMT offset.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_gmt_from_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_gmt_from_date</span><span class="nb-faded-text">(
+          string $string, string $format
+              =
+              'Y-m-d H:i:s'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns a date in the GMT equivalent.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Requires and returns a date in the Y-m-d H:i:s format. Simply subtracts the
+value of the 'gmt_offset' option. Return format can be overridden using the
+$format parameter. The DateTime and DateTimeZone classes are used to respect
+time zone differences in DST.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The date to be converted.</p></em></td>
+</tr>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>The format string for the returned date (default is Y-m-d H:i:s)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>GMT version of the date provided.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_option()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::htmlentities2()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">htmlentities2</span><span class="nb-faded-text">(
+          string $myHTML
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert entities, while preserving already-encoded entities.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$myHTML</th>
+<td>string</td>
+<td><em><p>The text to be converted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://www.php.net/htmlentities">Borrowed from the PHP Manual user notes.</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::human_time_diff()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">human_time_diff</span><span class="nb-faded-text">(
+          int $from, int $to
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Determines the difference between two timestamps.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The difference is returned in a human readable format such as "1 hour",
+"5 mins", "2 days".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from</th>
+<td>int</td>
+<td><em><p>Unix timestamp from which the difference begins.</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>int</td>
+<td><em><p>Optional. Unix timestamp to end the time difference. Default becomes time() if not set.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Human readable time difference.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_email</span><span class="nb-faded-text">(
+          string $email, boolean $deprecated
+              =
+              false
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Verifies that an email is valid.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Does not grok i18n domains. Not RFC compliant.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>Email address to verify.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>boolean</td>
+<td><em><p>Deprecated.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>Either false or the valid email address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::iso8601_timezone_to_offset()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">iso8601_timezone_to_offset</span><span class="nb-faded-text">(
+          string $timezone
+          )
+        </span>
+        :
+          int|float</code><div class="description"><p class="short_description">Computes an offset in seconds from an iso8601 timezone.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$timezone</th>
+<td>string</td>
+<td><em><p>Either 'Z' for 0 offset or '±hhmm'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|float</td>
+<td>The offset in seconds.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::iso8601_to_datetime()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">iso8601_to_datetime</span><span class="nb-faded-text">(
+          string $date_string, string $timezone
+              =
+              'user'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts an iso8601 date to MySQL DateTime format used by post_date[_gmt].</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$date_string</th>
+<td>string</td>
+<td><em><p>Date and time in ISO 8601 format {@link http://en.wikipedia.org/wiki/ISO_8601}.</p>
+</em></td>
+</tr>
+<tr>
+<th>$timezone</th>
+<td>string</td>
+<td><em><p>Optional. If set to GMT returns the time minus gmt_offset. Default is 'user'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The date and time in MySQL DateTime format - Y-m-d H:i:s.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::like_escape()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">like_escape</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escapes text for SQL LIKE special characters % and _.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text to be escaped.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>text, safe for inclusion in LIKE query.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::links_add_base_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">links_add_base_url</span><span class="nb-faded-text">(
+          string $content, string $base, array $attrs
+              =
+              array('src'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Add a Base url to relative links in passed content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>By default it supports the 'src' and 'href' attributes. However this can be
+changed via the 3rd param.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>String to search for links in.</p></em></td>
+</tr>
+<tr>
+<th>$base</th>
+<td>string</td>
+<td><em><p>The base URL to prefix to links.</p></em></td>
+</tr>
+<tr>
+<th>$attrs</th>
+<td>array</td>
+<td><em><p>The attributes which should be processed.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::links_add_target()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">links_add_target</span><span class="nb-faded-text">(
+          string $content, string $target
+              =
+              '_blank', array $tags
+              =
+              array('a'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds a Target attribute to all links in passed content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function by default only applies to <a> tags, however this can be
+modified by the 3rd param.</p>
+
+<p><b>NOTE:</b> Any current target attributed will be stripped and replaced.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>String to search for links in.</p></em></td>
+</tr>
+<tr>
+<th>$target</th>
+<td>string</td>
+<td><em><p>The Target to add to the links.</p></em></td>
+</tr>
+<tr>
+<th>$tags</th>
+<td>array</td>
+<td><em><p>An array of tags to apply to.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::make_clickable()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">make_clickable</span><span class="nb-faded-text">(
+          string $ret
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert plaintext URI to HTML links.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Converts URI, www and ftp, and email addresses. Finishes by fixing links
+within links.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ret</th>
+<td>string</td>
+<td><em><p>Content to convert URIs.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content with converted URIs.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::normalize_whitespace()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">normalize_whitespace</span><span class="nb-faded-text">(
+           $str
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::popuplinks()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">popuplinks</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds a element attributes to open links in new windows.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Comment text in popup windows should be filtered through this. Right now it's
+a moderately dumb function, ideally it would detect whether a target or rel
+attribute was already there and adjust its actions accordingly.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Content to replace links to open in a new window.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content that has filtered links.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_accents()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_accents</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts all accent characters to ASCII characters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If there are no accent characters, then the string given is just returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Text that might have accent characters</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered string with replaced "nice" characters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_email</span><span class="nb-faded-text">(
+          string $email
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Strips out all characters that are not allowable in an email.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>Email address to filter.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered email address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_file_name()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_file_name</span><span class="nb-faded-text">(
+          string $filename
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitizes a filename replacing whitespace with dashes</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Removes special characters that are illegal in filenames on certain
+operating systems and special characters requiring special escaping
+to manipulate at the command line. Replaces spaces and consecutive
+dashes with a single dash. Trim period, dash and underscore from beginning
+and end of filename.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em><p>The filename to be sanitized</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sanitized filename</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_html_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_html_class</span><span class="nb-faded-text">(
+          string $class, string $fallback
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Santizes a html classname to ensure it only contains valid characters</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Strips the string down to A-Z,a-z,0-9,_,-. If this results in an empty
+string then it will return the alternative value supplied.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em><p>The classname to be sanitized</p></em></td>
+</tr>
+<tr>
+<th>$fallback</th>
+<td>string</td>
+<td><em><p>Optional. The value to return if the sanitization end's up as an empty string. Defaults to an empty string.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sanitized value</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Todo</dt>
+<dd>Expand to support the full range of CDATA that a class attribute can contain.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_key()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_key</span><span class="nb-faded-text">(
+          string $key
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize a string key.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes and underscores are allowed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>String key</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized key</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_mime_type()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_mime_type</span><span class="nb-faded-text">(
+          string $mime_type
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize a mime type</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mime_type</th>
+<td>string</td>
+<td><em><p>Mime type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized mime type</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_option</span><span class="nb-faded-text">(
+          string $option, string $value
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitises various option values based on the nature of the option.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is basically a switch statement which will pass $value through a number
+of functions depending on the $option.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>The name of the option.</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>string</td>
+<td><em><p>The unsanitised value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized value.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_sql_orderby()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_sql_orderby</span><span class="nb-faded-text">(
+          string $orderby
+          )
+        </span>
+        :
+          string|false</code><div class="description"><p class="short_description">Ensures a string is a valid SQL order by clause.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Accepts one or more columns, with or without ASC/DESC, and also accepts
+RAND().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>Order by string to be checked.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|false</td>
+<td>Returns the order by clause if it is a match, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_text_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_text_field</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize a string from user input or from the db</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>check for invalid UTF-8,
+Convert single &lt; characters to entity,
+strip all tags,
+remove line breaks, tabs and extra white space,
+strip octets.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_title</span><span class="nb-faded-text">(
+          string $title, string $fallback_title
+              =
+              '', string $context
+              =
+              'save'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitizes title or use fallback title.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Specifically, HTML and PHP tags are stripped. Further actions can be added
+via the plugin API. If $title is empty and $fallback_title is set, the latter
+will be used.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The string to be sanitized.</p></em></td>
+</tr>
+<tr>
+<th>$fallback_title</th>
+<td>string</td>
+<td><em><p>Optional. A title to use if $title is empty.</p>
+</em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional. The operation for which the string is sanitized</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sanitized string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_title_for_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_title_for_query</span><span class="nb-faded-text">(
+           $title
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_title_with_dashes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_title_with_dashes</span><span class="nb-faded-text">(
+          string $title, string $raw_title
+              =
+              '', string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitizes title, replacing whitespace and a few other characters with dashes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Limits the output to alphanumeric characters, underscore (_) and dash (-).
+Whitespace becomes a dash.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The title to be sanitized.</p></em></td>
+</tr>
+<tr>
+<th>$raw_title</th>
+<td>string</td>
+<td><em><p>Optional. Not used.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional. The operation for which the string is sanitized.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sanitized title.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_user</span><span class="nb-faded-text">(
+          string $username, bool $strict
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize username stripping out unsafe characters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Removes tags, octets, entities, and if strict is enabled, will only keep
+alphanumeric, _, space, ., -, @. After sanitizing, it passes the username,
+raw username (the username in the parameter), and the value of $strict as
+parameters for the 'sanitize_user' filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>The username to be sanitized.</p></em></td>
+</tr>
+<tr>
+<th>$strict</th>
+<td>bool</td>
+<td><em><p>If set limits $username to specific characters. Default false.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sanitized username, after passing through filters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::seems_utf8()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">seems_utf8</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks to see if a string is utf8 encoded.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>NOTE: This function checks for 5-Byte sequences, UTF8
+      has Bytes Sequences with a maximum length of 4.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>string</td>
+<td><em><p>The string to be checked</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if $str fits a UTF-8 model, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Author</dt>
+<dd>bmorel at ssi dot fr (modified)
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::shortcode_unautop()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">shortcode_unautop</span><span class="nb-faded-text">(
+          string $pee
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Don't auto-p wrap shortcodes that stand alone</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Ensures that shortcodes are not wrapped in &lt;</p>
+
+<p>>...<</p>
+
+<blockquote>
+  <p>.</p>
+</blockquote>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pee</th>
+<td>string</td>
+<td><em><p>The content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The filtered content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::stripslashes_deep()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">stripslashes_deep</span><span class="nb-faded-text">(
+          array|string $value
+          )
+        </span>
+        :
+          array|string</code><div class="description"><p class="short_description">Navigates through an array and removes slashes from the values.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If an array is passed, the array_map() function causes a callback to pass the
+value back to the function. The slashes from this value will removed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$value</th>
+<td>array|string</td>
+<td><em><p>The array or string to be stripped.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|string</td>
+<td>Stripped array (or string in the callback).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::tag_escape()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">tag_escape</span><span class="nb-faded-text">(
+          string $tag_name
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escape a HTML tag name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag_name</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::trailingslashit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">trailingslashit</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Appends a trailing slash.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will remove trailing slash if it exists already before adding a trailing
+slash. This prevents double slashing a string or path.</p>
+
+<p>The primary use of this is for paths and thus should be used for paths. It is
+not restricted to paths and offers no specific path support.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>What to add the trailing slash to.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>String with trailing slash added.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\untrailingslashit()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::translate_smiley()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">translate_smiley</span><span class="nb-faded-text">(
+          string $smiley
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert one smiley code to the icon graphic file equivalent.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Looks up one smiley code in the $wpsmiliestrans global array and returns an
+<img> string for that smiley.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$smiley</th>
+<td>string</td>
+<td><em><p>Smiley code to convert to image.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Image string for smiley.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wpsmiliestrans
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::untrailingslashit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">untrailingslashit</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Removes trailing slash if it exists.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The primary use of this is for paths and thus should be used for paths. It is
+not restricted to paths and offers no specific path support.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>What to remove the trailing slash from.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>String without the trailing slash.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::urlencode_deep()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">urlencode_deep</span><span class="nb-faded-text">(
+          array|string $value
+          )
+        </span>
+        :
+          array|string</code><div class="description"><p class="short_description">Navigates through an array and encodes the values to be used in a URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Uses a callback to pass the value of the array back to the function as a
+string.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$value</th>
+<td>array|string</td>
+<td><em><p>The array or string to be encoded.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|string</td>
+<td>$value The encoded array (or string from the callback).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::utf8_uri_encode()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">utf8_uri_encode</span><span class="nb-faded-text">(
+          string $utf8_string, int $length
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Encode the Unicode values to be used in the URI.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$utf8_string</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$length</th>
+<td>int</td>
+<td><em><p>Max length of the string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>String with Unicode encoded for URI.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_basename()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_basename</span><span class="nb-faded-text">(
+          string $path, string $suffix
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">i18n friendly version of basename()</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>A path.</p></em></td>
+</tr>
+<tr>
+<th>$suffix</th>
+<td>string</td>
+<td><em><p>If the filename ends in suffix this will also be cut off.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_check_invalid_utf8()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_check_invalid_utf8</span><span class="nb-faded-text">(
+          string $string, boolean $strip
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Checks for invalid UTF8 in a string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The text which is to be checked.</p></em></td>
+</tr>
+<tr>
+<th>$strip</th>
+<td>boolean</td>
+<td><em><p>Optional. Whether to attempt to strip out invalid UTF8. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The checked text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_html_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_html_excerpt</span><span class="nb-faded-text">(
+          integer $str, integer $count
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Safely extracts not more than the first $count characters from html string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>UTF-8, tags and entities safe prefix extraction. Entities inside will <em>NOT</em>
+be counted as one character. For example &amp; will be counted as 4, &lt; as
+3, etc.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>integer</td>
+<td><em><p>String to get the excerpt from.</p></em></td>
+</tr>
+<tr>
+<th>$count</th>
+<td>integer</td>
+<td><em><p>Maximum number of characters to take.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The excerpt.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_htmledit_pre()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_htmledit_pre</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Formats text for the HTML editor.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Unless $output is empty it will pass through htmlspecialchars before the
+'htmledit_pre' filter is applied.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>The text to be formatted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Formatted text after filter applied.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_iso_descrambler()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_iso_descrambler</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert to ASCII from email subjects.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Subject line</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted string to ASCII</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Usedby</dt>
+<dd>wp_mail() handles charsets in email subjects
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_make_link_relative()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_make_link_relative</span><span class="nb-faded-text">(
+          string $link
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert full URL paths to absolute paths.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Removes the http or https protocols and the domain. Keeps the path '/' at the
+beginning, so it isn't a true relative link, but from the web root base.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Full URL path.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Absolute path.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_parse_str()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_parse_str</span><span class="nb-faded-text">(
+          string $string, array $array
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Parses a string into variables to be stored in an array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Uses {@link http://www.php.net/parse_str parse_str()} and stripslashes if
+{@link http://www.php.net/magic_quotes magic_quotes_gpc} is on.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The string to be parsed.</p></em></td>
+</tr>
+<tr>
+<th>$array</th>
+<td>array</td>
+<td><em><p>Variables will be stored in this array.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_pre_kses_less_than()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_pre_kses_less_than</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert lone less than signs.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>KSES already converts lone greater than signs.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to be converted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_pre_kses_less_than_callback
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_pre_kses_less_than_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_pre_kses_less_than_callback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback function used by preg_replace.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Populated by matches to preg_replace.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text returned after esc_html if needed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\esc_html
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_rel_nofollow()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_rel_nofollow</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds rel nofollow string to all HTML A elements in content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Content that may contain HTML A elements.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_rel_nofollow_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_rel_nofollow_callback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback to used to add rel=nofollow string to HTML A element.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will remove already existing rel="nofollow" and rel='nofollow' from the
+string to prevent from invalidating (X)HTML.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Single Match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML A Element with rel nofollow.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_richedit_pre()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_richedit_pre</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Formats text for the rich text editor.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The filter 'richedit_pre' is applied here. If $text is empty the filter will
+be applied to an empty string.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text to be formatted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The formatted text after filter is applied.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_specialchars_decode()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_specialchars_decode</span><span class="nb-faded-text">(
+          string $string, mixed $quote_style
+              =
+              ENT_NOQUOTES
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts a number of HTML entities into their special characters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Specifically deals with: &amp;, &lt;, >, ", and '.</p>
+
+<p>$quote_style can be set to ENT_COMPAT to decode " entities,
+or ENT_QUOTES to do both " and '. Default is ENT_NOQUOTES where no quotes are decoded.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>The text which is to be decoded.</p></em></td>
+</tr>
+<tr>
+<th>$quote_style</th>
+<td>mixed</td>
+<td><em><p>Optional. Converts double quotes if set to ENT_COMPAT, both single and double if set to ENT_QUOTES or none if set to ENT_NOQUOTES. Also compatible with old _wp_specialchars() values; converting single quotes if set to 'single', double if set to 'double' or both if otherwise set. Default is ENT_NOQUOTES.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The decoded text without HTML entities.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_sprintf()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_sprintf</span><span class="nb-faded-text">(
+          string $pattern
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">WordPress implementation of PHP sprintf() with filters.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pattern</th>
+<td>string</td>
+<td><em><p>The string which formatted args are inserted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The formatted string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://www.php.net/sprintf">http://www.php.net/sprintf</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_sprintf_l()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_sprintf_l</span><span class="nb-faded-text">(
+          string $pattern, array $args
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Localize list items before the rest of the content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The '%l' must be at the first characters can then contain the rest of the
+content. The list items will have ', ', ', and', and ' and ' added depending
+on the amount of list items in the $args parameter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pattern</th>
+<td>string</td>
+<td><em><p>Content containing '%l' at the beginning.</p>
+</em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>List items to prepend to the content and replace '%l'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Localized list items and rest of the content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_strip_all_tags()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_strip_all_tags</span><span class="nb-faded-text">(
+          string $string, bool $remove_breaks
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Properly strip all HTML tags including script and style</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>String containing HTML tags</p></em></td>
+</tr>
+<tr>
+<th>$remove_breaks</th>
+<td>bool</td>
+<td><em><p>optional Whether to remove left over line breaks and white space chars</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The processed string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_trim_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_trim_excerpt</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Generates an excerpt from the content, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The excerpt word amount will be 55 words and if the amount is greater than
+that, then the string ' [...]' will be appended to the excerpt. If the string
+is less than 55 words, then the content will be returned as is.</p>
+
+<p>The 55 word limit can be modified by plugins/themes using the excerpt_length filter
+The ' [...]' string can be modified by plugins/themes using the excerpt_more filter</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The excerpt. If set to empty an excerpt is generated.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The excerpt.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpautop()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpautop</span><span class="nb-faded-text">(
+          string $pee, int|bool $br
+              =
+              1
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Replaces double line-breaks with paragraph elements.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A group of regex replaces used to identify text formatted with newlines and
+replace double line-breaks with HTML paragraph tags. The remaining
+line-breaks after conversion become &lt;<br />> tags, unless $br is set to '0'
+or 'false'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pee</th>
+<td>string</td>
+<td><em><p>The text which has to be formatted.</p></em></td>
+</tr>
+<tr>
+<th>$br</th>
+<td>int|bool</td>
+<td><em><p>Optional. If set, this will convert all remaining line-breaks after paragraphing. Default true.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Text which has been converted into correct paragraph tags.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wptexturize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wptexturize</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Replaces common plain text characters into formatted entities</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>As an example,</p>
+
+<pre><code>'cause today's effort makes it worth tomorrow's "holiday"...
+</code></pre>
+
+<p>Becomes:</p>
+
+<pre><code>&#8217;cause today&#8217;s effort makes it worth tomorrow&#8217;s &#8220;holiday&#8221;&#8230;
+</code></pre>
+
+<p>Code within certain html blocks are skipped.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text to be formatted</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The string replaced with html entities</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_cockneyreplace
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::zeroise()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">zeroise</span><span class="nb-faded-text">(
+          mixed $number, int $threshold
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Add leading zeros when necessary.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If you set the threshold to '4' and the number is '10', then you will get
+back '0010'. If you set the number to '4' and the number is '5000', then you
+will get back '5000'.</p>
+
+<p>Uses sprintf to append the amount of zeros based on the $threshold parameter
+and the size of the number. If the number is large enough, then no zeros will
+be appended.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$number</th>
+<td>mixed</td>
+<td><em><p>Number to append zeros to if not greater than threshold.</p></em></td>
+</tr>
+<tr>
+<th>$threshold</th>
+<td>int</td>
+<td><em><p>Digit places number needs to be to not have zeros added.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Adds leading zeros to number if needed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

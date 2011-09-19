@@ -1,0 +1,1333 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/wp-diff.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul>
+<li><a href="#%5CWP_Text_Diff_Renderer_Table">\WP_Text_Diff_Renderer_Table</a></li>
+<li><a href="#%5CWP_Text_Diff_Renderer_inline">\WP_Text_Diff_Renderer_inline</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress Diff bastard child of old MediaWiki Diff Formatter.</p>
+<div class="long-description"><p>Basically all that remains is the table structure and some method names.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Diff
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\WP_Text_Diff_Renderer_Table" class="anchor"></a><h2 class="class">\WP_Text_Diff_Renderer_Table<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">Table renderer to display the diff lines.</p>
+<div class="long-description"><p>This class renders the diff in classic diff format. It is intended that
+this class be customized via inheritance, to obtain fancier outputs.</p>
+
+<p>Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer">\Text_Diff_Renderer</a></dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>wp_text_diff()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer">\Text_Diff_Renderer</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Text_Diff_Renderer_Table::$_diff_threshold" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">float
+                 <span class="highlight">$_diff_threshold</span>= '0.6'
+                </code><div class="description">
+<p class="short-description">{@internal Missing Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>0.6</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>float</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::$_leading_context_lines" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$_leading_context_lines</span>= '10000'
+                </code><div class="description"><p class="short-description">Number of leading context "lines" to preserve.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This should be left at zero for this class, but subclasses may want to
+set this to other values.</p>
+</div>
+<strong>Default value</strong><code>10000</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_leading_context_lines">\Text_Diff_Renderer::_leading_context_lines</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::$_trailing_context_lines" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$_trailing_context_lines</span>= '10000'
+                </code><div class="description"><p class="short-description">Number of trailing context "lines" to preserve.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This should be left at zero for this class, but subclasses may want to
+set this to other values.</p>
+</div>
+<strong>Default value</strong><code>10000</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_trailing_context_lines">\Text_Diff_Renderer::_trailing_context_lines</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::$inline_diff_renderer" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$inline_diff_renderer</span>= ''WP_Text_Diff_Renderer_inline''
+                </code><div class="description">
+<p class="short-description">Inline display helper object name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'WP_Text_Diff_Renderer_inline'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Text_Diff_Renderer_Table::Text_Diff_Renderer()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Renderer</span><span class="nb-faded-text">(
+           $params
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Constructor.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::Text_Diff_Renderer()">\Text_Diff_Renderer::Text_Diff_Renderer()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$params</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          array $params
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructor - Call parent constructor with params array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This will set class properties based on the key value pairs in the array.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$params</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_block()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_block</span><span class="nb-faded-text">(
+           $xbeg,  $xlen,  $ybeg,  $ylen,  $edits
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_block()">\Text_Diff_Renderer::_block()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xbeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ybeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$edits</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_blockHeader()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_blockHeader</span><span class="nb-faded-text">(
+           $xbeg,  $xlen,  $ybeg,  $ylen
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_blockHeader()">\Text_Diff_Renderer::_blockHeader()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xbeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ybeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_changed()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_changed</span><span class="nb-faded-text">(
+          array $orig, array $final
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Process changed lines to do word-by-word diffs for extra highlighting.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>(TRAC style) sometimes these lines can actually be deleted or added rows.
+We do additional processing to figure that out</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$final</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_endBlock()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_endBlock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_endBlock()">\Text_Diff_Renderer::_endBlock()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_endDiff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_endDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_endDiff()">\Text_Diff_Renderer::_endDiff()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::_startDiff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_startDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_startDiff()">\Text_Diff_Renderer::_startDiff()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::compute_string_distance()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compute_string_distance</span><span class="nb-faded-text">(
+          string $string1, string $string2
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Computes a number that is intended to reflect the "distance" between two strings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string1</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$string2</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::getParams()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParams</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Get any renderer parameters.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::getParams()">\Text_Diff_Renderer::getParams()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>All parameters of this renderer object.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::interleave_changed_lines()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">interleave_changed_lines</span><span class="nb-faded-text">(
+          \unknown_type $orig, \unknown_type $final
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Takes changed blocks and matches which rows in orig turned into which rows in final.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns
+    *_matches ( which rows match with which )
+    *_rows ( order of rows in each column interleaved with blank rows as
+        necessary )</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$final</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_Table::render()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">render</span><span class="nb-faded-text">(
+          <a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a> $diff
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Renders a diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::render()">\Text_Diff_Renderer::render()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$diff</th>
+<td><a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></td>
+<td><em><p>A Text_Diff object.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The formatted output.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline" class="anchor"></a><h2 class="class">\WP_Text_Diff_Renderer_inline<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">Better word splitting than the PEAR package provides.</p>
+<div class="long-description"><p>This class renders diffs in the Wiki-style "inline" format.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline">\Text_Diff_Renderer_inline</a>
+            &lt;
+            <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer" style="color: gray; font-size: 0.8em
+                ">\Text_Diff_Renderer</a>
+</dd>
+<dt>Author</dt>
+<dd>Ciprian Popovici
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline">\Text_Diff_Renderer_inline</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Text_Diff_Renderer_inline::$_block_header" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_block_header</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Header for each change block.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_block_header">\Text_Diff_Renderer_inline::$_block_header</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_block_header">\Text_Diff_Renderer_inline::$_block_header</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_del_prefix" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_del_prefix</span>= ''&lt;del&gt;''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Prefix for deleted text.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_del_prefix">\Text_Diff_Renderer_inline::$_del_prefix</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'&lt;del&gt;'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_del_prefix">\Text_Diff_Renderer_inline::$_del_prefix</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_del_suffix" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_del_suffix</span>= ''&lt;/del&gt;''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Suffix for deleted text.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_del_suffix">\Text_Diff_Renderer_inline::$_del_suffix</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'&lt;/del&gt;'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_del_suffix">\Text_Diff_Renderer_inline::$_del_suffix</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_ins_prefix" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_ins_prefix</span>= ''&lt;ins&gt;''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Prefix for inserted text.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_ins_prefix">\Text_Diff_Renderer_inline::$_ins_prefix</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'&lt;ins&gt;'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_ins_prefix">\Text_Diff_Renderer_inline::$_ins_prefix</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_ins_suffix" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_ins_suffix</span>= ''&lt;/ins&gt;''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Suffix for inserted text.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_ins_suffix">\Text_Diff_Renderer_inline::$_ins_suffix</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'&lt;/ins&gt;'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_ins_suffix">\Text_Diff_Renderer_inline::$_ins_suffix</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_leading_context_lines" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">integer
+                 <span class="highlight">$_leading_context_lines</span>= '10000'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Number of leading context "lines" to preserve.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_leading_context_lines">\Text_Diff_Renderer_inline::$_leading_context_lines</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This should be left at zero for this class, but subclasses may want to
+set this to other values.</p>
+</div>
+<strong>Default value</strong><code>10000</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>integer</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_leading_context_lines">\Text_Diff_Renderer_inline::$_leading_context_lines</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_split_characters" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">boolean
+                 <span class="highlight">$_split_characters</span>= 'false'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Whether to split down to character-level.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_split_characters">\Text_Diff_Renderer_inline::$_split_characters</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>boolean</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_split_characters">\Text_Diff_Renderer_inline::$_split_characters</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_split_level" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$_split_level</span>= ''lines''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">What are we currently splitting on? Used to recurse to show word-level
+or character-level changes.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_split_level">\Text_Diff_Renderer_inline::$_split_level</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'lines'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_split_level">\Text_Diff_Renderer_inline::$_split_level</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::$_trailing_context_lines" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">integer
+                 <span class="highlight">$_trailing_context_lines</span>= '10000'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Number of trailing context "lines" to preserve.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_trailing_context_lines">\Text_Diff_Renderer_inline::$_trailing_context_lines</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This should be left at zero for this class, but subclasses may want to
+set this to other values.</p>
+</div>
+<strong>Default value</strong><code>10000</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>integer</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::%24_trailing_context_lines">\Text_Diff_Renderer_inline::$_trailing_context_lines</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Text_Diff_Renderer_inline::Text_Diff_Renderer()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Renderer</span><span class="nb-faded-text">(
+           $params
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Constructor.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::Text_Diff_Renderer()">\Text_Diff_Renderer::Text_Diff_Renderer()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$params</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_added()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_added</span><span class="nb-faded-text">(
+           $lines
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_added()">\Text_Diff_Renderer_inline::_added()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_block()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_block</span><span class="nb-faded-text">(
+           $xbeg,  $xlen,  $ybeg,  $ylen,  $edits
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_block()">\Text_Diff_Renderer::_block()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xbeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ybeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$edits</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_blockHeader()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_blockHeader</span><span class="nb-faded-text">(
+           $xbeg,  $xlen,  $ybeg,  $ylen
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_blockHeader()">\Text_Diff_Renderer_inline::_blockHeader()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xbeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ybeg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_changed()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_changed</span><span class="nb-faded-text">(
+           $orig,  $final
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_changed()">\Text_Diff_Renderer_inline::_changed()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$final</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_context()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_context</span><span class="nb-faded-text">(
+           $lines
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_context()">\Text_Diff_Renderer::_context()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_deleted()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_deleted</span><span class="nb-faded-text">(
+           $lines,  $words
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_deleted()">\Text_Diff_Renderer_inline::_deleted()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$words</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_encode()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_encode</span><span class="nb-faded-text">(
+           $string
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_encode()">\Text_Diff_Renderer_inline::_encode()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_endBlock()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_endBlock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_endBlock()">\Text_Diff_Renderer::_endBlock()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_endDiff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_endDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_endDiff()">\Text_Diff_Renderer::_endDiff()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_lines()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_lines</span><span class="nb-faded-text">(
+           $lines,  $prefix
+              =
+              ' ',  $encode
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_lines()">\Text_Diff_Renderer_inline::_lines()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$prefix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$encode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_startBlock()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_startBlock</span><span class="nb-faded-text">(
+           $header
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer_inline.html#%5CText_Diff_Renderer_inline::_startBlock()">\Text_Diff_Renderer_inline::_startBlock()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$header</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::_startDiff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_startDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::_startDiff()">\Text_Diff_Renderer::_startDiff()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::getParams()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParams</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Get any renderer parameters.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::getParams()">\Text_Diff_Renderer::getParams()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>All parameters of this renderer object.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Text_Diff_Renderer_inline::render()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">render</span><span class="nb-faded-text">(
+          <a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a> $diff
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Renders a diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff_Renderer.html#%5CText_Diff_Renderer::render()">\Text_Diff_Renderer::render()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$diff</th>
+<td><a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></td>
+<td><em><p>A Text_Diff object.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The formatted output.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

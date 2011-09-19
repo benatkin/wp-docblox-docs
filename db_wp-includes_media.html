@@ -1,0 +1,2336 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/media.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_Embed">\WP_Embed</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress API for media display.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_wp_post_thumbnail_class_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_post_thumbnail_class_filter</span><span class="nb-faded-text">(
+          array $attr
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Adds a 'wp-post-image' class to post thumbnail thumbnails
+Uses the begin_fetch_post_thumbnail_html and end_fetch_post_thumbnail_html action hooks to
+dynamically add/remove itself so as to only filter post thumbnail thumbnails</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td>array</td>
+<td><em><p>Attributes including src, class, alt, title</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_post_thumbnail_class_filter_add()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_post_thumbnail_class_filter_add</span><span class="nb-faded-text">(
+           $attr
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds _wp_post_thumbnail_class_filter to the wp_get_attachment_image_attributes filter</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_post_thumbnail_class_filter_remove()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_post_thumbnail_class_filter_remove</span><span class="nb-faded-text">(
+           $attr
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes _wp_post_thumbnail_class_filter from the wp_get_attachment_image_attributes filter</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_image_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_image_size</span><span class="nb-faded-text">(
+           $name,  $width
+              =
+              0,  $height
+              =
+              0,  $crop
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers a new image size</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$width</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$crop</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::adjacent_image_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">adjacent_image_link</span><span class="nb-faded-text">(
+          bool $prev
+              =
+              true,  $size
+              =
+              'thumbnail',  $text
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display next or previous image link that has the same post parent.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Retrieves the current attachment object from the $post global.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prev</th>
+<td>bool</td>
+<td><em><p>Optional. Default is true to display previous link, true for next.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$text</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::gallery_shortcode()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">gallery_shortcode</span><span class="nb-faded-text">(
+          array $attr
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The Gallery shortcode.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This implements the functionality of the Gallery Shortcode for displaying
+WordPress images on a post.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td>array</td>
+<td><em><p>Attributes attributed to the shortcode.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content to display gallery.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::gd_edit_image_support()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">gd_edit_image_support</span><span class="nb-faded-text">(
+          string $mime_type
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check if the installed version of GD supports particular image type</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mime_type</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_attachment_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_attachment_taxonomies</span><span class="nb-faded-text">(
+          int|array|object $attachment
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve taxonomies attached to the attachment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attachment</th>
+<td>int|array|object</td>
+<td><em><p>Attachment ID, Attachment data array, or Attachment data object.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Empty array on failure. List of taxonomies on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_image_tag()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_image_tag</span><span class="nb-faded-text">(
+          int $id, string $alt, string $title, string $align, string $size
+              =
+              'medium'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">An <img src /> tag for an image attachment, scaling it down if requested.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The filter 'get_image_tag_class' allows for changing the class name for the
+image without having to use regular expressions on the HTML content. The
+parameters are: what WordPress will use for the class, the Attachment ID,
+image align value, and the size the image should be.</p>
+
+<p>The second filter 'get_image_tag' has the HTML content, which can then be
+further manipulated by a plugin to change all attribute values and even HTML
+content.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Attachment ID.</p></em></td>
+</tr>
+<tr>
+<th>$alt</th>
+<td>string</td>
+<td><em><p>Image Description for the alt attribute.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Image Description for the title attribute.</p></em></td>
+</tr>
+<tr>
+<th>$align</th>
+<td>string</td>
+<td><em><p>Part of the class name for aligning the image.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional. Default is 'medium'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML IMG element for given image attachment</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_intermediate_image_sizes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_intermediate_image_sizes</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the available image sizes</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Returns a filtered array of image size strings</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_constrain_size_for_editor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_constrain_size_for_editor</span><span class="nb-faded-text">(
+          int $width, int $height, string|array $size
+              =
+              'medium'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Scale down the default size of an image.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is so that the image is a better fit for the editor and theme.</p>
+
+<p>The $size parameter accepts either an array or a string. The supported string
+values are 'thumb' or 'thumbnail' for the given thumbnail size or defaults at
+128 width and 96 height in pixels. Also supported for the string value is
+'medium' and 'full'. The 'full' isn't actually supported, but any value other
+than the supported will result in the content_width size or 500 if that is
+not set.</p>
+
+<p>Finally, there is a filter named, 'editor_max_image_size' that will be called
+on the calculated array for width and height, respectively. The second
+parameter will be the value that was in the $size parameter. The returned
+type for the hook is an array with the width as the first element and the
+height as the second element.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>Width of the image</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>Height of the image</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>string|array</td>
+<td><em><p>Size of what the result image should be.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Width and height of what the result image should resize to.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_constrain_dimensions()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_downsize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_downsize</span><span class="nb-faded-text">(
+          int $id, array|string $size
+              =
+              'medium'
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Scale an image to fit a particular size (such as 'thumb' or 'medium').</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Array with image url, width, height, and whether is intermediate size, in
+that order is returned on success is returned. $is_intermediate is true if
+$url is a resized image, false if it is the original.</p>
+
+<p>The URL might be the original image, or it might be a resized version. This
+function won't create a new resized copy, it will just return an already
+resized one if it exists.</p>
+
+<p>A plugin may use the 'image_downsize' filter to hook into and offer image
+resizing services for images. The hook must return an array with the same
+elements that are returned in the function. The first element being the URL
+to the new image that was resized.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Attachment ID for image.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>array|string</td>
+<td><em><p>Optional, default is 'medium'. Size of image, either array or string.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>False on failure, array on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_get_intermediate_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_get_intermediate_size</span><span class="nb-faded-text">(
+          int $post_id, array|string $size
+              =
+              'thumbnail'
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Retrieve the image's intermediate size (resized) path, width, and height.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The $size parameter can be an array with the width and height respectively.
+If the size matches the 'sizes' metadata array for width and height, then it
+will be used. If there is no direct match, then the nearest image size larger
+than the specified size will be used. If nothing is found, then the function
+will break out and return false.</p>
+
+<p>The metadata 'sizes' is used for compatible sizes that can be used for the
+parameter $size value.</p>
+
+<p>The url path will be given, when the $size parameter is a string.</p>
+
+<p>If you are passing an array for the $size, you should consider using
+add_image_size() so that a cropped version is generated. It's much more
+efficient than having to find the closest-sized image and then having the
+browser scale down the image.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Attachment ID for image.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>array|string</td>
+<td><em><p>Optional, default is 'thumbnail'. Size of image, either array or string.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>False on failure or array of file path, width, and height on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\add_image_size()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_hwstring()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_hwstring</span><span class="nb-faded-text">(
+          int|string $width, int|string $height
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve width and height attributes using given width and height values.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Both attributes are required in the sense that both parameters must have a
+value, but are optional in that if you set them to false or null, then they
+will not be added to the returned string.</p>
+
+<p>You can set the value using a string, but it will only take numeric values.
+If you wish to put 'px' after the numbers, then it will be stripped out of
+the return.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$width</th>
+<td>int|string</td>
+<td><em><p>Optional. Width attribute value.</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int|string</td>
+<td><em><p>Optional. Height attribute value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML attributes for width and, or height.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_make_intermediate_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_make_intermediate_size</span><span class="nb-faded-text">(
+          string $file, int $width, int $height, bool $crop
+              =
+              false
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Resize an image to make a thumbnail or intermediate size.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The returned array has the file size, the image width, and image height. The
+filter 'image_make_intermediate_size' can be used to hook in and change the
+values of the returned array. The only parameter is the resized file path.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>File path.</p></em></td>
+</tr>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>Image width.</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>Image height.</p></em></td>
+</tr>
+<tr>
+<th>$crop</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to crop image to specified height and width or resize.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>False, if no image was created. Metadata array on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_resize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_resize</span><span class="nb-faded-text">(
+          string $file, int $max_w, int $max_h, bool $crop
+              =
+              false, string $suffix
+              =
+              null, string $dest_path
+              =
+              null, int $jpeg_quality
+              =
+              90
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Scale down an image to fit a particular size and save a new copy of the image.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The PNG transparency will be preserved using the function, as well as the
+image type. If the file going in is PNG, then the resized image is going to
+be PNG. The only supported image types are PNG, GIF, and JPEG.</p>
+
+<p>Some functionality requires API to exist, so some PHP version may lose out
+support. This is not the fault of WordPress (where functionality is
+downgraded, not actual defects), but of your PHP version.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Image file path.</p></em></td>
+</tr>
+<tr>
+<th>$max_w</th>
+<td>int</td>
+<td><em><p>Maximum width to resize to.</p></em></td>
+</tr>
+<tr>
+<th>$max_h</th>
+<td>int</td>
+<td><em><p>Maximum height to resize to.</p></em></td>
+</tr>
+<tr>
+<th>$crop</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to crop image or resize.</p></em></td>
+</tr>
+<tr>
+<th>$suffix</th>
+<td>string</td>
+<td><em><p>Optional. File Suffix.</p></em></td>
+</tr>
+<tr>
+<th>$dest_path</th>
+<td>string</td>
+<td><em><p>Optional. New image file path.</p></em></td>
+</tr>
+<tr>
+<th>$jpeg_quality</th>
+<td>int</td>
+<td><em><p>Optional, default is 90. Image quality percentage.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure. String with new destination path.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::image_resize_dimensions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">image_resize_dimensions</span><span class="nb-faded-text">(
+          int $orig_w, int $orig_h, int $dest_w, int $dest_h, bool $crop
+              =
+              false
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Retrieve calculated resized dimensions for use in imagecopyresampled().</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Calculate dimensions and coordinates for a resized image that fits within a
+specified width and height. If $crop is true, the largest matching central
+portion of the image will be cropped out and resized to the required size.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig_w</th>
+<td>int</td>
+<td><em><p>Original width.</p></em></td>
+</tr>
+<tr>
+<th>$orig_h</th>
+<td>int</td>
+<td><em><p>Original height.</p></em></td>
+</tr>
+<tr>
+<th>$dest_w</th>
+<td>int</td>
+<td><em><p>New width.</p></em></td>
+</tr>
+<tr>
+<th>$dest_h</th>
+<td>int</td>
+<td><em><p>New height.</p></em></td>
+</tr>
+<tr>
+<th>$crop</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to crop image or resize.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>False, on failure. Returned array matches parameters for imagecopyresampled() PHP function.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::img_caption_shortcode()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">img_caption_shortcode</span><span class="nb-faded-text">(
+          array $attr, string $content
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The Caption shortcode.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Allows a plugin to replace the content that would otherwise be returned. The
+filter is 'img_caption_shortcode' and passes an empty string, the attr
+parameter and the content parameter values.</p>
+
+<p>The supported attributes for the shortcode are 'id', 'align', 'width', and
+'caption'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td>array</td>
+<td><em><p>Attributes attributed to the shortcode.</p></em></td>
+</tr>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Optional. Shortcode content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_image_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_image_link</span><span class="nb-faded-text">(
+          string $size
+              =
+              'thumbnail', string $text
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display next image link that has the same post parent.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional, default is 'thumbnail'. Size of image, either array or string. 0 or 'none' will default to post_title or $text;</p>
+</em></td>
+</tr>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional, default is false. If included, link will reflect $text variable.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_image_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_image_link</span><span class="nb-faded-text">(
+          string $size
+              =
+              'thumbnail', string $text
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display previous image link that has the same post parent.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional, default is 'thumbnail'. Size of image, either array or string. 0 or 'none' will default to post_title or $text;</p>
+</em></td>
+</tr>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional, default is false. If included, link will reflect $text variable.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_post_thumbnail_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_post_thumbnail_size</span><span class="nb-faded-text">(
+           $width
+              =
+              0,  $height
+              =
+              0,  $crop
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers an image size for the post thumbnail</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$width</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$crop</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_constrain_dimensions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_constrain_dimensions</span><span class="nb-faded-text">(
+          int $current_width, int $current_height, int $max_width
+              =
+              0, int $max_height
+              =
+              0
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Calculates the new dimensions for a downsampled image.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If either width or height are empty, no constraint is applied on
+that dimension.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$current_width</th>
+<td>int</td>
+<td><em><p>Current width of the image.</p></em></td>
+</tr>
+<tr>
+<th>$current_height</th>
+<td>int</td>
+<td><em><p>Current height of the image.</p></em></td>
+</tr>
+<tr>
+<th>$max_width</th>
+<td>int</td>
+<td><em><p>Optional. Maximum wanted width.</p></em></td>
+</tr>
+<tr>
+<th>$max_height</th>
+<td>int</td>
+<td><em><p>Optional. Maximum wanted height.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>First item is the width, the second item is the height.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_embed_defaults()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_embed_defaults</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Create default array of embed parameters.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Default embed parameters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_embed_handler_googlevideo()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_embed_handler_googlevideo</span><span class="nb-faded-text">(
+          array $matches, array $attr, string $url, array $rawattr
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The Google Video embed handler callback. Google Video does not support oEmbed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>The regex matches from the provided regex when calling {@link wp_embed_register_handler()}.</p>
+</em></td>
+</tr>
+<tr>
+<th>$attr</th>
+<td>array</td>
+<td><em><p>Embed attributes.</p></em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The original URL that was matched by the regex.</p></em></td>
+</tr>
+<tr>
+<th>$rawattr</th>
+<td>array</td>
+<td><em><p>The original unmodified attributes.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The embed HTML.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::register_handler()">\WP_Embed::register_handler()</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::shortcode()">\WP_Embed::shortcode()</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_embed_register_handler()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_embed_register_handler</span><span class="nb-faded-text">(
+           $id,  $regex,  $callback,  $priority
+              =
+              10
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register an embed handler. This function should probably only be used for sites that do not support oEmbed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$regex</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::register_handler()">\WP_Embed::register_handler()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_embed_unregister_handler()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_embed_unregister_handler</span><span class="nb-faded-text">(
+           $id,  $priority
+              =
+              10
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Unregister a previously registered embed handler.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::unregister_handler()">\WP_Embed::unregister_handler()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_expand_dimensions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_expand_dimensions</span><span class="nb-faded-text">(
+          int $example_width, int $example_height, int $max_width, int $max_height
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Based on a supplied width/height example, return the biggest possible dimensions based on the max width/height.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$example_width</th>
+<td>int</td>
+<td><em><p>The width of an example embed.</p></em></td>
+</tr>
+<tr>
+<th>$example_height</th>
+<td>int</td>
+<td><em><p>The height of an example embed.</p></em></td>
+</tr>
+<tr>
+<th>$max_width</th>
+<td>int</td>
+<td><em><p>The maximum allowed width.</p></em></td>
+</tr>
+<tr>
+<th>$max_height</th>
+<td>int</td>
+<td><em><p>The maximum allowed height.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The maximum possible width and height based on the example ratio.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_constrain_dimensions()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_attachment_image()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_attachment_image</span><span class="nb-faded-text">(
+          int $attachment_id, string $size
+              =
+              'thumbnail', bool $icon
+              =
+              false,  $attr
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get an HTML img element representing an image attachment</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>While $size will accept an array, it is better to register a size with
+add_image_size() so that a cropped version is generated. It's much more
+efficient than having to find the closest-sized image and then having the
+browser scale down the image.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attachment_id</th>
+<td>int</td>
+<td><em><p>Image attachment ID.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional, default is 'thumbnail'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$icon</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether it is an icon.</p></em></td>
+</tr>
+<tr>
+<th>$attr</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML img element or empty string on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\add_image_size()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_attachment_image_src()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_attachment_image_src()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_attachment_image_src</span><span class="nb-faded-text">(
+          int $attachment_id, string $size
+              =
+              'thumbnail', bool $icon
+              =
+              false
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Retrieve an image to represent an attachment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A mime icon for files, thumbnail or intermediate size for images.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attachment_id</th>
+<td>int</td>
+<td><em><p>Image attachment ID.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional, default is 'thumbnail'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$icon</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether it is an icon.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>Returns an array (url, width, height), or false, if no image is available.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_imagecreatetruecolor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_imagecreatetruecolor</span><span class="nb-faded-text">(
+          int $width, int $height
+          )
+        </span>
+        :
+          \image</code><div class="description"><p class="short_description">Create new GD image resource with transparency support</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>Image width</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>Image height</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\image</td>
+<td>resource</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_load_image()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_load_image</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          resource</code><div class="description"><p class="short_description">Load an image from a string, if PHP supports it.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Filename of the image to load.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>resource</td>
+<td>The resulting image resource on success, Error string on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_maybe_load_embeds()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_maybe_load_embeds</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Determines if default embed handlers should be loaded.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks to make sure that the embeds library hasn't already been loaded. If
+it hasn't, then it will load the embeds library.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_oembed_add_provider()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_oembed_add_provider</span><span class="nb-faded-text">(
+          string $format, string $provider, boolean $regex
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds a URL format and oEmbed provider URL pair.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>The format of URL that this provider can handle. You can use asterisks as wildcards.</p></em></td>
+</tr>
+<tr>
+<th>$provider</th>
+<td>string</td>
+<td><em><p>The URL to the oEmbed provider.</p></em></td>
+</tr>
+<tr>
+<th>$regex</th>
+<td>boolean</td>
+<td><em><p>Whether the $format parameter is in a regex format.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-oembed.html#%5CWP_oEmbed">\WP_oEmbed</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\_wp_oembed_get_object()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_oembed_get()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_oembed_get</span><span class="nb-faded-text">(
+          string $url, array $args
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Attempts to fetch the embed HTML for a provided URL using oEmbed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL that should be embedded.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Addtional arguments and parameters.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The original URL on failure or the embed HTML on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-oembed.html#%5CWP_oEmbed">\WP_oEmbed</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\_wp_oembed_get_object()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-oembed.html#%5CWP_oEmbed::get_html()">\WP_oEmbed::get_html()</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Embed" class="anchor"></a><h2 class="class">\WP_Embed<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\Embed</small><p class="short-description">API for easily embedding rich media such as videos and images into content.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Embed::$handlers" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$handlers</span>= 'array('
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array(</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::$linkifunknown" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$linkifunknown</span>= 'true'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>true</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::$post_ID" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$post_ID</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::$usecache" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$usecache</span>= 'true'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>true</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Embed::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructor</p></div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::autoembed()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">autoembed</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Passes any unlinked URLs that are on their own line to {@link WP_Embed::shortcode()} for potential embedding.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>The content to be searched.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Potentially modified $content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::autoembed_callback()">\WP_Embed::autoembed_callback()</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::autoembed_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">autoembed_callback</span><span class="nb-faded-text">(
+          array $match
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback function for {@link WP_Embed::autoembed()}.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td>array</td>
+<td><em><p>A regex match array.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The embed HTML on success, otherwise the original URL.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::shortcode()">\WP_Embed::shortcode()</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::cache_oembed()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_oembed</span><span class="nb-faded-text">(
+          int $post_ID
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Triggers a caching of all oEmbed results.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em><p>Post ID to do the caching for.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::delete_oembed_caches()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete_oembed_caches</span><span class="nb-faded-text">(
+          int $post_ID
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Delete all oEmbed caches.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em><p>Post ID to delete the caches for.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::maybe_make_link()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">maybe_make_link</span><span class="nb-faded-text">(
+          string $url
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Conditionally makes a hyperlink based on an internal class variable.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to potentially be linked.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Linked URL or the original URL.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::maybe_run_ajax_cache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">maybe_run_ajax_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">If a post/page was saved, then output Javascript to make
+an AJAX request that will call WP_Embed::cache_oembed().</p></div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::register_handler()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">register_handler</span><span class="nb-faded-text">(
+          string $id, string $regex, callback $callback, int $priority
+              =
+              10
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register an embed handler. Do not use this function directly, use {@link wp_embed_register_handler()} instead.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function should probably also only be used for sites that do not support oEmbed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>An internal ID/name for the handler. Needs to be unique.</p>
+</em></td>
+</tr>
+<tr>
+<th>$regex</th>
+<td>string</td>
+<td><em><p>The regex that will be used to see if this handler should be used for a URL.</p></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td>callback</td>
+<td><em><p>The callback function that will be called if the regex is matched.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>Optional. Used to specify the order in which the registered handlers will be tested (default: 10). Lower numbers correspond with earlier testing, and handlers with the same priority are tested in the order in which they were added to the action.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::run_shortcode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">run_shortcode</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Process the [embed] shortcode.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Since the [embed] shortcode needs to be run earlier than other shortcodes,
+this function removes all existing shortcodes, registers the [embed] shortcode,
+calls {@link do_shortcode()}, and then re-registers the old shortcodes.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Content to parse</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content with shortcode parsed</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>\$shortcode_tags
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\remove_all_shortcodes()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_shortcode()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_shortcode()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::shortcode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">shortcode</span><span class="nb-faded-text">(
+          array $attr, string $url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The {@link do_shortcode()} callback function.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Attempts to convert a URL into embed HTML. Starts by checking the URL against the regex of the registered embed handlers.
+If none of the regex matches and it's enabled, then the URL will be given to the {@link WP_oEmbed} class.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td>array</td>
+<td><em><p>Shortcode attributes.</p></em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL attempting to be embedded.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The embed HTML on success, otherwise the original URL.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>\wp_oembed_get()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_parse_args()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_embed_defaults()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_media.html#%5CWP_Embed::maybe_make_link()">\WP_Embed::maybe_make_link()</a>
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_option()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_cache_get()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_cache_set()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_post_meta()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\update_post_meta()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Embed::unregister_handler()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unregister_handler</span><span class="nb-faded-text">(
+          string $id, int $priority
+              =
+              10
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Unregister a previously registered embed handler. Do not use this function directly, use {@link wp_embed_unregister_handler()} instead.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>The handler ID that should be removed.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>Optional. The priority of the handler to be removed (default: 10).</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

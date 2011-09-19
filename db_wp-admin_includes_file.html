@@ -1,0 +1,1029 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-admin/includes/file.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">File contains all the administration image manipulation functions.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Administration
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::WP_Filesystem()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">WP_Filesystem</span><span class="nb-faded-text">(
+          array $args
+              =
+              false, string $context
+              =
+              false
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Initialises and connects the WordPress Filesystem Abstraction classes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function will include the chosen transport and attempt connecting.</p>
+
+<p>Plugins may add extra transports, And force WordPress to use them by returning the filename via the 'filesystem_method_file' filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>(optional) Connection args, These are passed directly to the WP_Filesystem_*() classes.</p>
+</em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>(optional) Context for get_filesystem_method(), See function declaration for more information.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>false on failure, true on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_unzip_file_pclzip()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_unzip_file_pclzip</span><span class="nb-faded-text">(
+          string $file, string $to, array $needed_dirs
+              =
+              array(
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">This function should not be called directly, use unzip_file instead. Attempts to unzip an archive using the PclZip library.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Assumes that WP_Filesystem() has already been called and set up.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Full path and filename of zip archive</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>string</td>
+<td><em><p>Full path on the filesystem to extract archive to</p></em></td>
+</tr>
+<tr>
+<th>$needed_dirs</th>
+<td>array</td>
+<td><em><p>A partial list of required folders needed to be created.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure, True on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>See</dt>
+<dd>\unzip_file
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_unzip_file_ziparchive()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_unzip_file_ziparchive</span><span class="nb-faded-text">(
+          string $file, string $to, array $needed_dirs
+              =
+              array(
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">This function should not be called directly, use unzip_file instead. Attempts to unzip an archive using the ZipArchive class.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Assumes that WP_Filesystem() has already been called and set up.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Full path and filename of zip archive</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>string</td>
+<td><em><p>Full path on the filesystem to extract archive to</p></em></td>
+</tr>
+<tr>
+<th>$needed_dirs</th>
+<td>array</td>
+<td><em><p>A partial list of required folders needed to be created.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure, True on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>See</dt>
+<dd>\unzip_file
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::copy_dir()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">copy_dir</span><span class="nb-faded-text">(
+          string $from, string $to, array $skip_list
+              =
+              array(
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Copies a directory from one location to another via the WordPress Filesystem Abstraction.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Assumes that WP_Filesystem() has already been called and setup.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from</th>
+<td>string</td>
+<td><em><p>source directory</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>string</td>
+<td><em><p>destination directory</p></em></td>
+</tr>
+<tr>
+<th>$skip_list</th>
+<td>array</td>
+<td><em><p>a list of files/folders to skip copying</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure, True on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::download_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">download_url</span><span class="nb-faded-text">(
+          string $url, int $timeout
+              =
+              300
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Downloads a url to a local temporary file using the WordPress HTTP Class.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Please note, That the calling function must unlink() the  file.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>the URL of the file to download</p></em></td>
+</tr>
+<tr>
+<th>$timeout</th>
+<td>int</td>
+<td><em><p>The timeout for the request to download the file default 300 seconds</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure, string Filename on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_file_description()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_file_description</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the description for standard WordPress theme files and other various standard
+WordPress files</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Filesystem path or filename</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Description of file from $wp_file_descriptions or basename of $file if description doesn't exist</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\_cleanup_header_comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_file_descriptions
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_filesystem_method()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_filesystem_method</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, string $context
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Determines which Filesystem Method to use.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The priority of the Transports are: Direct, SSH2, FTP PHP Extension, FTP Sockets (Via Sockets class, or fsockopen())</p>
+
+<p>Note that the return value of this function can be overridden in 2 ways
+ - By defining FS_METHOD in your</p>
+
+<pre><code>wp-config.php</code></pre>
+
+<p>file
+ - By using the filesystem_method filter
+Valid values for these are: 'direct', 'ssh', 'ftpext' or 'ftpsockets'
+Plugins may also define a custom transport handler, See the WP_Filesystem function for more information.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Connection details.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Full path to the directory that is tested for being writable.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The transport to use, see description for valid return values.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_home_path()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_home_path</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the absolute filesystem path to the root of the WordPress installation</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Full filesystem path to the root of the WordPress installation</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_real_file_to_edit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_real_file_to_edit</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the real file system path to a file to edit within the admin</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the $file is index.php or .htaccess this function will assume it is relative
+to the install root, otherwise it is assumed the file is relative to the wp-content
+directory</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>filesystem path relative to the WordPress install directory or to the wp-content directory</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>full file system path to edit</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_home_path
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\WP_CONTENT_DIR
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::list_files()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">list_files</span><span class="nb-faded-text">(
+          string $folder
+              =
+              '', int $levels
+              =
+              100
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Returns a listing of all files in the specified folder and all subdirectories up to 100 levels deep.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The depth of the recursiveness can be controlled by the $levels param.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$folder</th>
+<td>string</td>
+<td><em><p>Full path to folder</p></em></td>
+</tr>
+<tr>
+<th>$levels</th>
+<td>int</td>
+<td><em><p>(optional) Levels of folders to follow, Default: 100 (PHP Loop limit).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>False on failure, Else array of files</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::request_filesystem_credentials()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">request_filesystem_credentials</span><span class="nb-faded-text">(
+          string $form_post, string $type
+              =
+              '', boolean $error
+              =
+              false, string $context
+              =
+              false, string $extra_fields
+              =
+              null
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Displays a form to the user to request for their FTP/SSH details in order to  connect to the filesystem.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>All chosen/entered details are saved, Excluding the Password.</p>
+
+<p>Hostnames may be in the form of hostname:portnumber (eg: wordpress.org:2467) to specify an alternate FTP/SSH port.</p>
+
+<p>Plugins may override this form by returning true|false via the</p>
+
+<pre><code>request_filesystem_credentials</code></pre>
+
+<p>filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$form_post</th>
+<td>string</td>
+<td><em><p>the URL to post the form to</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>the chosen Filesystem method in use</p></em></td>
+</tr>
+<tr>
+<th>$error</th>
+<td>boolean</td>
+<td><em><p>if the current request has failed to connect</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>The directory which is needed access to, The write-test will be performed on this directory by get_filesystem_method()</p>
+</em></td>
+</tr>
+<tr>
+<th>$extra_fields</th>
+<td>string</td>
+<td><em><p>Extra POST fields which should be checked for to be included in the post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>False on failure. True on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unzip_file()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unzip_file</span><span class="nb-faded-text">(
+          string $file, string $to
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Unzips a specified ZIP file to a location on the Filesystem via the WordPress Filesystem Abstraction.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Assumes that WP_Filesystem() has already been called and set up. Does not extract a root-level __MACOSX directory, if present.</p>
+
+<p>Attempts to increase the PHP Memory limit to 256M before uncompressing,
+However, The most memory required shouldn't be much larger than the Archive itself.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Full path and filename of zip archive</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>string</td>
+<td><em><p>Full path on the filesystem to extract archive to</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>WP_Error on failure, True on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::validate_file_to_edit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">validate_file_to_edit</span><span class="nb-faded-text">(
+          string $file, array $allowed_files
+              =
+              ''
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Make sure that the file that was requested to edit, is allowed to be edited</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Function will die if if you are not allowed to edit the file</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>file the users is attempting to edit</p></em></td>
+</tr>
+<tr>
+<th>$allowed_files</th>
+<td>array</td>
+<td><em><p>Array of allowed files to edit, $file must match an entry exactly</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_die
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\validate_file
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_handle_sideload()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_handle_sideload</span><span class="nb-faded-text">(
+          array $file, array $overrides
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Handle sideloads, which is the process of retrieving a media item from another server instead of
+a traditional media upload.  This process involves sanitizing the filename, checking extensions
+for mime type, and moving the file to the appropriate directory within the uploads directory.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>array</td>
+<td><em><p>an array similar to that of a PHP $_FILES POST array</p>
+</em></td>
+</tr>
+<tr>
+<th>$overrides</th>
+<td>array</td>
+<td><em><p>Optional. An associative array of names=>values to override default variables with extract( $overrides, EXTR_OVERWRITE ).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>On success, returns an associative array of file attributes. On failure, returns $overrides['upload_error_handler'](&amp;$file, $message ) or array( 'error'=&gt;$message ).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_handle_upload_error
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_check_filetype_and_ext
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\current_user_can
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_upload_dir
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_unique_filename
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_handle_upload()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_handle_upload</span><span class="nb-faded-text">(
+          array $file, array $overrides
+              =
+              false,  $time
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Handle PHP uploads in WordPress, sanitizing file names, checking extensions for mime type,
+and moving the file to the appropriate directory within the uploads directory.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>array</td>
+<td><em><p>Reference to a single element of $_FILES. Call the function once for each uploaded file.</p>
+</em></td>
+</tr>
+<tr>
+<th>$overrides</th>
+<td>array</td>
+<td><em><p>Optional. An associative array of names=>values to override default variables with extract( $overrides, EXTR_OVERWRITE ).</p>
+</em></td>
+</tr>
+<tr>
+<th>$time</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>On success, returns an associative array of file attributes. On failure, returns $overrides['upload_error_handler'](&amp;$file, $message ) or array( 'error'=&gt;$message ).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_handle_upload_error
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\is_multisite
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_check_filetype_and_ext
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\current_user_can
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_upload_dir
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_unique_filename
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\delete_transient
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_tempnam()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_tempnam</span><span class="nb-faded-text">(
+          string $filename
+              =
+              '', string $dir
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns a filename of a Temporary unique file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Please note that the calling function must unlink() this itself.</p>
+
+<p>The filename is based off the passed parameter or defaults to the current unix timestamp,
+while the directory can either be passed as well, or by leaving  it blank, default to a writable temporary directory.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em><p>(optional) Filename to base the Unique file off</p>
+</em></td>
+</tr>
+<tr>
+<th>$dir</th>
+<td>string</td>
+<td><em><p>(optional) Directory to store the file in</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>a writable filename</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

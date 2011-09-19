@@ -1,0 +1,742 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/author-template.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Author Template functions for use in themes.</p>
+<div class="long-description"><p>These functions must be used within the WordPress Loop.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Author_Templates">http://codex.wordpress.org/Author_Templates</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Template
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::__clear_multi_author_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__clear_multi_author_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Helper function to clear the cache for number of authors.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Private</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_author_posts_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_author_posts_url</span><span class="nb-faded-text">(
+           $author_id,  $author_nicename
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the URL to the author page for the user with the ID provided.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$author_id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$author_nicename</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The URL to the author's page.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_rewrite
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author</span><span class="nb-faded-text">(
+          string $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Deprecated.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's display name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$authordata
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve either author's link or author's name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the author has a home page set, return an HTML link, otherwise just return the
+author's name.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_author()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_meta</span><span class="nb-faded-text">(
+          string $field
+              =
+              '', int $user_id
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the requested data of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>selects the field of the users record.</p></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Optional. User ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's field from the current author's DB object.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author_meta">http://codex.wordpress.org/Template_Tags/the_author_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$authordata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_posts</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the number of posts by the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The number of posts by the author.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\count_user_posts()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_modified_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_modified_author</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the author who last edited the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's display name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_post_meta()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_userdata()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_multi_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_multi_author</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Does this site have more than one author</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks to see if more than one author has published posts.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether or not we have more than one author</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author</span><span class="nb-faded-text">(
+          string $deprecated
+              =
+              '', string $deprecated_echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display the name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The behavior of this function is based off of old functionality predating
+get_the_author(). This function is not deprecated, but is designed to echo
+the value from get_the_author() and as an result of any old theme that might
+still use the old behavior will also pass the value from get_the_author().</p>
+
+<p>The normal, expected behavior of this function is to echo the author and not
+return it. However, backwards compatibility has to be maintained.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Deprecated.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated_echo</th>
+<td>string</td>
+<td><em><p>Deprecated. Use get_the_author(). Echo the string or return it.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's display name, from get_the_author().</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author">http://codex.wordpress.org/Template_Tags/the_author</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display either author's link or author's name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the author has a home page set, echo an HTML link, otherwise just echo the
+author's name.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author_link">http://codex.wordpress.org/Template_Tags/the_author_link</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_author_link()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_meta</span><span class="nb-faded-text">(
+          string $field
+              =
+              '', int $user_id
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve the requested data of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>selects the field of the users record.</p></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Optional. User ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Echo</dt>
+<dd>string The author's field from the current author's DB object.
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author_meta">http://codex.wordpress.org/Template_Tags/the_author_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_posts</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the number of posts by the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author_posts">http://codex.wordpress.org/Template_Tags/the_author_posts</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_author_posts()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_posts_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_posts_link</span><span class="nb-faded-text">(
+          string $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display an HTML link to the author page of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Does just echo get_author_posts_url() function, like the others do. The
+reason for this, is that another function is used to help in printing the
+link to the author's posts.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Deprecated.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/the_author_posts_link">http://codex.wordpress.org/Template_Tags/the_author_posts_link</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$authordata
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_author_posts_url()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_author()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_modified_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_modified_author</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display the name of the author who last edited the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's display name, from get_the_modified_author().</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_the_author()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_authors()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_authors</span><span class="nb-faded-text">(
+          array $args
+              =
+              ''
+          )
+        </span>
+        :
+          null|string</code><div class="description"><p class="short_description">List all the authors of the blog, with several options available.</p></div>
+<div class="code-tabs">
+<div class="long-description"><ul>
+<li>optioncount (boolean) (false): Show the count in parenthesis next to the
+author's name.</li>
+<li>exclude_admin (boolean) (true): Exclude the 'admin' user that is
+installed bydefault.</li>
+<li>show_fullname (boolean) (false): Show their full names.</li>
+<li>hide_empty (boolean) (true): Don't show authors without any posts.</li>
+<li>feed (string) (''): If isn't empty, show links to author's feeds.</li>
+<li>feed_image (string) (''): If isn't empty, use this image to link to
+feeds.</li>
+<li>echo (boolean) (true): Set to false to return the output, instead of
+echoing.</li>
+<li>style (string) ('list'): Whether to display list of authors in list form
+or as a string.</li>
+<li>html (bool) (true): Whether to list the items in html form or plaintext.
+</li>
+</ul>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>The argument array.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|string</td>
+<td>The output, if echo is set to false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Template_Tags/wp_list_authors">http://codex.wordpress.org/Template_Tags/wp_list_authors</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

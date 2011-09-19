@@ -1,0 +1,1858 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/pluggable.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">These functions can be replaced via plugins. If plugins do not redefine these
+functions, then these will be used instead.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::auth_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">auth_redirect</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Checks if a user is logged in, if not it redirects them to the login page.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::cache_users()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">cache_users</span><span class="nb-faded-text">(
+          array $user_ids
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve info for user lists to prevent multiple queries by get_userdata()</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_ids</th>
+<td>array</td>
+<td><em><p>User ID numbers list</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::check_admin_referer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_admin_referer</span><span class="nb-faded-text">(
+          string $action
+              =
+              -1, string $query_arg
+              =
+              '_wpnonce'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Makes sure that a user was referred from another admin page.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To avoid security exploits.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>Action nonce</p></em></td>
+</tr>
+<tr>
+<th>$query_arg</th>
+<td>string</td>
+<td><em><p>where to look for nonce in $_REQUEST (since 2.5)</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::check_ajax_referer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_ajax_referer</span><span class="nb-faded-text">(
+          string $action
+              =
+              -1, string $query_arg
+              =
+              false,  $die
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Verifies the AJAX request to prevent processing requests external of the blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>Action nonce</p></em></td>
+</tr>
+<tr>
+<th>$query_arg</th>
+<td>string</td>
+<td><em><p>where to look for nonce in $_REQUEST (since 2.5)</p>
+</em></td>
+</tr>
+<tr>
+<th>$die</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_avatar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_avatar</span><span class="nb-faded-text">(
+          int|string|object $id_or_email, int $size
+              =
+              '96', string $default
+              =
+              '', string $alt
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the avatar for a user who provided a user ID or email address.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id_or_email</th>
+<td>int|string|object</td>
+<td><em><p>A user ID, email address, or comment object</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>int</td>
+<td><em><p>Size of the avatar image</p></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>string</td>
+<td><em><p>URL to a default image to use if no avatar is available</p></em></td>
+</tr>
+<tr>
+<th>$alt</th>
+<td>string</td>
+<td><em><p>Alternate text to use in image tag. Defaults to blank</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>&lt;img&gt; tag for the user's avatar</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_currentuserinfo()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_currentuserinfo</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool|null</code><div class="description"><p class="short_description">Populate global variables with information about the currently logged in user.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will set the current user, if the current user is not set. The current user
+will be set to the logged in person. If no user is logged in, then it will
+set the current user to 0, which is invalid and won't have any permissions.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|null</td>
+<td>False on XMLRPC Request and invalid auth cookie. Null when current user set</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$current_user
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_validate_auth_cookie()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_by()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_by</span><span class="nb-faded-text">(
+          string $field, int|string $value
+          )
+        </span>
+        :
+          bool|object</code><div class="description"><p class="short_description">Retrieve user info by a given field</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>The field to retrieve the user with. id | slug | email | login</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>int|string</td>
+<td><em><p>A value for $field. A user ID, slug, email address, or login name.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|object</td>
+<td>False on failure, WP_User object on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_userdata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_userdata</span><span class="nb-faded-text">(
+          int $user_id
+          )
+        </span>
+        :
+          bool|object</code><div class="description"><p class="short_description">Retrieve user info by user ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|object</td>
+<td>False on failure, WP_User object on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_user_logged_in()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_user_logged_in</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks if the current visitor is a logged in user.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if user is logged in, false if not logged in.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_authenticate()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_authenticate</span><span class="nb-faded-text">(
+          string $username, string $password
+          )
+        </span>
+        :
+          <a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|<a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a></code><div class="description"><p class="short_description">Checks a user's login information and logs them in if it checks out.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>User's username</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>User's password</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>
+<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|<a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a>
+</td>
+<td>WP_User object if login successful, otherwise WP_Error object.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_check_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_check_password</span><span class="nb-faded-text">(
+          string $password, string $hash,  $user_id
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks the plaintext password against the encrypted Password.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Maintains compatibility between old version and the new cookie authentication
+protocol using PHPass library. The $hash parameter is the encrypted password
+and the function compares the plain text password when encrypted similarly
+against the already encrypted password to see if they match.</p>
+
+<p>For integration with other applications, this function can be overwritten to
+instead use the other package password checking algorithm.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>Plaintext user's password</p>
+</em></td>
+</tr>
+<tr>
+<th>$hash</th>
+<td>string</td>
+<td><em><p>Hash of the user's password to check against.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False, if the $password does not match the hashed password</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>object $wp_hasher PHPass object used for checking the password
+against the $hash + $password
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-phpass.html#%5CPasswordHash::CheckPassword">\PasswordHash::CheckPassword</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_clear_auth_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_clear_auth_cookie</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes all of the cookies associated with authentication.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_create_nonce()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_create_nonce</span><span class="nb-faded-text">(
+          string|int $action
+              =
+              -1
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Creates a random, one time use token.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string|int</td>
+<td><em><p>Scalar value to add context to the nonce.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The one use form token</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_generate_auth_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_generate_auth_cookie</span><span class="nb-faded-text">(
+          int $user_id, int $expiration, string $scheme
+              =
+              'auth'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Generate authentication cookie contents.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$expiration</th>
+<td>int</td>
+<td><em><p>Cookie expiration in seconds</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. The cookie scheme to use: auth, secure_auth, or logged_in</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Authentication cookie contents</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_generate_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_generate_password</span><span class="nb-faded-text">(
+          int $length
+              =
+              12, bool $special_chars
+              =
+              true, bool $extra_special_chars
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Generates a random password drawn from the defined set of characters.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$length</th>
+<td>int</td>
+<td><em><p>The length of password to generate</p></em></td>
+</tr>
+<tr>
+<th>$special_chars</th>
+<td>bool</td>
+<td><em><p>Whether to include standard special characters. Default true.</p></em></td>
+</tr>
+<tr>
+<th>$extra_special_chars</th>
+<td>bool</td>
+<td><em><p>Whether to include other special characters. Used when generating secret keys and salts. Default false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The random password</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_current_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_current_user</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a></code><div class="description"><p class="short_description">Retrieve the current user object.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a></td>
+<td>Current user WP_User object</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_hash()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_hash</span><span class="nb-faded-text">(
+          string $data,  $scheme
+              =
+              'auth'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get hash of given string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Plain text to hash</p></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Hash of $data</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_salt()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_hash_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_hash_password</span><span class="nb-faded-text">(
+          string $password
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Create a hash (encrypt) of a plain text password.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>For integration with other applications, this function can be overwritten to
+instead use the other package password checking algorithm.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>Plain text user password to hash</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The hash string of the password</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>object $wp_hasher PHPass object
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-phpass.html#%5CPasswordHash::HashPassword">\PasswordHash::HashPassword</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_logout()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_logout</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Log the current user out.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_mail()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_mail</span><span class="nb-faded-text">(
+           $to,  $subject,  $message,  $headers
+              =
+              '',  $attachments
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$to</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$subject</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$headers</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$attachments</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_new_user_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_new_user_notification</span><span class="nb-faded-text">(
+          int $user_id, string $plaintext_pass
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Notify the blog admin of a new user, normally via email.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$plaintext_pass</th>
+<td>string</td>
+<td><em><p>Optional. The user's plaintext password</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_nonce_tick()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_nonce_tick</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the time-dependent variable for nonce creation.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A nonce has a lifespan of two ticks. Nonces in their second tick may be
+updated, e.g. by autosave.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_notify_moderator()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_notify_moderator</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notifies the moderator of the blog about a new comment that is awaiting approval.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_notify_postauthor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_notify_postauthor</span><span class="nb-faded-text">(
+          int $comment_id, string $comment_type
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notify an author of a comment/trackback/pingback to one of their posts.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID</p></em></td>
+</tr>
+<tr>
+<th>$comment_type</th>
+<td>string</td>
+<td><em><p>Optional. The comment type either 'comment' (default), 'trackback', or 'pingback'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if user email does not exist. True on completion.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_parse_auth_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_parse_auth_cookie</span><span class="nb-faded-text">(
+          string $cookie
+              =
+              '', string $scheme
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parse a cookie into its components</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cookie</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. The cookie scheme to use: auth, secure_auth, or logged_in</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Authentication cookie components</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_password_change_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_password_change_notification</span><span class="nb-faded-text">(
+          object $user
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Notify the blog admin of a user changing password, normally via email.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>object</td>
+<td><em><p>User Object</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_rand()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_rand</span><span class="nb-faded-text">(
+          int $min
+              =
+              0, int $max
+              =
+              0
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Generates a random number</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$min</th>
+<td>int</td>
+<td><em><p>Lower limit for the generated number (optional, default is 0)</p>
+</em></td>
+</tr>
+<tr>
+<th>$max</th>
+<td>int</td>
+<td><em><p>Upper limit for the generated number (optional, default is 4294967295)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>A random number between min and max</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_redirect</span><span class="nb-faded-text">(
+          string $location, int $status
+              =
+              302
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Redirects to another page.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$location</th>
+<td>string</td>
+<td><em><p>The path to redirect to</p></em></td>
+</tr>
+<tr>
+<th>$status</th>
+<td>int</td>
+<td><em><p>Status code to use</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if $location is not set</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_safe_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_safe_redirect</span><span class="nb-faded-text">(
+           $location,  $status
+              =
+              302
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Performs a safe (local) redirect, using wp_redirect().</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks whether the $location is using an allowed host, if it has an absolute
+path. A plugin can therefore set or remove allowed host(s) to or from the
+list.</p>
+
+<p>If the host is not allowed, then the redirect is to wp-admin on the siteurl
+instead. This prevents malicious redirects which redirect to another host,
+but only used in a few places.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$location</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$status</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_validate_redirect()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_salt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_salt</span><span class="nb-faded-text">(
+          string $scheme
+              =
+              'auth'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get salt to add to hashes to help prevent attacks.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The secret key is located in two places: the database in case the secret key
+isn't defined in the second place, which is in the wp-config.php file. If you
+are going to set the secret key, then you must do so in the wp-config.php
+file.</p>
+
+<p>The secret key in the database is randomly generated and will be appended to
+the secret key that is in wp-config.php file in some instances. It is
+important to have the secret key defined or changed in wp-config.php.</p>
+
+<p>If you have installed WordPress 2.5 or later, then you will have the
+SECRET_KEY defined in the wp-config.php already. You will want to change the
+value in it because hackers will know what it is. If you have upgraded to
+WordPress 2.5 or later version from a version before WordPress 2.5, then you
+should add the constant to your wp-config.php file.</p>
+
+<p>Below is an example of how the SECRET_KEY constant is defined with a value.
+You must not copy the below example and paste into your wp-config.php. If you
+need an example, then you can have a
+{@link https://api.wordpress.org/secret-key/1.1/ secret key created} for you.</p>
+
+<pre><code>define('SECRET_KEY', 'mAry1HadA15|\/|b17w55w1t3asSn09w');
+</code></pre>
+
+<p>Salting passwords helps against tools which has stored hashed values of
+common dictionary strings. The added values makes it harder to crack if given
+salt string is not weak.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Authentication scheme</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Salt value</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="https://api.wordpress.org/secret-key/1.1/">Create a Secret Key for wp-config.php</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_sanitize_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_sanitize_redirect</span><span class="nb-faded-text">(
+           $location
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitizes a URL for use in a redirect.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$location</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>redirect-sanitized URL</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_auth_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_auth_cookie</span><span class="nb-faded-text">(
+          int $user_id, bool $remember
+              =
+              false,  $secure
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the authentication cookies based User ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The $remember parameter increases the time that the cookie will be kept. The
+default the cookie is kept without remembering is two days. When $remember is
+set, the cookies will be kept for 14 days or two weeks.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$remember</th>
+<td>bool</td>
+<td><em><p>Whether to remember the user</p></em></td>
+</tr>
+<tr>
+<th>$secure</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_current_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_current_user</span><span class="nb-faded-text">(
+          int $id, string $name
+              =
+              ''
+          )
+        </span>
+        :
+          <a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a></code><div class="description"><p class="short_description">Changes the current user by ID or name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Set $id to null and specify a name if you do not know a user's ID.</p>
+
+<p>Some WordPress functionality is based on the current user and not based on
+the signed in user. Therefore, it opens the ability to edit and perform
+actions on users who aren't signed in.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>User's username</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_wp-includes_capabilities.html#%5CWP_User">\WP_User</a></td>
+<td>Current user User object</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>object $current_user The current user object which holds the user data.
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_password</span><span class="nb-faded-text">(
+          string $password, int $user_id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Updates the user's password with a new encrypted one.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>For integration with other applications, this function can be overwritten to
+instead use the other package password checking algorithm.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>The plaintext new user password</p></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_hash_password()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_text_diff()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_text_diff</span><span class="nb-faded-text">(
+          string $left_string, string $right_string, string|array $args
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Displays a human readable HTML representation of the difference between two strings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The Diff is available for getting the changes between versions. The output is
+HTML, so the primary use is for displaying the changes. If the two strings
+are equivalent, then an empty string will be returned.</p>
+
+<p>The arguments supported and can be changed are listed below.</p>
+
+<p>'title' : Default is an empty string. Titles the diff in a manner compatible
+        with the output.
+'title_left' : Default is an empty string. Change the HTML to the left of the
+        title.
+'title_right' : Default is an empty string. Change the HTML to the right of
+        the title.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$left_string</th>
+<td>string</td>
+<td><em><p>"old" (left) version of string</p>
+</em></td>
+</tr>
+<tr>
+<th>$right_string</th>
+<td>string</td>
+<td><em><p>"new" (right) version of string</p>
+</em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Change 'title', 'title_left', and 'title_right' defaults.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Empty string if strings are equivalent or HTML with differences.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_parse_args()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a>
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_wp-diff.html#%5CWP_Text_Diff_Renderer_Table">\WP_Text_Diff_Renderer_Table</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_validate_auth_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_validate_auth_cookie</span><span class="nb-faded-text">(
+          string $cookie
+              =
+              '', string $scheme
+              =
+              ''
+          )
+        </span>
+        :
+          bool|int</code><div class="description"><p class="short_description">Validates authentication cookie.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The checks include making sure that the authentication cookie is set and
+pulling in the contents (if $cookie is not used).</p>
+
+<p>Makes sure the cookie is not expired. Verifies the hash in cookie is what is
+should be and compares the two.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cookie</th>
+<td>string</td>
+<td><em><p>Optional. If used, will validate contents instead of cookie's</p>
+</em></td>
+</tr>
+<tr>
+<th>$scheme</th>
+<td>string</td>
+<td><em><p>Optional. The cookie scheme to use: auth, secure_auth, or logged_in</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|int</td>
+<td>False if invalid cookie, User ID if valid.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_validate_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_validate_redirect</span><span class="nb-faded-text">(
+          string $location, string $default
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Validates a URL for use in a redirect.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks whether the $location is using an allowed host, if it has an absolute
+path. A plugin can therefore set or remove allowed host(s) to or from the
+list.</p>
+
+<p>If the host is not allowed, then the redirect is to $default supplied</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$location</th>
+<td>string</td>
+<td><em><p>The redirect to validate</p></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>string</td>
+<td><em><p>The value to return is $location is not allowed</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>redirect-sanitized URL</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_verify_nonce()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_verify_nonce</span><span class="nb-faded-text">(
+          string $nonce, string|int $action
+              =
+              -1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Verify that correct nonce was used with time limit.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The user is given an amount of time to use the token, so therefore, since the
+UID and $action remain the same, the independent variable is the time.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$nonce</th>
+<td>string</td>
+<td><em><p>Nonce that was used in the form to verify</p></em></td>
+</tr>
+<tr>
+<th>$action</th>
+<td>string|int</td>
+<td><em><p>Should give context to what is taking place and be the same when nonce was created.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the nonce check passed or failed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

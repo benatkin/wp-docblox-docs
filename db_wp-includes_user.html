@@ -1,0 +1,2041 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/user.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_User_Query">\WP_User_Query</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress User API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_wp_get_user_contactmethods()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_get_user_contactmethods</span><span class="nb-faded-text">(
+          object $user
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Set up the default contact methods</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>object</td>
+<td><em><p>User data object (optional)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>$user_contactmethods Array of contact methods and their labels.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_user_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_user_meta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key, mixed $meta_value, bool $unique
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add meta data field to a user.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Post meta data is called "Custom Fields" on the Administration Screens.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata name.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+<tr>
+<th>$unique</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether the same key should not be added.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False for failure. True for success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/add_user_meta">http://codex.wordpress.org/Function_Reference/add_user_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_metadata()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_user_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_user_cache</span><span class="nb-faded-text">(
+          int $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Clean all user caches</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::count_many_users_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">count_many_users_posts</span><span class="nb-faded-text">(
+           $users, string|array $post_type
+              =
+              'post'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Number of posts written by a list of users.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$users</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_type</th>
+<td>string|array</td>
+<td><em><p>Optional. Post type to check. Defaults to post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Amount of posts each user has written.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::count_user_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">count_user_posts</span><span class="nb-faded-text">(
+          int $userid
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Number of posts user has written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userid</th>
+<td>int</td>
+<td><em><p>User ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Amount of posts user has written.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::count_users()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">count_users</span><span class="nb-faded-text">(
+          string $strategy
+              =
+              'time'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Count number of users who have each of the user roles.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Assumes there are neither duplicated nor orphaned capabilities meta_values.
+Assumes role names are unique phrases.  Same assumption made by WP_User_Query::prepare_query()
+Using $strategy = 'time' this is CPU-intensive and should handle around 10^7 users.
+Using $strategy = 'memory' this is memory-intensive and should handle around 10^5 users, but see WP Bug #12257.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$strategy</th>
+<td>string</td>
+<td><em><p>'time' or 'memory'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Includes a grand total and an array of counts indexed by role strings.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_user_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_user_meta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key, mixed $meta_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove metadata matching criteria from a user.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can match based on the key, or key and value. Removing based on key and
+value, will keep from removing duplicate metadata with the same key. It also
+allows removing all metadata matching key, if needed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>user ID</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata name.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Optional. Metadata value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False for failure. True for success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/delete_user_meta">http://codex.wordpress.org/Function_Reference/delete_user_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\delete_metadata()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_user_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_user_option</span><span class="nb-faded-text">(
+          int $user_id, string $option_name, bool $global
+              =
+              false
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Delete user option with global blog capability.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>User options are just like user metadata except that they have support for
+global blog options. If the 'global' parameter is false, which it is by default
+it will prepend the WordPress table prefix to the option name.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$option_name</th>
+<td>string</td>
+<td><em><p>User option name.</p></em></td>
+</tr>
+<tr>
+<th>$global</th>
+<td>bool</td>
+<td><em><p>Optional. Whether option name is global or blog specific. Default false (blog specific).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::email_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">email_exists</span><span class="nb-faded-text">(
+          string $email
+          )
+        </span>
+        :
+          bool|int</code><div class="description"><p class="short_description">Checks whether the given email exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>Email.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|int</td>
+<td>The user's ID on success, and false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_blogs_of_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_blogs_of_user</span><span class="nb-faded-text">(
+          int $id, bool $all
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the blogs a user belongs to.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>User Id</p></em></td>
+</tr>
+<tr>
+<th>$all</th>
+<td>bool</td>
+<td><em><p>Whether to retrieve all blogs or only blogs that are not marked as deleted, archived, or spam.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>A list of the user's blogs. False if the user was not found or an empty array if the user has no blogs.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_current_user_id()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_current_user_id</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the current user's ID</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The current user's ID</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_current_user
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_meta</span><span class="nb-faded-text">(
+          int $user_id, string $key
+              =
+              '', bool $single
+              =
+              false
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve user meta field for a user.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The meta key to retrieve.</p></em></td>
+</tr>
+<tr>
+<th>$single</th>
+<td>bool</td>
+<td><em><p>Whether to return a single value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Will be an array if $single is false. Will be value of meta data field if $single is true.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/get_user_meta">http://codex.wordpress.org/Function_Reference/get_user_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_metadata()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_option</span><span class="nb-faded-text">(
+          string $option, int $user
+              =
+              0, bool $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve user option that can be either per Site or per Network.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the user ID is not given, then the current user will be used instead. If
+the user ID is given, then the user data will be retrieved. The filter for
+the result, will also pass the original option name and finally the user data
+object as the third parameter.</p>
+
+<p>The option will first check for the per site name and then the per Network name.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>User option name.</p></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td>int</td>
+<td><em><p>Optional. User ID.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>bool</td>
+<td><em><p>Use get_option() to check for an option in the options table.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_users()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_users</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve list of users matching criteria.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of users.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_user.html#%5CWP_User_Query">\WP_User_Query</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_blog_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_blog_user</span><span class="nb-faded-text">(
+          int $blog_id
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks if the current user belong to a given blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Blog ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if the current users belong to $blog_id, false if not.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_user_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_user_field</span><span class="nb-faded-text">(
+          string $field, mixed $value, int $user_id, string $context
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Sanitize user field based on context.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Possible context values are:  'raw', 'edit', 'db', 'display', 'attribute' and 'js'. The
+'display' context is used by default. 'attribute' and 'js' contexts are treated like 'display'
+when calling filters.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>The user Object field name.</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>The user Object value.</p></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>user ID.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>How to sanitize user fields. Looks for 'raw', 'edit', 'db', 'display', 'attribute' and 'js'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Sanitized value.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::setup_userdata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">setup_userdata</span><span class="nb-faded-text">(
+          int $for_user_id
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set up global user vars.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used by wp_set_current_user() for back compat. Might be deprecated in the future.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$for_user_id</th>
+<td>int</td>
+<td><em><p>Optional. User ID to set up global data.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>string $userdata User description.
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $user_login The user username for logging in
+         
+    </dd>
+<dt>Global</dt>
+<dd>int $user_level The level of the user
+         
+    </dd>
+<dt>Global</dt>
+<dd>int $user_ID The ID of the user
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $user_email The email address of the user
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $user_url The url in the user's profile
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $user_pass_md5 MD5 of the user's password
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $user_identity The display name of the user
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_user_caches()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_user_caches</span><span class="nb-faded-text">(
+          object $user
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Update all user caches</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>object</td>
+<td><em><p>User object to be cached</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_user_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_user_meta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key, mixed $meta_value, mixed $prev_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update user meta field based on user ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use the $prev_value parameter to differentiate between meta fields with the
+same key and user ID.</p>
+
+<p>If the meta field for the user does not exist, it will be added.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+<tr>
+<th>$prev_value</th>
+<td>mixed</td>
+<td><em><p>Optional. Previous value to check before removing.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure, true if success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/update_user_meta">http://codex.wordpress.org/Function_Reference/update_user_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\update_metadata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_user_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_user_option</span><span class="nb-faded-text">(
+          int $user_id, string $option_name, mixed $newvalue, bool $global
+              =
+              false
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Update user option with global blog capability.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>User options are just like user metadata except that they have support for
+global blog options. If the 'global' parameter is false, which it is by default
+it will prepend the WordPress table prefix to the option name.</p>
+
+<p>Deletes the user option if $newvalue is empty.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$option_name</th>
+<td>string</td>
+<td><em><p>User option name.</p></em></td>
+</tr>
+<tr>
+<th>$newvalue</th>
+<td>mixed</td>
+<td><em><p>User option value.</p></em></td>
+</tr>
+<tr>
+<th>$global</th>
+<td>bool</td>
+<td><em><p>Optional. Whether option name is global or blog specific. Default false (blog specific).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_pass_ok()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_pass_ok</span><span class="nb-faded-text">(
+          string $user_login, string $user_pass
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check that the user login name and password is correct.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_login</th>
+<td>string</td>
+<td><em><p>User name.</p></em></td>
+</tr>
+<tr>
+<th>$user_pass</th>
+<td>string</td>
+<td><em><p>User password.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if does not authenticate, true if username and password authenticates.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Todo</dt>
+<dd>xmlrpc only. Maybe move to xmlrpc.php.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::username_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">username_exists</span><span class="nb-faded-text">(
+          string $username
+          )
+        </span>
+        :
+          null|int</code><div class="description"><p class="short_description">Checks whether the given username exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>Username.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|int</td>
+<td>The user's ID on success, and null on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::validate_username()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">validate_username</span><span class="nb-faded-text">(
+          string $username
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks whether an username is valid.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>Username.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether username given is valid</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_authenticate_cookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_authenticate_cookie</span><span class="nb-faded-text">(
+           $user,  $username,  $password
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Authenticate the user using the WordPress auth cookie.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$username</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_authenticate_username_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_authenticate_username_password</span><span class="nb-faded-text">(
+           $user,  $username,  $password
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$username</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_create_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_create_user</span><span class="nb-faded-text">(
+          string $username, string $password, string $email
+              =
+              ''
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">A simpler way of inserting an user into the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Creates a new user with just the username, password, and email. For more
+complex user creation use wp_insert_user() to specify more information.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>The user's username.</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>The user's password.</p>
+</em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>The user's email (optional).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The new user's ID.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_insert_user()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_dropdown_users()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_dropdown_users</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Create dropdown HTML content of users.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The content can either be displayed, which it is by default or retrieved by
+setting the 'echo' argument. The 'include' and 'exclude' arguments do not
+need to be used; all users will be displayed in that case. Only one can be
+used, either 'include' or 'exclude', but not both.</p>
+
+<p>The available arguments are as follows:</p>
+
+<ol>
+<li>show_option_all - Text to show all and whether HTML option exists.</li>
+<li>show_option_none - Text for show none and whether HTML option exists.</li>
+<li>hide_if_only_one_author - Don't create the dropdown if there is only one user.</li>
+<li>orderby - SQL order by clause for what order the users appear. Default is 'display_name'.</li>
+<li>order - Default is 'ASC'. Can also be 'DESC'.</li>
+<li>include - User IDs to include.</li>
+<li>exclude - User IDs to exclude.</li>
+<li>multi - Default is 'false'. Whether to skip the ID attribute on the 'select' element. A 'true' value is overridden when id argument is set.</li>
+<li>show - Default is 'display_name'. User table column to display. If the selected item is empty then the user_login will be displayed in parentheses</li>
+<li>echo - Default is '1'. Whether to display or retrieve content.</li>
+<li>selected - Which User ID is selected.</li>
+<li>include_selected - Always include the selected user ID in the dropdown. Default is false.</li>
+<li>name - Default is 'user'. Name attribute of select element.</li>
+<li>id - Default is the value of the 'name' parameter. ID attribute of select element.</li>
+<li>class - Class attribute of select element.</li>
+<li>blog_id - ID of blog (Multisite only). Defaults to ID of current blog.</li>
+<li>who - Which users to query.  Currently only 'authors' is supported. Default is all users.</li>
+</ol>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Override defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Null on display. String of HTML content on retrieve.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_insert_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_insert_user</span><span class="nb-faded-text">(
+          array $userdata
+          )
+        </span>
+        :
+          int|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Insert an user into the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can update a current user or insert a new user based on whether the user's ID
+is present.</p>
+
+<p>Can be used to update the user's info (see below), set the user's role, and
+set the user's preference on whether they want the rich editor on.</p>
+
+<p>Most of the $userdata array fields have filters associated with the values.
+The exceptions are 'rich_editing', 'role', 'jabber', 'aim', 'yim',
+'user_registered', and 'ID'. The filters have the prefix 'pre_user_' followed
+by the field name. An example using 'description' would have the filter
+called, 'pre_user_description' that can be hooked into.</p>
+
+<p>The $userdata array can contain the following fields:
+'ID' - An integer that will be used for updating an existing user.
+'user_pass' - A string that contains the plain text password for the user.
+'user_login' - A string that contains the user's username for logging in.
+'user_nicename' - A string that contains a nicer looking name for the user.
+        The default is the user's username.
+'user_url' - A string containing the user's URL for the user's web site.
+'user_email' - A string containing the user's email address.
+'display_name' - A string that will be shown on the site. Defaults to user's
+        username. It is likely that you will want to change this, for appearance.
+'nickname' - The user's nickname, defaults to the user's username.
+'first_name' - The user's first name.
+'last_name' - The user's last name.
+'description' - A string containing content about the user.
+'rich_editing' - A string for whether to enable the rich editor. False
+        if not empty.
+'user_registered' - The date the user registered. Format is 'Y-m-d H:i:s'.
+'role' - A string used to set the user's role.
+'jabber' - User's Jabber account.
+'aim' - User's AOL IM account.
+'yim' - User's Yahoo IM account.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userdata</th>
+<td>array</td>
+<td><em><p>An array of user data.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>The newly created user's ID or a WP_Error object if the user could not be created.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_signon()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_signon</span><span class="nb-faded-text">(
+          array $credentials
+              =
+              '', bool $secure_cookie
+              =
+              ''
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Authenticate user with remember capability.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The credentials is an array that has 'user_login', 'user_password', and
+'remember' indices. If the credentials is not given, then the log in form
+will be assumed and used if set.</p>
+
+<p>The various authentication cookies will be set by this function and will be
+set for a longer period depending on if the 'remember' credential is set to
+true.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$credentials</th>
+<td>array</td>
+<td><em><p>Optional. User info in order to sign on.</p></em></td>
+</tr>
+<tr>
+<th>$secure_cookie</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to use secure cookie.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>Either WP_Error on failure, or WP_User on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_user</span><span class="nb-faded-text">(
+          array $userdata
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Update an user in the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>It is possible to update a user's password by specifying the 'user_pass'
+value in the $userdata parameter array.</p>
+
+<p>If $userdata does not contain an 'ID' key, then a new user will be created
+and the new user's ID will be returned.</p>
+
+<p>If current user's password is being updated, then the cookies will be
+cleared.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userdata</th>
+<td>array</td>
+<td><em><p>An array of user data.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The updated user's ID.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_insert_user()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_insert_user()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_User_Query" class="anchor"></a><h2 class="class">\WP_User_Query<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">WordPress User Query class.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>get_users()
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_User_Query::$query_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_fields</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$query_from" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_from</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$query_limit" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_limit</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$query_orderby" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_orderby</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$query_where" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_where</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$results" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$results</span>= ''
+                </code><div class="description">
+<p class="short-description">List of found user ids</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::$total_users" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$total_users</span>= '0'
+                </code><div class="description">
+<p class="short-description">Total number of found users for the current query</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_User_Query::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+           $query
+              =
+              null
+          )
+        </span>
+        :
+          <a href="db_wp-includes_user.html#%5CWP_User_Query">\WP_User_Query</a></code><div class="description"><p class="short_description">PHP5 constructor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_wp-includes_user.html#%5CWP_User_Query">\WP_User_Query</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::get_results()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_results</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Return the list of users</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::get_search_sql()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_search_sql</span><span class="nb-faded-text">(
+           $string,  $cols,  $wild
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$cols</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$wild</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::get_total()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_total</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Return the total number of users for the current query</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::prepare_query()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">prepare_query</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prepare the query variables</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_User_Query::query()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">query</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Execute the query, with the current variables</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

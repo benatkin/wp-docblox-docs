@@ -1,0 +1,1902 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/widgets.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul>
+<li><a href="#%5CWP_Widget">\WP_Widget</a></li>
+<li><a href="#%5CWP_Widget_Factory">\WP_Widget_Factory</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">API for creating dynamic sidebar without hardcoding functionality into
+themes. Includes both internal WordPress routines and theme use routines.</p>
+<div class="long-description"><p>This functionality was found in a plugin before WordPress 2.2 release which
+included it in the core from that point on.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Plugins/WordPress_Widgets">WordPress Widgets</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Plugins/WordPress_Widgets_Api">Widgets API</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Widgets
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_get_widget_id_base()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_widget_id_base</span><span class="nb-faded-text">(
+           $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Private</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_register_widget_form_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_register_widget_form_callback</span><span class="nb-faded-text">(
+           $id,  $name,  $form_callback,  $options
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$form_callback</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_register_widget_update_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_register_widget_update_callback</span><span class="nb-faded-text">(
+           $id_base,  $update_callback,  $options
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id_base</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$update_callback</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_sidebars_changed()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_sidebars_changed</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Handle sidebars config after theme change</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::dynamic_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">dynamic_sidebar</span><span class="nb-faded-text">(
+          int|string $index
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Display dynamic sidebar.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>By default it displays the default sidebar or 'sidebar-1'. The 'sidebar-1' is
+not named by the theme, the actual name is '1', but 'sidebar-' is added to
+the registered sidebars for the name. If you named your sidebar 'after-post',
+then the parameter $index will still be 'after-post', but the lookup will be
+for 'sidebar-after-post'.</p>
+
+<p>It is confusing for the $index parameter, but just know that it should just
+work. When you register the sidebar in the theme, you will use the same name
+for this function or "Pay no heed to the man behind the curtain." Just accept
+it as an oddity of WordPress sidebar register and display.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$index</th>
+<td>int|string</td>
+<td><em><p>Optional, default is 1. Name or ID of dynamic sidebar.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if widget sidebar was found and called. False if not found or not called.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_active_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_active_sidebar</span><span class="nb-faded-text">(
+          mixed $index
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether a sidebar is in use.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$index</th>
+<td>mixed</td>
+<td><em><p>Sidebar name, id or number to check.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true if the sidebar is in use, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_active_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_active_widget</span><span class="nb-faded-text">(
+          string $callback
+              =
+              false, int $widget_id
+              =
+              false, string $id_base
+              =
+              false, bool $skip_inactive
+              =
+              true
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Whether widget is displayed on the front-end.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Either $callback or $id_base can be used
+$id_base is the first argument when extending WP_Widget class
+Without the optional $widget_id parameter, returns the ID of the first sidebar
+in which the first instance of the widget with the given callback or $id_base is found.
+With the $widget_id parameter, returns the ID of the sidebar where
+the widget with that callback/$id_base AND that ID is found.</p>
+
+<p>NOTE: $widget_id and $id_base are the same for single widgets. To be effective
+this function has to run after widgets have initialized, at action 'init' or later.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$callback</th>
+<td>string</td>
+<td><em><p>Optional, Widget callback to check.</p></em></td>
+</tr>
+<tr>
+<th>$widget_id</th>
+<td>int</td>
+<td><em><p>Optional, but needed for checking. Widget ID.</p></em></td>
+</tr>
+<tr>
+<th>$id_base</th>
+<td>string</td>
+<td><em><p>Optional, the base ID of a widget created by extending WP_Widget.</p></em></td>
+</tr>
+<tr>
+<th>$skip_inactive</th>
+<td>bool</td>
+<td><em><p>Optional, whether to check in 'wp_inactive_widgets'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>false if widget is not active or id of sidebar in which the widget is active.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_dynamic_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_dynamic_sidebar</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the dynamic sidebar is enabled and used by theme.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if using widgets. False, if not using widgets.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_sidebar</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Builds the definition for a single sidebar and returns the ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The $args parameter takes either a string or an array with 'name' and 'id'
+contained in either usage. It will be noted that the values will be applied
+to all sidebars, so if creating more than one, it will be advised to allow
+for WordPress to create the defaults for you.</p>
+
+<p>Example for string would be</p>
+
+<pre><code>'name=whatever;id=whatever1'</code></pre>
+
+<p>and for
+the array it would be</p>
+
+<pre><code>array(
+   'name' => 'whatever',
+   'id' => 'whatever1')</code></pre>
+
+<p>.</p>
+
+<p>name - The name of the sidebar, which presumably the title which will be
+    displayed.
+id - The unique identifier by which the sidebar will be called by.
+before_widget - The content that will prepended to the widgets when they are
+    displayed.
+after_widget - The content that will be appended to the widgets when they are
+    displayed.
+before_title - The content that will be prepended to the title when displayed.
+after_title - the content that will be appended to the title when displayed.</p>
+
+<p><em>Content</em> is assumed to be HTML and should be formatted as such, but
+doesn't have to be.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Builds Sidebar based off of 'name' and 'id' values</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The sidebar id that was added.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_registered_sidebars
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_sidebars()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_sidebars</span><span class="nb-faded-text">(
+          int $number
+              =
+              1, string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Creates multiple sidebars.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If you wanted to quickly create multiple sidebars for a theme or internally.
+This function will allow you to do so. If you don't pass the 'name' and/or
+'id' in $args, then they will be built for you.</p>
+
+<p>The default for the name is "Sidebar #", with '#' being replaced with the
+number the sidebar is currently when greater than one. If first sidebar, the
+name will be just "Sidebar". The default for id is "sidebar-" followed by the
+number the sidebar creation is currently at. If the id is provided, and multiple
+sidebars are being defined, the id will have "-2" appended, and so on.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$number</th>
+<td>int</td>
+<td><em><p>Number of sidebars to create.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Builds Sidebar based off of 'name' and 'id' values.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\register_sidebar()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\parse_str()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\register_sidebar()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_widget</span><span class="nb-faded-text">(
+          string $widget_class
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register a widget</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Registers a WP_Widget widget</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_class</th>
+<td>string</td>
+<td><em><p>The name of a class that extends WP_Widget</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget">\WP_Widget</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget_Factory">\WP_Widget_Factory</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget_Factory">\WP_Widget_Factory</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::retrieve_widgets()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">retrieve_widgets</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="::the_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_widget</span><span class="nb-faded-text">(
+          string $widget, array $instance
+              =
+              array(, array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output an arbitrary widget as a template tag</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget</th>
+<td>string</td>
+<td><em><p>the widget's PHP class name (see default-widgets.php)</p>
+</em></td>
+</tr>
+<tr>
+<th>$instance</th>
+<td>array</td>
+<td><em><p>the widget's instance settings</p>
+</em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>the widget's sidebar args</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unregister_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unregister_sidebar</span><span class="nb-faded-text">(
+          string $name
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes a sidebar from the list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The ID of the sidebar when it was added.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_registered_sidebars
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unregister_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unregister_widget</span><span class="nb-faded-text">(
+          string $widget_class
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Unregister a widget</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Unregisters a WP_Widget widget. Useful for unregistering default widgets.
+Run within a function hooked to the widgets_init action.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_class</th>
+<td>string</td>
+<td><em><p>The name of a class that extends WP_Widget</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget">\WP_Widget</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget_Factory">\WP_Widget_Factory</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_widgets.html#%5CWP_Widget_Factory">\WP_Widget_Factory</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_convert_widget_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_convert_widget_settings</span><span class="nb-faded-text">(
+           $base_name,  $option_name,  $settings
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Convert the widget settings from single to multi-widget format.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$base_name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$option_name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$settings</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_sidebars_widgets()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_sidebars_widgets</span><span class="nb-faded-text">(
+          bool $deprecated
+              =
+              true
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve full list of sidebars and their widgets.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will upgrade sidebar widget list, if needed. Will also save updated list, if
+needed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>bool</td>
+<td><em><p>Not used (deprecated).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Upgraded list of widgets to version 3 array format when called from the admin.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_widget_defaults()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_widget_defaults</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve default registered sidebars list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_register_sidebar_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_register_sidebar_widget</span><span class="nb-faded-text">(
+          int|string $id, string $name, callback $output_callback, array|string $options
+              =
+              array(
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Register widget for use in sidebars.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The default widget option is 'classname' that can be override.</p>
+
+<p>The function can also be used to unregister widgets when $output_callback
+parameter is an empty string.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>Widget display title.</p></em></td>
+</tr>
+<tr>
+<th>$output_callback</th>
+<td>callback</td>
+<td><em><p>Run when widget is called.</p></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td>array|string</td>
+<td><em><p>Optional. Widget Options.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Will return if $output_callback is empty after removing widget.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_registered_widgets
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_register_widget_defaults
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_register_widget_control()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_register_widget_control</span><span class="nb-faded-text">(
+          int|string $id, string $name, callback $control_callback, array|string $options
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers widget control callback for customizing options.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The options contains the 'height', 'width', and 'id_base' keys. The 'height'
+option is never used. The 'width' option is the width of the fully expanded
+control form, but try hard to use the default width. The 'id_base' is for
+multi-widgets (widgets which allow multiple instances such as the text
+widget), an id_base must be provided. The widget id will end up looking like
+{$id_base}-{$unique_number}.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Sidebar ID.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>Sidebar display name.</p></em></td>
+</tr>
+<tr>
+<th>$control_callback</th>
+<td>callback</td>
+<td><em><p>Run when sidebar is displayed.</p></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td>array|string</td>
+<td><em><p>Optional. Widget options. See above long description.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_sidebars_widgets()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_sidebars_widgets</span><span class="nb-faded-text">(
+          array $sidebars_widgets
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the sidebar widget option to update sidebars.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sidebars_widgets</th>
+<td>array</td>
+<td><em><p>Sidebar widgets and their settings.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_sidebar_description()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_sidebar_description</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve description for a sidebar.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When registering sidebars a 'description' parameter can be included that
+describes the sidebar for display on the widget administration panel.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>sidebar ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sidebar description, if available. Null on failure to retrieve description.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_unregister_sidebar_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_unregister_sidebar_widget</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Remove widget from sidebar.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_unregister_widget_control()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_unregister_widget_control</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Remove control callback for widget.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_register_widget_control()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_widget_description()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_widget_description</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve description for widget.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When registering widgets, the options can also include 'description' that
+describes the widget for display on the widget administration panel or
+in the theme.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Widget description, if available. Null on failure to retrieve description.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Widget" class="anchor"></a><h2 class="class">\WP_Widget<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\Widgets</small><p class="short-description">This class must be extended for each widget and WP_Widget::widget(), WP_Widget::update()
+and WP_Widget::form() need to be over-ridden.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_wp-content_themes_twentyeleven_inc_widgets.html#%5CTwenty_Eleven_Ephemera_Widget">\Twenty_Eleven_Ephemera_Widget</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Pages">\WP_Widget_Pages</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Links">\WP_Widget_Links</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Search">\WP_Widget_Search</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Archives">\WP_Widget_Archives</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Meta">\WP_Widget_Meta</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Calendar">\WP_Widget_Calendar</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Text">\WP_Widget_Text</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Categories">\WP_Widget_Categories</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Recent_Posts">\WP_Widget_Recent_Posts</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Recent_Comments">\WP_Widget_Recent_Comments</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_RSS">\WP_Widget_RSS</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Widget_Tag_Cloud">\WP_Widget_Tag_Cloud</a></dd>
+<dd><a href="db_wp-includes_default-widgets.html#%5CWP_Nav_Menu_Widget">\WP_Nav_Menu_Widget</a></dd>
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Widget::$control_options" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$control_options</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$id" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$id</span>= 'false'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$id_base" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$id_base</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$name" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$name</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$number" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$number</span>= 'false'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$updated" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$updated</span>= 'false'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::$widget_options" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$widget_options</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Widget::WP_Widget()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">WP_Widget</span><span class="nb-faded-text">(
+           $id_base
+              =
+              false,  $name,  $widget_options
+              =
+              array(,  $control_options
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">PHP4 constructor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id_base</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$widget_options</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$control_options</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          string $id_base
+              =
+              false, string $name, array $widget_options
+              =
+              array(, array $control_options
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">PHP5 constructor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id_base</th>
+<td>string</td>
+<td><em><p>Optional Base ID for the widget, lower case, if left empty a portion of the widget's class name will be used. Has to be unique.</p>
+</em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>Name for the widget displayed on the configuration page.</p></em></td>
+</tr>
+<tr>
+<th>$widget_options</th>
+<td>array</td>
+<td><em><p>Optional Passed to wp_register_sidebar_widget() - description: shown on the configuration page - classname</p>
+</em></td>
+</tr>
+<tr>
+<th>$control_options</th>
+<td>array</td>
+<td><em><p>Optional Passed to wp_register_widget_control() - width: required if more than 250px - height: currently not used but may be needed in the future</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_get_display_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_get_display_callback</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_get_form_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_get_form_callback</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_get_update_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_get_update_callback</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_register()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_register</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_register_one()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_register_one</span><span class="nb-faded-text">(
+           $number
+              =
+              -1
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Helper function: Registers a single instance.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$number</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::_set()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_set</span><span class="nb-faded-text">(
+           $number
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$number</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::display_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_callback</span><span class="nb-faded-text">(
+           $args,  $widget_args
+              =
+              1
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generate the actual widget content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Just finds the instance and calls widget().
+    Do NOT over-ride this function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$widget_args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::form()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">form</span><span class="nb-faded-text">(
+          array $instance
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Echo the settings update form</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$instance</th>
+<td>array</td>
+<td><em><p>Current settings</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::form_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">form_callback</span><span class="nb-faded-text">(
+           $widget_args
+              =
+              1
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generate the control form.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Do NOT over-ride this function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::get_field_id()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_field_id</span><span class="nb-faded-text">(
+          string $field_name
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Constructs id attributes for use in form() fields</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function should be used in form() methods to create id attributes for fields to be saved by update()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field_name</th>
+<td>string</td>
+<td><em><p>Field name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>ID attribute for $field_name</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::get_field_name()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_field_name</span><span class="nb-faded-text">(
+          string $field_name
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Constructs name attributes for use in form() fields</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function should be used in form() methods to create name attributes for fields to be saved by update()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field_name</th>
+<td>string</td>
+<td><em><p>Field name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Name attribute for $field_name</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::get_settings()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_settings</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::save_settings()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">save_settings</span><span class="nb-faded-text">(
+           $settings
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$settings</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::update()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">update</span><span class="nb-faded-text">(
+          array $new_instance, array $old_instance
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Update a particular instance.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function should check that $new_instance is set correctly.
+The newly calculated value of $instance should be returned.
+If "false" is returned, the instance won't be saved/updated.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$new_instance</th>
+<td>array</td>
+<td><em><p>New settings for this instance as input by the user via form()</p>
+</em></td>
+</tr>
+<tr>
+<th>$old_instance</th>
+<td>array</td>
+<td><em><p>Old settings for this instance</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Settings to save or bool false to cancel saving</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::update_callback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">update_callback</span><span class="nb-faded-text">(
+           $widget_args
+              =
+              1
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Deal with changed settings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Do NOT over-ride this function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget::widget()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">widget</span><span class="nb-faded-text">(
+          array $args, array $instance
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Echo the widget content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Subclasses should over-ride this function to generate their widget code.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Display arguments including before_title, after_title, before_widget, and after_widget.</p></em></td>
+</tr>
+<tr>
+<th>$instance</th>
+<td>array</td>
+<td><em><p>The settings for the particular instance of the widget</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Widget_Factory" class="anchor"></a><h2 class="class">\WP_Widget_Factory<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\Widgets</small><p class="short-description">Singleton that registers and instantiates WP_Widget classes.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>register_widget()
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>unregister_widget()
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Widget_Factory::$widgets" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$widgets</span>= 'array('
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array(</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Widget_Factory::WP_Widget_Factory()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">WP_Widget_Factory</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget_Factory::_register_widgets()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_register_widgets</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget_Factory::register()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">register</span><span class="nb-faded-text">(
+           $widget_class
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_class</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Widget_Factory::unregister()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unregister</span><span class="nb-faded-text">(
+           $widget_class
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$widget_class</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

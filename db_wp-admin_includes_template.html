@@ -1,0 +1,2860 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-admin/includes/template.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWalker_Category_Checklist">\Walker_Category_Checklist</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Template WordPress Administration API.</p>
+<div class="long-description"><p>A Big Mess. Also some neat functions that are nicely written.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Administration
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_admin_search_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_admin_search_query</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the search query.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A simple wrapper to display the "s" parameter in a GET URI. This function
+should only be used when {@link the_search_query()} cannot.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\attr
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_draft_or_post_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_draft_or_post_title</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the post title.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The post title is fetched and if it is blank then a default string is
+returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>The post id. If not supplied the global $post is used.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The post title if set</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_list_meta_row()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_list_meta_row</span><span class="nb-faded-text">(
+          \unknown_type $entry, \unknown_type $count
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$entry</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$count</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_media_states()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_media_states</span><span class="nb-faded-text">(
+           $post
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_post_states()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_post_states</span><span class="nb-faded-text">(
+           $post
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_pointer_print_admin_bar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_pointer_print_admin_bar</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="::add_contextual_help()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_contextual_help</span><span class="nb-faded-text">(
+          string $screen, string $help
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add contextual help text for a page</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>string</td>
+<td><em><p>The handle for the screen to add help to. This is usually the hook name returned by the add_*_page() functions.</p>
+</em></td>
+</tr>
+<tr>
+<th>$help</th>
+<td>string</td>
+<td><em><p>Arbitrary help text</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_meta_box()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_meta_box</span><span class="nb-faded-text">(
+          string $id, string $title, string $callback, string $page, string $context
+              =
+              'advanced', string $priority
+              =
+              'default',  $callback_args
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a meta box to an edit form.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>String for use in the 'id' attribute of tags.</p>
+</em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Title of the meta box.</p></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td>string</td>
+<td><em><p>Function that fills the box with the desired content. The function should echo its output.</p></em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>The type of edit page on which to show the box (post, page, link).</p>
+</em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>The context within the page where the boxes should show ('normal', 'advanced').</p>
+</em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>string</td>
+<td><em><p>The priority within the context where the boxes should show ('high', 'low').</p>
+</em></td>
+</tr>
+<tr>
+<th>$callback_args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_screen_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_screen_option</span><span class="nb-faded-text">(
+          string $option, mixed $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register and configure an admin screen option</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>An option name.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>mixed</td>
+<td><em><p>Option dependent arguments</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_settings_error()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_settings_error</span><span class="nb-faded-text">(
+          string $setting, string $code, string $message, string $type
+              =
+              'error'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register a settings error to be displayed to the user</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Use this to show messages to users about settings validation
+problems, missing settings or anything else.</p>
+
+<p>Settings errors should be added inside the $sanitize_callback function defined in
+register_setting() for a given setting to give feedback about the submission.</p>
+
+<p>By default messages will show immediately after the submission that generated the error.
+Additional calls to settings_errors() can be used to show errors even when the settings
+page is first accessed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$setting</th>
+<td>string</td>
+<td><em><p>Slug title of the setting to which this error applies</p></em></td>
+</tr>
+<tr>
+<th>$code</th>
+<td>string</td>
+<td><em><p>Slug-name to identify the error. Used as part of 'id' attribute in HTML output.</p>
+</em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>The formatted message text to display to the user (will be shown inside styled</p>
+
+<p><</p>
+
+<p>div> and</p>
+
+<p><</p>
+
+<p>p>)</p>
+</em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of message it is, controls HTML class. Use 'error' or 'updated'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_settings_errors Storage array of errors registered during this pageload
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_settings_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_settings_field</span><span class="nb-faded-text">(
+          string $id, string $title, string $callback, string $page, string $section
+              =
+              'default', array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a new field to a section of a settings page</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Use this to define a settings field that will show
+as part of a settings section inside a settings page. The fields are shown using
+do_settings_fields() in do_settings-sections()</p>
+
+<p>The $callback argument should be the name of a function that echoes out the
+html input tags for this setting field. Use get_option() to retrieve existing
+values to show.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>Slug-name to identify the field. Used in the 'id' attribute of tags.</p>
+</em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Formatted title of the field. Shown as the label for the field during output.</p></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td>string</td>
+<td><em><p>Function that fills the field with the desired form inputs. The function should echo its output.</p></em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>The slug-name of the settings page on which to show the section (general, reading, writing, ...).</p>
+</em></td>
+</tr>
+<tr>
+<th>$section</th>
+<td>string</td>
+<td><em><p>The slug-name of the section of the settings page in which to show the box (default, ...).</p>
+</em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Additional arguments</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>$wp_settings_fields Storage array of settings fields and info about their pages/sections
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_settings_section()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_settings_section</span><span class="nb-faded-text">(
+          string $id, string $title, string $callback, string $page
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a new section to a settings page.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Use this to define new settings sections for an admin page.
+Show settings sections in your admin page callback function with do_settings_sections().
+Add settings fields to your section with add_settings_field()</p>
+
+<p>The $callback argument should be the name of a function that echoes out any
+content you want to show at the top of the settings section before the actual
+fields. It can output nothing if you want.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>Slug-name to identify the section. Used in the 'id' attribute of tags.</p>
+</em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Formatted title of the section. Shown as the heading for the section.</p></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td>string</td>
+<td><em><p>Function that echos out any content at the top of the section (between heading and fields).</p>
+</em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>The slug-name of the settings page on which to show the section. Built-in pages include 'general', 'reading', 'writing', 'discussion', 'media', etc. Create your own using add_options_page();</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>$wp_settings_sections Storage array of all settings sections added to admin pages
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::compression_test()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">compression_test</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Test support for compressing JavaScript from PHP</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Outputs JavaScript that tests if compression from PHP works as expected
+and sets an option with the result. Has no effect when the current user
+is not an administrator. To run the test again the option 'can_compress_scripts'
+has to be deleted.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::convert_to_screen()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">convert_to_screen</span><span class="nb-faded-text">(
+          string $screen
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Convert a screen string to a screen object</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>string</td>
+<td><em><p>The name of the screen</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>An object containing the safe screen name and id</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_meta_boxes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_meta_boxes</span><span class="nb-faded-text">(
+          string $page, string $context, mixed $object
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Meta-Box template function</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>page identifier, also known as screen identifier</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>box context</p></em></td>
+</tr>
+<tr>
+<th>$object</th>
+<td>mixed</td>
+<td><em><p>gets passed to the box callback function as first parameter</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>number of meta_boxes</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_settings_fields()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_settings_fields</span><span class="nb-faded-text">(
+          string $page, \section $section
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print out the settings fields for a particular settings section</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Use this in a settings page to output
+a specific section. Should normally be called by do_settings_sections()
+rather than directly.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>Slug title of the admin page who's settings fields you want to show.</p>
+</em></td>
+</tr>
+<tr>
+<th>$section</th>
+<td>\section</td>
+<td><em><p>Slug title of the settings section who's fields you want to show.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>$wp_settings_fields Storage array of settings fields and their pages/sections
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_settings_sections()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_settings_sections</span><span class="nb-faded-text">(
+          string $page
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints out all settings sections added to a particular settings page</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Use this in a settings page callback function
+to output all the sections and fields that were added to that $page with
+add_settings_section() and add_settings_field()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>The slug name of the page whos settings sections you want to output</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>$wp_settings_sections Storage array of all settings sections added to admin pages
+         
+    </dd>
+<dt>Global</dt>
+<dd>$wp_settings_fields Storage array of settings fields and info about their pages/sections
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::favorite_actions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">favorite_actions</span><span class="nb-faded-text">(
+           $screen
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::find_posts_div()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">find_posts_div</span><span class="nb-faded-text">(
+          \unknown_type $found_action
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$found_action</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_column_headers()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_column_headers</span><span class="nb-faded-text">(
+          string|object $screen
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the column headers for a screen</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>string|object</td>
+<td><em><p>The screen you want the headers for</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Containing the headers in the format id =&gt; UI String</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_current_screen()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_current_screen</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Get the current screen object</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>@since 3.1.0</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>Current screen object</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_hidden_columns()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_hidden_columns</span><span class="nb-faded-text">(
+          string|object $screen
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get a list of hidden columns.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>string|object</td>
+<td><em><p>The screen you want the hidden columns for</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_hidden_meta_boxes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_hidden_meta_boxes</span><span class="nb-faded-text">(
+          string|object $screen
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get Hidden Meta Boxes</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>string|object</td>
+<td><em><p>Screen identifier</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Hidden Meta Boxes</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_inline_data()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_inline_data</span><span class="nb-faded-text">(
+          \unknown_type $post
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_screen_icon()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_screen_icon</span><span class="nb-faded-text">(
+           $screen
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_settings_errors()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_settings_errors</span><span class="nb-faded-text">(
+          string $setting
+              =
+              '', boolean $sanitize
+              =
+              FALSE
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Fetch settings errors registered by add_settings_error()</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks the $wp_settings_errors array for any errors declared during the current
+pageload and returns them.</p>
+
+<p>If changes were just submitted ($_GET['settings-updated']) and settings errors were saved
+to the 'settings_errors' transient then those errors will be returned instead. This
+is used to pass errors back across pageloads.</p>
+
+<p>Use the $sanitize argument to manually re-sanitize the option before returning errors.
+This is useful if you have errors or notices you want to show even when the user
+hasn't submitted data (i.e. when they first load an options page, or in admin_notices action hook)</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$setting</th>
+<td>string</td>
+<td><em><p>Optional slug title of a specific setting who's errors you want.</p>
+</em></td>
+</tr>
+<tr>
+<th>$sanitize</th>
+<td>boolean</td>
+<td><em><p>Whether to re-sanitize the setting value before returning errors.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of settings errors</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_settings_errors Storage array of errors registered during this pageload
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_submit_button()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_submit_button</span><span class="nb-faded-text">(
+          string $text
+              =
+              NULL, string $type
+              =
+              'primary', string $name
+              =
+              'submit', bool $wrap
+              =
+              true, array|string $other_attributes
+              =
+              NULL
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns a submit button, with provided text and appropriate class</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text of the button (defaults to 'Save Changes')</p>
+</em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of button. One of: primary, secondary, delete</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The HTML name of the submit button. Defaults to "submit". If no id attribute is given in $other_attributes below, $name will be used as the button's id.</p>
+</em></td>
+</tr>
+<tr>
+<th>$wrap</th>
+<td>bool</td>
+<td><em><p>True if the output button should be wrapped in a paragraph tag, false otherwise. Defaults to true</p></em></td>
+</tr>
+<tr>
+<th>$other_attributes</th>
+<td>array|string</td>
+<td><em><p>Other attributes that should be output with the button, mapping attributes to their values, such as array( 'tabindex' => '1' ). These attributes will be output as attribute="value", such as tabindex="1". Defaults to no other attributes. Other attributes can also be provided as a string such as 'tabindex="1"', though the array format is typically cleaner.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::iframe_footer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">iframe_footer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generic Iframe footer for use with Thickbox</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::iframe_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">iframe_header</span><span class="nb-faded-text">(
+          string $title
+              =
+              '', bool $limit_styles
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generic Iframe header for use with Thickbox</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Title of the Iframe page.</p></em></td>
+</tr>
+<tr>
+<th>$limit_styles</th>
+<td>bool</td>
+<td><em><p>Limit styles to colour-related styles only (unless others are enqueued).</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::list_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">list_meta</span><span class="nb-faded-text">(
+          \unknown_type $meta
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::meta_box_prefs()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">meta_box_prefs</span><span class="nb-faded-text">(
+          \unknown_type $screen
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::meta_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">meta_form</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::page_template_dropdown()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">page_template_dropdown</span><span class="nb-faded-text">(
+          \unknown_type $default
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$default</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::parent_dropdown()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">parent_dropdown</span><span class="nb-faded-text">(
+          \unknown_type $default
+              =
+              0, \unknown_type $parent
+              =
+              0, \unknown_type $level
+              =
+              0
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$default</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$parent</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$level</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_meta_box()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_meta_box</span><span class="nb-faded-text">(
+          string $id, string $page, string $context
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Remove a meta box from an edit form.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>String for use in the 'id' attribute of tags.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>string</td>
+<td><em><p>The type of edit page on which to show the box (post, page, link).</p>
+</em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>The context within the page where the boxes should show ('normal', 'advanced').</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::screen_icon()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">screen_icon</span><span class="nb-faded-text">(
+           $screen
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::screen_layout()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">screen_layout</span><span class="nb-faded-text">(
+           $screen
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::screen_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">screen_meta</span><span class="nb-faded-text">(
+           $screen
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::screen_options()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">screen_options</span><span class="nb-faded-text">(
+           $screen
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$screen</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_current_screen()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_current_screen</span><span class="nb-faded-text">(
+          string $id
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the current screen object</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>Screen id, optional.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$current_screen
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::settings_errors()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">settings_errors</span><span class="nb-faded-text">(
+          string $setting
+              =
+              '', boolean $sanitize
+              =
+              FALSE, boolean $hide_on_update
+              =
+              FALSE
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display settings errors registered by add_settings_error()</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Part of the Settings API. Outputs a</p>
+
+<p>&lt;</p>
+
+<p>div> for each error retrieved by get_settings_errors().</p>
+
+<p>This is called automatically after a settings page based on the Settings API is submitted.
+Errors should be added during the validation callback function for a setting defined in register_setting()</p>
+
+<p>The $sanitize option is passed into get_settings_errors() and will re-run the setting sanitization
+on its current value.</p>
+
+<p>The $hide_on_update option will cause errors to only show when the settings page is first loaded.
+if the user has already saved new values it will be hidden to avoid repeating messages already
+shown in the default error reporting after submission. This is useful to show general errors like missing
+settings when the user arrives at the settings page.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$setting</th>
+<td>string</td>
+<td><em><p>Optional slug title of a specific setting who's errors you want.</p>
+</em></td>
+</tr>
+<tr>
+<th>$sanitize</th>
+<td>boolean</td>
+<td><em><p>Whether to re-sanitize the setting value before returning errors.</p>
+</em></td>
+</tr>
+<tr>
+<th>$hide_on_update</th>
+<td>boolean</td>
+<td><em><p>If set to true errors will not be shown if the settings page has already been submitted.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::submit_button()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">submit_button</span><span class="nb-faded-text">(
+          string $text
+              =
+              NULL, string $type
+              =
+              'primary', string $name
+              =
+              'submit', bool $wrap
+              =
+              true, array|string $other_attributes
+              =
+              NULL
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Echos a submit button, with provided text and appropriate class</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text of the button (defaults to 'Save Changes')</p>
+</em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of button. One of: primary, secondary, delete</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The HTML name of the submit button. Defaults to "submit". If no id attribute is given in $other_attributes below, $name will be used as the button's id.</p>
+</em></td>
+</tr>
+<tr>
+<th>$wrap</th>
+<td>bool</td>
+<td><em><p>True if the output button should be wrapped in a paragraph tag, false otherwise. Defaults to true</p></em></td>
+</tr>
+<tr>
+<th>$other_attributes</th>
+<td>array|string</td>
+<td><em><p>Other attributes that should be output with the button, mapping attributes to their values, such as array( 'tabindex' => '1' ). These attributes will be output as attribute="value", such as tabindex="1". Defaults to no other attributes. Other attributes can also be provided as a string such as 'tabindex="1"', though the array format is typically cleaner.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_attachment_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_attachment_links</span><span class="nb-faded-text">(
+          \unknown_type $id
+              =
+              false
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_post_password()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_post_password</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the post password.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The password is passed through {@link esc_attr()} to ensure that it
+is safe for placing in an html attribute.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\attr
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::touch_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">touch_time</span><span class="nb-faded-text">(
+          \unknown_type $edit
+              =
+              1, \unknown_type $for_post
+              =
+              1, \unknown_type $tab_index
+              =
+              0, \unknown_type $multi
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$edit</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$for_post</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$tab_index</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$multi</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_category_checklist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_category_checklist</span><span class="nb-faded-text">(
+          \unknown_type $post_id
+              =
+              0, \unknown_type $descendants_and_self
+              =
+              0, \unknown_type $selected_cats
+              =
+              false, \unknown_type $popular_cats
+              =
+              false,  $walker
+              =
+              null,  $checked_ontop
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$descendants_and_self</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$selected_cats</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$popular_cats</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$walker</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$checked_ontop</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_comment_reply()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_comment_reply</span><span class="nb-faded-text">(
+          \unknown_type $position
+              =
+              '1', \unknown_type $checkbox
+              =
+              false, \unknown_type $mode
+              =
+              'single',  $table_row
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$position</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$checkbox</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$table_row</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_comment_trashnotice()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_comment_trashnotice</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output 'undo move to trash' text for comments</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_convert_bytes_to_hr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_convert_bytes_to_hr</span><span class="nb-faded-text">(
+          \unknown_type $bytes
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$bytes</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_convert_hr_to_bytes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_convert_hr_to_bytes</span><span class="nb-faded-text">(
+          \unknown_type $size
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$size</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_dropdown_roles()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_dropdown_roles</span><span class="nb-faded-text">(
+          string $selected
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print out <option> html elements for role selectors</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$selected</th>
+<td>string</td>
+<td><em><p>slug for the role that should be already selected</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_import_upload_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_import_upload_form</span><span class="nb-faded-text">(
+          string $action
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Outputs the form used by the importers to accept the data to be imported</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>The action attribute for the form.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_link_category_checklist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_link_category_checklist</span><span class="nb-faded-text">(
+          \unknown_type $link_id
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link_id</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_max_upload_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_max_upload_size</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_pointer_enqueue()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_pointer_enqueue</span><span class="nb-faded-text">(
+           $hook_suffix
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Initializes the new feature pointers.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$hook_suffix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+Pointer user settings:
+p0 - Admin bar pointer, added 3.3.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_popular_terms_checklist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_popular_terms_checklist</span><span class="nb-faded-text">(
+          \unknown_type $taxonomy, \unknown_type $default
+              =
+              0, \unknown_type $number
+              =
+              10, \unknown_type $echo
+              =
+              true
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$number</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_terms_checklist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_terms_checklist</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0, array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Taxonomy independent version of wp_category_checklist</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\Walker_Category_Checklist" class="anchor"></a><h2 class="class">\Walker_Category_Checklist<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">{@internal Missing Short Description}}</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a></dd>
+<dt>Since</dt>
+<dd>2.5.1
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Walker_Category_Checklist::$db_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$db_fields</span>= 'array ('parent' =&gt; 'parent''
+                </code><div class="description">
+<p class="short-description">DB fields to use.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array ('parent' =&gt; 'parent'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::$max_pages" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$max_pages</span>= '1'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Max number of pages walked by the paged walker</p><small>Inherited from:
+                        <a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>1</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::$tree_type" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$tree_type</span>= ''category''
+                </code><div class="description">
+<p class="short-description">What the class handles.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'category'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Walker_Category_Checklist::display_element()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_element</span><span class="nb-faded-text">(
+          object $element, array $children_elements, int $max_depth, int $depth
+              =
+              0, array $args, string $output
+          )
+        </span>
+        :
+          null</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Traverse elements to create list from elements.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::display_element()">\Walker::display_element()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Display one element if the element doesn't have any children otherwise,
+display the element and its children. Will only traverse up to the max
+depth and no ignore elements under that depth. It is possible to set the
+max depth to include all depths, see walk() method.</p>
+
+<p>This method shouldn't be called directly, use the walk() method instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>object</td>
+<td><em><p>Data object</p></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td>array</td>
+<td><em><p>List of elements to continue traversing.</p></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>Max depth to traverse.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of current element.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Null on failure with no changes to parameters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::end_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_el</span><span class="nb-faded-text">(
+          string $output,  $category,  $depth,  $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the element output, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$category</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::end_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_lvl</span><span class="nb-faded-text">(
+          string $output,  $depth,  $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the list of after the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method finishes the list at the end of output of the elements.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::get_number_of_root_elements()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_number_of_root_elements</span><span class="nb-faded-text">(
+           $elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::get_number_of_root_elements()">\Walker::get_number_of_root_elements()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::paged_walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">paged_walk</span><span class="nb-faded-text">(
+           $elements, int $max_depth, int $page_num,  $per_page
+          )
+        </span>
+        :
+          \XHTML</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">paged_walk() - produce a page of nested elements</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::paged_walk()">\Walker::paged_walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Given an array of hierarchical elements, the maximum depth, a specific page number,
+and number of elements per page, this function first determines all top level root elements
+belonging to that page, then lists them and all of their children in hierarchical order.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>= 0 means display all levels; $max_depth > 0 specifies the number of display levels.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_num</th>
+<td>int</td>
+<td><em><p>the specific page number, beginning with 1.</p></em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\XHTML</td>
+<td>of the specified page of elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::start_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_el</span><span class="nb-faded-text">(
+          string $output,  $category,  $depth,  $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Start the element output.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. Includes
+the element output also.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$category</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::start_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_lvl</span><span class="nb-faded-text">(
+          string $output,  $depth,  $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Starts the list before the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method is called at the start of the output list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::unset_children()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unset_children</span><span class="nb-faded-text">(
+           $e,  $children_elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::unset_children()">\Walker::unset_children()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$e</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Category_Checklist::walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">walk</span><span class="nb-faded-text">(
+          array $elements, int $max_depth
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Display array of elements hierarchically.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::walk()">\Walker::walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>It is a generic function which does not assume any existing order of
+elements. max_depth = -1 means flatly display every element. max_depth =
+0 means display all levels. max_depth > 0  specifies the number of
+display levels.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

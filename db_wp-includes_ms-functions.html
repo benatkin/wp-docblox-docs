@@ -1,0 +1,3038 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/ms-functions.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Multi-site WordPress API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Multisite
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::add_existing_user_to_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_existing_user_to_blog</span><span class="nb-faded-text">(
+          array $details
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a user to a blog based on details from maybe_add_existing_user_to_blog().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$details</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_user_to_blog()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_new_user_to_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_new_user_to_blog</span><span class="nb-faded-text">(
+          int $user_id, string $email, array $meta
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a newly created user to the appropriate blog</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_user_to_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_user_to_blog</span><span class="nb-faded-text">(
+          int $blog_id, int $user_id, string $role
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add a user to a blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use the 'add_user_to_blog' action to fire an event when
+users are added to a blog.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>ID of the blog you're adding the user to.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>ID of the user you're adding.</p>
+</em></td>
+</tr>
+<tr>
+<th>$role</th>
+<td>string</td>
+<td><em><p>The role you want the user to have</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::check_upload_mimes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_upload_mimes</span><span class="nb-faded-text">(
+          array $mimes
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Check an array of MIME types against a whitelist.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>WordPress ships with a set of allowed upload filetypes,
+which is defined in wp-includes/functions.php in
+get_allowed_mime_types(). This function is used to filter
+that list against the filetype whitelist provided by Multisite
+Super Admins at wp-admin/network/settings.php.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mimes</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::create_empty_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">create_empty_blog</span><span class="nb-faded-text">(
+          string $domain, string $path,  $weblog_title,  $site_id
+              =
+              1
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Create an empty blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The new blog's domain.</p>
+</em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The new blog's path.</p>
+</em></td>
+</tr>
+<tr>
+<th>$weblog_title</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$site_id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The ID of the newly created blog</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\install_blog()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::domain_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">domain_exists</span><span class="nb-faded-text">(
+          string $domain, string $path, int $site_id
+              =
+              1
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Check whether a blogname is already taken.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used during the new site registration process to ensure
+that each blogname is unique.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The domain to be checked.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The path to be checked.</p></em></td>
+</tr>
+<tr>
+<th>$site_id</th>
+<td>int</td>
+<td><em><p>Optional. Relevant only on multi-network installs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::filter_SSL()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">filter_SSL</span><span class="nb-faded-text">(
+           $url
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Formats an String URL to use HTTPS if HTTP is found.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful as a filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::fix_import_form_size()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">fix_import_form_size</span><span class="nb-faded-text">(
+          int $size
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the remaining upload space for this blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$size</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\upload_is_user_over_quota()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_space_allowed()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_dirsize()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::fix_phpmailer_messageid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">fix_phpmailer_messageid</span><span class="nb-faded-text">(
+           $phpmailer
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Correct From host on outgoing mail to match the site domain</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$phpmailer</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::force_ssl_content()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">force_ssl_content</span><span class="nb-faded-text">(
+          string|bool $force
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether to force SSL on content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$force</th>
+<td>string|bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if forced, false if not forced.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_active_blog_for_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_active_blog_for_user</span><span class="nb-faded-text">(
+          int $user_id
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Get one of a user's active blogs</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the user's primary blog, if she has one and
+it is active. If it's inactive, function returns another
+active blog of the user. If none are found, the user
+is added as a Subscriber to the Dashboard Blog and that blog
+is returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>The unique ID of the user</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>The blog object</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blogs_of_user()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_user_to_blog()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blog_details()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_admin_users_for_domain()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_admin_users_for_domain</span><span class="nb-faded-text">(
+          string $sitedomain
+              =
+              '', string $path
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the admin for a domain/path combination.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sitedomain</th>
+<td>string</td>
+<td><em><p>Optional. Site domain.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Site path.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The network admins</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_blog_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_blog_count</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">The number of active sites on your installation.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The count is cached and updated twice daily. This is not a live count.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. A site_id.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_blog_id_from_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_blog_id_from_url</span><span class="nb-faded-text">(
+          string $domain, string $path
+              =
+              '/'
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get a blog's numeric ID from its URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>On a subdirectory installation like example.com/blog1/,
+$domain will be the root 'example.com' and $path the
+subdirectory '/blog1/'. With subdomains like blog1.example.com,
+$domain is 'blog1.example.com' and $path is '/'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Optional. Not required for subdomain installations.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 2.6.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_blog_permalink()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_blog_permalink</span><span class="nb-faded-text">(
+          int $_blog_id, int $post_id
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the permalink for a post on another blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_blog_id</th>
+<td>int</td>
+<td><em><p>ID of the source blog.</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>ID of the desired post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The post's permalink</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_blog_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_blog_post</span><span class="nb-faded-text">(
+          int $blog_id, int $post_id
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Get a blog post from any site on the network.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>ID of the blog.</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>ID of the post you're looking for.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>The post.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_current_site()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_current_site</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Get the current site info.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns an object containing the ID, domain, path, and site_name
+of the site being viewed.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_dashboard_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_dashboard_blog</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the "dashboard blog", the blog where users without a blog edit their profile data.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blog_details()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_dirsize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_dirsize</span><span class="nb-faded-text">(
+          string $directory
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the size of a directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A helper function that is used primarily to check whether
+a blog has exceeded its allowed upload space.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$directory</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\recurse_dirsize()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_most_recent_post_of_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_most_recent_post_of_user</span><span class="nb-faded-text">(
+          int $user_id
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get a user's most recent post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Walks through each of a user's blogs to find the post with
+the most recent post_date_gmt.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Contains the blog_id, post_id, post_date_gmt, and post_gmt_ts</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blogs_of_user()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_sitestats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_sitestats</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Gets the network's site and user counts.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Site and user count for the network.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blog_count()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_user_count()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_count</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">The number of active users in your installation.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The count is cached and updated twice daily. This is not a live count.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_id_from_string()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_id_from_string</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get a numeric user ID from either an email address or a login.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\is_email()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::global_terms()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">global_terms</span><span class="nb-faded-text">(
+          int $term_id,  $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Maintains a canonical list of terms by syncing terms created for each blog with the global terms table.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>An ID for a term on the current blog.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>An ID from the global terms table mapped from $term_id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\term_id_filter
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::insert_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">insert_blog</span><span class="nb-faded-text">(
+          string $domain, string $path, int $site_id
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Store basic site info in the blogs table.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function creates a row in the wp_blogs table and returns
+the new blog's ID. It is the first step in creating a new blog.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The domain of the new site.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The path of the new site.</p></em></td>
+</tr>
+<tr>
+<th>$site_id</th>
+<td>int</td>
+<td><em><p>Unless you're running a multi-network install, be sure to set this value to 1.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The ID of the new row</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::install_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">install_blog</span><span class="nb-faded-text">(
+          int $blog_id, string $blog_title
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Install an empty blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Creates the new blog tables and options. If calling this function
+directly, be sure to use switch_to_blog() first, so that $wpdb
+points to the new blog.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>The value returned by insert_blog().</p>
+</em></td>
+</tr>
+<tr>
+<th>$blog_title</th>
+<td>string</td>
+<td><em><p>The title of the new site.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\make_db_current_silent()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\populate_roles()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::install_blog_defaults()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">install_blog_defaults</span><span class="nb-faded-text">(
+          int $blog_id, int $user_id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set blog defaults.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function creates a row in the wp_blogs table.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Ignored in this function.</p></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>MU
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_install_defaults()
+         
+    </dd>
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_install_defaults()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_email_address_unsafe()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_email_address_unsafe</span><span class="nb-faded-text">(
+          string $user_email
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks an email address against a list of banned domains.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function checks against the Banned Email Domains list
+at wp-admin/network/settings.php. The check is only run on
+self-registrations; user creation at wp-admin/network/users.php
+bypasses this check.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The email provided by the user at registration.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Returns true when the email address is banned.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_user_member_of_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_user_member_of_blog</span><span class="nb-faded-text">(
+          int $user_id,  $blog_id
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Find out whether a user is a member of a given blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>The unique ID of the user</p></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_blogs_of_user()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_user_option_local()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_user_option_local</span><span class="nb-faded-text">(
+          string $key, int $user_id
+              =
+              0, int $blog_id
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether a usermeta key has to do with the current blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>Optional. Defaults to current user.</p></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Optional. Defaults to current blog.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_current_user()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_user_spammy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_user_spammy</span><span class="nb-faded-text">(
+          string $username
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check to see whether a user is marked as a spammer, based on username</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_current_user_id()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_user_id_from_string()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_add_existing_user_to_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_add_existing_user_to_blog</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a new user to a blog by visiting /newbloguser/username/.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This will only work when the user's details are saved as an option
+keyed as 'new_user_x', where 'x' is the username of the user to be
+added, as when a user is invited through the regular WP Add User interface.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_existing_user_to_blog()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_redirect_404()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_redirect_404</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Correct 404 redirects when NOBLOGREDIRECT is defined.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::newblog_notify_siteadmin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">newblog_notify_siteadmin</span><span class="nb-faded-text">(
+          int $blog_id,  $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notifies the network admin that a new site has been activated.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filter 'newblog_notify_siteadmin' to change the content of
+the notification email.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>The new site's ID.</p>
+</em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::newuser_notify_siteadmin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">newuser_notify_siteadmin</span><span class="nb-faded-text">(
+          int $user_id
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notifies the network admin that a new user has been activated.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filter 'newuser_notify_siteadmin' to change the content of
+the notification email.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>The new user's ID.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::recurse_dirsize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">recurse_dirsize</span><span class="nb-faded-text">(
+          string $directory
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get the size of a directory recursively.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used by get_dirsize() to get a directory's size when it contains
+other directories.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$directory</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::redirect_this_site()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">redirect_this_site</span><span class="nb-faded-text">(
+           $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Ensure that the current site's domain is listed in the allowed redirect host list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The current site's domain</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_validate_redirect()
+         
+    </dd>
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_user_from_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_user_from_blog</span><span class="nb-faded-text">(
+          int $user_id, int $blog_id
+              =
+              '', string $reassign
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove a user from a blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use the 'remove_user_from_blog' action to fire an event when
+users are removed from a blog.</p>
+
+<p>Accepts an optional $reassign parameter, if you want to
+reassign the user's blog posts to another user upon removal.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>ID of the user you're removing.</p>
+</em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>ID of the blog you're removing the user from.</p>
+</em></td>
+</tr>
+<tr>
+<th>$reassign</th>
+<td>string</td>
+<td><em><p>Optional. A user to whom to reassign posts.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::signup_nonce_check()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">signup_nonce_check</span><span class="nb-faded-text">(
+          array $result
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Process the signup nonce created in signup_nonce_fields().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$result</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_create_nonce()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::signup_nonce_fields()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">signup_nonce_fields</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add a nonce field to the signup page.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_nonce_field()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_blog_public()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_blog_public</span><span class="nb-faded-text">(
+          int $old_value, int $value
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update this blog's 'public' setting in the global blogs table.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Public blogs have a setting of 1, private blogs are 0.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$old_value</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>int</td>
+<td><em><p>The new public value</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\update_blog_status()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_posts_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_posts_count</span><span class="nb-faded-text">(
+           $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Update a blog's post count.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>WordPress MS stores a blog's post count as an option so as
+to avoid extraneous COUNTs when a blog's details are fetched
+with get_blog_details(). This function is called when posts
+are published to make sure the count stays current.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::upload_is_file_too_big()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">upload_is_file_too_big</span><span class="nb-faded-text">(
+          array $upload
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Check whether an upload is too big.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$upload</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>If the upload is under the size limit, $upload is returned. Otherwise returns an error message.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::upload_is_user_over_quota()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">upload_is_user_over_quota</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Check whether a blog has used its allotted upload space.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used by get_dirsize() to get a directory's size when it contains
+other directories.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional. If $echo is set and the quota is exceeded, a warning message is echoed. Default is true.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_dirsize()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::users_can_register_signup_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">users_can_register_signup_filter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether users can self-register, based on Network settings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::welcome_user_msg_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">welcome_user_msg_filter</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Ensure that the welcome message is not empty. Currently unused.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_schedule_update_network_counts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_schedule_update_network_counts</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Schedule update of the network-wide counts for the current network.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_network_counts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_network_counts</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Update the network-wide counts for the current network.</p></div>
+<div class="code-tabs"><div class="long-description"><p>@since 3.1.0</p>
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_activate_signup()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_activate_signup</span><span class="nb-faded-text">(
+          string $key
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Activate a signup.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Hook to 'wpmu_activate_user' or 'wpmu_activate_blog' for events
+that should happen only when users or sites are self-created (since
+those actions are not called when users and sites are created
+by a Super Admin).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The activation key provided to the user.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>An array containing information about the activated user and/or blog</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_generate_password()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_welcome_user_notification()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_user_to_blog()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_new_user_to_blog()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_create_user()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_create_blog()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_welcome_notification()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_admin_do_redirect()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_admin_do_redirect</span><span class="nb-faded-text">(
+          string $url
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Redirect a user based on $_GET or $_POST arguments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The function looks for redirect arguments in the following order:
+1) $_GET['ref']
+2) $_POST['ref']
+3) $_SERVER['HTTP_REFERER']
+4) $_GET['redirect']
+5) $_POST['redirect']
+6) $url</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_admin_redirect_add_updated_param()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_admin_redirect_add_updated_param()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_admin_redirect_add_updated_param</span><span class="nb-faded-text">(
+          string $url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds an 'updated=true' argument to a URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_create_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_create_blog</span><span class="nb-faded-text">(
+          string $domain, string $path, string $title, int $user_id, array $meta
+              =
+              '', int $site_id
+              =
+              1
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Create a site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function runs when a user self-registers a new site as well
+as when a Super Admin creates a new site. Hook to 'wpmu_new_blog'
+for events that should affect all new sites.</p>
+
+<p>On subdirectory installs, $domain is the same as the main site's
+domain, and the path is the subdirectory name (eg 'example.com'
+and '/blog1/'). On subdomain installs, $domain is the new subdomain +
+root domain (eg 'blog1.example.com'), and $path is '/'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The new site's domain.</p>
+</em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The new site's path.</p>
+</em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The new site's title.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>The user ID of the new site's admin.</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>Optional. Used to set initial site options.</p></em></td>
+</tr>
+<tr>
+<th>$site_id</th>
+<td>int</td>
+<td><em><p>Optional. Only relevant on multi-network installs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Returns WP_Error object on failure, int $blog_id on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\domain_exists()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\insert_blog()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_install_defaults()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_user_to_blog()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_create_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_create_user</span><span class="nb-faded-text">(
+          string $user_name, string $password, string $email
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Create a user.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function runs when a user self-registers as well as when
+a Super Admin creates a new user. Hook to 'wpmu_new_user' for events
+that should affect all new users, but only on Multisite (otherwise
+use 'user_register').</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_name</th>
+<td>string</td>
+<td><em><p>The new user's login name.</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>The new user's password.</p>
+</em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>The new user's email address.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Returns false on failure, or int $user_id on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_create_user()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_log_new_registrations()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_log_new_registrations</span><span class="nb-faded-text">(
+          int $blog_id, int $user_id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Logs user registrations.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_signup_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_signup_blog</span><span class="nb-faded-text">(
+          string $domain, string $path, string $title, string $user, string $user_email, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Record site signup information for future activation.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The requested domain.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The requested path.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The requested site title.</p></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td>string</td>
+<td><em><p>The user's requested login name.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The user's email address.</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>By default, contains the requested privacy setting and lang_id.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_signup_blog_notification()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_signup_blog_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_signup_blog_notification</span><span class="nb-faded-text">(
+          string $domain, string $path, string $title, string $user, string $user_email, string $key, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notify user of signup success.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is the notification function used when site registration
+is enabled.</p>
+
+<p>Filter 'wpmu_signup_blog_notification' to bypass this function or
+replace it with your own notification behavior.</p>
+
+<p>Filter 'wpmu_signup_blog_notification_email' and
+'wpmu_signup_blog_notification_email' to change the content
+and subject line of the email sent to newly registered users.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>The new blog domain.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>The new blog path.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The site title.</p></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td>string</td>
+<td><em><p>The user's login name.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The user's email address.</p>
+</em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The activation key created in wpmu_signup_blog()</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>By default, contains the requested privacy setting and lang_id.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_signup_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_signup_user</span><span class="nb-faded-text">(
+          string $user, string $user_email, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Record user signup information for future activation.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is used when user registration is open but
+new site registration is not.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>string</td>
+<td><em><p>The user's requested login name.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The user's email address.</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>By default, this is an empty array.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wpmu_signup_user_notification()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_signup_user_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_signup_user_notification</span><span class="nb-faded-text">(
+          string $user, string $user_email, string $key, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notify user of signup success.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is the notification function used when no new site has
+been requested.</p>
+
+<p>Filter 'wpmu_signup_user_notification' to bypass this function or
+replace it with your own notification behavior.</p>
+
+<p>Filter 'wpmu_signup_user_notification_email' and
+'wpmu_signup_user_notification_subject' to change the content
+and subject line of the email sent to newly registered users.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>string</td>
+<td><em><p>The user's login name.</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The user's email address.</p>
+</em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The activation key created in wpmu_signup_user()</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>By default, an empty array.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_validate_blog_signup()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_validate_blog_signup</span><span class="nb-faded-text">(
+          string $blogname, string $blog_title,  $user
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Processes new site registrations.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks the data provided by the user during blog signup. Verifies
+the validity and uniqueness of blog paths and domains.</p>
+
+<p>This function prevents the current user from registering a new site
+with a blogname equivalent to another user's login name. Passing the
+$user parameter to the function, where $user is the other user, is
+effectively an override of this limitation.</p>
+
+<p>Filter 'wpmu_validate_blog_signup' if you want to modify
+the way that WordPress validates new site signups.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blogname</th>
+<td>string</td>
+<td><em><p>The blog name provided by the user. Must be unique.</p></em></td>
+</tr>
+<tr>
+<th>$blog_title</th>
+<td>string</td>
+<td><em><p>The blog title provided by the user.</p></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Contains the new site data and error messages.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\domain_exists()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\username_exists()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_validate_user_signup()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_validate_user_signup</span><span class="nb-faded-text">(
+          string $user_name, string $user_email
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Processes new user registrations.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks the data provided by the user during signup. Verifies
+the validity and uniqueness of user names and user email addresses,
+and checks email addresses against admin-provided domain
+whitelists and blacklists.</p>
+
+<p>The hook 'wpmu_validate_user_signup' provides an easy way
+to modify the signup process. The value $result, which is passed
+to the hook, contains both the user-provided info and the error
+messages created by the function. 'wpmu_validate_user_signup' allows
+you to process the data in any way you'd like, and unset the
+relevant errors if necessary.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_name</th>
+<td>string</td>
+<td><em><p>The login name provided by the user.</p></em></td>
+</tr>
+<tr>
+<th>$user_email</th>
+<td>string</td>
+<td><em><p>The email provided by the user.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Contains username, email, and error messages.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\is_email_address_unsafe()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\username_exists()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\email_exists()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_welcome_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_welcome_notification</span><span class="nb-faded-text">(
+          int $blog_id, int $user_id, string $password, string $title, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notify a user that her blog activation has been successful.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filter 'wpmu_welcome_notification' to disable or bypass.</p>
+
+<p>Filter 'update_welcome_email' and 'update_welcome_subject' to
+modify the content and subject line of the notification email.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>The new blog's title</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>Optional. Not used in the default function, but is passed along to hooks for customization.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wpmu_welcome_user_notification()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wpmu_welcome_user_notification</span><span class="nb-faded-text">(
+          int $user_id, string $password, array $meta
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Notify a user that her account activation has been successful.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filter 'wpmu_welcome_user_notification' to disable or bypass.</p>
+
+<p>Filter 'update_welcome_user_email' and 'update_welcome_user_subject' to
+modify the content and subject line of the notification email.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$meta</th>
+<td>array</td>
+<td><em><p>Optional. Not used in the default function, but is passed along to hooks for customization.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>MU
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

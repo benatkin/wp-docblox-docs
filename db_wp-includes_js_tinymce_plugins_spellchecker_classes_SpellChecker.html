@@ -1,0 +1,287 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/js/tinymce/plugins/spellchecker/classes/SpellChecker.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CSpellChecker">\SpellChecker</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">$Id: editor_plugin_src.js 201 2007-02-12 15:56:56Z spocke $</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Author</dt>
+<dd>Moxiecode
+         
+    </dd>
+<dt>Copyright</dt>
+<dd>Copyright © 2004-2007, Moxiecode Systems AB, All rights reserved.
+         
+    </dd>
+<dt>Package</dt>
+<dd>MCManager.includes
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\SpellChecker" class="anchor"></a><h2 class="class">\SpellChecker<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>MCManager\includes</small><p class="short-description">$Id: editor_plugin_src.js 201 2007-02-12 15:56:56Z spocke $</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_wp-includes_js_tinymce_plugins_spellchecker_classes_EnchantSpell.html#%5CEnchantSpell">\EnchantSpell</a></dd>
+<dd><a href="db_wp-includes_js_tinymce_plugins_spellchecker_classes_GoogleSpell.html#%5CGoogleSpell">\GoogleSpell</a></dd>
+<dd><a href="db_wp-includes_js_tinymce_plugins_spellchecker_classes_PSpell.html#%5CPSpell">\PSpell</a></dd>
+<dd><a href="db_wp-includes_js_tinymce_plugins_spellchecker_classes_PSpellShell.html#%5CPSpellShell">\PSpellShell</a></dd>
+<dt>Author</dt>
+<dd>Moxiecode
+         
+    </dd>
+<dt>Copyright</dt>
+<dd>Copyright © 2004-2007, Moxiecode Systems AB, All rights reserved.
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\SpellChecker::SpellChecker()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">SpellChecker</span><span class="nb-faded-text">(
+          \$config $config
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructor.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$config</th>
+<td>\$config</td>
+<td><em><p>Configuration name/value array.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\SpellChecker::checkWords()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">checkWords</span><span class="nb-faded-text">(
+          \{String} $lang, \{Array} $words
+          )
+        </span>
+        :
+          \{Array}</code><div class="description"><p class="short_description">Spellchecks an array of words.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lang</th>
+<td>\{String}</td>
+<td><em><p>Language code like sv or en.</p></em></td>
+</tr>
+<tr>
+<th>$words</th>
+<td>\{Array}</td>
+<td><em><p>Array of words to spellcheck.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\{Array}</td>
+<td>Array of misspelled words.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\SpellChecker::getSuggestions()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSuggestions</span><span class="nb-faded-text">(
+          \{String} $lang, \{String} $word
+          )
+        </span>
+        :
+          \{Array}</code><div class="description"><p class="short_description">Returns suggestions of for a specific word.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lang</th>
+<td>\{String}</td>
+<td><em><p>Language code like sv or en.</p></em></td>
+</tr>
+<tr>
+<th>$word</th>
+<td>\{String}</td>
+<td><em><p>Specific word to get suggestions for.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\{Array}</td>
+<td>Array of suggestions for the specified word.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\SpellChecker::loopback()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">loopback</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \{Array}</code><div class="description"><p class="short_description">Simple loopback function everything that gets in will be send back.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\{Array}</td>
+<td>Array of all input arguments.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\SpellChecker::throwError()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">throwError</span><span class="nb-faded-text">(
+          \{String} $str
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Throws an error message back to the user. This will stop all execution.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>\{String}</td>
+<td><em><p>Message to send back to user.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

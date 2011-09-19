@@ -1,0 +1,2689 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/comment.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_Comment_Query">\WP_Comment_Query</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Manages WordPress comments</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Comment
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_close_comments_for_old_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_close_comments_for_old_post</span><span class="nb-faded-text">(
+          bool $open, int $post_id
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Close comments on an old post.  Hooked to comments_open and pings_open.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$open</th>
+<td>bool</td>
+<td><em><p>Comments open or closed</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Post ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>$open</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_close_comments_for_old_posts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_close_comments_for_old_posts</span><span class="nb-faded-text">(
+          object $posts
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Close comments on old posts on the fly, without any extra DB queries.  Hooked to the_posts.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$posts</th>
+<td>object</td>
+<td><em><p>Post data object.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_comment_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_comment_meta</span><span class="nb-faded-text">(
+          int $comment_id, string $meta_key, mixed $meta_value, bool $unique
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add meta data field to a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata name.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+<tr>
+<th>$unique</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether the same key should not be added.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False for failure. True for success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/add_comment_meta">http://codex.wordpress.org/Function_Reference/add_comment_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_metadata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::check_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_comment</span><span class="nb-faded-text">(
+          string $author, string $email, string $url, string $comment, string $user_ip, string $user_agent, string $comment_type
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks whether a comment passes internal checks to be allowed to add.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If comment moderation is set in the administration, then all comments,
+regardless of their type and whitelist will be set to false. If the number of
+links exceeds the amount in the administration, then the check fails. If any
+of the parameter contents match the blacklist of words, then the check fails.</p>
+
+<p>If the number of links exceeds the amount in the administration, then the
+check fails. If any of the parameter contents match the blacklist of words,
+then the check fails.</p>
+
+<p>If the comment author was approved before, then the comment is
+automatically whitelisted.</p>
+
+<p>If none of the checks fail, then the failback is to set the check to pass
+(return true).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$author</th>
+<td>string</td>
+<td><em><p>Comment Author's name</p>
+</em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>Comment Author's email</p>
+</em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>Comment Author's URL</p>
+</em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>string</td>
+<td><em><p>Comment contents</p></em></td>
+</tr>
+<tr>
+<th>$user_ip</th>
+<td>string</td>
+<td><em><p>Comment Author's IP address</p>
+</em></td>
+</tr>
+<tr>
+<th>$user_agent</th>
+<td>string</td>
+<td><em><p>Comment Author's User Agent</p>
+</em></td>
+</tr>
+<tr>
+<th>$comment_type</th>
+<td>string</td>
+<td><em><p>Comment type, either user submitted comment, trackback, or pingback</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the checks passed (true) and the comments should be displayed or set to moderated</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::check_comment_flood_db()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_comment_flood_db</span><span class="nb-faded-text">(
+          string $ip, string $email, string $date
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Check whether comment flooding is occurring.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Won't run, if current user can manage options, so to not block
+administrators.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ip</th>
+<td>string</td>
+<td><em><p>Comment IP.</p></em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>Comment author email address.</p></em></td>
+</tr>
+<tr>
+<th>$date</th>
+<td>string</td>
+<td><em><p>MySQL time string.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_comment_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_comment_cache</span><span class="nb-faded-text">(
+          int|array $ids
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes comment ID from the comment cache.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ids</th>
+<td>int|array</td>
+<td><em><p>Comment ID or array of comment IDs to remove from cache</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_comment_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_comment_meta</span><span class="nb-faded-text">(
+          int $comment_id, string $meta_key, mixed $meta_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove metadata matching criteria from a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can match based on the key, or key and value. Removing based on key and
+value, will keep from removing duplicate metadata with the same key. It also
+allows removing all metadata matching key, if needed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>comment ID</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata name.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Optional. Metadata value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False for failure. True for success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/delete_comment_meta">http://codex.wordpress.org/Function_Reference/delete_comment_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\delete_metadata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::discover_pingback_server_uri()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">discover_pingback_server_uri</span><span class="nb-faded-text">(
+          string $url, int $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          bool|string</code><div class="description"><p class="short_description">Finds a pingback server URI based on the given URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks the HTML for the rel="pingback" link and x-pingback headers. It does
+a check for the x-pingback headers first and returns that, if available. The
+check for the rel="pingback" has more overhead than just the header.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to ping.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>int</td>
+<td><em><p>Not Used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string</td>
+<td>False on failure, string containing URI on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_all_pings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_all_pings</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Perform all pingbacks, enclosures, trackbacks, and send to pingback services.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_trackbacks()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_trackbacks</span><span class="nb-faded-text">(
+          int $post_id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Perform trackbacks.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Post ID to do trackbacks on.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::generic_ping()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">generic_ping</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Sends pings to all of the ping site services.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Post ID. Not actually used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Same as Post ID from parameter</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_approved_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_approved_comments</span><span class="nb-faded-text">(
+          int $post_id
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve the approved comments for post $post_id.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>The ID of the post</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>$comments The approved comments</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment</span><span class="nb-faded-text">(
+          object|string|int $comment, string $output
+              =
+              OBJECT
+          )
+        </span>
+        :
+          object|array|null</code><div class="description"><p class="short_description">Retrieves comment data given a comment ID or comment object.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If an object is passed then the comment data will be cached and then returned
+after being passed through a filter. If the comment is empty, then the global
+comment variable will be used, if it is set.</p>
+
+<p>If the comment is empty, then the global comment variable will be used, if it
+is set.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment</th>
+<td>object|string|int</td>
+<td><em><p>Comment to retrieve.</p></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Optional. OBJECT or ARRAY_A or ARRAY_N constants.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object|array|null</td>
+<td>Depends on $output value.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_count</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">The amount of comments in a post or total comments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A lot like {@link wp_count_comments()}, in that they both return comment
+stats (albeit with different types). The {@link wp_count_comments()} actual
+caches, but this function does not.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional. Comment amount in post if > 0, else total comments blog wide.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The amount of spam, approved, awaiting moderation, and total comments.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_meta</span><span class="nb-faded-text">(
+          int $comment_id, string $key, bool $single
+              =
+              false
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve comment meta field for a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The meta key to retrieve.</p></em></td>
+</tr>
+<tr>
+<th>$single</th>
+<td>bool</td>
+<td><em><p>Whether to return a single value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Will be an array if $single is false. Will be value of meta data field if $single is true.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/get_comment_meta">http://codex.wordpress.org/Function_Reference/get_comment_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_metadata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_pages_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_pages_count</span><span class="nb-faded-text">(
+          array $comments
+              =
+              null, int $per_page
+              =
+              null, boolean $threaded
+              =
+              null
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Calculate the total number of comment pages.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comments</th>
+<td>array</td>
+<td><em><p>Optional array of comment objects. Defaults to $wp_query->comments</p>
+</em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td>int</td>
+<td><em><p>Optional comments per page.</p></em></td>
+</tr>
+<tr>
+<th>$threaded</th>
+<td>boolean</td>
+<td><em><p>Optional control over flat or threaded comments.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Number of comment pages.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_query_var()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_option()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_comment-template.html#%5CWalker_Comment">\Walker_Comment</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_statuses()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_statuses</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve all of the WordPress supported comment statuses.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Comments have a limited set of valid status values, this provides the comment
+status values and descriptions.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of comment statuses.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comments</span><span class="nb-faded-text">(
+          mixed $args
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve a list of comments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The comment list can be for the blog as a whole or for an individual post.</p>
+
+<p>The list of comment arguments are 'status', 'orderby', 'comment_date_gmt',
+'order', 'number', 'offset', and 'post_id'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>mixed</td>
+<td><em><p>Optional. Array or string of options to override defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of comments.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_lastcommentmodified()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_lastcommentmodified</span><span class="nb-faded-text">(
+          string $timezone
+              =
+              'server'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The date the last comment was modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$timezone</th>
+<td>string</td>
+<td><em><p>Which timezone to use in reference to 'gmt', 'blog', or 'server' locations.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Last comment modified date.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $cache_lastcommentmodified
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_page_of_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_page_of_comment</span><span class="nb-faded-text">(
+          int $comment_ID, array $args
+              =
+              array(
+          )
+        </span>
+        :
+          int|null</code><div class="description"><p class="short_description">Calculate what page number a comment will appear on for comment paging.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional args.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|null</td>
+<td>Comment page number or null on error.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_comment()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_option()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_page_of_comment()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::pingback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">pingback</span><span class="nb-faded-text">(
+          string $content, int $post_ID
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Pings back the links found in a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Post content to check for links.</p></em></td>
+</tr>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em><p>Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_version
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-IXR.html#%5CIXR_Client">\IXR_Client</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::privacy_ping_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">privacy_ping_filter</span><span class="nb-faded-text">(
+          mixed $sites
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Check whether blog is public before returning sites.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sites</th>
+<td>mixed</td>
+<td><em><p>Will return if blog is public, will not return if not public.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Empty string if blog is not public, returns $sites, if site is public.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_comment_cookies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_comment_cookies</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sanitizes the cookies sent to the user already.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only do anything if the cookies have already been created for the user.
+Mostly used after cookies had been sent to use elsewhere.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::separate_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">separate_comments</span><span class="nb-faded-text">(
+          array $comments
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Separates an array of comments into an array keyed by comment_type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comments</th>
+<td>array</td>
+<td><em><p>Array of comments</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of comments keyed by comment_type.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::trackback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">trackback</span><span class="nb-faded-text">(
+          string $trackback_url, string $title, string $excerpt, int $ID
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Send a Trackback.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Updates database when sending trackback to prevent duplicates.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$trackback_url</th>
+<td>string</td>
+<td><em><p>URL to send trackbacks.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Title of post.</p></em></td>
+</tr>
+<tr>
+<th>$excerpt</th>
+<td>string</td>
+<td><em><p>Excerpt of post.</p></em></td>
+</tr>
+<tr>
+<th>$ID</th>
+<td>int</td>
+<td><em><p>Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Database query from update.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_comment_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_comment_cache</span><span class="nb-faded-text">(
+          array $comments
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Updates the comment cache of given comments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will add the comments in $comments to the cache. If comment ID already exists
+in the comment cache then it will not be updated. The comment is added to the
+cache using the comment group with the key using the ID of the comments.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comments</th>
+<td>array</td>
+<td><em><p>Array of comment row objects</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_comment_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_comment_meta</span><span class="nb-faded-text">(
+          int $comment_id, string $meta_key, mixed $meta_value, mixed $prev_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update comment meta field based on comment ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use the $prev_value parameter to differentiate between meta fields with the
+same key and comment ID.</p>
+
+<p>If the meta field for the comment does not exist, it will be added.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+<tr>
+<th>$prev_value</th>
+<td>mixed</td>
+<td><em><p>Optional. Previous value to check before removing.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure, true if success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/update_comment_meta">http://codex.wordpress.org/Function_Reference/update_comment_meta</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\update_metadata
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::weblog_ping()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">weblog_ping</span><span class="nb-faded-text">(
+          string $server
+              =
+              '', string $path
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Send a pingback.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$server</th>
+<td>string</td>
+<td><em><p>Host of blog to connect to.</p></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Path to send the ping.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_version
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-IXR.html#%5CIXR_Client">\IXR_Client</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_allow_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_allow_comment</span><span class="nb-faded-text">(
+          array $commentdata
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Validates whether this comment is allowed to be made.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commentdata</th>
+<td>array</td>
+<td><em><p>Contains information on the comment</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Signifies the approval status (0|1|'spam')</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_blacklist_check()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_blacklist_check</span><span class="nb-faded-text">(
+          string $author, string $email, string $url, string $comment, string $user_ip, string $user_agent
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Does comment contain blacklisted characters or words.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$author</th>
+<td>string</td>
+<td><em><p>The author of the comment</p></em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>The email of the comment</p></em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The url used in the comment</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>string</td>
+<td><em><p>The comment content</p></em></td>
+</tr>
+<tr>
+<th>$user_ip</th>
+<td>string</td>
+<td><em><p>The comment author IP address</p></em></td>
+</tr>
+<tr>
+<th>$user_agent</th>
+<td>string</td>
+<td><em><p>The author's browser user agent</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if comment contains blacklisted content, false if comment does not</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_count_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_count_comments</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Retrieve total comments for blog or single post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The properties of the returned object contain the 'moderated', 'approved',
+and spam comments for either the entire blog or single post. Those properties
+contain the amount of comments that match the status. The 'total_comments'
+property contains the integer of total comments.</p>
+
+<p>The comment stats are cached and then retrieved, if they already exist in the
+cache.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>Comment stats.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_defer_comment_counting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_defer_comment_counting</span><span class="nb-faded-text">(
+          bool $defer
+              =
+              null
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Whether to defer comment counting.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When setting $defer to true, all post comment counts will not be updated
+until $defer is set to false. When $defer is set to false, then all
+previously deferred updated post comment counts will then be automatically
+updated without having to call wp_update_comment_count() after.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$defer</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Staticvar</dt>
+<dd>bool $_defer
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_delete_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_delete_comment</span><span class="nb-faded-text">(
+          int $comment_id, bool $force_delete
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Trashes or deletes a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The comment is moved to trash instead of permanently deleted unless trash is
+disabled, item is already in the trash, or $force_delete is true.</p>
+
+<p>The post comment count will be updated if the comment was approved and has a
+post ID available.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID</p></em></td>
+</tr>
+<tr>
+<th>$force_delete</th>
+<td>bool</td>
+<td><em><p>Whether to bypass trash and force deletion. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if delete comment query failure, true on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_transition_comment_status()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_filter_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_filter_comment</span><span class="nb-faded-text">(
+          array $commentdata
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Filters and sanitizes comment data.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Sets the comment data 'filtered' field to true when finished. This can be
+checked as to whether the comment should be filtered and to keep from
+filtering the same comment more than once.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commentdata</th>
+<td>array</td>
+<td><em><p>Contains information on the comment.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Parsed comment information.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_comment_status()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_comment_status</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">The status of a comment by ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>Status might be 'trash', 'approved', 'unapproved', 'spam'. False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_current_commenter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_current_commenter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get current commenter's name, email, and URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Expects cookies content to already be sanitized. User of this function might
+wish to recheck the returned array for validity.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Comment author, email, url respectively.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\sanitize_comment_cookies()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_insert_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_insert_comment</span><span class="nb-faded-text">(
+          array $commentdata
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Inserts a comment to the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The available comment data key names are 'comment_author_IP', 'comment_date',
+'comment_date_gmt', 'comment_parent', 'comment_approved', and 'user_id'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commentdata</th>
+<td>array</td>
+<td><em><p>Contains information on the comment.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The new comment's ID.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_new_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_new_comment</span><span class="nb-faded-text">(
+          array $commentdata
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Adds a new comment to the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filters new comment to ensure that the fields are sanitized and valid before
+inserting comment into database. Calls 'comment_post' action with comment ID
+and whether comment is approved by WordPress. Also has 'preprocess_comment'
+filter for processing the comment data before the function handles it.</p>
+
+<p>We use REMOTE_ADDR here directly. If you are behind a proxy, you should ensure
+that it is properly set, such as in wp-config.php, for your environment.
+See {@link http://core.trac.wordpress.org/ticket/9235}</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commentdata</th>
+<td>array</td>
+<td><em><p>Contains information on the comment.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The ID of the comment after adding.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_filter_comment()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_allow_comment()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_insert_comment()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_comment_status()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_comment_status</span><span class="nb-faded-text">(
+          int $comment_id, string $comment_status, bool $wp_error
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Sets the status of a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The 'wp_set_comment_status' action is called after the comment is handled and
+will only be called, if the comment status is either 'hold', 'approve', or
+'spam'. If the comment status is not in the list, then false is returned and
+if the status is 'delete', then the comment is deleted without calling the
+action.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+<tr>
+<th>$comment_status</th>
+<td>string</td>
+<td><em><p>New comment status, either 'hold', 'approve', 'spam', or 'delete'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$wp_error</th>
+<td>bool</td>
+<td><em><p>Whether to return a WP_Error object if there is a failure. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure or deletion and true on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_transition_comment_status()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_spam_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_spam_comment</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Marks a comment as Spam</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>False on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_throttle_comment_flood()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_throttle_comment_flood</span><span class="nb-faded-text">(
+          bool $block, int $time_lastcomment, int $time_newcomment
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether comment should be blocked because of comment flood.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$block</th>
+<td>bool</td>
+<td><em><p>Whether plugin has already blocked comment.</p></em></td>
+</tr>
+<tr>
+<th>$time_lastcomment</th>
+<td>int</td>
+<td><em><p>Timestamp for last comment.</p></em></td>
+</tr>
+<tr>
+<th>$time_newcomment</th>
+<td>int</td>
+<td><em><p>Timestamp for new comment.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether comment should be blocked.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_transition_comment_status()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_transition_comment_status</span><span class="nb-faded-text">(
+          string $new_status, string $old_status, object $comment
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Call hooks for when a comment status transition occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Calls hooks for comment status transitions. If the new comment status is not the same
+as the previous comment status, then two hooks will be ran, the first is
+'transition_comment_status' with new status, old status, and comment data. The
+next action called is 'comment_OLDSTATUS_to_NEWSTATUS' the NEWSTATUS is the
+$new_status parameter and the OLDSTATUS is $old_status parameter; it has the
+comment data.</p>
+
+<p>The final action will run whether or not the comment statuses are the same. The
+action is named 'comment_NEWSTATUS_COMMENTTYPE', NEWSTATUS is from the $new_status
+parameter and COMMENTTYPE is comment_type comment data.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$new_status</th>
+<td>string</td>
+<td><em><p>New comment status.</p></em></td>
+</tr>
+<tr>
+<th>$old_status</th>
+<td>string</td>
+<td><em><p>Previous comment status.</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>object</td>
+<td><em><p>Comment data.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_trash_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_trash_comment</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Moves a comment to the Trash</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If trash is disabled, comment is permanently deleted.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>False on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_delete_comment()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_unspam_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_unspam_comment</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Removes a comment from the Spam</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>False on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_untrash_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_untrash_comment</span><span class="nb-faded-text">(
+          int $comment_id
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Removes a comment from the Trash</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>Comment ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>False on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_comment</span><span class="nb-faded-text">(
+          array $commentarr
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Updates an existing comment in the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filters the comment and makes sure certain fields are valid before updating.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commentarr</th>
+<td>array</td>
+<td><em><p>Contains information on the comment.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Comment was updated if value is 1, or was not updated if value is 0.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_transition_comment_status()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_comment_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_comment_count</span><span class="nb-faded-text">(
+          int $post_id, bool $do_deferred
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Updates the comment count for post(s).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When $do_deferred is false (is by default) and the comments have been set to
+be deferred, the post_id will be added to a queue, which will be updated at a
+later date and only updated once per post ID.</p>
+
+<p>If the comments have not be set up to be deferred, then the post will be
+updated. When $do_deferred is set to true, then all previous deferred post
+IDs will be updated along with the current $post_id.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Post ID</p></em></td>
+</tr>
+<tr>
+<th>$do_deferred</th>
+<td>bool</td>
+<td><em><p>Whether to process previously deferred post comment counts</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on success, false on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_update_comment_count_now()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_comment_count_now()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_comment_count_now</span><span class="nb-faded-text">(
+          int $post_id
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Updates the comment count for the post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Post ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on '0' $post_id or if post with ID does not exist. True on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Comment_Query" class="anchor"></a><h2 class="class">\WP_Comment_Query<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">WordPress Comment Query class.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Comment_Query::get_search_sql()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_search_sql</span><span class="nb-faded-text">(
+           $string,  $cols
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$cols</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Comment_Query::query()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">query</span><span class="nb-faded-text">(
+          string|array $query_vars
+          )
+        </span>
+        :
+          int|array</code><div class="description"><p class="short_description">Execute the query</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query_vars</th>
+<td>string|array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

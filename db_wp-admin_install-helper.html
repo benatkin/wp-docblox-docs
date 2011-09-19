@@ -1,0 +1,415 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-admin/install-helper.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Plugins may load this file to gain access to special helper functions for
+plugin installation. This file is not included by WordPress and it is
+recommended, to prevent fatal errors, that this file is included using
+require_once().</p>
+<div class="long-description"><p>These functions are not optimized for speed, but they should only be used
+once in a while, so speed shouldn't be a concern. If it is and you are
+needing to use these functions a lot, you might experience time outs. If you
+do, then it is advised to just write the SQL code yourself.</p>
+
+<p>You can turn debugging on, by setting $debug to 1 after you include this
+file.</p>
+
+<pre><code>check_column('wp_links', 'link_description', 'mediumtext');
+if (check_column($wpdb->comments, 'comment_author', 'tinytext'))
+    echo "ok\n";
+
+$error_count = 0;
+$tablename = $wpdb->links;
+// check the column
+if (!check_column($wpdb->links, 'link_description', 'varchar(255)')) {
+    $ddl = "ALTER TABLE $wpdb->links MODIFY COLUMN link_description varchar(255) NOT NULL DEFAULT '' ";
+    $q = $wpdb->query($ddl);
+}
+
+if (check_column($wpdb->links, 'link_description', 'varchar(255)')) {
+    $res .= $tablename . ' - ok <br />';
+} else {
+    $res .= 'There was a problem with ' . $tablename . '<br />';
+    ++$error_count;
+}
+</code></pre>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::check_column()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">check_column</span><span class="nb-faded-text">(
+          string $table_name, string $col_name, string $col_type, bool $is_null
+              =
+              null, mixed $key
+              =
+              null, mixed $default
+              =
+              null, mixed $extra
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check column matches criteria.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Uses the SQL DESC for retrieving the table info for the column. It will help
+understand the parameters, if you do more research on what column information
+is returned by the SQL statement. Pass in null to skip checking that
+criteria.</p>
+
+<p>Column names returned from DESC table are case sensitive and are listed:
+     Field
+     Type
+     Null
+     Key
+     Default
+     Extra</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table_name</th>
+<td>string</td>
+<td><em><p>Table name</p></em></td>
+</tr>
+<tr>
+<th>$col_name</th>
+<td>string</td>
+<td><em><p>Column name</p></em></td>
+</tr>
+<tr>
+<th>$col_type</th>
+<td>string</td>
+<td><em><p>Column type</p></em></td>
+</tr>
+<tr>
+<th>$is_null</th>
+<td>bool</td>
+<td><em><p>Optional. Check is null.</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>mixed</td>
+<td><em><p>Optional. Key info.</p></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>mixed</td>
+<td><em><p>Optional. Default value.</p></em></td>
+</tr>
+<tr>
+<th>$extra</th>
+<td>mixed</td>
+<td><em><p>Optional. Extra value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if matches. False, if not matching.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_add_column()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_add_column</span><span class="nb-faded-text">(
+          string $table_name, string $column_name, string $create_ddl
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add column to database table, if column doesn't already exist in table.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table_name</th>
+<td>string</td>
+<td><em><p>Database table name</p></em></td>
+</tr>
+<tr>
+<th>$column_name</th>
+<td>string</td>
+<td><em><p>Table column name</p></em></td>
+</tr>
+<tr>
+<th>$create_ddl</th>
+<td>string</td>
+<td><em><p>SQL to add column to table.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure. True, if already exists or was successful.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$debug
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_create_table()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_create_table</span><span class="nb-faded-text">(
+          string $table_name, string $create_ddl
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Create database table, if it doesn't already exist.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table_name</th>
+<td>string</td>
+<td><em><p>Database table name.</p></em></td>
+</tr>
+<tr>
+<th>$create_ddl</th>
+<td>string</td>
+<td><em><p>Create database table SQL.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on error, true if already exists or success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_drop_column()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_drop_column</span><span class="nb-faded-text">(
+          string $table_name, string $column_name, string $drop_ddl
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Drop column from database table, if it exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table_name</th>
+<td>string</td>
+<td><em><p>Table name</p></em></td>
+</tr>
+<tr>
+<th>$column_name</th>
+<td>string</td>
+<td><em><p>Column name</p></em></td>
+</tr>
+<tr>
+<th>$drop_ddl</th>
+<td>string</td>
+<td><em><p>SQL statement to drop column.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure, true on success or doesn't exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

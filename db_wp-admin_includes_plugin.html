@@ -1,0 +1,2499 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-admin/includes/plugin.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress Plugin Administration API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Administration
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_get_dropins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_dropins</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Returns drop-ins that WordPress uses.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Includes Multisite drop-ins only when is_multisite()</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Key is file name. The value is an array, with the first value the purpose of the drop-in and the second value the name of the constant that must be true for the drop-in to be used, or true if no constant is required.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_get_plugin_data_markup_translate()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_plugin_data_markup_translate</span><span class="nb-faded-text">(
+           $plugin_file,  $plugin_data,  $markup
+              =
+              true,  $translate
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin_file</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$plugin_data</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$markup</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_sort_uname_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_sort_uname_callback</span><span class="nb-faded-text">(
+           $a,  $b
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Callback to sort array by a 'Name' key.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$a</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$b</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::activate_plugin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">activate_plugin</span><span class="nb-faded-text">(
+          string $plugin, string $redirect
+              =
+              '', bool $network_wide
+              =
+              false, bool $silent
+              =
+              false
+          )
+        </span>
+        :
+          <a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|null</code><div class="description"><p class="short_description">Attempts activation of plugin in a "sandbox" and redirects on success.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A plugin that is already activated will not attempt to be activated again.</p>
+
+<p>The way it works is by setting the redirection to the error before trying to
+include the plugin file. If the plugin fails, then the redirection will not
+be overwritten with the success message. Also, the options will not be
+updated and the activation hook will not be called on plugin error.</p>
+
+<p>It should be noted that in no way the below code will actually prevent errors
+within the file. The code should not be used elsewhere to replicate the
+"sandbox", which uses redirection to work.
+{@source 13 1}</p>
+
+<p>If any errors are found or text is outputted, then it will be captured to
+ensure that the success redirection will update the error redirection.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Plugin path to main plugin file with plugin data.</p></em></td>
+</tr>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Optional. URL to redirect to.</p></em></td>
+</tr>
+<tr>
+<th>$network_wide</th>
+<td>bool</td>
+<td><em><p>Whether to enable the plugin for all sites in the network or just the current site. Multisite only. Default is false.</p></em></td>
+</tr>
+<tr>
+<th>$silent</th>
+<td>bool</td>
+<td><em><p>Prevent calling activation hooks. Optional, default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>
+<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|null</td>
+<td>WP_Error on invalid file or null on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::activate_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">activate_plugins</span><span class="nb-faded-text">(
+          string|array $plugins, string $redirect
+              =
+              '', bool $network_wide
+              =
+              false, bool $silent
+              =
+              false
+          )
+        </span>
+        :
+          bool|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Activate multiple plugins.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When WP_Error is returned, it does not mean that one of the plugins had
+errors. It means that one or more of the plugins file path was invalid.</p>
+
+<p>The execution will be halted as soon as one of the plugins has an error.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugins</th>
+<td>string|array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Redirect to page after successful activation.</p></em></td>
+</tr>
+<tr>
+<th>$network_wide</th>
+<td>bool</td>
+<td><em><p>Whether to enable the plugin for all sites in the network.</p></em></td>
+</tr>
+<tr>
+<th>$silent</th>
+<td>bool</td>
+<td><em><p>Prevent calling activation hooks. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>True when finished or WP_Error if there were errors during a plugin activation.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_comments_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_comments_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the comments main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_dashboard_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_dashboard_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the Dashboard main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_links_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_links_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the links main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_management_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_management_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the tools main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_media_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_media_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the media main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_menu_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_menu_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              '', string $icon_url
+              =
+              '', int $position
+              =
+              NULL
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Add a top level menu page</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+<tr>
+<th>$icon_url</th>
+<td>string</td>
+<td><em><p>The url to the icon to be used for this menu</p></em></td>
+</tr>
+<tr>
+<th>$position</th>
+<td>int</td>
+<td><em><p>The position in the menu order this one should appear</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The resulting page's hook_suffix</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_object_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_object_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              '', string $icon_url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Add a top level menu page in the 'objects' section</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+<tr>
+<th>$icon_url</th>
+<td>string</td>
+<td><em><p>The url to the icon to be used for this menu</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The resulting page's hook_suffix</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_option_whitelist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_option_whitelist</span><span class="nb-faded-text">(
+          \unknown_type $new_options, \unknown_type $options
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$new_options</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_options_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_options_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the options main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_pages_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_pages_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the pages main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_plugins_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_plugins_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the plugins main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_posts_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_posts_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the posts main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_submenu_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_submenu_page</span><span class="nb-faded-text">(
+          string $parent_slug, string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add a sub menu page</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent_slug</th>
+<td>string</td>
+<td><em><p>The slug name for the parent menu (or the file name of a standard WordPress admin page)</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_theme_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_theme_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the themes main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_users_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_users_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              ''
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Add sub menu page to the Users/Profile main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>The resulting page's hook_suffix, or false if the user does not have the capability required.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_utility_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_utility_page</span><span class="nb-faded-text">(
+          string $page_title, string $menu_title, string $capability, string $menu_slug, callback $function
+              =
+              '', string $icon_url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Add a top level menu page in the 'utility' section</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function takes a capability which will be used to determine whether
+or not a page is included in the menu.</p>
+
+<p>The function which is hooked in to handle the output of the page must check
+that the user has the required capability as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$page_title</th>
+<td>string</td>
+<td><em><p>The text to be displayed in the title tags of the page when the menu is selected</p></em></td>
+</tr>
+<tr>
+<th>$menu_title</th>
+<td>string</td>
+<td><em><p>The text to be used for the menu</p></em></td>
+</tr>
+<tr>
+<th>$capability</th>
+<td>string</td>
+<td><em><p>The capability required for this menu to be displayed to the user.</p></em></td>
+</tr>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>The function to be called to output the content for this page.</p></em></td>
+</tr>
+<tr>
+<th>$icon_url</th>
+<td>string</td>
+<td><em><p>The url to the icon to be used for this menu</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The resulting page's hook_suffix</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::deactivate_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">deactivate_plugins</span><span class="nb-faded-text">(
+          string|array $plugins, bool $silent
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Deactivate a single plugin or multiple plugins.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The deactivation hook is disabled by the plugin upgrader by using the $silent
+parameter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugins</th>
+<td>string|array</td>
+<td><em><p>Single plugin or list of plugins to deactivate.</p></em></td>
+</tr>
+<tr>
+<th>$silent</th>
+<td>bool</td>
+<td><em><p>Prevent calling deactivation hooks. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_plugins</span><span class="nb-faded-text">(
+          array $plugins, string $redirect
+              =
+              ''
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Remove directory and files of a plugin for a single or list of plugin(s).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the plugins parameter list is empty, false will be returned. True when
+completed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugins</th>
+<td>array</td>
+<td><em><p>List of plugin</p></em></td>
+</tr>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Redirect to page when complete.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_admin_page_parent()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_admin_page_parent</span><span class="nb-faded-text">(
+           $parent
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_admin_page_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_admin_page_title</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="::get_dropins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_dropins</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Check the wp-content directory and retrieve all drop-ins with any plugin data.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Key is the file path and the value is an array of the plugin data.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_mu_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_mu_plugins</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Check the mu-plugins directory and retrieve all mu-plugin files with any plugin data.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>WordPress only includes mu-plugin files in the base mu-plugins directory (wp-content/mu-plugins).</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Key is the mu-plugin file path and the value is an array of the mu-plugin data.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_plugin_data()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_plugin_data</span><span class="nb-faded-text">(
+          string $plugin_file, bool $markup
+              =
+              true, bool $translate
+              =
+              true
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parse the plugin contents to retrieve plugin's metadata.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The metadata of the plugin's data searches for the following in the plugin's
+header. All plugin data must be on its own line. For plugin description, it
+must not have any newlines or only parts of the description will be displayed
+and the same goes for the plugin data. The below is formatted for printing.</p>
+
+<pre><code>/*
+Plugin Name: Name of Plugin
+Plugin URI: Link to plugin information
+Description: Plugin Description
+Author: Plugin author's name
+Author URI: Link to the author's web site
+Version: Must be set in the plugin for WordPress 2.3+
+Text Domain: Optional. Unique identifier, should be same as the one used in
+        plugin_text_domain()
+Domain Path: Optional. Only useful if the translations are located in a
+        folder above the plugin's base path. For example, if .mo files are
+        located in the locale folder then Domain Path will be "/locale/" and
+        must have the first slash. Defaults to the base folder the plugin is
+        located in.
+Network: Optional. Specify "Network: true" to require that a plugin is activated
+        across all sites in an installation. This will prevent a plugin from being
+        activated on a single site when Multisite is enabled.
+ * / # Remove the space to close comment
+</code></pre>
+
+<p>Plugin data returned array contains the following:
+        'Name' - Name of the plugin, must be unique.
+        'Title' - Title of the plugin and the link to the plugin's web site.
+        'Description' - Description of what the plugin does and/or notes
+        from the author.
+        'Author' - The author's name
+        'AuthorURI' - The authors web site address.
+        'Version' - The plugin version number.
+        'PluginURI' - Plugin web site address.
+        'TextDomain' - Plugin's text domain for localization.
+        'DomainPath' - Plugin's relative directory path to .mo files.
+        'Network' - Boolean. Whether the plugin can only be activated network wide.</p>
+
+<p>Some users have issues with opening large files and manipulating the contents
+for want is usually the first 1kiB or 2kiB. This function stops pulling in
+the plugin contents when it has all of the required plugin data.</p>
+
+<p>The first 8kiB of the file will be pulled in and if the plugin data is not
+within that first 8kiB, then the plugin author should correct their plugin
+and move the plugin data headers to the top.</p>
+
+<p>The plugin file is assumed to have permissions to allow for scripts to read
+the file. This is not checked however and the file is only opened for
+reading.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin_file</th>
+<td>string</td>
+<td><em><p>Path to the plugin file</p></em></td>
+</tr>
+<tr>
+<th>$markup</th>
+<td>bool</td>
+<td><em><p>If the returned data should have HTML markup applied</p></em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td>bool</td>
+<td><em><p>If the returned data should be translated</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>See above for description.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://trac.wordpress.org/ticket/5651">Previous Optimizations.</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://trac.wordpress.org/ticket/7372">Further and better Optimizations.</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_plugin_files()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_plugin_files</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get a list of a plugin's files.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Plugin ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of files relative to the plugin root.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_plugin_page_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_plugin_page_hook</span><span class="nb-faded-text">(
+           $plugin_page,  $parent_page
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$parent_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_plugin_page_hookname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_plugin_page_hookname</span><span class="nb-faded-text">(
+           $plugin_page,  $parent_page
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$parent_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_plugins</span><span class="nb-faded-text">(
+          string $plugin_folder
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Check the plugins directory and retrieve all plugin files with plugin data.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>WordPress only supports plugin files in the base plugins directory
+(wp-content/plugins) and in one directory above the plugins directory
+(wp-content/plugins/my-plugin). The file it looks for has the plugin data and
+must be found in those two locations. It is recommended that do keep your
+plugin files in directories.</p>
+
+<p>The file with the plugin data is the file that will be included and therefore
+needs to have the main execution for the plugin. This does not mean
+everything must be contained in the file and it is recommended that the file
+be split for maintainability. Keep everything in one file for extreme
+optimization purposes.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin_folder</th>
+<td>string</td>
+<td><em><p>Optional. Relative path to single plugin folder.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Key is the plugin file path and the value is an array of the plugin data.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_network_only_plugin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_network_only_plugin</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks for "Network: true" in the plugin header to see if this should
+be activated only as a network wide plugin. The plugin would also work
+when Multisite is not enabled.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks for "Site Wide Only: true" for backwards compatibility.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Plugin to check</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if plugin is network only, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_plugin_active()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_plugin_active</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether the plugin is active by checking the active_plugins list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Base plugin path from plugins directory.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if in the active plugins list. False, not in the list.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_plugin_active_for_network()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_plugin_active_for_network</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether the plugin is active for the entire network.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Base plugin path from plugins directory.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if active for the network, otherwise false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_plugin_inactive()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_plugin_inactive</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether the plugin is inactive.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Reverse of is_plugin_active(). Used as a callback.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Base plugin path from plugins directory.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if inactive. False if active.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\is_plugin_active()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_uninstallable_plugin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_uninstallable_plugin</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the plugin can be uninstalled.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Plugin path to check.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether plugin can be uninstalled.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::menu_page_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">menu_page_url</span><span class="nb-faded-text">(
+          string $menu_slug, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get the url to access a particular menu page based on the slug it was registered with.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the slug hasn't been registered properly no url will be returned</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug name to refer to this menu by (should be unique for this menu)</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether or not to echo the url - default is true</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>the url</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::option_update_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">option_update_filter</span><span class="nb-faded-text">(
+          \unknown_type $options
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$options</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_setting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_setting</span><span class="nb-faded-text">(
+          string $option_group, string $option_name, \unknown_type $sanitize_callback
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Register a setting and its sanitization callback</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option_group</th>
+<td>string</td>
+<td><em><p>A settings group name. Should correspond to a whitelisted option key name. Default whitelisted option key names include "general," "discussion," and "reading," among others.</p>
+</em></td>
+</tr>
+<tr>
+<th>$option_name</th>
+<td>string</td>
+<td><em><p>The name of an option to sanitize and save.</p></em></td>
+</tr>
+<tr>
+<th>$sanitize_callback</th>
+<td>\unknown_type</td>
+<td><em><p>A callback function that sanitizes the option's value.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_menu_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_menu_page</span><span class="nb-faded-text">(
+          string $menu_slug
+          )
+        </span>
+        :
+          array|bool</code><div class="description"><p class="short_description">Remove a top level admin menu</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug of the menu</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|bool</td>
+<td>The removed menu on success, False if not found</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_option_whitelist()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_option_whitelist</span><span class="nb-faded-text">(
+          \unknown_type $del_options, \unknown_type $options
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$del_options</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$options</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_submenu_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_submenu_page</span><span class="nb-faded-text">(
+          string $menu_slug, string $submenu_slug
+          )
+        </span>
+        :
+          array|bool</code><div class="description"><p class="short_description">Remove an admin submenu</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$menu_slug</th>
+<td>string</td>
+<td><em><p>The slug for the parent menu</p></em></td>
+</tr>
+<tr>
+<th>$submenu_slug</th>
+<td>string</td>
+<td><em><p>The slug of the submenu</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|bool</td>
+<td>The removed submenu on success, False if not found</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::settings_fields()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">settings_fields</span><span class="nb-faded-text">(
+          string $option_group
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output nonce, action, and option_page fields for a settings page.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option_group</th>
+<td>string</td>
+<td><em><p>A settings group name. This should match the group name used in register_setting().</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::uninstall_plugin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">uninstall_plugin</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Uninstall a single plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Calls the uninstall hook, if it is available.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Relative plugin path from Plugin Directory.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unregister_setting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unregister_setting</span><span class="nb-faded-text">(
+          \unknown_type $option_group, \unknown_type $option_name, \unknown_type $sanitize_callback
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Unregister a setting</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option_group</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$option_name</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$sanitize_callback</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_access_admin_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_access_admin_page</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="::validate_active_plugins()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">validate_active_plugins</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Validate active plugins</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Validate all active plugins, deactivates invalid and
+returns an array of deactivated ones.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>invalid plugins, plugin as key, error as value</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::validate_plugin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">validate_plugin</span><span class="nb-faded-text">(
+          string $plugin
+          )
+        </span>
+        :
+          <a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|int</code><div class="description"><p class="short_description">Validate the plugin path.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks that the file exists and {@link validate_file() is valid file}.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$plugin</th>
+<td>string</td>
+<td><em><p>Plugin Path</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>
+<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|int</td>
+<td>0 on success, WP_Error on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

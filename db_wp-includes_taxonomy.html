@@ -1,0 +1,3654 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/taxonomy.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_Tax_Query">\WP_Tax_Query</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Taxonomy API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_get_term_children()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_term_children</span><span class="nb-faded-text">(
+          int $term_id, array $terms, string $taxonomy
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the subset of $terms that are descendants of $term_id.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If $terms is an array of objects, then _get_term_children returns an array of objects.
+If $terms is an array of IDs, then _get_term_children returns an array of IDs.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>The ancestor term: all returned terms should be descendants of $term_id.</p>
+</em></td>
+</tr>
+<tr>
+<th>$terms</th>
+<td>array</td>
+<td><em><p>The set of terms---either an array of term objects or term IDs---from which those that are descendants of $term_id will be chosen.</p>
+</em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy which determines the hierarchy of the terms.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The subset of $terms that are descendants of $term_id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_get_term_hierarchy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_term_hierarchy</span><span class="nb-faded-text">(
+          string $taxonomy
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieves children of taxonomy as Term IDs.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Empty if $taxonomy isn't hierarchical or returns children as Term IDs.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\update_option()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_pad_term_counts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_pad_term_counts</span><span class="nb-faded-text">(
+          array $terms, string $taxonomy
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Add count of children to parent count.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Recalculates term counts by including items from child terms. Assumes all
+relevant children are already in the $terms argument.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$terms</th>
+<td>array</td>
+<td><em><p>List of Term IDs</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Term Context</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Will break from function if conditions are not met.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_update_post_term_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_update_post_term_count</span><span class="nb-faded-text">(
+          array $terms, object $taxonomy
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Will update term count based on object types of the current taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Private function for the default callback for post_tag and category
+taxonomies.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$terms</th>
+<td>array</td>
+<td><em><p>List of Term taxonomy IDs</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>object</td>
+<td><em><p>Current taxonomy object of terms</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_object_term_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_object_term_cache</span><span class="nb-faded-text">(
+          int|array $object_ids, array|string $object_type
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes the taxonomy relationship to terms from the cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will remove the entire taxonomy relationship containing term $object_id. The
+term IDs have to exist within the taxonomy $object_type for the deletion to
+take place.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_ids</th>
+<td>int|array</td>
+<td><em><p>Single or list of term object ID(s)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>array|string</td>
+<td><em><p>The taxonomy object type</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_object_taxonomies()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_term_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_term_cache</span><span class="nb-faded-text">(
+          int|array $ids, string $taxonomy
+              =
+              '', bool $clean_taxonomy
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Will remove all of the term ids from the cache.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ids</th>
+<td>int|array</td>
+<td><em><p>Single or list of Term IDs</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Can be empty and will assume tt_ids, else will use for context.</p></em></td>
+</tr>
+<tr>
+<th>$clean_taxonomy</th>
+<td>bool</td>
+<td><em><p>Whether to clean taxonomy wide caches (true), or just individual term object caches (false). Default is true.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::create_initial_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">create_initial_taxonomies</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Creates the initial taxonomies when 'init' action is fired.</p></div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="::get_ancestors()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_ancestors</span><span class="nb-faded-text">(
+          int $object_id
+              =
+              0, string $object_type
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get an array of ancestor IDs for a given object.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>The ID of the object</p></em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>string</td>
+<td><em><p>The type of object for which we'll be retrieving ancestors.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>of ancestors from lowest to highest in the hierarchy.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_object_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_object_taxonomies</span><span class="nb-faded-text">(
+          array|string|object $object, string $output
+              =
+              'names'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Return all of the taxonomy names that are of $object_type.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>It appears that this function can be used to find all of the names inside of
+$wp_taxonomies global variable.</p>
+
+<pre><code><?php $taxonomies = get_object_taxonomies('post'); ?></code></pre>
+
+<p>Should
+result in</p>
+
+<pre><code>Array('category', 'post_tag')</code></pre>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object</th>
+<td>array|string|object</td>
+<td><em><p>Name of the type of taxonomy object, or an object (row from posts)</p>
+</em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>The type of output to return, either taxonomy 'names' or 'objects'. 'names' is the default.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The names of all taxonomy of $object_type.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_object_term_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_object_term_cache</span><span class="nb-faded-text">(
+          int|array $id, string $taxonomy
+          )
+        </span>
+        :
+          bool|array</code><div class="description"><p class="short_description">Retrieves the taxonomy relationship to the term object id.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|array</td>
+<td><em><p>Term object ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|array</td>
+<td>Empty array if $terms found, but not $taxonomy. False if nothing is in cache for $taxonomy and $id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_cache_get()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_objects_in_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_objects_in_term</span><span class="nb-faded-text">(
+          int|array $term_ids, string|array $taxonomies, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          <a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|array</code><div class="description"><p class="short_description">Retrieve object_ids of valid taxonomy and term.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The strings of $taxonomies must exist before this function will continue. On
+failure of finding a valid taxonomy, it will return an WP_Error class, kind
+of like Exceptions in PHP 5, except you can't catch them. Even so, you can
+still test for the WP_Error class and get the error message.</p>
+
+<p>The $terms aren't checked the same as $taxonomies, but still need to exist
+for $object_ids to be returned.</p>
+
+<p>It is possible to change the order that object_ids is returned by either
+using PHP sort family functions or using the database by using $args with
+either ASC or DESC array. The value should be in the key named 'order'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_ids</th>
+<td>int|array</td>
+<td><em><p>Term id or array of term ids of terms that will be used</p></em></td>
+</tr>
+<tr>
+<th>$taxonomies</th>
+<td>string|array</td>
+<td><em><p>String of taxonomy name or Array of string values of taxonomy names</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Change the order of the object_ids, either ASC or DESC</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>
+<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>|array</td>
+<td>If the taxonomy does not exist, then WP_Error will be returned. On success the array can be empty meaning that there are no $object_ids found or it will return the $object_ids found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_parse_args()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_taxonomies</span><span class="nb-faded-text">(
+          int $post
+              =
+              0
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve all taxonomies of a post with just the names.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td>int</td>
+<td><em><p>Optional. Post ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_object_taxonomies()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_tax_sql()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_tax_sql</span><span class="nb-faded-text">(
+          array $tax_query, string $primary_table, string $primary_id_column
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Given a taxonomy query, generates SQL to be appended to a main query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tax_query</th>
+<td>array</td>
+<td><em><p>A compact tax query</p></em></td>
+</tr>
+<tr>
+<th>$primary_table</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$primary_id_column</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_taxonomy.html#%5CWP_Tax_Query">\WP_Tax_Query</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_taxonomies</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, string $output
+              =
+              'names', string $operator
+              =
+              'and'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get a list of registered taxonomy objects.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>An array of key => value arguments to match against the taxonomy objects.</p>
+</em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>The type of output to return, either taxonomy 'names' or 'objects'. 'names' is the default.</p>
+</em></td>
+</tr>
+<tr>
+<th>$operator</th>
+<td>string</td>
+<td><em><p>The logical operation to perform. 'or' means only one element from the array needs to match; 'and' means all elements must match. The default is 'and'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>A list of taxonomy names or objects</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\register_taxonomy
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_taxonomy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_taxonomy</span><span class="nb-faded-text">(
+          string $taxonomy
+          )
+        </span>
+        :
+          object|bool</code><div class="description"><p class="short_description">Retrieves the taxonomy object of $taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The get_taxonomy function will first check that the parameter string given
+is a taxonomy object and if it is, it will return it.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object to return</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object|bool</td>
+<td>The Taxonomy Object or false if $taxonomy doesn't exist</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\taxonomy_exists()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_taxonomy_labels()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_taxonomy_labels</span><span class="nb-faded-text">(
+          object $tax
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Builds an object with all taxonomy labels out of a taxonomy object</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Accepted keys of the label array in the taxonomy object:
+- name - general name for the taxonomy, usually plural. The same as and overridden by $tax->label. Default is Tags/Categories
+- singular_name - name for one object of this taxonomy. Default is Tag/Category
+- search_items - Default is Search Tags/Search Categories
+- popular_items - This string isn't used on hierarchical taxonomies. Default is Popular Tags
+- all_items - Default is All Tags/All Categories
+- parent_item - This string isn't used on non-hierarchical taxonomies. In hierarchical ones the default is Parent Category
+- parent_item_colon - The same as</p>
+
+<pre><code>parent_item</code></pre>
+
+<p>, but with colon</p>
+
+<pre><code>:</code></pre>
+
+<p>in the end
+- edit_item - Default is Edit Tag/Edit Category
+- update_item - Default is Update Tag/Update Category
+- add_new_item - Default is Add New Tag/Add New Category
+- new_item_name - Default is New Tag Name/New Category Name
+- separate_items_with_commas - This string isn't used on hierarchical taxonomies. Default is "Separate tags with commas," used in the meta box.
+- add_or_remove_items - This string isn't used on hierarchical taxonomies. Default is "Add or remove tags," used in the meta box when JavaScript is disabled.
+- choose_from_most_used - This string isn't used on hierarchical taxonomies. Default is "Choose from the most used tags," used in the meta box.</p>
+
+<p>Above, the first default value is for non-hierarchical taxonomies (like tags) and the second one is for hierarchical taxonomies (like categories.)</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tax</th>
+<td>object</td>
+<td><em><p>Taxonomy object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>object with all the labels as member variables</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term</span><span class="nb-faded-text">(
+          int|object $term, string $taxonomy, string $output
+              =
+              OBJECT, string $filter
+              =
+              'raw'
+          )
+        </span>
+        :
+          mixed|null|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Get all Term data from database by Term ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The usage of the get_term function is to apply filters to a term object. It
+is possible to get a term object from the database before applying the
+filters.</p>
+
+<p>$term ID must be part of $taxonomy, to get from the database. Failure, might
+be able to be captured by the hooks. Failure would be the same value as $wpdb
+returns for the get_row method.</p>
+
+<p>There are two hooks, one is specifically for each term, named 'get_term', and
+the second is for the taxonomy name, 'term_$taxonomy'. Both hooks gets the
+term object, and the taxonomy name as parameters. Both hooks are expected to
+return a Term object.</p>
+
+<p>'get_term' hook - Takes two parameters the term Object and the taxonomy name.
+Must return term object. Used in get_term() as a catch-all filter for every
+$term.</p>
+
+<p>'get_$taxonomy' hook - Takes two parameters the term Object and the taxonomy
+name. Must return term object. $taxonomy will be the taxonomy name, so for
+example, if 'category', it would be 'get_category' as the filter name. Useful
+for custom taxonomies or plugging into default taxonomies.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>int|object</td>
+<td><em><p>If integer, will get from database. If object will apply filters and return $term.</p>
+</em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy name that $term is part of.</p>
+</em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Constant OBJECT, ARRAY_A, or ARRAY_N</p></em></td>
+</tr>
+<tr>
+<th>$filter</th>
+<td>string</td>
+<td><em><p>Optional, default is raw or no WordPress defined filter will applied.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed|null|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>Term Row from database. Will return null if $term is empty. If taxonomy does not exist then WP_Error will be returned.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\sanitize_term_field()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_term()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_by()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_by</span><span class="nb-faded-text">(
+          string $field, string|int $value, string $taxonomy, string $output
+              =
+              OBJECT, string $filter
+              =
+              'raw'
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Get all Term data from database by Term field and data.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Warning: $value is not escaped for 'name' $field. You must do it yourself, if
+required.</p>
+
+<p>The default $field is 'id', therefore it is possible to also use null for
+field, but not recommended that you do so.</p>
+
+<p>If $value does not exist, the return value will be false. If $taxonomy exists
+and $field and $value combinations exist, the Term will be returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>Either 'slug', 'name', or 'id'</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>string|int</td>
+<td><em><p>Search for this term value</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Constant OBJECT, ARRAY_A, or ARRAY_N</p></em></td>
+</tr>
+<tr>
+<th>$filter</th>
+<td>string</td>
+<td><em><p>Optional, default is raw or no WordPress defined filter will applied.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Term Row from database. Will return false if $taxonomy does not exist or $term was not found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\sanitize_term_field()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_term()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_children()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_children</span><span class="nb-faded-text">(
+          string $term_id, string $taxonomy
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Merge all term children into a single array of their IDs.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This recursive function will merge all of the children of $term into the same
+array of term IDs. Only useful for taxonomies which are hierarchical.</p>
+
+<p>Will return an empty array if $term does not exist in $taxonomy.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>string</td>
+<td><em><p>ID of Term to get children</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>List of Term Objects. WP_Error returned if $taxonomy does not exist</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\_get_term_hierarchy()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_term_children()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_field</span><span class="nb-faded-text">(
+          string $field, int $term, string $taxonomy, string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Get sanitized Term field.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Does checks for $term, based on the $taxonomy. The function is for contextual
+reasons and for simplicity of usage. See sanitize_term_field() for more
+information.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>Term field to fetch</p></em></td>
+</tr>
+<tr>
+<th>$term</th>
+<td>int</td>
+<td><em><p>Term ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional, default is display. Look at sanitize_term_field() for available options.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Will return an empty string if $term is not an object or if $field is not set in $term.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_term_field()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_link</span><span class="nb-faded-text">(
+          object|int|string $term, string $taxonomy
+              =
+              ''
+          )
+        </span>
+        :
+          string|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Generates a permalink for a taxonomy term archive.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>object|int|string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>(optional if $term is object)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>HTML link to taxonomy term archive on success, WP_Error if term does not exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_term_to_edit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_term_to_edit</span><span class="nb-faded-text">(
+          int|object $id, string $taxonomy
+          )
+        </span>
+        :
+          mixed|null|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Sanitizes Term for editing.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Return value is sanitize_term() and usage is for sanitizing the term for
+editing. Function is for contextual and simplicity.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|object</td>
+<td><em><p>Term ID or Object</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed|null|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>Will return empty string if $term is not an object.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_term()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_terms()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_terms</span><span class="nb-faded-text">(
+          string|array $taxonomies, string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Retrieve the terms in a given taxonomy or list of taxonomies.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can fully inject any customizations to the query before it is sent, as
+well as control the output with a filter.</p>
+
+<p>The 'get_terms' filter will be called when the cache has the term and will
+pass the found term along with the array of $taxonomies and array of $args.
+This filter is also called before the array of terms is passed and will pass
+the array of terms, along with the $taxonomies and $args.</p>
+
+<p>The 'list_terms_exclusions' filter passes the compiled exclusions along with
+the $args.</p>
+
+<p>The 'get_terms_orderby' filter passes the ORDER BY clause for the query
+along with the $args array.</p>
+
+<p>The 'get_terms_fields' filter passes the fields for the SELECT query
+along with the $args array.</p>
+
+<p>The list of arguments that $args can contain, which will overwrite the defaults:</p>
+
+<p>orderby - Default is 'name'. Can be name, count, term_group, slug or nothing
+(will use term_id), Passing a custom value other than these will cause it to
+order based on the custom value.</p>
+
+<p>order - Default is ASC. Can use DESC.</p>
+
+<p>hide_empty - Default is true. Will not return empty terms, which means
+terms whose count is 0 according to the given taxonomy.</p>
+
+<p>exclude - Default is an empty array.  An array, comma- or space-delimited string
+of term ids to exclude from the return array.  If 'include' is non-empty,
+'exclude' is ignored.</p>
+
+<p>exclude_tree - Default is an empty array.  An array, comma- or space-delimited
+string of term ids to exclude from the return array, along with all of their
+descendant terms according to the primary taxonomy.  If 'include' is non-empty,
+'exclude_tree' is ignored.</p>
+
+<p>include - Default is an empty array.  An array, comma- or space-delimited string
+of term ids to include in the return array.</p>
+
+<p>number - The maximum number of terms to return.  Default is to return them all.</p>
+
+<p>offset - The number by which to offset the terms query.</p>
+
+<p>fields - Default is 'all', which returns an array of term objects.
+If 'fields' is 'ids' or 'names', returns an array of
+integers or strings, respectively.</p>
+
+<p>slug - Returns terms whose "slug" matches this value. Default is empty string.</p>
+
+<p>hierarchical - Whether to include terms that have non-empty descendants
+(even if 'hide_empty' is set to true).</p>
+
+<p>search - Returned terms' names will contain the value of 'search',
+case-insensitive.  Default is an empty string.</p>
+
+<p>name__like - Returned terms' names will begin with the value of 'name__like',
+case-insensitive. Default is empty string.</p>
+
+<p>The argument 'pad_counts', if set to true will include the quantity of a term's
+children in the quantity of each term's "count" object variable.</p>
+
+<p>The 'get' argument, if set to 'all' instead of its default empty string,
+returns terms regardless of ancestry or whether the terms are empty.</p>
+
+<p>The 'child_of' argument, when used, should be set to the integer of a term ID.  Its default
+is 0.  If set to a non-zero value, all returned terms will be descendants
+of that term according to the given taxonomy.  Hence 'child_of' is set to 0
+if more than one taxonomy is passed in $taxonomies, because multiple taxonomies
+make term ancestry ambiguous.</p>
+
+<p>The 'parent' argument, when used, should be set to the integer of a term ID.  Its default is
+the empty string '', which has a different meaning from the integer 0.
+If set to an integer value, all returned terms will have as an immediate
+ancestor the term whose ID is specified by that integer according to the given taxonomy.
+The 'parent' argument is different from 'child_of' in that a term X is considered a 'parent'
+of term Y only if term X is the father of term Y, not its grandfather or great-grandfather, etc.</p>
+
+<p>The 'cache_domain' argument enables a unique cache key to be produced when this query is stored
+in object cache. For instance, if you are using one of this function's filters to modify the
+query (such as 'terms_clauses'), setting 'cache_domain' to a unique value will not overwrite
+the cache for similar queries. Default value is 'core'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomies</th>
+<td>string|array</td>
+<td><em><p>Taxonomy name or list of Taxonomy names</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>The values of what to search for when returning terms</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>List of Term Objects and their children. Will return WP_Error, if any of $taxonomies do not exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_parse_args()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_taxonomies</span><span class="nb-faded-text">(
+          int $post
+              =
+              0, array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve all taxonomies associated with a post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function can be used within the loop. It will also return an array of
+the taxonomies with links to the taxonomy and name.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td>int</td>
+<td><em><p>Optional. Post ID or will use Global Post ID (in loop).</p>
+</em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_object_in_taxonomy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_object_in_taxonomy</span><span class="nb-faded-text">(
+          string $object_type, string $taxonomy
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Determine if the given object type is associated with the given taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_type</th>
+<td>string</td>
+<td><em><p>Object type string</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Single taxonomy name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if object is associated with the taxonomy, otherwise false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_object_taxonomies()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_object_in_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_object_in_term</span><span class="nb-faded-text">(
+          int $object_id, string $taxonomy, int|string|array $terms
+              =
+              null
+          )
+        </span>
+        :
+          bool|\WP_Error.</code><div class="description"><p class="short_description">Determine if the given object is associated with any of the given terms.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The given terms are checked against the object's terms' term_ids, names and slugs.
+Terms given as integers will only be checked against the object's terms' term_ids.
+If no terms are given, determines if object is associated with any terms in the given taxonomy.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object (post ID, link ID, ...)</p>
+</em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Single taxonomy name</p></em></td>
+</tr>
+<tr>
+<th>$terms</th>
+<td>int|string|array</td>
+<td><em><p>Optional. Term term_id, name, slug or array of said</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|\WP_Error.</td>
+<td>WP_Error on input error.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_object_term_cache()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_object_terms()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_taxonomy_hierarchical()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_taxonomy_hierarchical</span><span class="nb-faded-text">(
+          string $taxonomy
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the taxonomy object is hierarchical.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks to make sure that the taxonomy is an object first. Then Gets the
+object, and finally returns the hierarchical value in the object.</p>
+
+<p>A false return value might also mean that the taxonomy does not exist.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the taxonomy is hierarchical</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\taxonomy_exists()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_taxonomy()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_taxonomy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_taxonomy</span><span class="nb-faded-text">(
+          string $taxonomy, array|string $object_type, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Create or modify a taxonomy object. Do not use before init.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A simple function for creating or modifying a taxonomy object based on the
+parameters given. The function will accept an array (third optional
+parameter), along with strings for the taxonomy name and another string for
+the object type.</p>
+
+<p>Nothing is returned, so expect error maybe or use taxonomy_exists() to check
+whether taxonomy exists.</p>
+
+<p>Optional $args contents:</p>
+
+<p>label - Name of the taxonomy shown in the menu. Usually plural. If not set, labels['name'] will be used.</p>
+
+<p>hierarchical - has some defined purpose at other parts of the API and is a
+boolean value.</p>
+
+<p>update_count_callback - works much like a hook, in that it will be called
+when the count is updated.</p>
+
+<p>rewrite - false to prevent rewrite, or array('slug'=>$slug) to customize
+permastruct; default will use $taxonomy as slug.</p>
+
+<p>query_var - false to prevent queries, or string to customize query var
+(?$query_var=$term); default will use $taxonomy as query var.</p>
+
+<p>public - If the taxonomy should be publicly queryable; //@TODO not implemented.
+defaults to true.</p>
+
+<p>show_ui - If the WordPress UI admin tags UI should apply to this taxonomy;
+defaults to public.</p>
+
+<p>show_in_nav_menus - true makes this taxonomy available for selection in navigation menus.
+Defaults to public.</p>
+
+<p>show_tagcloud - false to prevent the taxonomy being listed in the Tag Cloud Widget;
+defaults to show_ui which defaults to public.</p>
+
+<p>labels - An array of labels for this taxonomy. You can see accepted values in {@link get_taxonomy_labels()}. By default tag labels are used for non-hierarchical types and category labels for hierarchical ones.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object</p></em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>array|string</td>
+<td><em><p>Name of the object type for the taxonomy object.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>See above description for the two keys values.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_rewrite
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_taxonomy_for_object_type()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_taxonomy_for_object_type</span><span class="nb-faded-text">(
+          string $taxonomy, array|string $object_type
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add an already registered taxonomy to an object type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object</p></em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>array|string</td>
+<td><em><p>Name of the object type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if successful, false if not</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_term</span><span class="nb-faded-text">(
+          array|object $term, string $taxonomy, string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Sanitize Term all fields.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Relies on sanitize_term_field() to sanitize the term. The difference is that
+this function will sanitize <strong>all</strong> fields. The context is based
+on sanitize_term_field().</p>
+
+<p>The $term is expected to be either an array or an object.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>array|object</td>
+<td><em><p>The term to check</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy name to use</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Default is 'display'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Term with all fields sanitized</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_term_field
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_term_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_term_field</span><span class="nb-faded-text">(
+          string $field, string $value, int $term_id, string $taxonomy, string $context
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Cleanse the field value in the term based on the context.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Passing a term field value through the function should be assumed to have
+cleansed the value for whatever context the term field is going to be used.</p>
+
+<p>If no context or an unsupported context is given, then default filters will
+be applied.</p>
+
+<p>There are enough filters for each context to support a custom filtering
+without creating your own filter function. Simply create a function that
+hooks into the filter you need.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>Term field to sanitize</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>string</td>
+<td><em><p>Search for this term value</p></em></td>
+</tr>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>Term ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Either edit, db, display, attribute, or js.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>sanitized field</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::taxonomy_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">taxonomy_exists</span><span class="nb-faded-text">(
+          string $taxonomy
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks that the taxonomy name exists.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Formerly is_taxonomy(), introduced in 2.3.0.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the taxonomy exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_taxonomies
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::term_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">term_exists</span><span class="nb-faded-text">(
+          int|string $term, string $taxonomy
+              =
+              '', int $parent
+              =
+              0
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Check if Term exists.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the index of a defined term, or 0 (false) if the term doesn't exist.</p>
+
+<p>Formerly is_term(), introduced in 2.3.0.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>int|string</td>
+<td><em><p>The term to check</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy name to use</p></em></td>
+</tr>
+<tr>
+<th>$parent</th>
+<td>int</td>
+<td><em><p>ID of parent term under which to confine the exists search.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Get the term id or Term Object, if exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_taxonomies()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_taxonomies</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the taxonomies of a post with available options.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function can be used within the loop to display the taxonomies for a
+post without specifying the Post ID. You can also use it outside the Loop to
+display the taxonomies for a specific post.</p>
+
+<p>The available defaults are:
+'post' : default is 0. The post ID to get taxonomies of.
+'before' : default is empty string. Display before taxonomies list.
+'sep' : default is empty string. Separate every taxonomy with value in this.
+'after' : default is empty string. Display this after the taxonomies list.
+'template' : The template to use for displaying the taxonomy terms.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_taxonomies()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_object_term_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_object_term_cache</span><span class="nb-faded-text">(
+          string|array $object_ids, array|string $object_type
+          )
+        </span>
+        :
+          null|bool</code><div class="description"><p class="short_description">Updates the cache for Term ID(s).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only update the cache for terms not already cached.</p>
+
+<p>The $object_ids expects that the ids be separated by commas, if it is a
+string.</p>
+
+<p>It should be noted that update_object_term_cache() is very time extensive. It
+is advised that the function is not called very often or at least not for a
+lot of terms that exist in a lot of taxonomies. The amount of time increases
+for each term and it also increases for each taxonomy the term belongs to.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_ids</th>
+<td>string|array</td>
+<td><em><p>Single or list of term object ID(s)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_type</th>
+<td>array|string</td>
+<td><em><p>The taxonomy object type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|bool</td>
+<td>Null value is given with empty $object_ids. False if</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_object_terms()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_term_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_term_cache</span><span class="nb-faded-text">(
+          array $terms, string $taxonomy
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Updates Terms to Taxonomy in cache.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$terms</th>
+<td>array</td>
+<td><em><p>List of Term objects to change</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Optional. Update Term to this taxonomy in cache</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_check_term_hierarchy_for_loops()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_check_term_hierarchy_for_loops</span><span class="nb-faded-text">(
+          int $parent, int $term_id, string $taxonomy
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Checks the given subset of the term hierarchy for hierarchy loops.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Prevents loops from forming and breaks those that it finds.</p>
+
+<p>Attached to the wp_update_term_parent filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent</th>
+<td>int</td>
+<td><em><p>term_id of the parent for the term we're checking.</p>
+</em></td>
+</tr>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>The term we're checking.</p>
+</em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy of the term we're checking.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The new parent for the term.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_find_hierarchy_loop()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_count_terms()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_count_terms</span><span class="nb-faded-text">(
+          string $taxonomy, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Count how many terms are in Taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Default $args is 'hide_empty' which can be 'hide_empty=true' or array('hide_empty' => true).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy name</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Overwrite defaults. See get_terms()</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>How many terms are in $taxonomy</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_terms()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_parse_args()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_defer_term_counting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_defer_term_counting</span><span class="nb-faded-text">(
+          bool $defer
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Enable or disable term counting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$defer</th>
+<td>bool</td>
+<td><em><p>Optional. Enable if true, disable if false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether term counting is enabled or disabled.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_delete_category()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_delete_category</span><span class="nb-faded-text">(
+          int $cat_ID
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Deletes one existing category.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_ID</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Returns true if completes delete action; false if term doesn't exist; Zero on attempted deletion of default Category; WP_Error object is also a possibility.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_delete_term()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_delete_object_term_relationships()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_delete_object_term_relationships</span><span class="nb-faded-text">(
+          int $object_id, string|array $taxonomies
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Will unlink the object from the taxonomy or taxonomies.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will remove all relationships between the object and any terms in
+a particular taxonomy or taxonomies. Does not remove the term or
+taxonomy itself.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>The term Object Id that refers to the term</p></em></td>
+</tr>
+<tr>
+<th>$taxonomies</th>
+<td>string|array</td>
+<td><em><p>List of Taxonomy Names or single Taxonomy name.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_delete_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_delete_term</span><span class="nb-faded-text">(
+          int $term, string $taxonomy, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          bool|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Removes a term from the database.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the term is a parent of other terms, then the children will be updated to
+that term's parent.</p>
+
+<p>The $args 'default' will only override the terms found, if there is only one
+term found. Any other and the found terms are used.</p>
+
+<p>The $args 'force_default' will force the term supplied as default to be
+assigned even if the object was not going to be termless</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>int</td>
+<td><em><p>Term ID</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Taxonomy Name</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Optional. Change 'default' term id and override found term ids.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>Returns false if not term; true if completes delete action.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_object_terms()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_object_terms</span><span class="nb-faded-text">(
+          int|array $object_ids, string|array $taxonomies, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Retrieves the terms associated with the given object(s), in the supplied taxonomies.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The following information has to do the $args parameter and for what can be
+contained in the string or array of that parameter, if it exists.</p>
+
+<p>The first argument is called, 'orderby' and has the default value of 'name'.
+The other value that is supported is 'count'.</p>
+
+<p>The second argument is called, 'order' and has the default value of 'ASC'.
+The only other value that will be acceptable is 'DESC'.</p>
+
+<p>The final argument supported is called, 'fields' and has the default value of
+'all'. There are multiple other options that can be used instead. Supported
+values are as follows: 'all', 'ids', 'names', and finally
+'all_with_object_id'.</p>
+
+<p>The fields argument also decides what will be returned. If 'all' or
+'all_with_object_id' is chosen or the default kept intact, then all matching
+terms objects will be returned. If either 'ids' or 'names' is used, then an
+array of all matching term ids or term names will be returned respectively.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_ids</th>
+<td>int|array</td>
+<td><em><p>The ID(s) of the object(s) to retrieve.</p>
+</em></td>
+</tr>
+<tr>
+<th>$taxonomies</th>
+<td>string|array</td>
+<td><em><p>The taxonomies to retrieve terms from.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Change what is returned</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>The requested term data or empty array if no terms found. WP_Error if $taxonomy does not exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_term_taxonomy_parent_id()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_term_taxonomy_parent_id</span><span class="nb-faded-text">(
+          int $term_id, string $taxonomy
+          )
+        </span>
+        :
+          int|bool</code><div class="description"><p class="short_description">Returns the term's parent's term_ID</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|bool</td>
+<td>false on error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_insert_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_insert_term</span><span class="nb-faded-text">(
+          string $term, string $taxonomy, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Adds a new term to the database. Optionally marks it as an alias of an existing term.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Error handling is assigned for the nonexistence of the $taxonomy and $term
+parameters before inserting. If both the term id and taxonomy exist
+previously, then an array will be returned that contains the term id and the
+contents of what is returned. The keys of the array are 'term_id' and
+'term_taxonomy_id' containing numeric values.</p>
+
+<p>It is assumed that the term does not yet exist or the above will apply. The
+term will be first added to the term table and then related to the taxonomy
+if everything is well. If everything is correct, then several actions will be
+run prior to a filter and then several actions will be run after the filter
+is run.</p>
+
+<p>The arguments decide how the term is handled based on the $args parameter.
+The following is a list of the available overrides and the defaults.</p>
+
+<p>'alias_of'. There is no default, but if added, expected is the slug that the
+term will be an alias of. Expected to be a string.</p>
+
+<p>'description'. There is no default. If exists, will be added to the database
+along with the term. Expected to be a string.</p>
+
+<p>'parent'. Expected to be numeric and default is 0 (zero). Will assign value
+of 'parent' to the term.</p>
+
+<p>'slug'. Expected to be a string. There is no default.</p>
+
+<p>If 'slug' argument exists then the slug will be checked to see if it is not
+a valid term. If that check succeeds (it is not a valid term), then it is
+added and the term id is given. If it fails, then a check is made to whether
+the taxonomy is hierarchical and the parent argument is not empty. If the
+second check succeeds, the term will be inserted and the term id will be
+given.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>string</td>
+<td><em><p>The term to add or update.</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy to which to add the term</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Change the values of the inserted term</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>The Term ID and Term Taxonomy ID</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_object_terms()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_object_terms</span><span class="nb-faded-text">(
+          int $object_id, array|int|string $terms, array|string $taxonomy, bool $append
+              =
+              false
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Create Term and Taxonomy Relationships.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Relates an object (post, link etc) to a term and taxonomy type. Creates the
+term and taxonomy relationship if it doesn't already exist. Creates a term if
+it doesn't exist (using the slug).</p>
+
+<p>A relationship means that the term is grouped in or belongs to the taxonomy.
+A term has no meaning until it is given context by defining which taxonomy it
+exists under.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>The object to relate to.</p></em></td>
+</tr>
+<tr>
+<th>$terms</th>
+<td>array|int|string</td>
+<td><em><p>The slug or id of the term, will replace all existing related terms in this taxonomy.</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>array|string</td>
+<td><em><p>The context in which to relate the term to the object.</p></em></td>
+</tr>
+<tr>
+<th>$append</th>
+<td>bool</td>
+<td><em><p>If false will delete difference of terms.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>Affected Term IDs</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_unique_term_slug()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_unique_term_slug</span><span class="nb-faded-text">(
+          string $slug, object $term
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Will make slug unique, if it isn't already.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The $slug has to be unique global to every taxonomy, meaning that one
+taxonomy term can't have a matching slug with another taxonomy term. Each
+slug has to be globally unique for every taxonomy.</p>
+
+<p>The way this works is that if the taxonomy that the term belongs to is
+hierarchical and has a parent, it will append that parent to the $slug.</p>
+
+<p>If that still doesn't return an unique slug, then it try to append a number
+until it finds a number that is truly unique.</p>
+
+<p>The only purpose for $term is for appending a parent, if one exists.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$slug</th>
+<td>string</td>
+<td><em><p>The string that will be tried for a unique slug</p></em></td>
+</tr>
+<tr>
+<th>$term</th>
+<td>object</td>
+<td><em><p>The term object that the $slug will belong too</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Will return a true unique slug.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_term</span><span class="nb-faded-text">(
+          int $term_id, string $taxonomy, array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a></code><div class="description"><p class="short_description">Update term based on arguments provided.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The $args will indiscriminately override all values with the same field name.
+Care must be taken to not override important information need to update or
+update will fail (or perhaps create a new term, neither would be acceptable).</p>
+
+<p>Defaults will set 'alias_of', 'description', 'parent', and 'slug' if not
+defined in $args already.</p>
+
+<p>'alias_of' will create a term group, if it doesn't already exist, and update
+it for the $term.</p>
+
+<p>If the 'slug' argument in $args is missing, then the 'name' in $args will be
+used. It should also be noted that if you set 'slug' and it isn't unique then
+a WP_Error will be passed back. If you don't pass any slug, then a unique one
+will be created for you.</p>
+
+<p>For what can be overrode in $args, check the term scheme can contain and stay
+away from the term keys.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term_id</th>
+<td>int</td>
+<td><em><p>The ID of the term</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The context in which to relate the term to the object.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Overwrite term field values</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|<a href="db_wp-includes_class-wp-error.html#%5CWP_Error">\WP_Error</a>
+</td>
+<td>Returns Term ID and Taxonomy Term ID</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_term_count()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_term_count</span><span class="nb-faded-text">(
+          int|array $terms, string $taxonomy,  $do_deferred
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Updates the amount of terms in taxonomy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If there is a taxonomy callback applied, then it will be called for updating
+the count.</p>
+
+<p>The default action is to count what the amount of terms have the relationship
+of term ID. Once that is done, then update the database.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$terms</th>
+<td>int|array</td>
+<td><em><p>The term_taxonomy_id of the terms</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The context of the term.</p></em></td>
+</tr>
+<tr>
+<th>$do_deferred</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>If no terms will return false, and if successful will return true.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Taxonomy
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_update_term_count_now()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_update_term_count_now</span><span class="nb-faded-text">(
+          array $terms, string $taxonomy
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Perform term count update immediately.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$terms</th>
+<td>array</td>
+<td><em><p>The term_taxonomy_id of terms to update.</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The context of the term.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always true when complete.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Tax_Query" class="anchor"></a><h2 class="class">\WP_Tax_Query<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">Container class for a multiple taxonomy query.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Tax_Query::$no_results" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
+                 <span class="highlight">$no_results</span>= 'array( 'join' =&gt; '''
+                </code><div class="description">
+<span class="attribute">static</span><p class="short-description">Standard response when the query should not return any rows.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array( 'join' =&gt; ''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Tax_Query::$queries" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$queries</span>= 'array('
+                </code><div class="description">
+<p class="short-description">List of taxonomy queries. A single taxonomy query is an associative array:
+- 'taxonomy' string The taxonomy being queried
+- 'terms' string|array The list of terms
+- 'field' string (optional) Which term field is being used.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Possible values: 'term_id', 'slug' or 'name'
+        Default: 'term_id'
+- 'operator' string (optional)
+        Possible values: 'AND', 'IN' or 'NOT IN'.
+        Default: 'IN'
+- 'include_children' bool (optional) Whether to include child terms.
+        Default: true</p>
+</div>
+<strong>Default value</strong><code>array(</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Tax_Query::$relation" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$relation</span>= ''
+                </code><div class="description">
+<p class="short-description">The relation between the queries. Can be one of 'AND' or 'OR'.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Tax_Query::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          array $tax_query
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructor.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Parses a compact tax query and sets defaults.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tax_query</th>
+<td>array</td>
+<td><em><p>A compact tax query: array( 'relation' => 'OR', array( 'taxonomy' => 'tax1', 'terms' => array( 'term1', 'term2' ), 'field' => 'slug', ), array( 'taxonomy' => 'tax2', 'terms' => array( 'term-a', 'term-b' ), 'field' => 'slug', ), )</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Tax_Query::clean_query()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">clean_query</span><span class="nb-faded-text">(
+          array $query
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Validates a single query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>array</td>
+<td><em><p>&$query The single query</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Tax_Query::get_sql()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_sql</span><span class="nb-faded-text">(
+          string $primary_table, string $primary_id_column
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Generates SQL clauses to be appended to a main query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$primary_table</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$primary_id_column</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Tax_Query::transform_query()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">transform_query</span><span class="nb-faded-text">(
+          array $query, string $resulting_field
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Transforms a single query, from one field to another.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>array</td>
+<td><em><p>&$query The single query</p>
+</em></td>
+</tr>
+<tr>
+<th>$resulting_field</th>
+<td>string</td>
+<td><em><p>The resulting field</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

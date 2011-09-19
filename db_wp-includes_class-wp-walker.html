@@ -1,0 +1,629 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/class-wp-walker.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWalker">\Walker</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">A class for displaying various tree-like structures.</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\Walker" class="anchor"></a><h2 class="class">\Walker<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress</small><p class="short-description">A class for displaying various tree-like structures.</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_wp-admin_includes_template.html#%5CWalker_Category_Checklist">\Walker_Category_Checklist</a></dd>
+<dd><a href="db_wp-includes_category-template.html#%5CWalker_Category">\Walker_Category</a></dd>
+<dd><a href="db_wp-includes_category-template.html#%5CWalker_CategoryDropdown">\Walker_CategoryDropdown</a></dd>
+<dd><a href="db_wp-includes_comment-template.html#%5CWalker_Comment">\Walker_Comment</a></dd>
+<dd><a href="db_wp-includes_nav-menu-template.html#%5CWalker_Nav_Menu">\Walker_Nav_Menu</a></dd>
+<dd><a href="db_wp-includes_post-template.html#%5CWalker_Page">\Walker_Page</a></dd>
+<dd><a href="db_wp-includes_post-template.html#%5CWalker_PageDropdown">\Walker_PageDropdown</a></dd>
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_category-template.html#%5CWalker_Category">\Walker_Category</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_category-template.html#%5CWalker_CategoryDropdown">\Walker_CategoryDropdown</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_comment-template.html#%5CWalker_Comment">\Walker_Comment</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_nav-menu-template.html#%5CWalker_Nav_Menu">\Walker_Nav_Menu</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_Page">\Walker_Page</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_PageDropdown">\Walker_PageDropdown</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Walker::$db_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$db_fields</span>= ''
+                </code><div class="description">
+<p class="short-description">DB fields to use.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::$max_pages" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$max_pages</span>= '1'
+                </code><div class="description">
+<p class="short-description">Max number of pages walked by the paged walker</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>1</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::$tree_type" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$tree_type</span>= ''
+                </code><div class="description">
+<p class="short-description">What the class handles.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Walker::display_element()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_element</span><span class="nb-faded-text">(
+          object $element, array $children_elements, int $max_depth, int $depth
+              =
+              0, array $args, string $output
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Traverse elements to create list from elements.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Display one element if the element doesn't have any children otherwise,
+display the element and its children. Will only traverse up to the max
+depth and no ignore elements under that depth. It is possible to set the
+max depth to include all depths, see walk() method.</p>
+
+<p>This method shouldn't be called directly, use the walk() method instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>object</td>
+<td><em><p>Data object</p></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td>array</td>
+<td><em><p>List of elements to continue traversing.</p></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>Max depth to traverse.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of current element.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Null on failure with no changes to parameters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::end_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_el</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the element output, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::end_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_lvl</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the list of after the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method finishes the list at the end of output of the elements.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::get_number_of_root_elements()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_number_of_root_elements</span><span class="nb-faded-text">(
+           $elements
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::paged_walk()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">paged_walk</span><span class="nb-faded-text">(
+           $elements, int $max_depth, int $page_num,  $per_page
+          )
+        </span>
+        :
+          \XHTML</code><div class="description"><p class="short_description">paged_walk() - produce a page of nested elements</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Given an array of hierarchical elements, the maximum depth, a specific page number,
+and number of elements per page, this function first determines all top level root elements
+belonging to that page, then lists them and all of their children in hierarchical order.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>= 0 means display all levels; $max_depth > 0 specifies the number of display levels.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_num</th>
+<td>int</td>
+<td><em><p>the specific page number, beginning with 1.</p></em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\XHTML</td>
+<td>of the specified page of elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::start_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_el</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Start the element output.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. Includes
+the element output also.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::start_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_lvl</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Starts the list before the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method is called at the start of the output list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::unset_children()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unset_children</span><span class="nb-faded-text">(
+           $e,  $children_elements
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$e</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker::walk()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">walk</span><span class="nb-faded-text">(
+          array $elements, int $max_depth
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display array of elements hierarchically.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>It is a generic function which does not assume any existing order of
+elements. max_depth = -1 means flatly display every element. max_depth =
+0 means display all levels. max_depth > 0  specifies the number of
+display levels.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

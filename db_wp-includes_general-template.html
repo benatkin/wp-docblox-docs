@@ -1,0 +1,3070 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/general-template.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">General template tags that can go anywhere in a template.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Template
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::__checked_selected_helper()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__checked_selected_helper</span><span class="nb-faded-text">(
+          \any $helper, \any $current, bool $echo, string $type
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Private helper function for checked, selected, and disabled.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compares the first two arguments and if identical marks as $type</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$helper</th>
+<td>\any</td>
+<td><em><p>One of the values to compare</p></em></td>
+</tr>
+<tr>
+<th>$current</th>
+<td>\any</td>
+<td><em><p>(true) The other value to compare if not just true</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo or just return the string</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of checked|selected|disabled we are doing</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>html attribute or empty string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_thickbox()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_thickbox</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enqueues the default ThickBox js and css.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If any of the settings need to be changed, this can be done with another js
+file similar to media-upload.js and theme-preview.js. That file should
+require array('thickbox') to ensure it is loaded after.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::allowed_tags()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">allowed_tags</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Display all of the allowed tags in HTML format with attributes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is useful for displaying in the comment area, which elements and
+attributes are supported. As well as any plugins which want to display it.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML allowed tags entity encoded.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$allowedtags
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::bloginfo()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">bloginfo</span><span class="nb-faded-text">(
+          string $show
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display information about the blog.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$show</th>
+<td>string</td>
+<td><em><p>What to display.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_bloginfo()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::calendar_week_mod()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">calendar_week_mod</span><span class="nb-faded-text">(
+          int $num
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Get number of days since the start of the week.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$num</th>
+<td>int</td>
+<td><em><p>Number of day.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Days since the start of the week.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Usedby</dt>
+<dd>get_calendar()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::checked()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">checked</span><span class="nb-faded-text">(
+          mixed $checked, mixed $current
+              =
+              true, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Outputs the html checked attribute.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compares the first two arguments and if identical marks as checked</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$checked</th>
+<td>mixed</td>
+<td><em><p>One of the values to compare</p></em></td>
+</tr>
+<tr>
+<th>$current</th>
+<td>mixed</td>
+<td><em><p>(true) The other value to compare if not just true</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo or just return the string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>html attribute or empty string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_get_calendar_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_get_calendar_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Purge the cached results of get_calendar.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_calendar
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::disabled()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">disabled</span><span class="nb-faded-text">(
+          mixed $disabled, mixed $current
+              =
+              true, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Outputs the html disabled attribute.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compares the first two arguments and if identical marks as disabled</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$disabled</th>
+<td>mixed</td>
+<td><em><p>One of the values to compare</p></em></td>
+</tr>
+<tr>
+<th>$current</th>
+<td>mixed</td>
+<td><em><p>(true) The other value to compare if not just true</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo or just return the string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>html attribute or empty string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::feed_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">feed_links</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the links to the general feeds.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional arguments.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::feed_links_extra()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">feed_links_extra</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the links to the extra feeds such as category feeds.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional arguments.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_archives_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_archives_link</span><span class="nb-faded-text">(
+          string $url, string $text, string $format
+              =
+              'html', string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve archive link content based on predefined or custom code.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The format can be one of four styles. The 'link' for head element, 'option'
+for use in the select element, 'html' for use in list (either ol or ul HTML
+elements). Custom content is also supported using the before and after
+parameters.</p>
+
+<p>The 'link' format uses the link HTML element with the <em>archives</em>
+relationship. The before and after parameters are not used. The text
+parameter is used to describe the link.</p>
+
+<p>The 'option' format uses the option HTML element for use in select element.
+The value is the url parameter and the before and after parameters are used
+between the text description.</p>
+
+<p>The 'html' format, which is the default, uses the li HTML element for use in
+the list HTML elements. The before parameter is before the link and the after
+parameter is after the closing link.</p>
+
+<p>The custom format uses the before parameter before the link ('a' HTML
+element) and the after parameter after the closing link tag. If the above
+three values for the format are not used, then custom format is assumed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to archive.</p></em></td>
+</tr>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Archive text description.</p></em></td>
+</tr>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em><p>Optional, default is 'html'. Can be 'link', 'option', 'html', or custom.</p>
+</em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML link content for archive.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_bloginfo()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_bloginfo</span><span class="nb-faded-text">(
+          string $show
+              =
+              '', string $filter
+              =
+              'raw'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve information about the blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Some show parameter values are deprecated and will be removed in future
+versions. These options will trigger the _deprecated_argument() function.
+The deprecated blog info options are listed in the function contents.</p>
+
+<p>The possible values for the 'show' parameter are listed below.</p>
+
+<ol>
+<li><strong>url</strong> - Blog URI to homepage.</li>
+<li><strong>wpurl</strong> - Blog URI path to WordPress.</li>
+<li><strong>description</strong> - Secondary title</li>
+</ol>
+
+<p>The feed URL options can be retrieved from 'rdf_url' (RSS 0.91),
+'rss_url' (RSS 1.0), 'rss2_url' (RSS 2.0), or 'atom_url' (Atom feed). The
+comment feeds can be retrieved from the 'comments_atom_url' (Atom comment
+feed) or 'comments_rss2_url' (RSS 2.0 comment feed).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$show</th>
+<td>string</td>
+<td><em><p>Blog info to retrieve.</p></em></td>
+</tr>
+<tr>
+<th>$filter</th>
+<td>string</td>
+<td><em><p>How to filter what is retrieved.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Mostly string values, might be empty.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_calendar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_calendar</span><span class="nb-faded-text">(
+          bool $initial
+              =
+              true, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display calendar with days that have posts as links.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The calendar is cached, which will be retrieved, if it exists. If there are
+no posts for the month, then it will not be displayed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$initial</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Use initial calendar names.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Set to false for return.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_current_blog_id()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_current_blog_id</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the current blog id</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Blog id</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_footer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_footer</span><span class="nb-faded-text">(
+          string $name
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load footer template.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Includes the footer template for a theme or if a name is specified then a
+specialised footer will be included.</p>
+
+<p>For the parameter, if the file is called "footer-special.php" then specify
+"special".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the specialised footer.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\locate_template()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_header</span><span class="nb-faded-text">(
+          string $name
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load header template.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Includes the header template for a theme or if a name is specified then a
+specialised header will be included.</p>
+
+<p>For the parameter, if the file is called "header-special.php" then specify
+"special".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the specialised header.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\locate_template()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_modified_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_modified_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              'U', bool $gmt
+              =
+              false, int|object $post
+              =
+              null, bool $translate
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the time at which the post was last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional, default is 'U'. Either 'G', 'U', or php date format.</p>
+</em></td>
+</tr>
+<tr>
+<th>$gmt</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to return the gmt time.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>Optional, default is global post object. A post_id or post object</p></em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to translate the result</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Returns timestamp</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              'U', bool $gmt
+              =
+              false, int|object $post
+              =
+              null, bool $translate
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the time at which the post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional Either 'G', 'U', or php date format.</p>
+</em></td>
+</tr>
+<tr>
+<th>$gmt</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to return the gmt time.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>Optional post ID or object. Default is global $post object.</p>
+</em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td>bool</td>
+<td><em><p>Whether to translate the time string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_search_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_search_form</span><span class="nb-faded-text">(
+          boolean $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display search form.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will first attempt to locate the searchform.php file in either the child or
+the parent, then load it. If it doesn't exist, then the default search form
+will be displayed. The default search form is HTML, which will be displayed.
+There is a filter applied to the search form HTML in order to edit or replace
+it. The filter is 'get_search_form'.</p>
+
+<p>This function is primarily used by themes which want to hardcode the search
+form into the sidebar and also by the search widget in WordPress.</p>
+
+<p>There is also an action that is called whenever the function is run called,
+'get_search_form'. This can be useful for outputting JavaScript that the
+search relies on or various formatting that applies to the beginning of the
+search. To give a few examples of what it can be used for.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>boolean</td>
+<td><em><p>Default to echo and not return the form.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_search_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_search_query</span><span class="nb-faded-text">(
+          bool $escaped
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the contents of the search WordPress query variable.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The search query string is passed through {@link esc_attr()}
+to ensure that it is safe for placing in an html attribute.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$escaped</th>
+<td>bool</td>
+<td><em><p>Whether the result is escaped. Default true. Only use when you are later escaping it. Do not use unescaped.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\esc_attr()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_sidebar()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_sidebar</span><span class="nb-faded-text">(
+          string $name
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load sidebar template.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Includes the sidebar template for a theme or if a name is specified then a
+specialised sidebar will be included.</p>
+
+<p>For the parameter, if the file is called "sidebar-special.php" then specify
+"special".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the specialised sidebar.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\locate_template()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_template_part()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_template_part</span><span class="nb-faded-text">(
+          string $slug, string $name
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load a template part into a template</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Makes it easy for a theme to reuse sections of code in a easy to overload way
+for child themes.</p>
+
+<p>Includes the named template part for a theme or if a name is specified then a
+specialised part will be included. If the theme contains no {slug}.php file
+then no template will be included.</p>
+
+<p>The template is included using require, not require_once, so you may include the
+same template part multiple times.</p>
+
+<p>For the parameter, if the file is called "{slug}-special.php" then specify
+"special".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$slug</th>
+<td>string</td>
+<td><em><p>The slug name for the generic template.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the specialised template.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\locate_template()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Retrieve the date the current $post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Unlike the_date() this function will always return the date.
+Modify output with 'get_the_date' filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. PHP date format defaults to the date_format option if not specified.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Null if displaying, string if retrieving.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_generator()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_generator</span><span class="nb-faded-text">(
+          string $type
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Creates the generator XML or Comment for RSS, ATOM, etc.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the correct generator type for the requested output format. Allows
+for a plugin to filter generators on an individual basis using the
+'get_the_generator_{$type}' filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of generator to return - (html|xhtml|atom|rss2|rdf|comment|export).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The HTML content for the generator.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_modified_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_modified_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the date on which the post was last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. PHP date format. Defaults to the "date_format" option</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_modified_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_modified_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the time at which the post was last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional Either 'G', 'U', or php date format defaults to the value specified in the time_format option.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', int|object $post
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the time at which the post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional Either 'G', 'U', or php date format defaults to the value specified in the time_format option.</p>
+</em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>Optional post ID or object. Default is global $post object.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::language_attributes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">language_attributes</span><span class="nb-faded-text">(
+          string $doctype
+              =
+              'html'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the language attributes for the html tag.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Builds up a set of html attributes containing the text direction and language
+information for the page.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$doctype</th>
+<td>string</td>
+<td><em><p>The type of html document (xhtml|html).</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::noindex()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">noindex</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display a noindex meta tag if required by the blog configuration.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If a blog is marked as not being public then the noindex meta tag will be
+output to tell web robots not to index the page content.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::paginate_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">paginate_links</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          array|string</code><div class="description"><p class="short_description">Retrieve paginated link for archive post pages.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Technically, the function can be used to create paginated link list for any
+area. The 'base' argument is used to reference the url, which will be used to
+create the paginated links. The 'format' argument is then used for replacing
+the page number. It is however, most likely and by default, to be used on the
+archive post pages.</p>
+
+<p>The 'type' argument controls format of the returned value. The default is
+'plain', which is just a string with the links separated by a newline
+character. The other possible values are either 'array' or 'list'. The
+'array' value will return an array of the paginated link list to offer full
+control of display. The 'list' value will place all of the paginated links in
+an unordered HTML list.</p>
+
+<p>The 'total' argument is the total amount of pages and is an integer. The
+'current' argument is the current page number and is also an integer.</p>
+
+<p>An example of the 'base' argument is "http://example.com/all_posts.php%<em>%"
+and the '%</em>%' is required. The '%_%' will be replaced by the contents of in
+the 'format' argument. An example for the 'format' argument is "?page=%#%"
+and the '%#%' is also required. The '%#%' will be replaced with the page
+number.</p>
+
+<p>You can include the previous and next links in the list by setting the
+'prev_next' argument to true, which it is by default. You can set the
+previous text, by using the 'prev_text' argument. You can set the next text
+by setting the 'next_text' argument.</p>
+
+<p>If the 'show_all' argument is set to true, then it will show all of the pages
+instead of a short list of the pages near the current page. By default, the
+'show_all' is set to false and controlled by the 'end_size' and 'mid_size'
+arguments. The 'end_size' argument is how many numbers on either the start
+and the end list edges, by default is 1. The 'mid_size' argument is how many
+numbers to either side of current page, but not including current page.</p>
+
+<p>It is possible to add query vars to the link by using the 'add_args' argument
+and see {@link add_query_arg()} for more information.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Override defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|string</td>
+<td>String of page links or array of page links.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_type_archive_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_type_archive_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve title for a post type archive.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is optimized for archive.php and archive-{$post_type}.php template files
+for displaying the title of the post type.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_admin_color_schemes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_admin_color_schemes</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers the default Admin color schemes</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::rich_edit_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">rich_edit_exists</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Determine if TinyMCE is available.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks to see if the user has deleted the tinymce files to slim down there WordPress install.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether TinyMCE exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::rsd_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">rsd_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the link to the Really Simple Discovery service endpoint.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://archipelago.phrasewise.com/rsd">http://archipelago.phrasewise.com/rsd</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::selected()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">selected</span><span class="nb-faded-text">(
+          mixed $selected, mixed $current
+              =
+              true, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Outputs the html selected attribute.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compares the first two arguments and if identical marks as selected</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$selected</th>
+<td>mixed</td>
+<td><em><p>One of the values to compare</p></em></td>
+</tr>
+<tr>
+<th>$current</th>
+<td>mixed</td>
+<td><em><p>(true) The other value to compare if not just true</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo or just return the string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>html attribute or empty string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::single_cat_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">single_cat_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for category archive.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is useful for category template file or files, because it is optimized
+for category page title and with less overhead than {@link wp_title()}.</p>
+
+<p>It does not support placing the separator after the title, but by leaving the
+prefix parameter empty, you can set the title separator manually. The prefix
+does not automatically place a space between the prefix, so if there should
+be a space, the parameter value will need to have it at the end.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::single_month_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">single_month_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for post archive based on date.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for when the template only needs to display the month and year, if
+either are available. Optimized for just this purpose, so if it is all that
+is needed, should be better than {@link wp_title()}.</p>
+
+<p>It does not support placing the separator after the title, but by leaving the
+prefix parameter empty, you can set the title separator manually. The prefix
+does not automatically place a space between the prefix, so if there should
+be a space, the parameter value will need to have it at the end.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::single_post_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">single_post_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is optimized for single.php template file for displaying the post title.</p>
+
+<p>It does not support placing the separator after the title, but by leaving the
+prefix parameter empty, you can set the title separator manually. The prefix
+does not automatically place a space between the prefix, so if there should
+be a space, the parameter value will need to have it at the end.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::single_tag_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">single_tag_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for tag post archive.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for tag template files for displaying the tag page title. It has less
+overhead than {@link wp_title()}, because of its limited implementation.</p>
+
+<p>It does not support placing the separator after the title, but by leaving the
+prefix parameter empty, you can set the title separator manually. The prefix
+does not automatically place a space between the prefix, so if there should
+be a space, the parameter value will need to have it at the end.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::single_term_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">single_term_title</span><span class="nb-faded-text">(
+          string $prefix
+              =
+              '', bool $display
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for taxonomy term archive.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for taxonomy term template files for displaying the taxonomy term page title.
+It has less overhead than {@link wp_title()}, because of its limited implementation.</p>
+
+<p>It does not support placing the separator after the title, but by leaving the
+prefix parameter empty, you can set the title separator manually. The prefix
+does not automatically place a space between the prefix, so if there should
+be a space, the parameter value will need to have it at the end.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>Optional. What to display before the title.</p></em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Title when retrieving, null when displaying or failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              '', bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or Retrieve the date the current $post was written (once per date)</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only output the date if the current post's date is different from the
+previous one output.</p>
+
+<p>i.e. Only one date listing will show per day worth of posts shown in the loop, even if the
+function is called several times for each post.</p>
+
+<p>HTML output can be filtered with 'the_date'.
+Date string output can be filtered with 'get_the_date'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. PHP date format defaults to the date_format option if not specified.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Output before the date.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Output after the date.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional, default is display. Whether to echo the date or return it.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Null if displaying, string if retrieving.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_date()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_date_xml()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_date_xml</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Outputs the date in iso8601 format for xml files.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_generator()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_generator</span><span class="nb-faded-text">(
+          string $type
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the generator XML or Comment for RSS, ATOM, etc.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the correct generator type for the requested output format. Allows
+for a plugin to filter generators overall the the_generator filter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>The type of generator to output - (html|xhtml|atom|rss2|rdf|comment|export).</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_modified_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_modified_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              '', bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display the date on which the post was last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. PHP date format defaults to the date_format option if not specified.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Output before the date.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Output after the date.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional, default is display. Whether to echo the date or return it.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Null if displaying, string if retrieving.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_modified_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_modified_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the time at which the post was last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional Either 'G', 'U', or php date format defaults to the value specified in the time_format option.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_search_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_search_query</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the contents of the search query variable.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The search query string is passed through {@link esc_attr()}
+to ensure that it is safe for placing in an html attribute.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\esc_attr()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the time at which the post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Either 'G', 'U', or php date format.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_weekday()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_weekday</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the weekday on which the post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_locale
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_weekday_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_weekday_date</span><span class="nb-faded-text">(
+          string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the weekday on which the post was written.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only output the weekday if the current post's weekday is different from
+the previous one output.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional Output before the date.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional Output after the date.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_richedit()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_richedit</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the user should have a WYSIWIG editor.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks that the user requires a WYSIWIG editor and that the editor is
+supported in the users browser.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wlwmanifest_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wlwmanifest_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the link to the Windows Live Writer manifest file.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://msdn.microsoft.com/en-us/library/bb463265.aspx">http://msdn.microsoft.com/en-us/library/bb463265.aspx</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_admin_css()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_admin_css</span><span class="nb-faded-text">(
+          string $file
+              =
+              'wp-admin', bool $force_echo
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enqueues or directly prints a stylesheet link to the specified CSS file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>"Intelligently" decides to enqueue or to print the CSS file. If the
+'wp_print_styles' action has <em>not</em> yet been called, the CSS file will be
+enqueued. If the wp_print_styles action <em>has</em> been called, the CSS link will
+be printed. Printing may be forced by passing TRUE as the $force_echo
+(second) parameter.</p>
+
+<p>For backward compatibility with WordPress 2.3 calling method: If the $file
+(first) parameter does not correspond to a registered CSS file, we assume
+$file is a file relative to wp-admin/ without its ".css" extension. A
+stylesheet link to that generated URL is printed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Optional. Style handle name or file name (without ".css" extension) relative to wp-admin/. Defaults to 'wp-admin'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$force_echo</th>
+<td>bool</td>
+<td><em><p>Optional. Force the stylesheet link to be printed rather than enqueued.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_styles
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_admin_css_color()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_admin_css_color</span><span class="nb-faded-text">(
+          string $key, string $name, string $url, array $colors
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers an admin colour scheme css file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Allows a plugin to register a new admin colour scheme. For example:</p>
+
+<pre><code>wp_admin_css_color('classic', __('Classic'), admin_url("css/colors-classic.css"),
+array('#07273E', '#14568A', '#D54E21', '#2683AE'));
+</code></pre>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The unique key for this theme.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the theme.</p></em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The url of the css file containing the colour scheme.</p></em></td>
+</tr>
+<tr>
+<th>$colors</th>
+<td>array</td>
+<td><em><p>Optional An array of CSS color definitions which are used to give the user a feel for the theme.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_admin_css_uri()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_admin_css_uri</span><span class="nb-faded-text">(
+          string $file
+              =
+              'wp-admin'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the URL of a WordPress admin CSS file.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>file relative to wp-admin/ without its ".css" extension.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class.wp-styles.html#%5CWP_Styles::_css_href">\WP_Styles::_css_href</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_editor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_editor</span><span class="nb-faded-text">(
+          string $content, string $editor_id, array $settings
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Loads and initializes WP_Editor class if needed, passes the settings for an instance of the editor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Initial content for the editor.</p></em></td>
+</tr>
+<tr>
+<th>$editor_id</th>
+<td>string</td>
+<td><em><p>HTML ID attribute value for the textarea and TinyMCE.</p></em></td>
+</tr>
+<tr>
+<th>$settings</th>
+<td>array</td>
+<td><em><p>See WP_Editor::editor().</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp-includes/class-wp-editor.php
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_footer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_footer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fire the wp_footer action</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_generator()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_generator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the XHTML generator that is generated on the wp_head hook.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_archives()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_archives</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display archive links based on type and format.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The 'type' argument offers a few choices and by default will display monthly
+archive links. The other options for values are 'daily', 'weekly', 'monthly',
+'yearly', 'postbypost' or 'alpha'. Both 'postbypost' and 'alpha' display the
+same archive link list, the difference between the two is that 'alpha'
+will order by post title and 'postbypost' will order by post date.</p>
+
+<p>The date archives will logically display dates with links to the archive post
+page. The 'postbypost' and 'alpha' values for 'type' argument will display
+the post titles.</p>
+
+<p>The 'limit' argument will only display a limited amount of links, specified
+by the 'limit' integer value. By default, there is no limit. The
+'show_post_count' argument will show how many posts are within the archive.
+By default, the 'show_post_count' argument is set to false.</p>
+
+<p>For the 'format', 'before', and 'after' arguments, see {@link
+get_archives_link()}. The values of these arguments have to do with that
+function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Override defaults.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_head()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_head</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fire the wp_head action</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_login_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_login_form</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(
+          )
+        </span>
+        :
+          \Void,</code><div class="description"><p class="short_description">Provides a simple login form for use anywhere within WordPress. By default, it echoes
+the HTML immediately. Pass array('echo'=>false) to return the string instead.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Configuration options to modify the form output</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\Void,</td>
+<td>or string containing the form</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_login_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_login_url</span><span class="nb-faded-text">(
+          string $redirect
+              =
+              '', bool $force_reauth
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the Log In URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the URL that allows the user to log in to the site</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Path to redirect to on login.</p></em></td>
+</tr>
+<tr>
+<th>$force_reauth</th>
+<td>bool</td>
+<td><em><p>Whether to force reauthorization, even if a cookie is present. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A log in url</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\site_url()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_loginout()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_loginout</span><span class="nb-faded-text">(
+          string $redirect
+              =
+              '', boolean $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the Log In/Out link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Displays a link, which allows users to navigate to the Log In page to log in
+or log out depending on whether they are currently logged in.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Optional path to redirect to on login/logout.</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>boolean</td>
+<td><em><p>Default to echo and not return the link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_logout_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_logout_url</span><span class="nb-faded-text">(
+          string $redirect
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns the Log Out URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the URL that allows the user to log out of the site</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Path to redirect to on logout.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_nonce_url()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\site_url()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_lostpassword_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_lostpassword_url</span><span class="nb-faded-text">(
+          string $redirect
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns the Lost Password URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns the URL that allows the user to retrieve the lost password</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$redirect</th>
+<td>string</td>
+<td><em><p>Path to redirect to on login.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\site_url()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_meta</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Theme container function for the 'wp_meta' action.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The 'wp_meta' action can have several purposes, depending on how you use it,
+but one purpose might have been to allow for theme switching.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://trac.wordpress.org/ticket/1458">Explanation of 'wp_meta' action.</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_register()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_register</span><span class="nb-faded-text">(
+          string $before
+              =
+              '<li>', string $after
+              =
+              '</li>', boolean $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the Registration or Admin link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Display a link which allows the user to navigate to the registration page if
+not logged in and registration is enabled or to the dashboard if logged in.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Text to output before the link (defaults to <li>).</p>
+</em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Text to output after the link (defaults to </li>).</p>
+</em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>boolean</td>
+<td><em><p>Default to echo and not return the link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_title</span><span class="nb-faded-text">(
+          string $sep
+              =
+              '&raquo;', bool $display
+              =
+              true, string $seplocation
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Display or retrieve page title for all areas of blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>By default, the page title will display the separator before the page title,
+so that the blog title will be before the page title. This is not good for
+title display, since the blog title shows up on most tabs and not what is
+important, which is the page that the user is looking at.</p>
+
+<p>There are also SEO benefits to having the blog title after or to the 'right'
+or the page title. However, it is mostly common sense to have the blog title
+to the right with most browsers supporting tabs. You can achieve this by
+using the seplocation parameter and setting the value to 'right'. This change
+was introduced around 2.5.0, in case backwards compatibility of themes is
+important.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sep</th>
+<td>string</td>
+<td><em><p>Optional, default is ''. How to separate the various items within the page title.</p>
+</em></td>
+</tr>
+<tr>
+<th>$display</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display or retrieve title.</p></em></td>
+</tr>
+<tr>
+<th>$seplocation</th>
+<td>string</td>
+<td><em><p>Optional. Direction to display title, 'right'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>String on retrieve, null when displaying.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

@@ -1,0 +1,1676 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/kses.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#constants"><img src="images/icons/constant.png" height="14">
+                      Constants
+                  </a><ul><li><a href="#::CUSTOM_TAGS">CUSTOM_TAGS</a></li></ul>
+</li>
+<li>
+<a href="#functions"><img src="images/icons/function.png" height="14">
+                      Functions
+                  </a><ul>
+<li><a href="#::_wp_kses_decode_entities_chr()">_wp_kses_decode_entities_chr</a></li>
+<li><a href="#::_wp_kses_decode_entities_chr_hexdec()">_wp_kses_decode_entities_chr_hexdec</a></li>
+<li><a href="#::_wp_kses_split_callback()">_wp_kses_split_callback</a></li>
+<li><a href="#::kses_init()">kses_init</a></li>
+<li><a href="#::kses_init_filters()">kses_init_filters</a></li>
+<li><a href="#::kses_remove_filters()">kses_remove_filters</a></li>
+<li><a href="#::safecss_filter_attr()">safecss_filter_attr</a></li>
+<li><a href="#::valid_unicode()">valid_unicode</a></li>
+<li><a href="#::wp_filter_kses()">wp_filter_kses</a></li>
+<li><a href="#::wp_filter_nohtml_kses()">wp_filter_nohtml_kses</a></li>
+<li><a href="#::wp_filter_post_kses()">wp_filter_post_kses</a></li>
+<li><a href="#::wp_kses()">wp_kses</a></li>
+<li><a href="#::wp_kses_array_lc()">wp_kses_array_lc</a></li>
+<li><a href="#::wp_kses_attr()">wp_kses_attr</a></li>
+<li><a href="#::wp_kses_bad_protocol()">wp_kses_bad_protocol</a></li>
+<li><a href="#::wp_kses_bad_protocol_once()">wp_kses_bad_protocol_once</a></li>
+<li><a href="#::wp_kses_bad_protocol_once2()">wp_kses_bad_protocol_once2</a></li>
+<li><a href="#::wp_kses_check_attr_val()">wp_kses_check_attr_val</a></li>
+<li><a href="#::wp_kses_data()">wp_kses_data</a></li>
+<li><a href="#::wp_kses_decode_entities()">wp_kses_decode_entities</a></li>
+<li><a href="#::wp_kses_hair()">wp_kses_hair</a></li>
+<li><a href="#::wp_kses_hook()">wp_kses_hook</a></li>
+<li><a href="#::wp_kses_html_error()">wp_kses_html_error</a></li>
+<li><a href="#::wp_kses_js_entities()">wp_kses_js_entities</a></li>
+<li><a href="#::wp_kses_named_entities()">wp_kses_named_entities</a></li>
+<li><a href="#::wp_kses_no_null()">wp_kses_no_null</a></li>
+<li><a href="#::wp_kses_normalize_entities()">wp_kses_normalize_entities</a></li>
+<li><a href="#::wp_kses_normalize_entities2()">wp_kses_normalize_entities2</a></li>
+<li><a href="#::wp_kses_normalize_entities3()">wp_kses_normalize_entities3</a></li>
+<li><a href="#::wp_kses_post()">wp_kses_post</a></li>
+<li><a href="#::wp_kses_split()">wp_kses_split</a></li>
+<li><a href="#::wp_kses_split2()">wp_kses_split2</a></li>
+<li><a href="#::wp_kses_stripslashes()">wp_kses_stripslashes</a></li>
+<li><a href="#::wp_kses_version()">wp_kses_version</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">kses 0.2.2 - HTML/XHTML filter that only allows some elements and attributes
+Copyright (C) 2002, 2003, 2005  Ulf Harnhammar</p>
+<div class="long-description"><p>This program is free software and open source software; you can redistribute
+it and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the License,
+or (at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+http://www.gnu.org/licenses/gpl.html</p>
+
+<p>[kses strips evil scripts!]</p>
+
+<p>Added wp_ prefix to avoid conflicts with existing kses users</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Author</dt>
+<dd>Ulf Harnhammar <http://advogato.org/person/metaur/>
+         
+    </dd>
+<dt>Copyright</dt>
+<dd>(C) 2002, 2003, 2005
+         
+    </dd>
+<dt>Package</dt>
+<dd>External
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>KSES
+         
+    </dd>
+<dt>Version</dt>
+<dd>0.2.2
+         
+    </dd>
+</dl>
+<a name="constants" class="anchor"></a><h2>Constants</h2>
+<div>
+<a id="::CUSTOM_TAGS" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">CUSTOM_TAGS</span>
+                = false</code><div class="description"></div>
+<div class="code-tabs"><dl class="constant-info"></dl></div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_wp_kses_decode_entities_chr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_kses_decode_entities_chr</span><span class="nb-faded-text">(
+          array $match
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Regex callback for wp_kses_decode_entities()</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td>array</td>
+<td><em><p>preg match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_kses_decode_entities_chr_hexdec()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_kses_decode_entities_chr_hexdec</span><span class="nb-faded-text">(
+          array $match
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Regex callback for wp_kses_decode_entities()</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td>array</td>
+<td><em><p>preg match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_kses_split_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_kses_split_callback</span><span class="nb-faded-text">(
+           $match
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Callback for wp_kses_split.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::kses_init()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">kses_init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets up most of the Kses filters for input form content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If you remove the kses_init() function from 'init' hook and
+'set_current_user' (priority is default), then none of the Kses filter hooks
+will be added.</p>
+
+<p>First removes all of the Kses filters in case the current user does not need
+to have Kses filter the content. If the user does not have unfiltered html
+capability, then Kses filters are added.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\kses_remove_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\kses_init_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::kses_init_filters()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">kses_init_filters</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds all Kses input form content filters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>All hooks have default priority. The wp_filter_kses() function is added to
+the 'pre_comment_content' and 'title_save_pre' hooks.</p>
+
+<p>The wp_filter_post_kses() function is added to the 'content_save_pre',
+'excerpt_save_pre', and 'content_filtered_save_pre' hooks.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_filter()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::kses_remove_filters()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">kses_remove_filters</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes all Kses input form content filters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A quick procedural method to removing all of the filters that kses uses for
+content in WordPress Loop.</p>
+
+<p>Does not remove the kses_init() function from 'init' hook (priority is
+default). Also does not remove kses_init() function from 'set_current_user'
+hook (priority is also default).</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.6
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::safecss_filter_attr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">safecss_filter_attr</span><span class="nb-faded-text">(
+           $css,  $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Inline CSS filter</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$css</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::valid_unicode()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">valid_unicode</span><span class="nb-faded-text">(
+          int $i
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Helper function to determine if a Unicode value is valid.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$i</th>
+<td>int</td>
+<td><em><p>Unicode value</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true if the value was a valid Unicode number</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_filter_kses()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_filter_kses</span><span class="nb-faded-text">(
+          string $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize content with allowed HTML Kses rules.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Content to filter, expected to be escaped with slashes</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$allowedtags
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_filter_nohtml_kses()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_filter_nohtml_kses</span><span class="nb-faded-text">(
+          string $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Strips all of the HTML in the content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Content to strip all HTML from</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content without any HTML</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_filter_post_kses()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_filter_post_kses</span><span class="nb-faded-text">(
+          string $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize content for allowed HTML tags for post content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Post content refers to the page contents of the 'post' type and not $_POST
+data from forms.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Post content to filter, expected to be escaped with slashes</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered post content with allowed HTML tags and attributes intact.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$allowedposttags
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses</span><span class="nb-faded-text">(
+          string $string, array $allowed_html, array $allowed_protocols
+              =
+              array (
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Filters content and keeps only allowable HTML elements.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function makes sure that only the allowed HTML element names, attribute
+names and attribute values plus only sane HTML entities will occur in
+$string. You have to remove any slashes from PHP's magic quotes before you
+call this function.</p>
+
+<p>The default allowed protocols are 'http', 'https', 'ftp', 'mailto', 'news',
+'irc', 'gopher', 'nntp', 'feed', 'telnet, 'mms', 'rtsp' and 'svn'. This
+covers all common link protocols, except for 'javascript' which should not
+be allowed for untrusted users.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to filter through kses</p></em></td>
+</tr>
+<tr>
+<th>$allowed_html</th>
+<td>array</td>
+<td><em><p>List of allowed HTML elements</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Optional. Allowed protocol in links.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content with only allowed HTML elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_array_lc()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_array_lc</span><span class="nb-faded-text">(
+          array $inarray
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Goes through an array and changes the keys to all lower case.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$inarray</th>
+<td>array</td>
+<td><em><p>Unfiltered array</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Fixed array with all lowercase keys</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_attr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_attr</span><span class="nb-faded-text">(
+          string $element, string $attr, array $allowed_html, array $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Removes all attributes, if none are allowed for this element.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If some are allowed it calls wp_kses_hair() to split them further, and then
+it builds up new HTML code from the data that kses_hair() returns. It also
+removes "&lt;" and ">" characters, if there are any left. One more thing it does
+is to check if the tag has a closing XHTML slash, and if it does, it puts one
+in the returned code as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>string</td>
+<td><em><p>HTML element/tag</p>
+</em></td>
+</tr>
+<tr>
+<th>$attr</th>
+<td>string</td>
+<td><em><p>HTML attributes from HTML element to closing HTML element tag</p></em></td>
+</tr>
+<tr>
+<th>$allowed_html</th>
+<td>array</td>
+<td><em><p>Allowed HTML elements</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocols to keep</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized HTML element</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_bad_protocol()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_bad_protocol</span><span class="nb-faded-text">(
+          string $string, array $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize string from bad protocols.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function removes all non-allowed protocols from the beginning of
+$string. It ignores whitespace and the case of the letters, and it does
+understand HTML entities. It does its work in a while loop, so it won't be
+fooled by a string like "javascript:javascript:alert(57)".</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to filter bad protocols from</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocols to keep</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_bad_protocol_once()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_bad_protocol_once</span><span class="nb-faded-text">(
+          string $string, string $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitizes content from bad protocols and other characters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function searches for URL protocols at the beginning of $string, while
+handling whitespace and HTML entities.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to check for bad protocols</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>string</td>
+<td><em><p>Allowed protocols</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_bad_protocol_once2()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_bad_protocol_once2</span><span class="nb-faded-text">(
+          string $string, string $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback for wp_kses_bad_protocol_once() regular expression.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function processes URL protocols, checks to see if they're in the
+white-list or not, and returns different data depending on the answer.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>URI scheme to check against the whitelist</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>string</td>
+<td><em><p>Allowed protocols</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Sanitized content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_check_attr_val()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_check_attr_val</span><span class="nb-faded-text">(
+          string $value, string $vless, string $checkname, mixed $checkvalue
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Performs different checks for attribute values.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The currently implemented checks are "maxlen", "minlen", "maxval", "minval"
+and "valueless" with even more checks to come soon.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$value</th>
+<td>string</td>
+<td><em><p>Attribute value</p></em></td>
+</tr>
+<tr>
+<th>$vless</th>
+<td>string</td>
+<td><em><p>Whether the value is valueless. Use 'y' or 'n'</p>
+</em></td>
+</tr>
+<tr>
+<th>$checkname</th>
+<td>string</td>
+<td><em><p>What $checkvalue is checking for.</p>
+</em></td>
+</tr>
+<tr>
+<th>$checkvalue</th>
+<td>mixed</td>
+<td><em><p>What constraint the value should pass</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether check passes</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_data()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_data</span><span class="nb-faded-text">(
+          string $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize content with allowed HTML Kses rules.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Content to filter, expected to not be escaped</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$allowedtags
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_decode_entities()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_decode_entities</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert all entities to their character counterparts.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function decodes numeric HTML entities (&#65; and &#x41;). It doesn't do
+anything with other entities like &auml;, but we don't need them in the URL
+protocol whitelisting system anyway.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to change entities</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content after decoded entities</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_hair()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_hair</span><span class="nb-faded-text">(
+          string $attr, array $allowed_protocols
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Builds an attribute list from string containing attributes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function does a lot of work. It parses an attribute list into an array
+with attribute data, and tries to do the right thing even if it gets weird
+input. It will add quotes around attribute values that don't have any quotes
+or apostrophes around them, to make it easier to produce HTML code that will
+conform to W3C's HTML specification. It will also remove bad URL protocols
+from attribute values.  It also reduces duplicate attributes by using the
+attribute defined first (foo='bar' foo='baz' will result in foo='bar').</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$attr</th>
+<td>string</td>
+<td><em><p>Attribute list from HTML element to closing HTML element tag</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocols to keep</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of attributes after parsing</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_hook</span><span class="nb-faded-text">(
+          string $string, array $allowed_html, array $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">You add any kses hooks here.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is currently only one kses WordPress hook and it is called here. All
+parameters are passed to the hooks and expected to receive a string.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to filter through kses</p></em></td>
+</tr>
+<tr>
+<th>$allowed_html</th>
+<td>array</td>
+<td><em><p>List of allowed HTML elements</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocol in links</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered content through 'pre_kses' hook</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_html_error()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_html_error</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Handles parsing errors in wp_kses_hair().</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The general plan is to remove everything to and including some whitespace,
+but it deals with quotes and apostrophes as well.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_js_entities()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_js_entities</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Removes the HTML JavaScript entities found in early versions of Netscape 4.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_named_entities()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_named_entities</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback for wp_kses_normalize_entities() regular expression.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function only accepts valid named entity references, which are finite,
+case-sensitive, and highly scrutinized by HTML and XML validators.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>preg_replace_callback() matches array</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Correctly encoded entity</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_no_null()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_no_null</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Removes any NULL characters in $string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_normalize_entities()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_normalize_entities</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts and fixes HTML entities.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function normalizes HTML entities. It will convert "AT&amp;T" to the correct
+"AT&amp;T", "&#00058;" to "&#58;", "&#XYZZY;" to "&amp;#XYZZY;" and so on.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to normalize entities</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content with normalized entities</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_normalize_entities2()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_normalize_entities2</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback for wp_kses_normalize_entities() regular expression.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function helps wp_kses_normalize_entities() to only accept 16 bit values
+and nothing more for &#number; entities.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>preg_replace_callback() matches array</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Correctly encoded entity</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_normalize_entities3()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_normalize_entities3</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback for wp_kses_normalize_entities() for regular expression.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function helps wp_kses_normalize_entities() to only accept valid Unicode
+numeric entities in hex form.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>preg_replace_callback() matches array</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Correctly encoded entity</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_post</span><span class="nb-faded-text">(
+          string $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sanitize content for allowed HTML tags for post content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Post content refers to the page contents of the 'post' type and not $_POST
+data from forms.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string</td>
+<td><em><p>Post content to filter</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Filtered post content with allowed HTML tags and attributes intact.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$allowedposttags
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_split()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_split</span><span class="nb-faded-text">(
+          string $string, array $allowed_html, array $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Searches for HTML tags, no matter how malformed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>It also matches stray ">" characters.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to filter</p></em></td>
+</tr>
+<tr>
+<th>$allowed_html</th>
+<td>array</td>
+<td><em><p>Allowed HTML elements</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocols to keep</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content with fixed HTML tags</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_split2()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_split2</span><span class="nb-faded-text">(
+          string $string, array $allowed_html, array $allowed_protocols
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback for wp_kses_split for fixing malformed HTML tags.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function does a lot of work. It rejects some very malformed things like
+<:::>. It returns an empty string, if the element isn't allowed (look ma, no
+strip_tags()!). Otherwise it splits the tag into an element and an attribute
+list.</p>
+
+<p>After the tag is split into an element and an attribute list, it is run
+through another filter which will remove illegal attributes and once that is
+completed, will be returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to filter</p></em></td>
+</tr>
+<tr>
+<th>$allowed_html</th>
+<td>array</td>
+<td><em><p>Allowed HTML elements</p></em></td>
+</tr>
+<tr>
+<th>$allowed_protocols</th>
+<td>array</td>
+<td><em><p>Allowed protocols to keep</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Fixed HTML element</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_kses_attr()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_stripslashes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_stripslashes</span><span class="nb-faded-text">(
+          string $string
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Strips slashes from in front of quotes.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function changes the character sequence  \"  to just  ". It leaves all
+other slashes alone. It's really weird, but the quoting from
+preg_replace(//e) seems to require this.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>String to strip slashes</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Fixed strings with quoted slashes</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_kses_version()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_kses_version</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">This function returns kses' version number.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>KSES Version Number</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

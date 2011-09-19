@@ -1,0 +1,356 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/Text/Diff/Engine/native.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CText_Diff_Engine_native">\Text_Diff_Engine_native</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Class used internally by Text_Diff to actually compute the diffs.</p>
+<div class="long-description"><p>This class is implemented using native PHP code.</p>
+
+<p>The algorithm used here is mostly lifted from the perl module
+Algorithm::Diff (version 1.06) by Ned Konz, which is available at:
+http://www.perl.com/CPAN/authors/id/N/NE/NEDKONZ/Algorithm-Diff-1.06.zip</p>
+
+<p>More ideas are taken from: http://www.ics.uci.edu/~eppstein/161/960229.html</p>
+
+<p>Some ideas (and a bit of code) are taken from analyze.c, of GNU
+diffutils-2.7, which can be found at:
+ftp://gnudist.gnu.org/pub/gnu/diffutils/diffutils-2.7.tar.gz</p>
+
+<p>Some ideas (subdivision by NCHUNKS > 2, and some optimizations) are from
+Geoffrey T. Dairiki <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>. The original PHP version of this
+code was written by him, and is used/adapted with his permission.</p>
+
+<p>Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>Text_Diff
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\Text_Diff_Engine_native" class="anchor"></a><h2 class="class">\Text_Diff_Engine_native<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description">Class used internally by Text_Diff to actually compute the diffs.</p>
+<div class="long-description"><p>This class is implemented using native PHP code.</p>
+
+<p>The algorithm used here is mostly lifted from the perl module
+Algorithm::Diff (version 1.06) by Ned Konz, which is available at:
+http://www.perl.com/CPAN/authors/id/N/NE/NEDKONZ/Algorithm-Diff-1.06.zip</p>
+
+<p>More ideas are taken from: http://www.ics.uci.edu/~eppstein/161/960229.html</p>
+
+<p>Some ideas (and a bit of code) are taken from analyze.c, of GNU
+diffutils-2.7, which can be found at:
+ftp://gnudist.gnu.org/pub/gnu/diffutils/diffutils-2.7.tar.gz</p>
+
+<p>Some ideas (subdivision by NCHUNKS > 2, and some optimizations) are from
+Geoffrey T. Dairiki <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>. The original PHP version of this
+code was written by him, and is used/adapted with his permission.</p>
+
+<p>Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+<dl class="class-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Engine_native::_compareseq()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_compareseq</span><span class="nb-faded-text">(
+           $xoff,  $xlim,  $yoff,  $ylim
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Finds LCS of two sequences.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The results are recorded in the vectors $this->{x,y}changed[], by
+storing a 1 in the element for each line that is an insertion or
+deletion (ie. is not in the LCS).</p>
+
+<p>The subsequence of file 0 is (XOFF, XLIM) and likewise for file 1.</p>
+
+<p>Note that XLIM, YLIM are exclusive bounds.  All line numbers are
+origin-0 and discarded lines are not counted.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xoff</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlim</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$yoff</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylim</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_native::_diag()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_diag</span><span class="nb-faded-text">(
+           $xoff,  $xlim,  $yoff,  $ylim,  $nchunks
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Divides the Largest Common Subsequence (LCS) of the sequences (XOFF,
+XLIM) and (YOFF, YLIM) into NCHUNKS approximately equally sized
+segments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns (LCS, PTS).  LCS is the length of the LCS. PTS is an array of
+NCHUNKS+1 (X, Y) indexes giving the diving points between sub
+sequences.  The first sub-sequence is contained in (X0, X1), (Y0, Y1),
+the second in (X1, X2), (Y1, Y2) and so on.  Note that (X0, Y0) ==
+(XOFF, YOFF) and (X[NCHUNKS], Y[NCHUNKS]) == (XLIM, YLIM).</p>
+
+<p>This function assumes that the first lines of the specified portions of
+the two files do not match, and likewise that the last lines do not
+match.  The caller must trim matching lines from the beginning and end
+of the portions it is going to specify.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xoff</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$xlim</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$yoff</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ylim</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$nchunks</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_native::_lcsPos()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_lcsPos</span><span class="nb-faded-text">(
+           $ypos
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ypos</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_native::_shiftBoundaries()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_shiftBoundaries</span><span class="nb-faded-text">(
+           $lines,  $changed,  $other_changed
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adjusts inserts/deletes of identical lines to join changes as much as
+possible.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>We do something when a run of changed lines include a line at one end
+and has an excluded, identical line at the other.  We are free to
+choose which identical line is included.  `compareseq' usually chooses
+the one at the beginning, but usually it is cleaner to consider the
+following identical line to be the "change".</p>
+
+<p>This is extracted verbatim from analyze.c (GNU diffutils-2.7).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$changed</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$other_changed</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Engine_native::diff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">diff</span><span class="nb-faded-text">(
+           $from_lines,  $to_lines
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$to_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

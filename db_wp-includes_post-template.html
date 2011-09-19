@@ -1,0 +1,2780 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/post-template.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul>
+<li><a href="#%5CWalker_Page">\Walker_Page</a></li>
+<li><a href="#%5CWalker_PageDropdown">\Walker_PageDropdown</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">WordPress Post Template Functions.</p>
+<div class="long-description"><p>Gets content for the current post in the loop.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Template
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_convert_urlencoded_to_entities()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_convert_urlencoded_to_entities</span><span class="nb-faded-text">(
+          array $match
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Preview fix for javascript bug with foreign languages</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$match</th>
+<td>array</td>
+<td><em><p>Match array from preg_replace_callback</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Returns</dt>
+<dd>string
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_link_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_link_page</span><span class="nb-faded-text">(
+          int $i
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Helper function for wp_link_pages().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$i</th>
+<td>int</td>
+<td><em><p>Page number.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Link.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::body_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">body_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the classes for the body element.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_body_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_body_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve the classes for the body element as an array.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of classes.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              '', int $post_id
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve the classes for the post div as an array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The class names are add are many. If the post is a sticky, then the 'sticky'
+class name. The class 'hentry' is always added to each post. For each
+category, the class will be added with 'category-' with category slug is
+added. The tags are the same way as the categories with 'tag-' before the tag
+slug. All classes are passed through the filter, 'post_class' with the list
+of classes, followed by $class parameter value, with the post ID as the last
+parameter.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list.</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of classes.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the ID of the current item in the WordPress Loop.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_content()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_content</span><span class="nb-faded-text">(
+          string $more_link_text
+              =
+              null, string $stripteaser
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the post content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$more_link_text</th>
+<td>string</td>
+<td><em><p>Optional. Content for when there is more text.</p></em></td>
+</tr>
+<tr>
+<th>$stripteaser</th>
+<td>string</td>
+<td><em><p>Optional. Teaser content before the more text.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_excerpt</span><span class="nb-faded-text">(
+          mixed $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the post excerpt.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>mixed</td>
+<td><em><p>Not used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_guid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_guid</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the Post Global Unique Identifier (guid).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The guid will appear to be a link, but should not be used as an link to the
+post. The reason you should not use it as a link, is because of moving the
+blog across domains.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_password_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_password_form</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve protected post password form content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content for password form for password protected post.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_title</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve post title.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the post is protected and the visitor is not an admin, then "Protected"
+will be displayed before the post title. If the post is private, then
+"Private" will be located before the post title.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::has_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">has_excerpt</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether post has excerpt.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_page_template()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_page_template</span><span class="nb-faded-text">(
+          string $template
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether currently in a page template.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This template tag allows you to determine if you are in a page template.
+You can optionally provide a template name and then the check will be
+specific to that template.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$template</th>
+<td>string</td>
+<td><em><p>The specific template name if specific matching is required.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on failure, true if success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_query
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              '', int $post_id
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the classes for the post div.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list.</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_custom()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_custom</span><span class="nb-faded-text">(
+          string $key
+              =
+              ''
+          )
+        </span>
+        :
+          bool|string|array</code><div class="description"><p class="short_description">Retrieve post custom meta data field.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>Meta data key name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string|array</td>
+<td>Array of values or single value, if only one element exists. False will be returned if key does not exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_password_required()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_password_required</span><span class="nb-faded-text">(
+          int|object $post
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether post requires password and correct password has been provided.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>An optional post. Global $post used if not provided.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>false if a password is not required or the correct password cookie is present, true otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::prepend_attachment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">prepend_attachment</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Wrap attachment in <<p>> element before content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sticky_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sticky_class</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display "sticky" CSS class, if a post is sticky.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the ID of the current item in the WordPress Loop.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_attachment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_attachment_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $fullsize
+              =
+              false, bool $deprecated
+              =
+              false, bool $permalink
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display an attachment page link using an image or icon.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$fullsize</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to use full size.</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>bool</td>
+<td><em><p>Deprecated. Not used.</p></em></td>
+</tr>
+<tr>
+<th>$permalink</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to include permalink.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_content()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_content</span><span class="nb-faded-text">(
+          string $more_link_text
+              =
+              null, string $stripteaser
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the post content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$more_link_text</th>
+<td>string</td>
+<td><em><p>Optional. Content for when there is more text.</p></em></td>
+</tr>
+<tr>
+<th>$stripteaser</th>
+<td>string</td>
+<td><em><p>Optional. Teaser content before the more text.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_excerpt</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the post excerpt.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_guid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_guid</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the Post Global Unique Identifier (guid).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The guid will appear to be a link, but should not be used as an link to the
+post. The reason you should not use it as a link, is because of moving the
+blog across domains.</p>
+
+<p>Url is escaped to make it xml safe</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_title</span><span class="nb-faded-text">(
+          string $before
+              =
+              '', string $after
+              =
+              '', bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          null|string</code><div class="description"><p class="short_description">Display or retrieve the current post title with optional content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Content to prepend to the title.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. Content to append to the title.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional, default to true.Whether to display or return.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|string</td>
+<td>Null on no title. String if $echo parameter is false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_title_attribute()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_title_attribute</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Sanitize the current title when retrieving or displaying.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Works like {@link the_title()}, except the parameters can be in a string or
+an array. See the function for what can be override in the $args parameter.</p>
+
+<p>The title before it is displayed will have the tags stripped and {@link
+esc_attr()} before it is passed to the user or displayed. The default
+as with {@link the_title()}, is to display the title.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>Null on failure or display. String when echo is false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::walk_page_dropdown_tree()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">walk_page_dropdown_tree</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve HTML dropdown (select) content for page list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_PageDropdown::walk()">\Walker_PageDropdown::walk()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_PageDropdown">\Walker_PageDropdown</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::walk_page_tree()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">walk_page_tree</span><span class="nb-faded-text">(
+           $pages,  $depth,  $current_page,  $r
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve HTML list content for page list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pages</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$current_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$r</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_Page::walk()">\Walker_Page::walk()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_post-template.html#%5CWalker_Page">\Walker_Page</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_dropdown_pages()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_dropdown_pages</span><span class="nb-faded-text">(
+          array|string $args
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve or display list of pages as a dropdown (select list).</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Optional. Override default arguments.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content, if not displaying.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_attachment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_attachment_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, string $size
+              =
+              'thumbnail', bool $permalink
+              =
+              false, bool $icon
+              =
+              false, string $text
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve an attachment page link using an image or icon, if possible.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$size</th>
+<td>string</td>
+<td><em><p>Optional, default is 'thumbnail'. Size of image, either array or string.</p>
+</em></td>
+</tr>
+<tr>
+<th>$permalink</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to add permalink to image.</p></em></td>
+</tr>
+<tr>
+<th>$icon</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to include icon.</p></em></td>
+</tr>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional, default is false. If string, then will be link text.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_link_pages()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_link_pages</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">The formatted output of a list of pages.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
+Quicktag one or more times). This tag must be within The Loop.</p>
+
+<p>The defaults for overwriting are:
+'next_or_number' - Default is 'number' (string). Indicates whether page
+     numbers should be used. Valid values are number and next.
+'nextpagelink' - Default is 'Next Page' (string). Text for link to next page.
+     of the bookmark.
+'previouspagelink' - Default is 'Previous Page' (string). Text for link to
+     previous page, if available.
+'pagelink' - Default is '%' (String).Format string for page numbers. The % in
+     the parameter string will be replaced with the page number, so Page %
+     generates "Page 1", "Page 2", etc. Defaults to %, just the page number.
+'before' - Default is '</p>
+
+<p> Pages:' (string). The html or text to prepend to
+     each bookmarks.
+'after' - Default is '</p>
+
+<p>' (string). The html or text to append to each
+     bookmarks.
+'link_before' - Default is '' (string). The html or text to prepend to each
+     Pages link inside the <a> tag. Also prepended to the current item, which
+     is not linked.
+'link_after' - Default is '' (string). The html or text to append to each
+     Pages link inside the <a> tag. Also appended to the current item, which
+     is not linked.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional. Overwrite the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Formatted output in HTML.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_pages()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_pages</span><span class="nb-faded-text">(
+          array|string $args
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve or display list of pages in list (li) format.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em><p>Optional. Override default arguments.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content, if not displaying.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_post_revisions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_post_revisions</span><span class="nb-faded-text">(
+          int|object $post_id
+              =
+              0, string|array $args
+              =
+              null
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Display list of a post's revisions.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can output either a UL with edit links or a TABLE with diff interface, and
+restore action links.</p>
+
+<p>Second argument controls parameters:
+  (bool)   parent : include the parent (the "Current Revision") in the list.
+  (string) format : 'list' or 'form-table'.  'list' outputs UL, 'form-table'
+                    outputs TABLE with UI.
+  (int)    right  : what revision is currently being viewed - used in
+                    form-table format.
+  (int)    left   : what revision is currently being diffed against right -
+                    used in form-table format.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int|object</td>
+<td><em><p>Post ID or post object.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>See description {@link wp_parse_args()}.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Post_Revisions
+         
+    </dd>
+<dt>Todo</dt>
+<dd>split into two functions (list, form-table) ?
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_post_revisions()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_post_revision_title()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_edit_post_link()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_page_menu()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_page_menu</span><span class="nb-faded-text">(
+          array|string $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display or retrieve list of pages with optional home link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The arguments are listed below and part of the arguments are for {@link
+wp_list_pages()} function. Check that function for more info on those
+arguments.</p>
+
+<ul>
+<li><strong>sort_column</strong> - How to sort the list of pages. Defaults
+to page title. Use column for posts table.</li>
+<li><strong>menu_class</strong> - Class to use for the div ID which contains
+the page list. Defaults to 'menu'.</li>
+<li><strong>echo</strong> - Whether to echo list or return it. Defaults to
+echo.</li>
+<li><strong>link_before</strong> - Text before show_home argument text.</li>
+<li><strong>link_after</strong> - Text after show_home argument text.</li>
+<li><strong>show_home</strong> - If you set this argument, then it will
+display the link to the home page. The show_home argument really just needs
+to be set to the value of the text of the link.</li>
+</ul>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array|string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_post_revision_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_post_revision_title</span><span class="nb-faded-text">(
+          int|object $revision, bool $link
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve formatted date timestamp of a revision (linked to that revisions's page).</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$revision</th>
+<td>int|object</td>
+<td><em><p>Revision ID or revision object.</p></em></td>
+</tr>
+<tr>
+<th>$link</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Link to revisions's page?</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>i18n formatted datetimestamp or localized 'Current Revision'.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Post_Revisions
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\date_i18n()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\Walker_Page" class="anchor"></a><h2 class="class">\Walker_Page<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress</small><p class="short-description">Create HTML list of pages.</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a></dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>walk_page_tree()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Walker_Page::$db_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$db_fields</span>= 'array ('parent' =&gt; 'post_parent''
+                </code><div class="description"><p class="short-description">DB fields to use.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array ('parent' =&gt; 'post_parent'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24db_fields">\Walker::$db_fields</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Todo</dt>
+<dd>Decouple this.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::$max_pages" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$max_pages</span>= '1'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Max number of pages walked by the paged walker</p><small>Inherited from:
+                        <a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>1</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::$tree_type" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$tree_type</span>= ''page''
+                </code><div class="description"><p class="short-description">What the class handles.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'page'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24tree_type">\Walker::$tree_type</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Walker_Page::display_element()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_element</span><span class="nb-faded-text">(
+          object $element, array $children_elements, int $max_depth, int $depth
+              =
+              0, array $args, string $output
+          )
+        </span>
+        :
+          null</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Traverse elements to create list from elements.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::display_element()">\Walker::display_element()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Display one element if the element doesn't have any children otherwise,
+display the element and its children. Will only traverse up to the max
+depth and no ignore elements under that depth. It is possible to set the
+max depth to include all depths, see walk() method.</p>
+
+<p>This method shouldn't be called directly, use the walk() method instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>object</td>
+<td><em><p>Data object</p></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td>array</td>
+<td><em><p>List of elements to continue traversing.</p></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>Max depth to traverse.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of current element.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Null on failure with no changes to parameters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::end_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_el</span><span class="nb-faded-text">(
+          string $output, object $page, int $depth
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the element output, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>object</td>
+<td><em><p>Page data object. Not used.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of page. Not Used.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_el()">\Walker::end_el()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::end_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_lvl</span><span class="nb-faded-text">(
+          string $output, int $depth
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the list of after the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method finishes the list at the end of output of the elements.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of page. Used for padding.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_lvl()">\Walker::end_lvl()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::get_number_of_root_elements()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_number_of_root_elements</span><span class="nb-faded-text">(
+           $elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::get_number_of_root_elements()">\Walker::get_number_of_root_elements()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::paged_walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">paged_walk</span><span class="nb-faded-text">(
+           $elements, int $max_depth, int $page_num,  $per_page
+          )
+        </span>
+        :
+          \XHTML</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">paged_walk() - produce a page of nested elements</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::paged_walk()">\Walker::paged_walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Given an array of hierarchical elements, the maximum depth, a specific page number,
+and number of elements per page, this function first determines all top level root elements
+belonging to that page, then lists them and all of their children in hierarchical order.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>= 0 means display all levels; $max_depth > 0 specifies the number of display levels.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_num</th>
+<td>int</td>
+<td><em><p>the specific page number, beginning with 1.</p></em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\XHTML</td>
+<td>of the specified page of elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::start_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_el</span><span class="nb-faded-text">(
+          string $output, object $page, int $depth, array $args, int $current_page
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Start the element output.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. Includes
+the element output also.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>object</td>
+<td><em><p>Page data object.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of page. Used for padding.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$current_page</th>
+<td>int</td>
+<td><em><p>Page ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_el()">\Walker::start_el()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::start_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_lvl</span><span class="nb-faded-text">(
+          string $output, int $depth
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Starts the list before the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method is called at the start of the output list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of page. Used for padding.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_lvl()">\Walker::start_lvl()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::unset_children()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unset_children</span><span class="nb-faded-text">(
+           $e,  $children_elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::unset_children()">\Walker::unset_children()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$e</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Page::walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">walk</span><span class="nb-faded-text">(
+          array $elements, int $max_depth
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Display array of elements hierarchically.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::walk()">\Walker::walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>It is a generic function which does not assume any existing order of
+elements. max_depth = -1 means flatly display every element. max_depth =
+0 means display all levels. max_depth > 0  specifies the number of
+display levels.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Walker_PageDropdown" class="anchor"></a><h2 class="class">\Walker_PageDropdown<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress</small><p class="short-description">Create HTML dropdown list of pages.</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a></dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>walk_page_dropdown_tree()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Walker_PageDropdown::$db_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$db_fields</span>= 'array ('parent' =&gt; 'post_parent''
+                </code><div class="description"><p class="short-description">DB fields to use.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array ('parent' =&gt; 'post_parent'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24db_fields">\Walker::$db_fields</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Todo</dt>
+<dd>Decouple this
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::$max_pages" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$max_pages</span>= '1'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Max number of pages walked by the paged walker</p><small>Inherited from:
+                        <a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>1</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::$tree_type" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$tree_type</span>= ''page''
+                </code><div class="description"><p class="short-description">What the class handles.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'page'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24tree_type">\Walker::$tree_type</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Walker_PageDropdown::display_element()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_element</span><span class="nb-faded-text">(
+          object $element, array $children_elements, int $max_depth, int $depth
+              =
+              0, array $args, string $output
+          )
+        </span>
+        :
+          null</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Traverse elements to create list from elements.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::display_element()">\Walker::display_element()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Display one element if the element doesn't have any children otherwise,
+display the element and its children. Will only traverse up to the max
+depth and no ignore elements under that depth. It is possible to set the
+max depth to include all depths, see walk() method.</p>
+
+<p>This method shouldn't be called directly, use the walk() method instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>object</td>
+<td><em><p>Data object</p></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td>array</td>
+<td><em><p>List of elements to continue traversing.</p></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>Max depth to traverse.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of current element.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Null on failure with no changes to parameters.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::end_el()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_el</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Ends the element output, if needed.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_el()">\Walker::end_el()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::end_lvl()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_lvl</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Ends the list of after the elements are added.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_lvl()">\Walker::end_lvl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method finishes the list at the end of output of the elements.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::get_number_of_root_elements()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_number_of_root_elements</span><span class="nb-faded-text">(
+           $elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::get_number_of_root_elements()">\Walker::get_number_of_root_elements()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::paged_walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">paged_walk</span><span class="nb-faded-text">(
+           $elements, int $max_depth, int $page_num,  $per_page
+          )
+        </span>
+        :
+          \XHTML</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">paged_walk() - produce a page of nested elements</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::paged_walk()">\Walker::paged_walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Given an array of hierarchical elements, the maximum depth, a specific page number,
+and number of elements per page, this function first determines all top level root elements
+belonging to that page, then lists them and all of their children in hierarchical order.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>= 0 means display all levels; $max_depth > 0 specifies the number of display levels.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_num</th>
+<td>int</td>
+<td><em><p>the specific page number, beginning with 1.</p></em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\XHTML</td>
+<td>of the specified page of elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::start_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_el</span><span class="nb-faded-text">(
+          string $output, object $page, int $depth, array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Start the element output.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. Includes
+the element output also.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$page</th>
+<td>object</td>
+<td><em><p>Page data object.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of page in reference to parent pages. Used for padding.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Uses 'selected' argument for selected page to set selected HTML attribute for option element.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_el()">\Walker::start_el()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::start_lvl()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_lvl</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Starts the list before the elements are added.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_lvl()">\Walker::start_lvl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method is called at the start of the output list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Abstract</dt>
+<dd>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::unset_children()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unset_children</span><span class="nb-faded-text">(
+           $e,  $children_elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::unset_children()">\Walker::unset_children()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$e</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_PageDropdown::walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">walk</span><span class="nb-faded-text">(
+          array $elements, int $max_depth
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Display array of elements hierarchically.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::walk()">\Walker::walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>It is a generic function which does not assume any existing order of
+elements. max_depth = -1 means flatly display every element. max_depth =
+0 means display all levels. max_depth > 0  specifies the number of
+display levels.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

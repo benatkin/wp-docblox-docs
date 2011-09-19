@@ -1,0 +1,453 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/functions.wp-scripts.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">BackPress script procedural API.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>BackPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::wp_dequeue_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_dequeue_script</span><span class="nb-faded-text">(
+           $handle
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Remove an enqueued script.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class.wp-scripts.html#%5CWP_Scripts::dequeue()">\WP_Scripts::dequeue()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>WP 3.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_deregister_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_deregister_script</span><span class="nb-faded-text">(
+           $handle
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Remove a registered script.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class.wp-scripts.html#%5CWP_Scripts::remove()">\WP_Scripts::remove()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_enqueue_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_enqueue_script</span><span class="nb-faded-text">(
+           $handle,  $src
+              =
+              false,  $deps
+              =
+              array(,  $ver
+              =
+              false,  $in_footer
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enqueues script.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Registers the script if src provided (does NOT overwrite) and enqueues.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$src</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$deps</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ver</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$in_footer</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\wp_register_script()
+         
+    </dd>
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_localize_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_localize_script</span><span class="nb-faded-text">(
+           $handle,  $name,  $data
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds extra Javascript data.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Works only if the script has already been added.
+Accepts an associative array $data and creates JS object:
+"$name" = {
+  key: value,
+  key: value,
+  ...
+}
+The $name is passed directly so it should be qualified JS variable /[a-zA-Z0-9_]+/
+The $data array is JSON encoded. If called more than once for the same $handle with the same $name,
+the object would contain all values. In that case if two or more keys are the same,
+the last value overwrites the previous. The function is named "localize_script" because of historical reasons.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class.wp-scripts.html#%5CWP_Scripts::add_script_data()">\WP_Scripts::add_script_data()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_print_scripts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_print_scripts</span><span class="nb-faded-text">(
+           $handles
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints script tags in document head.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by admin-header.php and by wp_head hook. Since it is called by wp_head
+on every page load, the function does not instantiate the WP_Scripts object
+unless script names are explicitly passed. Does make use of already
+instantiated $wp_scripts if present. Use provided wp_print_scripts hook to
+register/enqueue new scripts.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handles</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class.wp-dependencies.html#%5CWP_Dependencies::print_scripts()">\WP_Dependencies::print_scripts()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_register_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_register_script</span><span class="nb-faded-text">(
+          string $handle, string $src, array $deps
+              =
+              array(, string|bool $ver
+              =
+              false, bool $in_footer
+              =
+              false
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Register new Javascript file.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td>string</td>
+<td><em><p>Script name</p></em></td>
+</tr>
+<tr>
+<th>$src</th>
+<td>string</td>
+<td><em><p>Script url</p></em></td>
+</tr>
+<tr>
+<th>$deps</th>
+<td>array</td>
+<td><em><p>(optional) Array of script names on which this script depends</p>
+</em></td>
+</tr>
+<tr>
+<th>$ver</th>
+<td>string|bool</td>
+<td><em><p>(optional) Script version (used for cache busting), set to NULL to disable</p>
+</em></td>
+</tr>
+<tr>
+<th>$in_footer</th>
+<td>bool</td>
+<td><em><p>(optional) Whether to enqueue the script before </head> or before </body></p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>r16
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_script_is()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_script_is</span><span class="nb-faded-text">(
+          string $handle, string $list
+              =
+              'queue'
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether script has been added to WordPress Scripts.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The values for list defaults to 'queue', which is the same as enqueue for
+scripts.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td>string</td>
+<td><em><p>Handle used to add script.</p></em></td>
+</tr>
+<tr>
+<th>$list</th>
+<td>string</td>
+<td><em><p>Optional, defaults to 'queue'. Others values are 'registered', 'queue', 'done', 'to_do'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>WP unknown; BP unknown
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

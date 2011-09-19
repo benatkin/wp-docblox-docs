@@ -1,0 +1,599 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><script xmlns="" type="text/javascript">
+        $(document).ready(function() {
+            $("#marker-accordion").accordion({
+                collapsible: true,
+                autoHeight:  false
+            });
+        });
+    </script><div xmlns="" id="content">
+<h1>Markers (TODO / FIXME)</h1>
+<div id="marker-accordion">
+<h3><a href="#">wp-admin/admin-ajax.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>59</td>
+<td>fix this in a better way see #15336</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/import.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>74</td>
+<td>make more helpful</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/class-wp-upgrader.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>148</td>
+<td>optimizations, Copy when Move/Rename would suffice?</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/class-wp-users-list-table.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>234</td>
+<td>make profile/user-edit determination a separate function</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/image.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>184</td>
+<td>Try other exif libraries if available.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/nav-menu.php<small>2</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>25</td>
+<td>Decouple this.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>25</td>
+<td>Decouple this.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/template.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>23</td>
+<td>decouple this</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/theme-install.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>220</td>
+<td>This function needs a LOT of UI work :)</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/includes/upgrade.php<small>4</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>fixme</td>
+<td>716</td>
+<td>RESET_CAPS is temporary code to reset roles and caps if flag is set.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1610</td>
+<td>This does not copy arbitrary include dependencies.  Only the</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1768</td>
+<td>rm -rf the site theme directory.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1773</td>
+<td>rm -rf the site theme directory.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/install.php<small>4</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>193</td>
+<td>poka-yoke</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>200</td>
+<td>poka-yoke</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>204</td>
+<td>poka-yoke</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>208</td>
+<td>poka-yoke</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/network.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>126</td>
+<td>Realistically, step 1 should be a welcome screen explaining what a Network is and such. Navigating to Tools > Network
+should not be a sudden "Welcome to a new install process! Fill this out and click here." See also contextual help todo.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/plugin-install.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>8</td>
+<td>route this pages via a specific iframe handler instead of the do_action below</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-admin/user-edit.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>244</td>
+<td>create a function that does this: wp_get_user_role()</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-content/themes/twentyeleven/inc/theme-options.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>310</td>
+<td>set up Reset Options action</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/category-template.php<small>3</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>582</td>
+<td>Complete functionality.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>781</td>
+<td>Decouple this</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>929</td>
+<td>Decouple this</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/class-http.php<small>3</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>36</td>
+<td>Refactor this code. The code in this method extends the scope of its original purpose
+and should be refactored to allow for cleaner abstraction and reduce duplication of the
+code. One suggestion is to create a class specifically for the arguments, however
+preliminary refactoring to this affect has affect more than just the scope of the
+arguments. Something to ponder at least.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>426</td>
+<td>Add support for footer chunked headers.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1371</td>
+<td>The WordPress convention is to use underscores instead of camelCase for function and method
+names. Need to switch to use underscores instead for the methods.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/class-json.php<small>2</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>820</td>
+<td>Ultimately, this should just call PEAR::isError()</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>849</td>
+<td>Ultimately, this class shall be descended from PEAR_Error</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/class-phpmailer.php<small>3</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>1237</td>
+<td>check this worked</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1734</td>
+<td>using /e (equivalent to eval()) is probably not a good idea</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2134</td>
+<td>Should this not be using __set() magic function?</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/class-simplepie.php<small>11</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>1946</td>
+<td>Cache atom:icon</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2007</td>
+<td>If we have a perm redirect we should return the new URL</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2007</td>
+<td>When we make the above change, let's support <itunes:new-feed-url> as well</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2007</td>
+<td>Also, |atom:link|@rel=self</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3760</td>
+<td>Add ability to prefer one type of content over another (in a media group).</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3776</td>
+<td>Add support for end-user defined sorting of enclosures by type/handler (so we can prefer the faster-loading FLV over MP4).</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3776</td>
+<td>If an element exists at a level, but it's value is empty, we should fall back to the value from the parent (if it exists).</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>6913</td>
+<td>If the dimensions for media:content are defined, use them when width/height are set to 'auto'.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>7631</td>
+<td>Move to properly supporting RFC2616 (HTTP/1.1)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>11220</td>
+<td>Add support for EBCDIC</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>14647</td>
+<td>Move to using an actual HTML parser (this will allow tags to be properly stripped, and to switch between HTML and XHTML), this will also make it easier to shorten a string while preserving HTML tags</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/class-wp-xmlrpc-server.php<small>4</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>fixme</td>
+<td>1096</td>
+<td>we already have the comments, why query them again?</td>
+</tr>
+<tr>
+<td>fixme</td>
+<td>1948</td>
+<td>(or delete me) do we really want to cater to bad clients at the expense of good ones by BEEPing up their line breaks? commented.     $content = str_replace("\n", "\r\n", $content);</td>
+</tr>
+<tr>
+<td>fixme</td>
+<td>3430</td>
+<td>does url_to_postid() cover all these cases already?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3466</td>
+<td>Attempt to extract a post ID from the given URL</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/formatting.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>877</td>
+<td>Expand to support the full range of CDATA that a class attribute can contain.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/functions.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>1198</td>
+<td>Tidy this ghetto code up and make the debug code optional</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/ms-functions.php<small>5</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>89</td>
+<td>Review this call to add_user_to_blog too - to get here the user must have a role on this blog?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>700</td>
+<td>Check email too?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>837</td>
+<td>Don't hard code activation link.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>888</td>
+<td>Don't hard code activation link.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>968</td>
+<td>What to do if we create a user but cannot create a blog?</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/nav-menu-template.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>25</td>
+<td>Decouple this.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/pluggable.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>467</td>
+<td>what should the error message be? (Or would these even happen?)</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/pomo/mo.php<small>2</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>91</td>
+<td>warnings for control characters</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>99</td>
+<td>warnings for control characters</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/pomo/po.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>48</td>
+<td>sorting</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/post-template.php<small>3</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>1301</td>
+<td>split into two functions (list, form-table) ?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>980</td>
+<td>Decouple this.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1086</td>
+<td>Decouple this</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-includes/user.php<small>2</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>40</td>
+<td>do we deprecate the wp_authentication action?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>195</td>
+<td>xmlrpc only. Maybe move to xmlrpc.php.</td>
+</tr>
+</table></div>
+<h3><a href="#">wp-signup.php<small>1</small></a></h3>
+<div><table>
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>241</td>
+<td>- This doesn't seem to do anything do we really need it?</td>
+</tr>
+</table></div>
+</div>
+</div></body></html>

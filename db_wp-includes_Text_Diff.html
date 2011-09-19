@@ -1,0 +1,1542 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/Text/Diff.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul>
+<li><a href="#%5CText_Diff">\Text_Diff</a></li>
+<li><a href="#%5CText_Diff_Op">\Text_Diff_Op</a></li>
+<li><a href="#%5CText_Diff_Op_add">\Text_Diff_Op_add</a></li>
+<li><a href="#%5CText_Diff_Op_change">\Text_Diff_Op_change</a></li>
+<li><a href="#%5CText_Diff_Op_copy">\Text_Diff_Op_copy</a></li>
+<li><a href="#%5CText_Diff_Op_delete">\Text_Diff_Op_delete</a></li>
+<li><a href="#%5CText_MappedDiff">\Text_MappedDiff</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">General API for generating and formatting diffs - the differences between
+two sequences of strings.</p>
+<div class="long-description"><p>The original PHP version of this code was written by Geoffrey T. Dairiki
+<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>, and is used/adapted with his permission.</p>
+
+<p>Copyright 2004 Geoffrey T. Dairiki <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>
+Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>Text_Diff
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\Text_Diff" class="anchor"></a><h2 class="class">\Text_Diff<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description">General API for generating and formatting diffs - the differences between
+two sequences of strings.</p>
+<div class="long-description"><p>The original PHP version of this code was written by Geoffrey T. Dairiki
+<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>, and is used/adapted with his permission.</p>
+
+<p>Copyright 2004 Geoffrey T. Dairiki <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>
+Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_MappedDiff">\Text_MappedDiff</a></dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>wp_text_diff()
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff::$_edits" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$_edits</span>= ''
+                </code><div class="description">
+<p class="short-description">Array of changes.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff::Text_Diff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff</span><span class="nb-faded-text">(
+          string $engine, array $params
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Computes diffs between sequences of strings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$engine</th>
+<td>string</td>
+<td><em><p>Name of the diffing engine to use. 'auto' will automatically select the best.</p>
+</em></td>
+</tr>
+<tr>
+<th>$params</th>
+<td>array</td>
+<td><em><p>Parameters to pass to the diffing engine. Normally an array of two arrays, each containing the lines from a file.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::_check()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_check</span><span class="nb-faded-text">(
+           $from_lines,  $to_lines
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Checks a diff for validity.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is here only for debugging purposes.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$to_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::_getTempDir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_getTempDir</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Determines the location of the system temporary directory.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A directory name which can be used for temp files. Returns false if one could not be found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::countAddedLines()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">countAddedLines</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description"><p class="short_description">returns the number of new (added) lines in a given diff.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The number of new lines</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Text_Diff 1.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::countDeletedLines()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">countDeletedLines</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description"><p class="short_description">Returns the number of deleted (removed) lines in a given diff.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The number of deleted lines</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Text_Diff 1.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::getDiff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns the array of differences.</p></div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::getFinal()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Gets the final set of lines.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This reconstructs the $to_lines parameter passed to the constructor.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The sequence of strings.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::getOriginal()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getOriginal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Gets the original set of lines.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This reconstructs the $from_lines parameter passed to the constructor.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The original sequence of strings.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::isEmpty()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isEmpty</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Checks for an empty diff.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>True if two sequences were identical.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::lcs()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">lcs</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description"><p class="short_description">Computes the length of the Longest Common Subsequence (LCS).</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is mostly for diagnostic purposes.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The length of the LCS.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></code><div class="description"><p class="short_description">Computes a reversed diff.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Example:</p>
+
+<pre><code>$diff = new Text_Diff($lines1, $lines2);
+$rev = $diff->reverse();
+</code></pre>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></td>
+<td>A Diff object representing the inverse of the original diff. Note that we purposely don't return a reference here, since this essentially is a clone() method.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff::trimNewlines()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trimNewlines</span><span class="nb-faded-text">(
+          string $line, integer $key
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes trailing newlines from a line of text. This is meant to be used
+with array_walk().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$line</th>
+<td>string</td>
+<td><em><p>The line to trim.</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>integer</td>
+<td><em><p>The index of the line in the array. Not used.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_Diff_Op" class="anchor"></a><h2 class="class">\Text_Diff_Op<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description"></p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op_copy">\Text_Diff_Op_copy</a></dd>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op_delete">\Text_Diff_Op_delete</a></dd>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op_add">\Text_Diff_Op_add</a></dd>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op_change">\Text_Diff_Op_change</a></dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff_Op::$final" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$final</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op::$orig" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$orig</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Op::nfinal()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">nfinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op::norig()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">norig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_Diff_Op_add" class="anchor"></a><h2 class="class">\Text_Diff_Op_add<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description"></p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op">\Text_Diff_Op</a></dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff_Op_add::$final" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$final</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_add::$orig" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$orig</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Op_add::Text_Diff_Op_add()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Op_add</span><span class="nb-faded-text">(
+           $lines
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_add::nfinal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">nfinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::nfinal()">\Text_Diff_Op::nfinal()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_add::norig()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">norig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::norig()">\Text_Diff_Op::norig()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_add::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_Diff_Op_change" class="anchor"></a><h2 class="class">\Text_Diff_Op_change<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description"></p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op">\Text_Diff_Op</a></dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff_Op_change::$final" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$final</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_change::$orig" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$orig</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Op_change::Text_Diff_Op_change()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Op_change</span><span class="nb-faded-text">(
+           $orig,  $final
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$final</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_change::nfinal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">nfinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::nfinal()">\Text_Diff_Op::nfinal()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_change::norig()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">norig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::norig()">\Text_Diff_Op::norig()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_change::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_Diff_Op_copy" class="anchor"></a><h2 class="class">\Text_Diff_Op_copy<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description"></p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op">\Text_Diff_Op</a></dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff_Op_copy::$final" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$final</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_copy::$orig" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$orig</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Op_copy::Text_Diff_Op_copy()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Op_copy</span><span class="nb-faded-text">(
+           $orig,  $final
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orig</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$final</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_copy::nfinal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">nfinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::nfinal()">\Text_Diff_Op::nfinal()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_copy::norig()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">norig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::norig()">\Text_Diff_Op::norig()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_copy::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_Diff_Op_delete" class="anchor"></a><h2 class="class">\Text_Diff_Op_delete<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description"></p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op">\Text_Diff_Op</a></dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_Diff_Op_delete::$final" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$final</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24final">\Text_Diff_Op::$final</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_delete::$orig" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$orig</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::%24orig">\Text_Diff_Op::$orig</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_Diff_Op_delete::Text_Diff_Op_delete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff_Op_delete</span><span class="nb-faded-text">(
+           $lines
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_delete::nfinal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">nfinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::nfinal()">\Text_Diff_Op::nfinal()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_delete::norig()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">norig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff_Op::norig()">\Text_Diff_Op::norig()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_Diff_Op_delete::reverse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\Text_MappedDiff" class="anchor"></a><h2 class="class">\Text_MappedDiff<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Text\Diff</small><p class="short-description">General API for generating and formatting diffs - the differences between
+two sequences of strings.</p>
+<div class="long-description"><p>The original PHP version of this code was written by Geoffrey T. Dairiki
+<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>, and is used/adapted with his permission.</p>
+
+<p>Copyright 2004 Geoffrey T. Dairiki <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;">&#x64;&#97;&#x69;&#114;&#x69;&#107;&#x69;&#64;&#x64;&#97;&#x69;&#114;&#x69;k&#x69;.&#111;&#x72;&#103;</a>
+Copyright 2004-2010 The Horde Project (http://www.horde.org/)</p>
+
+<p>See the enclosed file COPYING for license information (LGPL). If you did
+not receive this file, see http://opensource.org/licenses/lgpl-license.php.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:dairiki@dairiki.org">Geoffrey T. Dairiki</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Text_MappedDiff::$_edits" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$_edits</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Array of changes.</p><small>Inherited from:
+                        <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::%24_edits">\Text_Diff::$_edits</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_Text_Diff.html#%5CText_Diff::%24_edits">\Text_Diff::$_edits</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Text_MappedDiff::Text_Diff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_Diff</span><span class="nb-faded-text">(
+          string $engine, array $params
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Computes diffs between sequences of strings.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::Text_Diff()">\Text_Diff::Text_Diff()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$engine</th>
+<td>string</td>
+<td><em><p>Name of the diffing engine to use. 'auto' will automatically select the best.</p>
+</em></td>
+</tr>
+<tr>
+<th>$params</th>
+<td>array</td>
+<td><em><p>Parameters to pass to the diffing engine. Normally an array of two arrays, each containing the lines from a file.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::Text_MappedDiff()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">Text_MappedDiff</span><span class="nb-faded-text">(
+          array $from_lines, array $to_lines, array $mapped_from_lines, array $mapped_to_lines
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Computes a diff between sequences of strings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This can be used to compute things like case-insensitve diffs, or diffs
+which ignore changes in white-space.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from_lines</th>
+<td>array</td>
+<td><em><p>An array of strings.</p></em></td>
+</tr>
+<tr>
+<th>$to_lines</th>
+<td>array</td>
+<td><em><p>An array of strings.</p></em></td>
+</tr>
+<tr>
+<th>$mapped_from_lines</th>
+<td>array</td>
+<td><em><p>This array should have the same size number of elements as $from_lines. The elements in $mapped_from_lines and $mapped_to_lines are what is actually compared when computing the diff.</p>
+</em></td>
+</tr>
+<tr>
+<th>$mapped_to_lines</th>
+<td>array</td>
+<td><em><p>This array should have the same number of elements as $to_lines.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::_check()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_check</span><span class="nb-faded-text">(
+           $from_lines,  $to_lines
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Checks a diff for validity.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::_check()">\Text_Diff::_check()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This is here only for debugging purposes.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$to_lines</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::_getTempDir()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_getTempDir</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Determines the location of the system temporary directory.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::_getTempDir()">\Text_Diff::_getTempDir()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A directory name which can be used for temp files. Returns false if one could not be found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::countAddedLines()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">countAddedLines</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">returns the number of new (added) lines in a given diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::countAddedLines()">\Text_Diff::countAddedLines()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The number of new lines</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Text_Diff 1.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::countDeletedLines()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">countDeletedLines</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the number of deleted (removed) lines in a given diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::countDeletedLines()">\Text_Diff::countDeletedLines()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The number of deleted lines</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Text_Diff 1.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::getDiff()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDiff</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the array of differences.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::getDiff()">\Text_Diff::getDiff()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::getFinal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFinal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Gets the final set of lines.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::getFinal()">\Text_Diff::getFinal()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This reconstructs the $to_lines parameter passed to the constructor.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The sequence of strings.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::getOriginal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getOriginal</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Gets the original set of lines.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::getOriginal()">\Text_Diff::getOriginal()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This reconstructs the $from_lines parameter passed to the constructor.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The original sequence of strings.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::isEmpty()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isEmpty</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Checks for an empty diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::isEmpty()">\Text_Diff::isEmpty()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>True if two sequences were identical.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::lcs()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">lcs</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Computes the length of the Longest Common Subsequence (LCS).</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::lcs()">\Text_Diff::lcs()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This is mostly for diagnostic purposes.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>integer</td>
+<td>The length of the LCS.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::reverse()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reverse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Computes a reversed diff.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::reverse()">\Text_Diff::reverse()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Example:</p>
+
+<pre><code>$diff = new Text_Diff($lines1, $lines2);
+$rev = $diff->reverse();
+</code></pre>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_wp-includes_Text_Diff.html#%5CText_Diff">\Text_Diff</a></td>
+<td>A Diff object representing the inverse of the original diff. Note that we purposely don't return a reference here, since this essentially is a clone() method.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Text_MappedDiff::trimNewlines()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trimNewlines</span><span class="nb-faded-text">(
+          string $line, integer $key
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Removes trailing newlines from a line of text. This is meant to be used
+with array_walk().</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_Text_Diff.html#%5CText_Diff::trimNewlines()">\Text_Diff::trimNewlines()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$line</th>
+<td>string</td>
+<td><em><p>The line to trim.</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>integer</td>
+<td><em><p>The index of the line in the array. Not used.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

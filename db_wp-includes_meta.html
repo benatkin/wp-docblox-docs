@@ -1,0 +1,1125 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/meta.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_Meta_Query">\WP_Meta_Query</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Metadata API</p>
+<div class="long-description"><p>Functions for retrieving and manipulating metadata of various WordPress object types.  Metadata
+for an object is a represented by a simple key-value pair.  Objects may contain multiple
+metadata entries that share the same key and differ only in their value.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Meta
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_get_meta_table()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_get_meta_table</span><span class="nb-faded-text">(
+          string $type
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve the name of the metadata table for the specified object type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Type of object to get metadata table for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Metadata table name, or false if no metadata table exists</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_metadata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_metadata</span><span class="nb-faded-text">(
+          string $meta_type, int $object_id, string $meta_key, string $meta_value, bool $unique
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add metadata for the specified object.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object metadata is for</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>string</td>
+<td><em><p>Metadata value</p></em></td>
+</tr>
+<tr>
+<th>$unique</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether the specified metadata key should be unique for the object. If true, and the object already has a value for the specified metadata key, no change will be made</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>The meta ID on successful update, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_metadata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_metadata</span><span class="nb-faded-text">(
+          string $meta_type, int $object_id, string $meta_key, string $meta_value
+              =
+              '', bool $delete_all
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Delete metadata for the specified object.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object metadata is for</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>string</td>
+<td><em><p>Optional. Metadata value. If specified, only delete metadata entries with this value. Otherwise, delete all entries with the specified meta_key.</p></em></td>
+</tr>
+<tr>
+<th>$delete_all</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. If true, delete matching metadata entries for all objects, ignoring the specified object_id. Otherwise, only delete matching metadata entries for the specified object_id.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful delete, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_metadata_by_mid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_metadata_by_mid</span><span class="nb-faded-text">(
+          string $meta_type, int $meta_id
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Delete meta data by meta ID</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta_id</th>
+<td>int</td>
+<td><em><p>ID for a specific meta row</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful delete, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_metadata_by_mid()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_meta_sql()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_meta_sql</span><span class="nb-faded-text">(
+          array $meta_query
+              =
+              false, string $type, string $primary_table, string $primary_id_column, object $context
+              =
+              null
+          )
+        </span>
+        :
+          \array(</code><div class="description"><p class="short_description">Given a meta query, generates SQL clauses to be appended to a main query</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_query</th>
+<td>array</td>
+<td><em><p>(optional) $meta_query A meta query</p>
+</em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Type of meta</p></em></td>
+</tr>
+<tr>
+<th>$primary_table</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$primary_id_column</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>object</td>
+<td><em><p>(optional) The main query object</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\array(</td>
+<td>'join' =&gt; $join_sql, 'where' =&gt; $where_sql )</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_meta.html#%5CWP_Meta_Query">\WP_Meta_Query</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_metadata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_metadata</span><span class="nb-faded-text">(
+          string $meta_type, int $object_id, string $meta_key
+              =
+              '', bool $single
+              =
+              false
+          )
+        </span>
+        :
+          string|array</code><div class="description"><p class="short_description">Retrieve metadata for the specified object.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object metadata is for</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Optional. Metadata key. If not specified, retrieve all metadata for the specified object.</p></em></td>
+</tr>
+<tr>
+<th>$single</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. If true, return only the first value of the specified meta_key. This parameter has no effect if meta_key is not specified.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|array</td>
+<td>Single metadata value, or array of values</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_metadata_by_mid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_metadata_by_mid</span><span class="nb-faded-text">(
+          string $meta_type, int $meta_id
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Get meta data by meta ID</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta_id</th>
+<td>int</td>
+<td><em><p>ID for a specific meta row</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>Meta object or false.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_protected_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_protected_meta</span><span class="nb-faded-text">(
+          string $meta_key,  $meta_type
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Determine whether a meta key is protected</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Meta key</p></em></td>
+</tr>
+<tr>
+<th>$meta_type</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if the key is protected, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::metadata_exists()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">metadata_exists</span><span class="nb-faded-text">(
+          string $meta_type, int $object_id, string $meta_key
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Determine if a meta key is set for a given object</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object metadata is for</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true of the key is set, false if not.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_meta</span><span class="nb-faded-text">(
+          string $meta_type, string $meta_key, string|array $sanitize_callback, string|array $auth_callback
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register meta key</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of meta</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Meta key</p></em></td>
+</tr>
+<tr>
+<th>$sanitize_callback</th>
+<td>string|array</td>
+<td><em><p>A function or method to call when sanitizing the value of $meta_key.</p>
+</em></td>
+</tr>
+<tr>
+<th>$auth_callback</th>
+<td>string|array</td>
+<td><em><p>Optional. A function or method to call when performing edit_post_meta, add_post_meta, and delete_post_meta capability checks.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_meta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_meta</span><span class="nb-faded-text">(
+          string $meta_key, mixed $meta_value, string $meta_type
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Sanitize meta value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Meta key</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Meta value to sanitize</p></em></td>
+</tr>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of meta</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Sanitized $meta_value</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_meta_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_meta_cache</span><span class="nb-faded-text">(
+          string $meta_type, int|array $object_ids
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Update the metadata cache for the specified objects.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_ids</th>
+<td>int|array</td>
+<td><em><p>array or comma delimited list of object IDs to update cache for</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Metadata cache for the specified objects, or false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_metadata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_metadata</span><span class="nb-faded-text">(
+          string $meta_type, int $object_id, string $meta_key, string $meta_value, string $prev_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update metadata for the specified object.  If no value already exists for the specified object
+ID and metadata key, the metadata will be added.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$object_id</th>
+<td>int</td>
+<td><em><p>ID of the object metadata is for</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>string</td>
+<td><em><p>Metadata value</p></em></td>
+</tr>
+<tr>
+<th>$prev_value</th>
+<td>string</td>
+<td><em><p>Optional. If specified, only update existing metadata entries with the specified value. Otherwise, update all entries.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful update, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_metadata_by_mid()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_metadata_by_mid</span><span class="nb-faded-text">(
+          string $meta_type, int $meta_id, string $meta_value, string $meta_key
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update meta data by meta ID</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_type</th>
+<td>string</td>
+<td><em><p>Type of object metadata is for (e.g., comment, post, or user)</p>
+</em></td>
+</tr>
+<tr>
+<th>$meta_id</th>
+<td>int</td>
+<td><em><p>ID for a specific meta row</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>string</td>
+<td><em><p>Metadata value</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Optional, you can provide a meta key to update it</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful update, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_metadata_by_mid()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Meta_Query" class="anchor"></a><h2 class="class">\WP_Meta_Query<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">Container class for a multiple metadata query</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Meta_Query::$queries" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$queries</span>= 'array('
+                </code><div class="description">
+<p class="short-description">List of metadata queries. A single query is an associative array:
+- 'key' string The meta key
+- 'value' string|array The meta value
+- 'compare' (optional) string How to compare the key to the value.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Possible values: '=', '!=', '>', '>=', '&lt;', '&lt;=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN'.
+             Default: '='
+- 'type' string (optional) The type of the value.
+             Possible values: 'NUMERIC', 'BINARY', 'CHAR', 'DATE', 'DATETIME', 'DECIMAL', 'SIGNED', 'TIME', 'UNSIGNED'.
+             Default: 'CHAR'</p>
+</div>
+<strong>Default value</strong><code>array(</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Meta_Query::$relation" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$relation</span>= ''
+                </code><div class="description">
+<p class="short-description">The relation between the queries. Can be one of 'AND' or 'OR'.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Meta_Query::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          array $meta_query
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$meta_query</th>
+<td>array</td>
+<td><em><p>(optional) $meta_query A meta query</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Meta_Query::get_sql()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_sql</span><span class="nb-faded-text">(
+          string $type, string $primary_table, string $primary_id_column, object $context
+              =
+              null
+          )
+        </span>
+        :
+          \array(</code><div class="description"><p class="short_description">Generates SQL clauses to be appended to a main query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Type of meta</p></em></td>
+</tr>
+<tr>
+<th>$primary_table</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$primary_id_column</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>object</td>
+<td><em><p>(optional) The main query object</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\array(</td>
+<td>'join' =&gt; $join_sql, 'where' =&gt; $where_sql )</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Meta_Query::parse_query_vars()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">parse_query_vars</span><span class="nb-faded-text">(
+          array $qv
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructs a meta query based on 'meta_*' query vars</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$qv</th>
+<td>array</td>
+<td><em><p>The query variables</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

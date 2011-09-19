@@ -1,0 +1,6461 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/functions.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Main WordPress API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::__return_empty_array()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__return_empty_array</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Returns an empty array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for returning an empty array to filters easily.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Empty array</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\__return_zero()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::__return_false()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__return_false</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Returns false.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for returning false to filters easily.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>false</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\__return_true()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::__return_true()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__return_true</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Returns true.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for returning true to filters easily.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\__return_false()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::__return_zero()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__return_zero</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Returns 0.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Useful for returning 0 to filters easily.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>0</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\__return_zero()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_cleanup_header_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_cleanup_header_comment</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Strip close comment and close php tags from file headers used by WP.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>See http://core.trac.wordpress.org/ticket/8497</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_config_wp_home()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_config_wp_home</span><span class="nb-faded-text">(
+          string $url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the WordPress home page URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the constant named 'WP_HOME' exists, then it will be used and returned by
+the function. This can be used to counter the redirection on your local
+development environment.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL for the home location</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Homepage location.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_config_wp_siteurl()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_config_wp_siteurl</span><span class="nb-faded-text">(
+          string $url
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the WordPress site URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the constant named 'WP_SITEURL' is defined, then the value in that
+constant will always be returned. This can be used for debugging a site on
+your localhost while not having to change the database to your URL.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to set the WordPress site location.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The WordPress Site URL</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_default_wp_die_handler()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_default_wp_die_handler</span><span class="nb-faded-text">(
+          string $message, string $title
+              =
+              '', string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Kill WordPress execution and display HTML message with error message.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is the default handler for wp_die if you want a custom one for your
+site then you can overload using the wp_die_handler filter in wp_die</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>Error message.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Error title.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional arguments to control behavior.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_deprecated_argument()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_deprecated_argument</span><span class="nb-faded-text">(
+          string $function, string $version, string $message
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Marks a function argument as deprecated and informs when it has been used.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is to be used whenever a deprecated function argument is used.
+Before this function is called, the argument must be checked for whether it was
+used by comparing it to its default value or evaluating whether it is empty.
+For example:</p>
+
+<pre><code>if ( !empty($deprecated) )
+    _deprecated_argument( __FUNCTION__, '3.0' );
+</code></pre>
+
+<p>There is a hook deprecated_argument_run that will be called that can be used
+to get the backtrace up to what file and function used the deprecated
+argument.</p>
+
+<p>The current behavior is to trigger a user error if WP_DEBUG is true.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$function</th>
+<td>string</td>
+<td><em><p>The function that was called</p></em></td>
+</tr>
+<tr>
+<th>$version</th>
+<td>string</td>
+<td><em><p>The version of WordPress that deprecated the argument used</p></em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>Optional. A message regarding the change.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_deprecated_file()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_deprecated_file</span><span class="nb-faded-text">(
+          string $file, string $version, string $replacement
+              =
+              null, string $message
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Marks a file as deprecated and informs when it has been used.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is a hook deprecated_file_included that will be called that can be used
+to get the backtrace up to what file and function included the deprecated
+file.</p>
+
+<p>The current behavior is to trigger a user error if WP_DEBUG is true.</p>
+
+<p>This function is to be used in every file that is deprecated.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The file that was included</p></em></td>
+</tr>
+<tr>
+<th>$version</th>
+<td>string</td>
+<td><em><p>The version of WordPress that deprecated the file</p></em></td>
+</tr>
+<tr>
+<th>$replacement</th>
+<td>string</td>
+<td><em><p>Optional. The file that should have been included based on ABSPATH</p></em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>Optional. A message regarding the change</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_deprecated_function()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_deprecated_function</span><span class="nb-faded-text">(
+          string $function, string $version, string $replacement
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Marks a function as deprecated and informs when it has been used.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is a hook deprecated_function_run that will be called that can be used
+to get the backtrace up to what file and function called the deprecated
+function.</p>
+
+<p>The current behavior is to trigger a user error if WP_DEBUG is true.</p>
+
+<p>This function is to be used in every function that is deprecated.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$function</th>
+<td>string</td>
+<td><em><p>The function that was called</p></em></td>
+</tr>
+<tr>
+<th>$version</th>
+<td>string</td>
+<td><em><p>The version of WordPress that deprecated the function</p></em></td>
+</tr>
+<tr>
+<th>$replacement</th>
+<td>string</td>
+<td><em><p>Optional. The function that should have been called</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_doing_it_wrong()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_doing_it_wrong</span><span class="nb-faded-text">(
+          string $function, string $message, string $version
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Marks something as being incorrectly called.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is a hook doing_it_wrong_run that will be called that can be used
+to get the backtrace up to what file and function called the deprecated
+function.</p>
+
+<p>The current behavior is to trigger a user error if WP_DEBUG is true.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$function</th>
+<td>string</td>
+<td><em><p>The function that was called.</p></em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>A message explaining what has been done incorrectly.</p></em></td>
+</tr>
+<tr>
+<th>$version</th>
+<td>string</td>
+<td><em><p>The version of WordPress where the message was added.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_http_build_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_http_build_query</span><span class="nb-faded-text">(
+           $data,  $prefix
+              =
+              null,  $sep
+              =
+              null,  $key
+              =
+              '',  $urlencode
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$prefix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$sep</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$urlencode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_mce_set_direction()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_mce_set_direction</span><span class="nb-faded-text">(
+          array $input
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Set the localized direction for MCE plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only set the direction to 'rtl', if the WordPress locale has the text
+direction set to 'rtl'.</p>
+
+<p>Fills in the 'directionality', 'plugins', and 'theme_advanced_button1' array
+keys. These keys are then returned in the $input array.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$input</th>
+<td>array</td>
+<td><em><p>MCE plugin array.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Direction set for 'rtl', if needed by locale.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>MCE
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_search_terms_tidy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_search_terms_tidy</span><span class="nb-faded-text">(
+          string $t
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Used internally to tidy up the search terms.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$t</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_timezone_choice_usort_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_timezone_choice_usort_callback</span><span class="nb-faded-text">(
+          \unknown_type $a, \unknown_type $b
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">{@internal Missing Short Description}}</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$a</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$b</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_xmlrpc_wp_die_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_xmlrpc_wp_die_filter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Filter to enable special wp_die handler for xmlrpc requests.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_xmlrpc_wp_die_handler()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_xmlrpc_wp_die_handler</span><span class="nb-faded-text">(
+          string $message, string $title
+              =
+              '', string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Kill WordPress execution and display XML message with error message.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is the handler for wp_die when processing XMLRPC requests.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>Error message.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Error title.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional arguments to control behavior.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::absint()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">absint</span><span class="nb-faded-text">(
+          mixed $maybeint
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Converts value to nonnegative integer.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$maybeint</th>
+<td>mixed</td>
+<td><em><p>Data you wish to have converted to a nonnegative integer</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>An nonnegative integer</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_magic_quotes()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_magic_quotes</span><span class="nb-faded-text">(
+          array $array
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Walks the array while sanitizing the contents.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$array</th>
+<td>array</td>
+<td><em><p>Array to used to walk while sanitizing contents.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Sanitized $array.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_option</span><span class="nb-faded-text">(
+          string $option, mixed $value
+              =
+              '', mixed $deprecated
+              =
+              '', bool $autoload
+              =
+              'yes'
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add a new option.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You do not need to serialize values. If the value needs to be serialized, then
+it will be serialized before it is inserted into the database. Remember,
+resources can not be serialized or added as an option.</p>
+
+<p>You can create options without values and then update the values later.
+Existing options will not be updated and checks are performed to ensure that you
+aren't adding a protected WordPress option. Care should be taken to not name
+options the same as the ones which are protected.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to add. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Optional. Option value, can be anything. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>mixed</td>
+<td><em><p>Optional. Description. Not used anymore.</p></em></td>
+</tr>
+<tr>
+<th>$autoload</th>
+<td>bool</td>
+<td><em><p>Optional. Default is enabled. Whether to load the option when WordPress starts up.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if option was not added and true if option was added.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_query_arg()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_query_arg</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve a modified URL query string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can rebuild the URL and append a new query variable to the URL query by
+using this function. You can also retrieve the full URL with query data.</p>
+
+<p>Adding a single key &amp; value or an associative array. Setting a key value to
+an empty string removes the key. Omitting oldquery_or_uri uses the $_SERVER
+value.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>New URL query string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_site_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_site_option</span><span class="nb-faded-text">(
+          string $option, mixed $value
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add a new site option.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Existing options will not be updated. Note that prior to 3.3 this wasn't the case.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to add. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Optional. Option value, can be anything. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if option was not added and true if option was added.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\add_option()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::apache_mod_loaded()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">apache_mod_loaded</span><span class="nb-faded-text">(
+          string $mod, bool $default
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Does the specified module exist in the Apache config?</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mod</th>
+<td>string</td>
+<td><em><p>e.g. mod_rewrite</p></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>bool</td>
+<td><em><p>The default return value if the module is not found</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::bool_from_yn()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">bool_from_yn</span><span class="nb-faded-text">(
+          string $yn
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether input is yes or no. Must be 'y' to be true.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$yn</th>
+<td>string</td>
+<td><em><p>Character string containing either 'y' or 'n'</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if yes, false on anything else</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::build_query()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">build_query</span><span class="nb-faded-text">(
+          array $data
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Build URL query based on an associative and, or indexed array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is a convenient function for easily building url queries. It sets the
+separator to '&amp;' and uses _http_build_query() function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>array</td>
+<td><em><p>URL-encode key/value pairs.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>URL encoded string</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://us2.php.net/manual/en/function.http-build-query.php">more on what
+http_build_query() does.</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>\_http_build_query()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::cache_javascript_headers()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">cache_javascript_headers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the headers for caching for 10 days with JavaScript content type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::current_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">current_time</span><span class="nb-faded-text">(
+          string $type, int|bool $gmt
+              =
+              0
+          )
+        </span>
+        :
+          int|string</code><div class="description"><p class="short_description">Retrieve the current time based on specified type.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The 'mysql' type will return the time in the format for MySQL DATETIME field.
+The 'timestamp' type will return the current timestamp.</p>
+
+<p>If $gmt is set to either '1' or 'true', then both types will use GMT time.
+if $gmt is false, the output is adjusted with the GMT offset in the WordPress option.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Either 'mysql' or 'timestamp'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$gmt</th>
+<td>int|bool</td>
+<td><em><p>Optional. Whether to use GMT timezone. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|string</td>
+<td>String if $type is 'gmt', int if $type is 'timestamp'.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::date_i18n()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">date_i18n</span><span class="nb-faded-text">(
+          string $dateformatstring, int $unixtimestamp
+              =
+              false, bool $gmt
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the date in localized format, based on timestamp.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the locale specifies the locale month and weekday, then the locale will
+take over the format for the date. If it isn't, then the date format string
+will be used instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dateformatstring</th>
+<td>string</td>
+<td><em><p>Format to display the date.</p></em></td>
+</tr>
+<tr>
+<th>$unixtimestamp</th>
+<td>int</td>
+<td><em><p>Optional. Unix timestamp.</p></em></td>
+</tr>
+<tr>
+<th>$gmt</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to convert to GMT for time.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The date, translated if locale specifies it.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::dead_db()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">dead_db</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load custom DB error or display WordPress DB error.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If a file exists in the wp-content directory named db-error.php, then it will
+be loaded instead of displaying the WordPress DB error. If it is not found,
+then the WordPress DB error will be displayed instead.</p>
+
+<p>The WordPress DB error sets the HTTP status header to 500 to try to prevent
+search engines from caching the message. Custom DB messages should do the
+same.</p>
+
+<p>This function was backported to the the WordPress 2.3.2, but originally was
+added in WordPress 2.5.0.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.2
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::debug_fclose()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">debug_fclose</span><span class="nb-faded-text">(
+          resource $fp
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Close the debugging file handle.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Technically, this can be used to close any file handle when the global $debug
+is set to 1 or true.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$fp</th>
+<td>resource</td>
+<td><em><p>Debug File handle.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$debug
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::debug_fopen()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">debug_fopen</span><span class="nb-faded-text">(
+          string $filename, string $mode
+          )
+        </span>
+        :
+          bool|resource</code><div class="description"><p class="short_description">Open the file handle for debugging.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is used for XMLRPC feature, but it is general purpose enough
+to be used in anywhere.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em><p>File path to debug file.</p></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>string</td>
+<td><em><p>Same as fopen() mode parameter.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|resource</td>
+<td>File handle. False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\fopen()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$debug
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::debug_fwrite()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">debug_fwrite</span><span class="nb-faded-text">(
+          resource $fp, string $string
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Write contents to the file used for debugging.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Technically, this can be used to write to any file handle when the global
+$debug is set to 1 or true.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$fp</th>
+<td>resource</td>
+<td><em><p>File handle for debugging file.</p></em></td>
+</tr>
+<tr>
+<th>$string</th>
+<td>string</td>
+<td><em><p>Content to write to debug file.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Debug
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$debug
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_all_user_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_all_user_settings</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Delete the user settings of the current user.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_option</span><span class="nb-faded-text">(
+          string $option
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Removes option by name. Prevents removal of protected WordPress options.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to remove. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if option is successfully deleted. False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_site_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_site_option</span><span class="nb-faded-text">(
+          string $option
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Removes site option by name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to remove. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, if succeed. False, if failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\delete_option()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_site_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_site_transient</span><span class="nb-faded-text">(
+          string $transient
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Delete a site transient.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if successful, false otherwise</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_transient</span><span class="nb-faded-text">(
+          string $transient
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Delete a transient.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true if successful, false otherwise</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_user_setting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_user_setting</span><span class="nb-faded-text">(
+          mixed $names
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Delete user interface settings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Deleting settings would reset them to the defaults.
+This function has to be used before any output has started as it calls setcookie().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$names</th>
+<td>mixed</td>
+<td><em><p>The name or array of names of the setting to be deleted.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true if deleted successfully/false if not.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_enclose()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_enclose</span><span class="nb-faded-text">(
+          string $content, int $post_ID
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Check content for video and audio links to add as enclosures.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will not add enclosures that have already been added and will
+remove enclosures that are no longer in the post. This is called as
+pingbacks and trackbacks.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Post Content</p></em></td>
+</tr>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em><p>Post ID</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_feed()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_feed</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Loads the feed template from the use of an action hook.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the feed action does not have a hook, then the function will die with a
+message telling the visitor that the feed is not valid.</p>
+
+<p>It is better to only have one hook for each feed.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_query
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_feed_atom()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_feed_atom</span><span class="nb-faded-text">(
+          bool $for_comments
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load either Atom comment feed or Atom posts feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$for_comments</th>
+<td>bool</td>
+<td><em><p>True for the comment feed, false for normal feed.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_feed_rdf()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_feed_rdf</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load the RDF RSS 0.91 Feed template.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_feed_rss()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_feed_rss</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load the RSS 1.0 Feed Template.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_feed_rss2()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_feed_rss2</span><span class="nb-faded-text">(
+          bool $for_comments
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Load either the RSS2 comment feed or the RSS2 posts feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$for_comments</th>
+<td>bool</td>
+<td><em><p>True for the comment feed, false for normal feed.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_robots()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_robots</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the robots.txt file content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The echo content should be with usage of the permalinks or for creating the
+robots.txt file.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::force_ssl_admin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">force_ssl_admin</span><span class="nb-faded-text">(
+          string|bool $force
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether to force SSL used for the Administration Screens.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$force</th>
+<td>string|bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if forced, false if not forced.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::force_ssl_login()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">force_ssl_login</span><span class="nb-faded-text">(
+          string|bool $force
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether SSL login should be forced.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$force</th>
+<td>string|bool</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if forced, false if not forced.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::form_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">form_option</span><span class="nb-faded-text">(
+          string $option
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print option value after sanitizing for forms.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Option name.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\attr
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_all_user_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_all_user_settings</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve all user interface settings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>the last saved user settings or empty array.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_allowed_mime_types()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_allowed_mime_types</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve list of allowed mime types and file extensions.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of mime types keyed by the file extension regex corresponding to those types.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.6
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_file_data()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_file_data</span><span class="nb-faded-text">(
+          string $file, array $default_headers, string $context
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve metadata from a file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Searches for metadata in the first 8kiB of a file, such as a plugin or theme.
+Each piece of metadata must be on its own line. Fields can not span multiple
+lines, the value will get cut at the end of the first line.</p>
+
+<p>If the file data is not within that first 8kiB, then the author should correct
+their plugin file and move the data headers to the top.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Path to the file</p></em></td>
+</tr>
+<tr>
+<th>$default_headers</th>
+<td>array</td>
+<td><em><p>List of headers, in the format array('HeaderKey' => 'Header Name')</p>
+</em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>If specified adds filter hook "extra_{$context}_headers"</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\http://codex.wordpress.org/File_Header
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_num_queries()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_num_queries</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the number of database queries during the WordPress execution.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Number of database queries</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_option</span><span class="nb-faded-text">(
+          string $option, mixed $default
+              =
+              false
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve option value based on name of option.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the option does not exist or does not have a value, then the return value
+will be false. This is useful to check whether you need to install an option
+and is commonly used during installation of plugin options and to test
+whether upgrading is required.</p>
+
+<p>If the option was serialized then it will be unserialized when it is returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to retrieve. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>mixed</td>
+<td><em><p>Optional. Default value to return if the option does not exist.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Value set for the option.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_site_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_site_option</span><span class="nb-faded-text">(
+          string $option, mixed $default
+              =
+              false, bool $use_cache
+              =
+              true
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve site option value based on name of option.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option to retrieve. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>mixed</td>
+<td><em><p>Optional value to return if option doesn't exist. Default false.</p>
+</em></td>
+</tr>
+<tr>
+<th>$use_cache</th>
+<td>bool</td>
+<td><em><p>Whether to use cache. Multisite only. Default true.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Value set for the option.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_option()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_site_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_site_transient</span><span class="nb-faded-text">(
+          string $transient
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Get the value of a site transient.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the transient does not exist or does not have a value, then the return value
+will be false.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Value of transient</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_transient()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_status_header_desc()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_status_header_desc</span><span class="nb-faded-text">(
+          int $code
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the description for the HTTP status.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$code</th>
+<td>int</td>
+<td><em><p>HTTP status code.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Empty string if not found, or description if found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_temp_dir()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_temp_dir</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Determines a writable directory for temporary files.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Function's preference is to WP_CONTENT_DIR followed by the return value of</p>
+
+<pre><code>sys_get_temp_dir()</code></pre>
+
+<p>, before finally defaulting to /tmp/</p>
+
+<p>In the event that this function does not find a writable location, It may be overridden by the</p>
+
+<pre><code>WP_TEMP_DIR</code></pre>
+
+<p>constant in your</p>
+
+<pre><code>wp-config.php</code></pre>
+
+<p>file.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Writable temporary directory</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_transient</span><span class="nb-faded-text">(
+          string $transient
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Get the value of a transient.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the transient does not exist or does not have a value, then the return value
+will be false.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Value of transient</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_setting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_setting</span><span class="nb-faded-text">(
+          string $name, string $default
+              =
+              false
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve user interface setting value based on setting name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the setting.</p></em></td>
+</tr>
+<tr>
+<th>$default</th>
+<td>string</td>
+<td><em><p>Optional default value to return when $name is not set.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>the last saved user setting or the default value/false if it doesn't exist.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_weekstartend()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_weekstartend</span><span class="nb-faded-text">(
+          string $mysqlstring, int $start_of_week
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get the week start and end from the datetime or date string from mysql.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mysqlstring</th>
+<td>string</td>
+<td><em><p>Date or datetime field type from mysql.</p></em></td>
+</tr>
+<tr>
+<th>$start_of_week</th>
+<td>int</td>
+<td><em><p>Optional. Start of the week as an integer.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Keys are 'start' and 'end'.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::global_terms_enabled()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">global_terms_enabled</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether global terms are enabled.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if multisite and global terms enabled</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::iis7_supports_permalinks()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">iis7_supports_permalinks</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check if IIS 7 supports pretty permalinks.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_blog_installed()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_blog_installed</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Test whether blog is already installed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The cache will be checked first. If you have a cache plugin, which saves the
+cache values, then this will work. If you use the default WordPress cache,
+and the database goes away, then you might have problems.</p>
+
+<p>Checks for the option siteurl for whether WordPress is installed.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether blog is already installed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_lighttpd_before_150()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_lighttpd_before_150</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Is the server running earlier than 1.5.0 version of lighttpd?</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the server is running lighttpd &lt; 1.5.0</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_main_site()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_main_site</span><span class="nb-faded-text">(
+          int $blog_id
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Is main site?</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>optional blog id to test (default current blog)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if not multisite or $blog_id is main site</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_new_day()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_new_day</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Whether today is a new day.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>1 when new day, 0 if not a new day.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$day
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$previousday
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_serialized()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_serialized</span><span class="nb-faded-text">(
+          mixed $data
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check value to find if it was serialized.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If $data is not an string, then returned value will always be false.
+Serialized data is always a string.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>Value to check to see if was serialized.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if not serialized and true if it was.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_serialized_string()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_serialized_string</span><span class="nb-faded-text">(
+          mixed $data
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check whether serialized data is of string type.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>Serialized data</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if not a serialized string, true if it is.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_ssl()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_ssl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Determine if SSL is used.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if SSL, false if not used.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_serialize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_serialize</span><span class="nb-faded-text">(
+          mixed $data
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Serialize data, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>Data that might be serialized.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>A scalar data</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::maybe_unserialize()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">maybe_unserialize</span><span class="nb-faded-text">(
+          string $original
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Unserialize value only if it was serialized.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$original</th>
+<td>string</td>
+<td><em><p>Maybe unserialized original, if is needed.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Unserialized data can be any type.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::mysql2date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">mysql2date</span><span class="nb-faded-text">(
+          string $dateformatstring, string $mysqlstring, bool $translate
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts MySQL DATETIME field to user specified date format.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If $dateformatstring has 'G' value, then gmmktime() function will be used to
+make the time. If $dateformatstring is set to 'U', then mktime() function
+will be used to make the time.</p>
+
+<p>The $translate will only be used, if it is set to true and it is by default
+and if the $wp_locale object has the month and weekday set.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dateformatstring</th>
+<td>string</td>
+<td><em><p>Either 'G', 'U', or php date format.</p>
+</em></td>
+</tr>
+<tr>
+<th>$mysqlstring</th>
+<td>string</td>
+<td><em><p>Time from mysql DATETIME field.</p></em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td>bool</td>
+<td><em><p>Optional. Default is true. Will switch format to locale.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Date formatted by $dateformatstring or locale (if available).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::nocache_headers()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">nocache_headers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the headers to prevent caching for the different browsers.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Different browsers support different nocache headers, so several headers must
+be sent so that all of them get the point that no caching should occur.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_get_nocache_headers()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::number_format_i18n()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">number_format_i18n</span><span class="nb-faded-text">(
+          int $number, int $decimals
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert integer number to format based on the locale.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$number</th>
+<td>int</td>
+<td><em><p>The number to convert based on locale.</p></em></td>
+</tr>
+<tr>
+<th>$decimals</th>
+<td>int</td>
+<td><em><p>Precision of the number of decimal places.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Converted number in string format.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::path_is_absolute()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">path_is_absolute</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Test if a give filesystem path is absolute ('/foo/bar', 'c:\windows').</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>File path</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if path is absolute, false is not absolute.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::path_join()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">path_join</span><span class="nb-faded-text">(
+          string $base, string $path
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Join two filesystem paths together (e.g. 'give me $path relative to $base').</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the $path is absolute, then it the full path is returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$base</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The path with the base or absolute path.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_query_arg()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_query_arg</span><span class="nb-faded-text">(
+          string|array $key, bool $query
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Removes an item or list from the query string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string|array</td>
+<td><em><p>Query key or keys to remove.</p></em></td>
+</tr>
+<tr>
+<th>$query</th>
+<td>bool</td>
+<td><em><p>When false uses the $_SERVER value.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>New URL query string.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::send_frame_options_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">send_frame_options_header</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \none</code><div class="description"><p class="short_description">Send a HTTP header to limit rendering of pages to same origin iframes.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\none</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="https://developer.mozilla.org/en/the_x-frame-options_response_header">https://developer.mozilla.org/en/the_x-frame-options_response_header</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::send_nosniff_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">send_nosniff_header</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \none</code><div class="description"><p class="short_description">Send a HTTP header to disable content type sniffing in browsers which support it.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\none</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx">http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://src.chromium.org/viewvc/chrome?view=rev&amp;revision=6985">http://src.chromium.org/viewvc/chrome?view=rev&revision=6985</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_site_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_site_transient</span><span class="nb-faded-text">(
+          string $transient, mixed $value, int $expiration
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Set/update the value of a site transient.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You do not need to serialize values, if the value needs to be serialize, then
+it will be serialized before it is set.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Transient value. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$expiration</th>
+<td>int</td>
+<td><em><p>Time until expiration in seconds, default 0</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if value was not set and true if value was set.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\set_transient()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_transient()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_transient</span><span class="nb-faded-text">(
+          string $transient, mixed $value, int $expiration
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Set/update the value of a transient.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You do not need to serialize values. If the value needs to be serialized, then
+it will be serialized before it is set.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$transient</th>
+<td>string</td>
+<td><em><p>Transient name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Transient value. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$expiration</th>
+<td>int</td>
+<td><em><p>Time until expiration in seconds, default 0</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if value was not set and true if value was set.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Transient
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_user_setting()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_user_setting</span><span class="nb-faded-text">(
+          string $name, string $value
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Add or update user interface setting.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Both $name and $value can contain only ASCII letters, numbers and underscores.
+This function has to be used before any output has started as it calls setcookie().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the setting.</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>string</td>
+<td><em><p>The value for the setting.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>true if set successfully/false if not.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::size_format()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">size_format</span><span class="nb-faded-text">(
+          int|string $bytes, int $decimals
+              =
+              0
+          )
+        </span>
+        :
+          bool|string</code><div class="description"><p class="short_description">Convert number of bytes largest unit bytes will fit into.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>It is easier to read 1kB than 1024 bytes and 1MB than 1048576 bytes. Converts
+number of bytes to human readable number by taking the number of that unit
+that the bytes will go into it. Supports TB value.</p>
+
+<p>Please note that integers in PHP are limited to 32 bits, unless they are on
+64 bit architecture, then they have 64 bit size. If you need to place the
+larger size then what PHP integer type will hold, then use a string. It will
+be converted to a double, which should always have 64 bit length.</p>
+
+<p>Technically the correct unit names for powers of 1024 are KiB, MiB etc.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$bytes</th>
+<td>int|string</td>
+<td><em><p>Number of bytes. Note max integer size for integers.</p></em></td>
+</tr>
+<tr>
+<th>$decimals</th>
+<td>int</td>
+<td><em><p>Precision of number of decimal places. Deprecated.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string</td>
+<td>False on failure. Number string on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://en.wikipedia.org/wiki/Byte">http://en.wikipedia.org/wiki/Byte</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::smilies_init()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">smilies_init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Convert smiley code to the icon graphic file equivalent.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can turn off smilies, by going to the write setting screen and unchecking
+the box, or by setting 'use_smilies' option to false or removing the option.</p>
+
+<p>Plugins may override the default smiley list by setting the $wpsmiliestrans
+to an array, with the key the code the blogger types in and the value the
+image file.</p>
+
+<p>The $wp_smiliessearch global is for the regular expression and is set each
+time the function is called.</p>
+
+<p>The full list of smilies can be found in the function and won't be listed in
+the description. Probably should create a Codex page for it, so that it is
+available.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wpsmiliestrans
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_smiliessearch
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::status_header()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">status_header</span><span class="nb-faded-text">(
+          int $header
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Set HTTP status header.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$header</th>
+<td>int</td>
+<td><em><p>HTTP status code</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_option</span><span class="nb-faded-text">(
+          string $option, mixed $newvalue
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update the value of an option that was already added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You do not need to serialize values. If the value needs to be serialized, then
+it will be serialized before it is inserted into the database. Remember,
+resources can not be serialized or added as an option.</p>
+
+<p>If the option does not exist, then the option will be added with the option
+value, but you will not be able to set whether it is autoloaded. If you want
+to set whether an option is autoloaded, then you need to use the add_option().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Option name. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$newvalue</th>
+<td>mixed</td>
+<td><em><p>Option value. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if value was not updated and true if value was updated.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_site_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_site_option</span><span class="nb-faded-text">(
+          string $option, mixed $value
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update the value of a site option that was already added.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Name of option. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Option value. Expected to not be SQL-escaped.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if value was not updated and true if value was updated.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\update_option()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\do_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::url_is_accessable_via_ssl()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">url_is_accessable_via_ssl</span><span class="nb-faded-text">(
+          string $url
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Determines if the blog can be accessed over SSL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Determines if blog can be accessed over SSL by using cURL to access the site
+using the https in the siteurl. Requires cURL extension to work correctly.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether SSL access is available</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::validate_file()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">validate_file</span><span class="nb-faded-text">(
+          string $file, array $allowed_files
+              =
+              ''
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">File validates against allowed set of defined rules.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A return value of '1' means that the $file contains either '..' or './'. A
+return value of '2' means that the $file contains ':' after the first
+character. A return value of '3' means that the file is not in the allowed
+files list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>File path.</p></em></td>
+</tr>
+<tr>
+<th>$allowed_files</th>
+<td>array</td>
+<td><em><p>List of allowed files.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>0 means nothing is wrong, greater than 0 means something was wrong.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp</span><span class="nb-faded-text">(
+          string $query_vars
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set up the WordPress query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query_vars</th>
+<td>string</td>
+<td><em><p>Default WP_Query arguments.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_array_slice_assoc()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_array_slice_assoc</span><span class="nb-faded-text">(
+          array $array, array $keys
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Extract a slice of an array, given a list of keys.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$array</th>
+<td>array</td>
+<td><em><p>The original array</p></em></td>
+</tr>
+<tr>
+<th>$keys</th>
+<td>array</td>
+<td><em><p>The list of keys</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The array slice</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_check_filetype()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_check_filetype</span><span class="nb-faded-text">(
+          string $filename, array $mimes
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve the file type from the file name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>You can optionally define the mime array, if needed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em><p>File name or path.</p></em></td>
+</tr>
+<tr>
+<th>$mimes</th>
+<td>array</td>
+<td><em><p>Optional. Key is the file extension with value as the mime type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Values with extension first and mime type.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_check_filetype_and_ext()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_check_filetype_and_ext</span><span class="nb-faded-text">(
+          string $file, string $filename, array $mimes
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Attempt to determine the real file type of a file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If unable to, the file name extension will be used to determine type.</p>
+
+<p>If it's determined that the extension does not match the file's real type,
+then the "proper_filename" value will be set with a proper filename and extension.</p>
+
+<p>Currently this function only supports validating images known to getimagesize().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Full path to the image.</p></em></td>
+</tr>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em><p>The filename of the image (may differ from $file due to $file being in a tmp directory)</p>
+</em></td>
+</tr>
+<tr>
+<th>$mimes</th>
+<td>array</td>
+<td><em><p>Optional. Key is the file extension with value as the mime type.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Values for the extension, MIME, and either a corrected filename or false if original $filename is valid</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_die()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_die</span><span class="nb-faded-text">(
+          string $message, string $title
+              =
+              '', string|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Kill WordPress execution and display HTML message with error message.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function complements the die() PHP function. The difference is that
+HTML will be displayed to the user. It is recommended to use this function
+only, when the execution should not continue any further. It is not
+recommended to call this function very often and try to handle as many errors
+as possible silently.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$message</th>
+<td>string</td>
+<td><em><p>Error message.</p></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Error title.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Optional arguments to control behavior.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_explain_nonce()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_explain_nonce</span><span class="nb-faded-text">(
+          string $action
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve nonce action "Are you sure" message.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The action is split by verb and noun. The action format is as follows:
+verb-action_extra. The verb is before the first dash and has the format of
+letters and no spaces and numbers. The noun is after the dash and before the
+underscore, if an underscore exists. The noun is also only letters.</p>
+
+<p>The filter will be called for any action, which is not defined by WordPress.
+You may use the filter for your plugin to explain nonce actions to the user,
+when they get the "Are you sure?" message. The filter is in the format of
+'explain_nonce_$verb-$noun' with the $verb replaced by the found verb and the
+$noun replaced by the found noun. The two parameters that are given to the
+hook are the localized "Are you sure you want to do this?" message with the
+extra text (the text after the underscore).</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>Nonce action.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Are you sure message.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_ext2type()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_ext2type</span><span class="nb-faded-text">(
+          string $ext
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Retrieve the file type based on the extension name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ext</th>
+<td>string</td>
+<td><em><p>The extension to search.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td>The file type, example: audio, video, document, spreadsheet, etc. Null if not found.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_filter_object_list()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_filter_object_list</span><span class="nb-faded-text">(
+          array $list, array $args
+              =
+              array(, string $operator
+              =
+              'and', bool|string $field
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Filters a list of objects, based on a set of key => value arguments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$list</th>
+<td>array</td>
+<td><em><p>An array of objects to filter</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>An array of key => value arguments to match against each object</p>
+</em></td>
+</tr>
+<tr>
+<th>$operator</th>
+<td>string</td>
+<td><em><p>The logical operation to perform. 'or' means only one element from the array needs to match; 'and' means all elements must match. The default is 'and'.</p>
+</em></td>
+</tr>
+<tr>
+<th>$field</th>
+<td>bool|string</td>
+<td><em><p>A field from the object to place instead of the entire object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>A list of objects or object fields</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_find_hierarchy_loop()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_find_hierarchy_loop</span><span class="nb-faded-text">(
+          callback $callback, int $start, int $start_parent, array $callback_args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Finds hierarchy loops using a callback function that maps object IDs to parent IDs.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$callback</th>
+<td>callback</td>
+<td><em><p>function that accepts ( ID, $callback_args ) and outputs parent_ID</p>
+</em></td>
+</tr>
+<tr>
+<th>$start</th>
+<td>int</td>
+<td><em><p>The ID to start the loop check at</p></em></td>
+</tr>
+<tr>
+<th>$start_parent</th>
+<td>int</td>
+<td><em><p>the parent_ID of $start to use instead of calling $callback( $start ). Use null to always use $callback</p>
+</em></td>
+</tr>
+<tr>
+<th>$callback_args</th>
+<td>array</td>
+<td><em><p>optional additional arguments to send to $callback</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>IDs of all members of loop</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_find_hierarchy_loop_tortoise_hare()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_find_hierarchy_loop_tortoise_hare</span><span class="nb-faded-text">(
+          callback $callback, int $start, array $override
+              =
+              array(, array $callback_args
+              =
+              array(, bool $_return_loop
+              =
+              false
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Uses the "The Tortoise and the Hare" algorithm to detect loops.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>For every step of the algorithm, the hare takes two steps and the tortoise one.
+If the hare ever laps the tortoise, there must be a loop.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$callback</th>
+<td>callback</td>
+<td><em><p>function that accepts ( ID, callback_arg, ... ) and outputs parent_ID</p>
+</em></td>
+</tr>
+<tr>
+<th>$start</th>
+<td>int</td>
+<td><em><p>The ID to start the loop check at</p></em></td>
+</tr>
+<tr>
+<th>$override</th>
+<td>array</td>
+<td><em><p>an array of ( ID => parent_ID, ... ) to use instead of $callback</p>
+</em></td>
+</tr>
+<tr>
+<th>$callback_args</th>
+<td>array</td>
+<td><em><p>optional additional arguments to send to $callback</p>
+</em></td>
+</tr>
+<tr>
+<th>$_return_loop</th>
+<td>bool</td>
+<td><em><p>Return loop members or just detect presence of loop? Only set to true if you already know the given $start is part of a loop (otherwise the returned array might include branches)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>scalar ID of some arbitrary member of the loop, or array of IDs of all members of loop if $_return_loop</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_http()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_http</span><span class="nb-faded-text">(
+          string $url, string|bool $file_path
+              =
+              false, int $red
+              =
+              1
+          )
+        </span>
+        :
+          bool|string</code><div class="description"><p class="short_description">Perform a HTTP HEAD or GET request.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If $file_path is a writable filename, this will do a GET request and write
+the file to that path.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to fetch.</p></em></td>
+</tr>
+<tr>
+<th>$file_path</th>
+<td>string|bool</td>
+<td><em><p>Optional. File path to write request to.</p></em></td>
+</tr>
+<tr>
+<th>$red</th>
+<td>int</td>
+<td><em><p>(private) The number of Redirects followed, Upon 5 being hit, returns false.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string</td>
+<td>False on failure and string of headers if HEAD request.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_http_headers()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_http_headers</span><span class="nb-faded-text">(
+          string $url, bool $deprecated
+              =
+              false
+          )
+        </span>
+        :
+          bool|string</code><div class="description"><p class="short_description">Retrieve HTTP Headers from URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>bool</td>
+<td><em><p>Not Used.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string</td>
+<td>False on failure, headers on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_nocache_headers()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_nocache_headers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Gets the header information to prevent caching.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The several different headers cover the different ways cache prevention is handled
+by different browsers</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The associative array of header names and field values.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_original_referer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_original_referer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Retrieve original referer that was posted, if it exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>False if no original referer or original referer if set.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_referer()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_referer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Retrieve referer from '_wp_http_referer', HTTP referer, or current page respectively.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>False on failure. Referer URL on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_guess_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_guess_url</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Guess the URL for the site.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will remove wp-admin links to retrieve only return URLs not in the wp-admin
+directory.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_filter</span><span class="nb-faded-text">(
+          array $list, array $args
+              =
+              array(, string $operator
+              =
+              'AND'
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Filters a list of objects, based on a set of key => value arguments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$list</th>
+<td>array</td>
+<td><em><p>An array of objects to filter</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>An array of key => value arguments to match against each object</p>
+</em></td>
+</tr>
+<tr>
+<th>$operator</th>
+<td>string</td>
+<td><em><p>The logical operation to perform: 'AND' means all elements from the array must match; 'OR' means only one element needs to match; 'NOT' means no elements may match. The default is 'AND'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_pluck()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_pluck</span><span class="nb-faded-text">(
+          array $list, int|string $field
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Pluck a certain field out of each object in a list.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$list</th>
+<td>array</td>
+<td><em><p>A list of objects or arrays</p></em></td>
+</tr>
+<tr>
+<th>$field</th>
+<td>int|string</td>
+<td><em><p>A field from the object to place instead of the entire object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_load_alloptions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_load_alloptions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Loads and caches all autoloaded options, if available or all options.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of all options.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_load_core_site_options()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_load_core_site_options</span><span class="nb-faded-text">(
+          int $site_id
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Loads and caches certain often requested site options if is_multisite() and a persistent cache is not being used.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$site_id</th>
+<td>int</td>
+<td><em><p>Optional site ID for which to query the options. Defaults to the current site.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_maybe_load_widgets()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_maybe_load_widgets</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Determines if Widgets library should be loaded.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks to make sure that the widgets library hasn't already been loaded. If
+it hasn't, then it will load the widgets library and run an action hook.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_action()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_mkdir_p()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_mkdir_p</span><span class="nb-faded-text">(
+          string $target
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Recursive directory creation based on full path.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will attempt to set permissions on folders.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$target</th>
+<td>string</td>
+<td><em><p>Full path to attempt to create.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the path was created. True if path already exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_nonce_ays()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_nonce_ays</span><span class="nb-faded-text">(
+          string $action
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display "Are You Sure" message to confirm the action being taken.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the action has the nonce explain message, then it will be displayed along
+with the "Are you sure?" message.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>The nonce action.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_nonce_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_nonce_field</span><span class="nb-faded-text">(
+          string $action
+              =
+              -1, string $name
+              =
+              "_wpnonce", bool $referer
+              =
+              true, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve or display nonce hidden field for forms.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The nonce field is used to validate that the contents of the form came from
+the location on the current site and not somewhere else. The nonce does not
+offer absolute protection, but should protect against most cases. It is very
+important to use nonce field in forms.</p>
+
+<p>The $action and $name are optional, but if you want to have better security,
+it is strongly suggested to set those two parameters. It is easier to just
+call the function without any parameters, because validation of the nonce
+doesn't require any parameters, but since crackers know what the default is
+it won't be difficult for them to find a way around your nonce and cause
+damage.</p>
+
+<p>The input name will be whatever $name value you gave. The input value will be
+the nonce creation value.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>Optional. Action name.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>Optional. Nonce name.</p></em></td>
+</tr>
+<tr>
+<th>$referer</th>
+<td>bool</td>
+<td><em><p>Optional, default true. Whether to set the referer field for validation.</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional, default true. Whether to display or return hidden form field.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Nonce field.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_nonce_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_nonce_url</span><span class="nb-faded-text">(
+          string $actionurl, string $action
+              =
+              -1
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve URL with nonce added to URL query.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$actionurl</th>
+<td>string</td>
+<td><em><p>URL to add nonce action</p></em></td>
+</tr>
+<tr>
+<th>$action</th>
+<td>string</td>
+<td><em><p>Optional. Nonce action name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>URL with nonce action added.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_ob_end_flush_all()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_ob_end_flush_all</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Flush all output buffers for PHP 5.2.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Make sure all output buffers are flushed before our singletons our destroyed.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_original_referer_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_original_referer_field</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              true, string $jump_back_to
+              =
+              'current'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve or display original referer hidden field for forms.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The input name is '_wp_original_http_referer' and will be either the same
+value of {@link wp_referer_field()}, if that was posted already or it will
+be the current page, if it doesn't exist.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo the original http referer</p></em></td>
+</tr>
+<tr>
+<th>$jump_back_to</th>
+<td>string</td>
+<td><em><p>Optional, default is 'current'. Can be 'previous' or page you want to jump back to.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Original referer field.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_parse_args()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_parse_args</span><span class="nb-faded-text">(
+          string|array $args, array $defaults
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Merge user defined arguments into defaults array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is used throughout WordPress to allow for both string or array
+to be merged into another array.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Value to merge with $defaults</p>
+</em></td>
+</tr>
+<tr>
+<th>$defaults</th>
+<td>array</td>
+<td><em><p>Array that serves as the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Merged user defined values with defaults.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_parse_id_list()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_parse_id_list</span><span class="nb-faded-text">(
+          array|string $list
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Clean up an array, comma- or space-separated list of IDs.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$list</th>
+<td>array|string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Sanitized array of IDs</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_protect_special_option()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_protect_special_option</span><span class="nb-faded-text">(
+          string $option
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Protect WordPress special option from being modified.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will die if $option is in protected list. Protected options are 'alloptions'
+and 'notoptions' options.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em><p>Option name.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_referer_field()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_referer_field</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve or display referer hidden field for forms.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The referer link is the current Request URI from the server super global. The
+input name is '_wp_http_referer', in case you wanted to check manually.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether to echo or return the referer field.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Referer field.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Security
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_remote_fopen()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_remote_fopen</span><span class="nb-faded-text">(
+          string $uri
+          )
+        </span>
+        :
+          bool|string</code><div class="description"><p class="short_description">HTTP request for URI to retrieve content.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$uri</th>
+<td>string</td>
+<td><em><p>URI/URL of web page to retrieve.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|string</td>
+<td>HTTP content. False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.1
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\wp_remote_get()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_scheduled_delete()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_scheduled_delete</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Permanently deletes posts, pages, attachments, and comments which have been in the trash for EMPTY_TRASH_DAYS.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_all_user_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_all_user_settings</span><span class="nb-faded-text">(
+          \unknown $all
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Private. Set all user interface settings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$all</th>
+<td>\unknown</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_suspend_cache_addition()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_suspend_cache_addition</span><span class="nb-faded-text">(
+          bool $suspend
+              =
+              null
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Temporarily suspend cache additions.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Stops more data being added to the cache, but still allows cache retrieval.
+This is useful for actions, such as imports, when a lot of data would otherwise
+be almost uselessly added to the cache.</p>
+
+<p>Suspension lasts for a single page load at most. Remember to call this
+function again if you wish to re-enable cache adds earlier.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$suspend</th>
+<td>bool</td>
+<td><em><p>Optional. Suspends additions if true, re-enables them if false.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>The current suspend setting</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_suspend_cache_invalidation()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_suspend_cache_invalidation</span><span class="nb-faded-text">(
+          bool $suspend
+              =
+              true
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Suspend cache invalidation.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Turns cache invalidation on and off.  Useful during imports where you don't wont to do invalidations
+every time a post is inserted.  Callers must be sure that what they are doing won't lead to an inconsistent
+cache when invalidation is suspended.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$suspend</th>
+<td>bool</td>
+<td><em><p>Whether to suspend or enable cache invalidation</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>The current suspend setting</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_timezone_choice()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_timezone_choice</span><span class="nb-faded-text">(
+          string $selected_zone
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Gives a nicely formatted list of timezone strings. // temporary! Not in final</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$selected_zone</th>
+<td>string</td>
+<td><em><p>Selected Zone</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_timezone_override_offset()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_timezone_override_offset</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          float|bool</code><div class="description"><p class="short_description">gmt_offset modification for smart timezone handling.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Overrides the gmt_offset option if we have a timezone_string available.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>float|bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_unique_filename()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_unique_filename</span><span class="nb-faded-text">(
+          string $dir, string $filename, mixed $unique_filename_callback
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get a filename that is sanitized and unique for the given directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the filename is not unique, then a number will be added to the filename
+before the extension, and will continue adding numbers until the filename is
+unique.</p>
+
+<p>The callback is passed three parameters, the first one is the directory, the
+second is the filename, and the third is the extension.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dir</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$filename</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$unique_filename_callback</th>
+<td>mixed</td>
+<td><em><p>Callback.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>New filename, if given wasn't unique.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_upload_bits()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_upload_bits</span><span class="nb-faded-text">(
+          string $name, null $deprecated, mixed $bits, string $time
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Create a file in the upload folder with given content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If there is an error, then the key 'error' will exist with the error message.
+If success, then the key 'file' will have the unique file path, the 'url' key
+will have the link to the new file. and the 'error' key will be set to false.</p>
+
+<p>This function will not move an uploaded file to the upload folder. It will
+create a new file with the content in $bits parameter. If you move the upload
+file, read the content of the uploaded file, and then you can give the
+filename and content to this function, which will add it to the upload
+folder.</p>
+
+<p>The permissions will be set on the new file automatically by this function.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>null</td>
+<td><em><p>Never used. Set to null.</p></em></td>
+</tr>
+<tr>
+<th>$bits</th>
+<td>mixed</td>
+<td><em><p>File content</p></em></td>
+</tr>
+<tr>
+<th>$time</th>
+<td>string</td>
+<td><em><p>Optional. Time formatted in 'yyyy/mm'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_upload_dir()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_upload_dir</span><span class="nb-faded-text">(
+          string $time
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get an array containing the current upload directory's path and url.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks the 'upload_path' option, which should be from the web root folder,
+and if it isn't empty it will be used. If it is empty, then the path will be
+'WP_CONTENT_DIR/uploads'. If the 'UPLOADS' constant is defined, then it will
+override the 'upload_path' option and 'WP_CONTENT_DIR/uploads' path.</p>
+
+<p>The upload URL path is set either by the 'upload_url_path' option or by using
+the 'WP_CONTENT_URL' constant and appending '/uploads' to the path.</p>
+
+<p>If the 'uploads_use_yearmonth_folders' is set to true (checkbox if checked in
+the administration settings panel), then the time will be used. The format
+will be year first and then month.</p>
+
+<p>If the path couldn't be created, then an error will be returned with the key
+'error' containing the error message. The error suggests that the parent
+directory is not writable by the server.</p>
+
+<p>On success, the returned array will have many indices:
+'path' - base directory and sub directory or full path to upload directory.
+'url' - base url and sub directory or absolute URL to upload directory.
+'subdir' - sub directory if uploads use year/month folders option is on.
+'basedir' - path without subdir.
+'baseurl' - URL path without subdir.
+'error' - set to false.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$time</th>
+<td>string</td>
+<td><em><p>Optional. Time formatted in 'yyyy/mm'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>See above for description.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_user_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_user_settings</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Saves and restores user interface settings stored in a cookie.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Checks if the current user-settings cookie is updated and stores it. When no
+cookie exists (different browser used), adds the last saved cookie restoring
+the settings.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Option
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_widgets_add_menu()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_widgets_add_menu</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Append the Widgets menu to the themes main menu.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$submenu
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::xmlrpc_getpostcategory()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">xmlrpc_getpostcategory</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string|array</code><div class="description"><p class="short_description">Retrieve the post category or categories from XMLRPC XML.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the category element is not found, then the default post category will be
+used. The return type then would be what $post_default_category. If the
+category is found, then it will always be an array.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>XMLRPC XML Request content</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|array</td>
+<td>List of categories or category name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>string $post_default_category Default XMLRPC post category.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>XMLRPC
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::xmlrpc_getposttitle()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">xmlrpc_getposttitle</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve post title from XMLRPC XML.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the title element is not part of the XML, then the default post title from
+the $post_default_title will be used instead.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>XMLRPC XML Request content</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Post title</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>string $post_default_title Default XMLRPC post title.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>XMLRPC
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::xmlrpc_removepostdata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">xmlrpc_removepostdata</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">XMLRPC XML content without title and category elements.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>XMLRPC XML Request content</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>XMLRPC XML Request content without title and category elements.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>XMLRPC
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

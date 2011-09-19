@@ -1,0 +1,3236 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/comment-template.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWalker_Comment">\Walker_Comment</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Comment template functions</p>
+<div class="long-description"><p>These functions are meant to live inside of the WordPress loop.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Template
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::cancel_comment_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">cancel_comment_reply_link</span><span class="nb-faded-text">(
+          string $text
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display HTML content for cancel comment reply link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional. Text to display for cancel reply link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the comment id of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_ID()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the author. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_IP()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_IP</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the IP address of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the author's IP address. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_author_IP()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_email</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the email of the author of the current global $comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Care should be taken to protect the email address and assure that email
+harvesters do not capture your commentors' email address. Most assume that
+their email address will not appear in raw form on the blog. Doing so will
+enable anyone, including those that people don't want to get the email
+address and use it for their own means good and bad.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the author's email. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_email_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_email_link</span><span class="nb-faded-text">(
+          string $linktext
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the html email link to the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Care should be taken to protect the email address and assure that email
+harvesters do not capture your commentors' email address. Most assume that
+their email address will not appear in raw form on the blog. Doing so will
+enable anyone, including those that people don't want to get the email
+address and use it for their own means good and bad.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$linktext</th>
+<td>string</td>
+<td><em><p>The text to display instead of the comment author's email address</p>
+</em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The text or HTML to display before the email link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The text or HTML to display after the email link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>object $comment The current Comment row object
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_comment_author_email_link()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_link</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the html link to the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the author's link. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_author_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_url</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the author's URL. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_comment_author_url()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_author_url_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_author_url_link</span><span class="nb-faded-text">(
+          string $linktext
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the HTML link of the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$linktext</th>
+<td>string</td>
+<td><em><p>The text to display instead of the comment author's email address</p>
+</em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The text or HTML to display before the email link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The text or HTML to display after the email link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_author_url_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              '', int $comment_id
+              =
+              null, int $post_id
+              =
+              null, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generates semantic classes for each comment element</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list</p></em></td>
+</tr>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>An optional comment ID</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Whether comment_class should echo or return</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the comment date of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>The format of the date (defaults to user's config)</p>
+</em></td>
+</tr>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the date. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_excerpt</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the excerpt of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the excerpt. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_form()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_form</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, mixed $post_id
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Outputs a complete commenting form for use within a template.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Most strings and form fields may be controlled through the $args array passed
+into the function, while you may also choose to use the comment_form_default_fields
+filter to modify the array of default fields if you'd just like to add a new
+one or remove a single field. All fields are also individually passed through
+a filter of the form comment_form_field_$name where $name is the key used
+in the array of fields.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Options for strings, fields etc in the form</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>mixed</td>
+<td><em><p>Post ID to generate the form for, uses the current post if null</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_form_title()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_form_title</span><span class="nb-faded-text">(
+          string $noreplytext
+              =
+              false, string $replytext
+              =
+              false, string $linktoparent
+              =
+              TRUE
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display text based on comment reply status. Only affects users with Javascript disabled.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$noreplytext</th>
+<td>string</td>
+<td><em><p>Optional. Text to display when not replying to a comment.</p></em></td>
+</tr>
+<tr>
+<th>$replytext</th>
+<td>string</td>
+<td><em><p>Optional. Text to display when replying to a comment. Accepts "%s" for the author of the comment being replied to.</p>
+</em></td>
+</tr>
+<tr>
+<th>$linktoparent</th>
+<td>string</td>
+<td><em><p>Optional. Boolean to control making the author's name a link to their comment.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_id_fields()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_id_fields</span><span class="nb-faded-text">(
+           $id
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output hidden input HTML for replying to comments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_id_fields()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_reply_link</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, int $comment
+              =
+              null, int $post
+              =
+              null
+          )
+        </span>
+        :
+          string|bool|null</code><div class="description"><p class="short_description">Displays the HTML content for reply to comment link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional. Override default options.</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>int</td>
+<td><em><p>Optional. Comment being replied to.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int</td>
+<td><em><p>Optional. Post that the comment is going to be displayed on.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool|null</td>
+<td>Link to show comment form, if successful. False, if comments are closed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_comment_reply_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_text()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_text</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the text of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to print the text. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_comment_text()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the comment time of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. The format of the time (defaults to user's config)</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comment_type()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comment_type</span><span class="nb-faded-text">(
+          string $commenttxt
+              =
+              false, string $trackbacktxt
+              =
+              false, string $pingbacktxt
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the comment type of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$commenttxt</th>
+<td>string</td>
+<td><em><p>The string to display for comment type</p></em></td>
+</tr>
+<tr>
+<th>$trackbacktxt</th>
+<td>string</td>
+<td><em><p>The string to display for trackback type</p></em></td>
+</tr>
+<tr>
+<th>$pingbacktxt</th>
+<td>string</td>
+<td><em><p>The string to display for pingback type</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_link</span><span class="nb-faded-text">(
+          string $deprecated
+              =
+              '', bool $deprecated_2
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the link to the current post comments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+<tr>
+<th>$deprecated_2</th>
+<td>bool</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_number()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_number</span><span class="nb-faded-text">(
+          string $zero
+              =
+              false, string $one
+              =
+              false, string $more
+              =
+              false, string $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the language string for the number of comments the current post has.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$zero</th>
+<td>string</td>
+<td><em><p>Text for no comments</p></em></td>
+</tr>
+<tr>
+<th>$one</th>
+<td>string</td>
+<td><em><p>Text for one comment</p></em></td>
+</tr>
+<tr>
+<th>$more</th>
+<td>string</td>
+<td><em><p>Text for more than one comment</p></em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em><p>Not used.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_open()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_open</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              NULL
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the current post is open for comments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID to check instead of the current post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if the comments are open</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_popup_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_popup_link</span><span class="nb-faded-text">(
+          string $zero
+              =
+              false, string $one
+              =
+              false, string $more
+              =
+              false, string $css_class
+              =
+              '', string $none
+              =
+              false
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Displays the link to the comments popup window for the current post ID.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Is not meant to be displayed on single posts and pages. Should be used on the
+lists of posts</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$zero</th>
+<td>string</td>
+<td><em><p>The string to display when no comments</p></em></td>
+</tr>
+<tr>
+<th>$one</th>
+<td>string</td>
+<td><em><p>The string to display when only one comment is available</p></em></td>
+</tr>
+<tr>
+<th>$more</th>
+<td>string</td>
+<td><em><p>The string to display when there are more than one comment</p></em></td>
+</tr>
+<tr>
+<th>$css_class</th>
+<td>string</td>
+<td><em><p>The CSS class to use for comments</p></em></td>
+</tr>
+<tr>
+<th>$none</th>
+<td>string</td>
+<td><em><p>The string to display when comments have been turned off</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Returns null on single posts and pages.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpcommentspopupfile
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpcommentsjavascript
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_popup_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_popup_script</span><span class="nb-faded-text">(
+          int $width
+              =
+              400, int $height
+              =
+              400, string $file
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays the JS popup script to show a comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the $file parameter is empty, then the home page is assumed. The defaults
+for the window are 400px by 400px.</p>
+
+<p>For the comment link popup to work, this function has to be called or the
+normal comment link will be assumed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>Optional. The width of the popup window</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>Optional. The height of the popup window</p></em></td>
+</tr>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Optional. Sets the location of the popup window</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>string $wpcommentspopupfile The URL to use for the popup window
+         
+    </dd>
+<dt>Global</dt>
+<dd>int $wpcommentsjavascript Whether to use JavaScript. Set when function is called
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_template()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_template</span><span class="nb-faded-text">(
+          string $file
+              =
+              '/comments.php', bool $separate_comments
+              =
+              false
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Loads the comment template specified in $file.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will not display the comments template if not on single post or page, or if
+the post does not have comments.</p>
+
+<p>Uses the WordPress database object to query for the comments. The comments
+are passed through the 'comments_array' filter hook with the list of comments
+and the post ID respectively.</p>
+
+<p>The $file path is passed through a filter hook called, 'comments_template'
+which includes the TEMPLATEPATH and $file combined. Tries the $filtered path
+first and if it fails it will require the default comment template from the
+default theme. If either does not exist, then the WordPress process will be
+halted. It is advised for that reason, that the default theme is not deleted.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Optional, default '/comments.php'. The file to load</p>
+</em></td>
+</tr>
+<tr>
+<th>$separate_comments</th>
+<td>bool</td>
+<td><em><p>Optional, whether to separate the comments by comment type. Default is false.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Returns null if no comments appear</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $comment List of comment objects for the current post
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$withcomments
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_cancel_comment_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_cancel_comment_reply_link</span><span class="nb-faded-text">(
+          string $text
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve HTML content for cancel comment reply link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Optional. Text to display for cancel reply link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the comment id of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The comment ID</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the comment has an empty comment_author field, then 'Anonymous' person is
+assumed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to retrieve the author. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The comment author</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_IP()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_IP</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the IP address of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the author's IP address. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The comment author's IP address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_email</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the email of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the author's email. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The current comment author's email</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_email_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_email_link</span><span class="nb-faded-text">(
+          string $linktext
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Return the html email link to the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Care should be taken to protect the email address and assure that email
+harvesters do not capture your commentors' email address. Most assume that
+their email address will not appear in raw form on the blog. Doing so will
+enable anyone, including those that people don't want to get the email
+address and use it for their own means good and bad.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$linktext</th>
+<td>string</td>
+<td><em><p>The text to display instead of the comment author's email address</p>
+</em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The text or HTML to display before the email link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The text or HTML to display after the email link.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>object $comment The current Comment row object
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_link</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the html link to the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the author's link. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Comment Author name or HTML link for author's URL</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_url</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the author's URL. Optional.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_author_url_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_author_url_link</span><span class="nb-faded-text">(
+          string $linktext
+              =
+              '', string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieves the HTML link of the url of the author of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>$linktext parameter is only used if the URL does not exist for the comment
+author. If the URL does exist then the URL will be used and the $linktext
+will be ignored.</p>
+
+<p>Encapsulate the HTML link between the $before and $after. So it will appear
+in the order of $before, link, and finally $after.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$linktext</th>
+<td>string</td>
+<td><em><p>The text to display instead of the comment author's email address</p>
+</em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The text or HTML to display before the email link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The text or HTML to display after the email link.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The HTML link between the $before and $after parameters</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_class()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_class</span><span class="nb-faded-text">(
+          string|array $class
+              =
+              '', int $comment_id
+              =
+              null, int $post_id
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Returns the classes for the comment div as an array</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string|array</td>
+<td><em><p>One or more classes to add to the class list</p></em></td>
+</tr>
+<tr>
+<th>$comment_id</th>
+<td>int</td>
+<td><em><p>An optional comment ID</p></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array of classes</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_date</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the comment date of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>The format of the date (defaults to user's config)</p>
+</em></td>
+</tr>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the date. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The comment's date</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_excerpt()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_excerpt</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the excerpt of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will cut each word and only output the first 20 words with '...' at the end.
+If the word count is less than 20, then no truncating is done and no '...'
+will appear.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the excerpt. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The maybe truncated comment with 20 words or less</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_id_fields()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_id_fields</span><span class="nb-faded-text">(
+           $id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve hidden input HTML for replying to comments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Hidden input HTML for replying to comments</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_link</span><span class="nb-faded-text">(
+          object|string|int $comment
+              =
+              null, array $args
+              =
+              array(
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the link to a given comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment</th>
+<td>object|string|int</td>
+<td><em><p>Comment to retrieve.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional args.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The permalink to the given comment.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_reply_link</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, int $comment
+              =
+              null, int $post
+              =
+              null
+          )
+        </span>
+        :
+          string|bool|null</code><div class="description"><p class="short_description">Retrieve HTML content for reply to comment link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The default arguments that can be override are 'add_below', 'respond_id',
+'reply_text', 'login_text', and 'depth'. The 'login_text' argument will be
+used, if the user must log in or register first before posting a comment. The
+'reply_text' will be used, if they can post a reply. The 'add_below' and
+'respond_id' arguments are for the JavaScript moveAddCommentForm() function
+parameters.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional. Override default options.</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>int</td>
+<td><em><p>Optional. Comment being replied to.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int</td>
+<td><em><p>Optional. Post that the comment is going to be displayed on.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool|null</td>
+<td>Link to show comment form, if successful. False, if comments are closed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_text()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_text</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the text of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the text. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The comment content</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_time()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_time</span><span class="nb-faded-text">(
+          string $d
+              =
+              '', bool $gmt
+              =
+              false, bool $translate
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the comment time of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$d</th>
+<td>string</td>
+<td><em><p>Optional. The format of the time (defaults to user's config)</p>
+</em></td>
+</tr>
+<tr>
+<th>$gmt</th>
+<td>bool</td>
+<td><em><p>Whether to use the GMT date</p></em></td>
+</tr>
+<tr>
+<th>$translate</th>
+<td>bool</td>
+<td><em><p>Whether to translate the time (for use in feeds)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The formatted time</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filter()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comment_type()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comment_type</span><span class="nb-faded-text">(
+          int $comment_ID
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the comment type of the current comment.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment for which to get the type. Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The comment type</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$comment
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comments_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comments_link</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieves the link to the current post comments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>Optional post id</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The link to the comments</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_comments_number()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_comments_number</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              0
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the amount of comments a post has.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>The Post ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The number of comments a post has</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_post_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_post_reply_link</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, int|object $post
+              =
+              null
+          )
+        </span>
+        :
+          string|bool|null</code><div class="description"><p class="short_description">Retrieve HTML content for reply to post link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The default arguments that can be override are 'add_below', 'respond_id',
+'reply_text', 'login_text', and 'depth'. The 'login_text' argument will be
+used, if the user must log in or register first before posting a comment. The
+'reply_text' will be used, if they can post a reply. The 'add_below' and
+'respond_id' arguments are for the JavaScript moveAddCommentForm() function
+parameters.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional. Override default options.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>Optional. Post that the comment is going to be displayed on. Defaults to current post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool|null</td>
+<td>Link to show comment form, if successful. False, if comments are closed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_trackback_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_trackback_url</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve The current post's trackback URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is a check to see if permalink's have been enabled and if so, will
+retrieve the pretty path. If permalinks weren't enabled, the ID of the
+current post is used and appended to the correct page to go to.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The trackback URL after being filtered</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::pings_open()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">pings_open</span><span class="nb-faded-text">(
+          int $post_id
+              =
+              NULL
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the current post is open for pings.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em><p>An optional post ID to check instead of the current post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if pings are accepted</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::post_reply_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">post_reply_link</span><span class="nb-faded-text">(
+          array $args
+              =
+              array(, int|object $post
+              =
+              null
+          )
+        </span>
+        :
+          string|bool|null</code><div class="description"><p class="short_description">Displays the HTML content for reply to post link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Optional. Override default options.</p></em></td>
+</tr>
+<tr>
+<th>$post</th>
+<td>int|object</td>
+<td><em><p>Optional. Post that the comment is going to be displayed on.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool|null</td>
+<td>Link to show comment form, if successful. False, if comments are closed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\get_post_reply_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::trackback_rdf()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">trackback_rdf</span><span class="nb-faded-text">(
+          int $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Generates and displays the RDF for the trackback information of current post.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Deprecated in 3.0.0, and restored in 3.0.1.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>int</td>
+<td><em><p>Not used (Was $timezone = 0)</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::trackback_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">trackback_url</span><span class="nb-faded-text">(
+          bool $deprecated_echo
+              =
+              true
+          )
+        </span>
+        :
+          void|string</code><div class="description"><p class="short_description">Displays the current post's trackback URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated_echo</th>
+<td>bool</td>
+<td><em><p>Remove backwards compat in 2.5</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>void|string</td>
+<td>Should only be used to echo the trackback URL, use get_trackback_url() for the result instead.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\get_trackback_url()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_comment_form_unfiltered_html_nonce()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_comment_form_unfiltered_html_nonce</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Displays form token for unfiltered comments.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will only display nonce token if the current user has permissions for
+unfiltered html. Won't display the token for other users.</p>
+
+<p>The function was backported to 2.0.10 and was added to versions 2.1.3 and
+above. Does not exist in versions prior to 2.0.10 in the 2.0 branch and in
+the 2.1 branch, prior to 2.1.3. Technically added in 2.2.0.</p>
+
+<p>Backported to 2.0.10.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.3
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$post
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_comments</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              array(, array $comments
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">List comments</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used in the comments.php template to list comments for a particular post</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em><p>Formatting options</p></em></td>
+</tr>
+<tr>
+<th>$comments</th>
+<td>array</td>
+<td><em><p>Optional array of comment objects. Defaults to $wp_query->comments</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_comment-template.html#%5CWalker_Comment">\Walker_Comment</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\Walker_Comment" class="anchor"></a><h2 class="class">\Walker_Comment<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress</small><p class="short-description">HTML comment list class.</p>
+<div class="long-description"><p>Extend the Walker class to use it, see examples at the below. Child classes
+do not need to implement all of the abstract methods in the class. The child
+only needs to implement the methods that are needed. Also, the methods are
+not strictly abstract in that the parameter definition needs to be followed.
+The child classes can have additional parameters.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a></dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>wp_list_comments()
+         
+    </dd>
+<dt>Used_by</dt>
+<dd>get_comment_pages_count()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker">\Walker</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Walker_Comment::$db_fields" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$db_fields</span>= 'array ('parent' =&gt; 'comment_parent''
+                </code><div class="description"><p class="short-description">DB fields to use.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array ('parent' =&gt; 'comment_parent'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24db_fields">\Walker::$db_fields</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::$max_pages" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$max_pages</span>= '1'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Max number of pages walked by the paged walker</p><small>Inherited from:
+                        <a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>1</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24max_pages">\Walker::$max_pages</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::$tree_type" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$tree_type</span>= ''comment''
+                </code><div class="description"><p class="short-description">What the class handles.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>'comment'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::%24tree_type">\Walker::$tree_type</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Walker_Comment::display_element()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_element</span><span class="nb-faded-text">(
+          object $element, array $children_elements, int $max_depth, int $depth
+              =
+              0, array $args, string $output
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">This function is designed to enhance Walker::display_element() to
+display children of higher nesting levels than selected inline on
+the highest depth level displayed. This prevents them being orphaned
+at the end of the comment list.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Example: max_depth = 2, with 5 levels of nested content.
+1
+ 1.1
+   1.1.1
+   1.1.1.1
+   1.1.1.1.1
+   1.1.2
+   1.1.2.1
+2
+ 2.2</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$element</th>
+<td>object</td>
+<td><em><p>Data object</p></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td>array</td>
+<td><em><p>List of elements to continue traversing.</p></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>Max depth to traverse.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of current element.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Null on failure with no changes to parameters.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::end_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_el</span><span class="nb-faded-text">(
+          string $output, object $comment, int $depth, array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the element output, if needed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>object</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of comment.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_el()">\Walker::end_el()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::end_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">end_lvl</span><span class="nb-faded-text">(
+          string $output, int $depth, array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Ends the list of after the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method finishes the list at the end of output of the elements.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of comment.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Will only append content if style argument value is 'ol' or 'ul'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::end_lvl()">\Walker::end_lvl()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::get_number_of_root_elements()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_number_of_root_elements</span><span class="nb-faded-text">(
+           $elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::get_number_of_root_elements()">\Walker::get_number_of_root_elements()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::paged_walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">paged_walk</span><span class="nb-faded-text">(
+           $elements, int $max_depth, int $page_num,  $per_page
+          )
+        </span>
+        :
+          \XHTML</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">paged_walk() - produce a page of nested elements</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::paged_walk()">\Walker::paged_walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Given an array of hierarchical elements, the maximum depth, a specific page number,
+and number of elements per page, this function first determines all top level root elements
+belonging to that page, then lists them and all of their children in hierarchical order.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em><p>= 0 means display all levels; $max_depth > 0 specifies the number of display levels.</p>
+</em></td>
+</tr>
+<tr>
+<th>$page_num</th>
+<td>int</td>
+<td><em><p>the specific page number, beginning with 1.</p></em></td>
+</tr>
+<tr>
+<th>$per_page</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\XHTML</td>
+<td>of the specified page of elements</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::start_el()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_el</span><span class="nb-faded-text">(
+          string $output, object $comment, int $depth, array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Start the element output.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. Includes
+the element output also.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$comment</th>
+<td>object</td>
+<td><em><p>Comment data object.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of comment in reference to parents.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_el()">\Walker::start_el()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::start_lvl()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_lvl</span><span class="nb-faded-text">(
+          string $output, int $depth, array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Starts the list before the elements are added.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Additional parameters are used in child classes. The args parameter holds
+additional values that may be used with the child class methods. This
+method is called at the start of the output list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>Passed by reference. Used to append additional content.</p></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em><p>Depth of comment.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Uses 'style' argument for type of HTML list.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-walker.html#%5CWalker::start_lvl()">\Walker::start_lvl()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::unset_children()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unset_children</span><span class="nb-faded-text">(
+           $e,  $children_elements
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::unset_children()">\Walker::unset_children()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$e</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children_elements</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Walker_Comment::walk()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">walk</span><span class="nb-faded-text">(
+          array $elements, int $max_depth
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Display array of elements hierarchically.</p>
+<small>Inherited from:
+                    <a href="db_wp-includes_class-wp-walker.html#%5CWalker::walk()">\Walker::walk()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>It is a generic function which does not assume any existing order of
+elements. max_depth = -1 means flatly display every element. max_depth =
+0 means display all levels. max_depth > 0  specifies the number of
+display levels.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$elements</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$max_depth</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

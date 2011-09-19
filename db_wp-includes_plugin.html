@@ -1,0 +1,1482 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/plugin.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">The plugin API is located in this file, which allows for creating actions
+and filters and hooking functions, and methods. The functions or methods will
+then be run when the action or filter is called.</p>
+<div class="long-description"><p>The API callback examples reference functions, but can be methods of classes.
+To hook methods, you'll need to pass an array one of two ways.</p>
+
+<p>Any of the syntaxes explained in the PHP documentation for the
+{@link http://us2.php.net/manual/en/language.pseudo-types.php#language.types.callback 'callback'}
+type are valid.</p>
+
+<p>Also see the {@link http://codex.wordpress.org/Plugin_API Plugin API} for
+more information and examples on how to use a lot of these functions.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::_wp_call_all_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_call_all_hook</span><span class="nb-faded-text">(
+          array $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Calls the 'all' hook, which will process the functions hooked into it.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The 'all' hook passes all of the arguments or parameters that were used for
+the hook, which this function was called for.</p>
+
+<p>This function is used internally for apply_filters(), do_action(), and
+do_action_ref_array() and is not meant to be used from outside those
+functions. This function does not check for the existence of the all hook, so
+it will fail unless the all hook exists prior to this function call.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>The collected parameters from the hook that was called.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_filter
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_wp_filter_build_unique_id()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_wp_filter_build_unique_id</span><span class="nb-faded-text">(
+          string $tag, callback $function, int|bool $priority
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Build Unique ID for storage and retrieval.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The old way to serialize the callback caused issues and this function is the
+solution. It works by checking for objects and creating an a new property in
+the class to keep track of the object and new objects of the same class that
+need to be added.</p>
+
+<p>It also allows for the removal of actions and filters for objects after they
+change class properties. It is possible to include the property $wp_filter_id
+in your class and set it to "null" or a number to bypass the workaround.
+However this will prevent you from adding new classes and any new classes
+will overwrite the previous hook by the same class.</p>
+
+<p>Functions and static method callbacks are just returned as strings and
+shouldn't have any speed penalty.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>Used in counting how many hooks were applied</p></em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>Used for creating unique id</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int|bool</td>
+<td><em><p>Used in counting how many hooks were applied. If === false and $function is an object reference, we return the unique id only if it already has one, false otherwise.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>Unique ID for usage as array key or false if $priority === false and $function is an object reference, and it does not already have a unique id.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_filter Storage for all of the filters and actions
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://trac.wordpress.org/ticket/3875">http://trac.wordpress.org/ticket/3875</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.3
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_action()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_action</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_add, int $priority
+              =
+              10, int $accepted_args
+              =
+              1
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Hooks a function on to a specific action.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Actions are the hooks that the WordPress core launches at specific points
+during execution, or when specific events occur. Plugins can specify that
+one or more of its PHP functions are executed at these points, using the
+Action API.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the action to which the $function_to_add is hooked.</p>
+</em></td>
+</tr>
+<tr>
+<th>$function_to_add</th>
+<td>callback</td>
+<td><em><p>The name of the function you wish to be called.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.</p>
+</em></td>
+</tr>
+<tr>
+<th>$accepted_args</th>
+<td>int</td>
+<td><em><p>optional. The number of arguments the function accept (default 1).</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_filter()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::add_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">add_filter</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_add, int $priority
+              =
+              10, int $accepted_args
+              =
+              1
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Hooks a function or method to a specific filter action.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Filters are the hooks that WordPress launches to modify text of various types
+before adding it to the database or sending it to the browser screen. Plugins
+can specify that one or more of its PHP functions is executed to
+modify specific types of text at these times, using the Filter API.</p>
+
+<p>To use the API, the following code should be used to bind a callback to the
+filter.</p>
+
+<pre><code>function example_hook($example) { echo $example; }
+add_filter('example_filter', 'example_hook');
+</code></pre>
+
+<p>In WordPress 1.5.1+, hooked functions can take extra arguments that are set
+when the matching do_action() or apply_filters() call is run. The
+$accepted_args allow for calling functions only when the number of args
+match. Hooked functions can take extra arguments that are set when the
+matching do_action() or apply_filters() call is run. For example, the action
+comment_id_not_found will pass any functions that hook onto it the ID of the
+requested comment.</p>
+
+<p><strong>Note:</strong> the function will return true no matter if the
+function was hooked fails or not. There are no checks for whether the
+function exists beforehand and no checks to whether the <tt>$function_to_add
+is even a string. It is up to you to take care and this is done for
+optimization purposes, so everything is as quick as possible.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the filter to hook the $function_to_add to.</p>
+</em></td>
+</tr>
+<tr>
+<th>$function_to_add</th>
+<td>callback</td>
+<td><em><p>The name of the function to be called when the filter is applied.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.</p>
+</em></td>
+</tr>
+<tr>
+<th>$accepted_args</th>
+<td>int</td>
+<td><em><p>optional. The number of arguments the function accept (default 1).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters added in the form of
+wp_filter['tag']['array of priorities']['array of functions serialized']['array of ['array (functions, accepted_args)']']
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $merged_filters Tracks the tags that need to be merged for later. If the hook is added, it doesn't need to run through that process.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::apply_filters()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">apply_filters</span><span class="nb-faded-text">(
+          string $tag, mixed $value
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Call the functions added to a filter hook.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The callback functions attached to filter hook $tag are invoked by calling
+this function. This function can be used to create a new filter hook by
+simply calling this function with the name of the new hook specified using
+the $tag parameter.</p>
+
+<p>The function allows for additional arguments to be added and passed to hooks.</p>
+
+<pre><code>function example_hook($string, $arg1, $arg2)
+{
+        //Do stuff
+        return $string;
+}
+$value = apply_filters('example_filter', 'filter me', 'arg1', 'arg2');
+</code></pre>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the filter hook.</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>The value on which the filters hooked to <tt>$tag</tt> are applied on.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>The filtered value after all hooked functions are applied to it.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $merged_filters Merges the filter hooks using this function.
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_current_filter stores the list of current filters with the current one last
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::apply_filters_ref_array()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">apply_filters_ref_array</span><span class="nb-faded-text">(
+          string $tag, array $args
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Execute functions hooked on a specific filter hook, specifying arguments in an array.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the filter hook.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>The arguments supplied to the functions hooked to <tt>$tag</tt></p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>The filtered value after all hooked functions are applied to it.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $merged_filters Merges the filter hooks using this function.
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_current_filter stores the list of current filters with the current one last
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::current_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">current_filter</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the name of the current filter or action.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Hook name of the current filter or action.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::did_action()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">did_action</span><span class="nb-faded-text">(
+          string $tag
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the number of times an action is fired.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the action hook.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The number of times action hook &lt;tt&gt;$tag&lt;/tt&gt; is fired</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_actions Increments the amount of times action was triggered.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_action()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_action</span><span class="nb-faded-text">(
+          string $tag,  $arg
+              =
+              ''
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Execute functions hooked on a specific action hook.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function invokes all functions attached to action hook $tag. It is
+possible to create new action hooks by simply calling this function,
+specifying the name of the new hook using the <tt>$tag</tt> parameter.</p>
+
+<p>You can pass extra arguments to the hooks, much like you can with
+apply_filters().</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the action to be executed.</p></em></td>
+</tr>
+<tr>
+<th>$arg</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Will return null if $tag does not exist in $wp_filter array</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_actions Increments the amount of times action was triggered.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\apply_filters()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::do_action_ref_array()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">do_action_ref_array</span><span class="nb-faded-text">(
+          string $tag, array $args
+          )
+        </span>
+        :
+          null</code><div class="description"><p class="short_description">Execute functions hooked on a specific action hook, specifying arguments in an array.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the action to be executed.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>The arguments supplied to the functions hooked to <tt>$tag</tt></p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null</td>
+<td>Will return null if $tag does not exist in $wp_filter array</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters
+         
+    </dd>
+<dt>Global</dt>
+<dd>array $wp_actions Increments the amount of times action was triggered.
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\do_action()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::has_action()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">has_action</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_check
+              =
+              false
+          )
+        </span>
+        :
+          int|boolean</code><div class="description"><p class="short_description">Check if any action has been registered for a hook.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the action hook.</p></em></td>
+</tr>
+<tr>
+<th>$function_to_check</th>
+<td>callback</td>
+<td><em><p>optional. If specified, return the priority of that function on this hook or false if not attached.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|boolean</td>
+<td>Optionally returns the priority on that hook for the specified function.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\has_filter()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::has_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">has_filter</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_check
+              =
+              false
+          )
+        </span>
+        :
+          int|boolean</code><div class="description"><p class="short_description">Check if any filter has been registered for a hook.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The name of the filter hook.</p></em></td>
+</tr>
+<tr>
+<th>$function_to_check</th>
+<td>callback</td>
+<td><em><p>optional. If specified, return the priority of that function on this hook or false if not attached.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int|boolean</td>
+<td>Optionally returns the priority on that hook for the specified function.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>array $wp_filter Stores all of the filters
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::plugin_basename()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">plugin_basename</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Gets the basename of a plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This method extracts the name of a plugin from its filename.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The filename of plugin.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The name of a plugin.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\WP_PLUGIN_DIR
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::plugin_dir_path()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">plugin_dir_path</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Gets the filesystem directory path (with trailing slash) for the plugin __FILE__ passed in</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The filename of the plugin (<strong>FILE</strong>)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>the filesystem path of the directory that contains the plugin</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::plugin_dir_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">plugin_dir_url</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Gets the URL directory path (with trailing slash) for the plugin __FILE__ passed in</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The filename of the plugin (<strong>FILE</strong>)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>the URL path of the directory that contains the plugin</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_activation_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_activation_hook</span><span class="nb-faded-text">(
+          string $file, callback $function
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the activation hook for a plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When a plugin is activated, the action 'activate_PLUGINNAME' hook is
+activated. In the name of this hook, PLUGINNAME is replaced with the name of
+the plugin, including the optional subdirectory. For example, when the plugin
+is located in wp-content/plugin/sampleplugin/sample.php, then the name of
+this hook will become 'activate_sampleplugin/sample.php'. When the plugin
+consists of only one file and is (as by default) located at
+wp-content/plugin/sample.php the name of this hook will be
+'activate_sample.php'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The filename of the plugin including the path.</p></em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>the function hooked to the 'activate_PLUGIN' action.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_deactivation_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_deactivation_hook</span><span class="nb-faded-text">(
+          string $file, callback $function
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the deactivation hook for a plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When a plugin is deactivated, the action 'deactivate_PLUGINNAME' hook is
+deactivated. In the name of this hook, PLUGINNAME is replaced with the name
+of the plugin, including the optional subdirectory. For example, when the
+plugin is located in wp-content/plugin/sampleplugin/sample.php, then
+the name of this hook will become 'activate_sampleplugin/sample.php'.</p>
+
+<p>When the plugin consists of only one file and is (as by default) located at
+wp-content/plugin/sample.php the name of this hook will be
+'activate_sample.php'.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The filename of the plugin including the path.</p></em></td>
+</tr>
+<tr>
+<th>$function</th>
+<td>callback</td>
+<td><em><p>the function hooked to the 'activate_PLUGIN' action.</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_uninstall_hook()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_uninstall_hook</span><span class="nb-faded-text">(
+          string $file, callback $callback
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the uninstallation hook for a plugin.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Registers the uninstall hook that will be called when the user clicks on the
+uninstall link that calls for the plugin to uninstall itself. The link won't
+be active unless the plugin hooks into the action.</p>
+
+<p>The plugin should not run arbitrary code outside of functions, when
+registering the uninstall hook. In order to run using the hook, the plugin
+will have to be included, which means that any code laying outside of a
+function will be run during the uninstall process. The plugin should not
+hinder the uninstall process.</p>
+
+<p>If the plugin can not be written without running code within the plugin, then
+the plugin should create a file named 'uninstall.php' in the base plugin
+folder. This file will be called, if it exists, during the uninstall process
+bypassing the uninstall hook. The plugin, when using the 'uninstall.php'
+should always check for the 'WP_UNINSTALL_PLUGIN' constant, before
+executing.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$callback</th>
+<td>callback</td>
+<td><em><p>The callback to run when the hook is called. Must be a static method or function.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_action()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_action</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_remove, int $priority
+              =
+              10, int $accepted_args
+              =
+              1
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Removes a function from a specified action hook.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function removes a function attached to a specified action hook. This
+method can be used to remove default functions attached to a specific filter
+hook and possibly replace them with a substitute.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The action hook to which the function to be removed is hooked.</p></em></td>
+</tr>
+<tr>
+<th>$function_to_remove</th>
+<td>callback</td>
+<td><em><p>The name of the function which should be removed.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>optional The priority of the function (default: 10).</p>
+</em></td>
+</tr>
+<tr>
+<th>$accepted_args</th>
+<td>int</td>
+<td><em><p>optional. The number of arguments the function accepts (default: 1).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>Whether the function is removed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_all_actions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_all_actions</span><span class="nb-faded-text">(
+          string $tag, int $priority
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove all of the hooks from an action.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The action to remove hooks from.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>The priority number to remove them from.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True when finished.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_all_filters()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_all_filters</span><span class="nb-faded-text">(
+          string $tag, int $priority
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove all of the hooks from a filter.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The filter to remove hooks from.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>The priority number to remove.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True when finished.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::remove_filter()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">remove_filter</span><span class="nb-faded-text">(
+          string $tag, callback $function_to_remove, int $priority
+              =
+              10, int $accepted_args
+              =
+              1
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Removes a function from a specified filter hook.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function removes a function attached to a specified filter hook. This
+method can be used to remove default functions attached to a specific filter
+hook and possibly replace them with a substitute.</p>
+
+<p>To remove a hook, the $function_to_remove and $priority arguments must match
+when the hook was added. This goes for both filters and actions. No warning
+will be given on removal failure.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$tag</th>
+<td>string</td>
+<td><em><p>The filter hook to which the function to be removed is hooked.</p></em></td>
+</tr>
+<tr>
+<th>$function_to_remove</th>
+<td>callback</td>
+<td><em><p>The name of the function which should be removed.</p></em></td>
+</tr>
+<tr>
+<th>$priority</th>
+<td>int</td>
+<td><em><p>optional. The priority of the function (default: 10).</p>
+</em></td>
+</tr>
+<tr>
+<th>$accepted_args</th>
+<td>int</td>
+<td><em><p>optional. The number of arguments the function accepts (default: 1).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>Whether the function existed before it was removed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Plugin
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

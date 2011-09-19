@@ -1,0 +1,2113 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/class-http.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul>
+<li><a href="#%5CWP_HTTP_Proxy">\WP_HTTP_Proxy</a></li>
+<li><a href="#%5CWP_Http">\WP_Http</a></li>
+<li><a href="#%5CWP_Http_Cookie">\WP_Http_Cookie</a></li>
+<li><a href="#%5CWP_Http_Curl">\WP_Http_Curl</a></li>
+<li><a href="#%5CWP_Http_Encoding">\WP_Http_Encoding</a></li>
+<li><a href="#%5CWP_Http_Fsockopen">\WP_Http_Fsockopen</a></li>
+<li><a href="#%5CWP_Http_Streams">\WP_Http_Streams</a></li>
+</ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Simple and uniform HTTP request API.</p>
+<div class="long-description"><p>Standardizes the HTTP requests for WordPress. Handles cookies, gzip encoding and decoding, chunk
+decoding, if HTTP 1.1 and various other difficult HTTP protocol implementations.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Link</dt>
+<dd>
+<a href="http://trac.wordpress.org/ticket/4779">HTTP API Proposal</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>HTTP
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a id="\WP_HTTP_Proxy" class="anchor"></a><h2 class="class">\WP_HTTP_Proxy<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>Default</small><p class="short-description">Adds Proxy support to the WordPress HTTP API.</p>
+<div class="long-description"><p>There are caveats to proxy support. It requires that defines be made in the wp-config.php file to
+enable proxy support. There are also a few filters that plugins can hook into for some of the
+constants.</p>
+
+<p>Please note that only BASIC authentication is supported by most transports.
+cURL MAY support more methods (such as NTLM authentication) depending on your environment.</p>
+
+<p>The constants are as follows:</p>
+
+<ol>
+<li>WP_PROXY_HOST - Enable proxy support and host for connecting.</li>
+<li>WP_PROXY_PORT - Proxy port for connection. No default, must be defined.</li>
+<li>WP_PROXY_USERNAME - Proxy username, if it requires authentication.</li>
+<li>WP_PROXY_PASSWORD - Proxy password, if it requires authentication.</li>
+<li>WP_PROXY_BYPASS_HOSTS - Will prevent the hosts in this list from going through the proxy.
+You do not need to have localhost and the blog host in this list, because they will not be passed
+through the proxy. The list should be presented in a comma separated list, wildcards using * are supported, eg. *.wordpress.org</li>
+</ol>
+
+<p>An example can be as seen below.</p>
+
+<pre><code>define('WP_PROXY_HOST', '192.168.84.101');
+define('WP_PROXY_PORT', '8080');
+define('WP_PROXY_BYPASS_HOSTS', 'localhost, www.example.com, *.wordpress.org');
+</code></pre>
+</div>
+<dl class="class-info">
+<dt>Link</dt>
+<dd>
+<a href="http://core.trac.wordpress.org/ticket/4011">Proxy support ticket in WordPress.</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://core.trac.wordpress.org/ticket/14636">Allow wildcard domains in WP_PROXY_BYPASS_HOSTS</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_HTTP_Proxy::authentication()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">authentication</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve authentication string for proxy authentication.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::authentication_header()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">authentication_header</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve header string for proxy authentication.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::host()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">host</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the host for the proxy server.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::is_enabled()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">is_enabled</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether proxy connection should be used.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Use</dt>
+<dd>WP_PROXY_HOST
+         
+    </dd>
+<dt>Use</dt>
+<dd>WP_PROXY_PORT
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::password()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">password</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the password for proxy authentication.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::port()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">port</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the port for the proxy server.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::send_through_proxy()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">send_through_proxy</span><span class="nb-faded-text">(
+          string $uri
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether URL should be sent through the proxy server.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>We want to keep localhost and the blog URL from being sent through the proxy server, because
+some proxies can not handle this. We also have the constant available for defining other
+hosts that won't be sent through the proxy.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$uri</th>
+<td>string</td>
+<td><em><p>URI to check.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True, to send through the proxy and false if, the proxy should not be used.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\WP_PROXY_BYPASS_HOSTS
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::use_authentication()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">use_authentication</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether authentication should be used.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Use</dt>
+<dd>WP_PROXY_USERNAME
+         
+    </dd>
+<dt>Use</dt>
+<dd>WP_PROXY_PASSWORD
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_HTTP_Proxy::username()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">username</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the username for proxy authentication.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http" class="anchor"></a><h2 class="class">\WP_Http<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">WordPress HTTP Class for managing HTTP Transports and making HTTP requests.</p>
+<div class="long-description"><p>This class is called for the functionality of making HTTP requests and replaces Snoopy
+functionality. There is no available functionality to add HTTP transport implementations, since
+most of the HTTP transports are added and available for use.</p>
+
+<p>There are no properties, because none are needed and for performance reasons. Some of the
+functions are static and while they do have some overhead over functions in PHP4, the purpose is
+maintainability. When PHP5 is finally the requirement, it will be easy to add the static keyword
+to the code. It is not as easy to convert a function to a method after enough code uses the old
+way.</p>
+
+<p>Debugging includes several actions, which pass different variables for debugging the HTTP API.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http::_dispatch_request()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_dispatch_request</span><span class="nb-faded-text">(
+          string $url, array $args
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Dispatches a HTTP request to a supporting transport.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Tests each transport in order to find a transport which matches the request arguments.
+Also caches the transport instance to be used later.</p>
+
+<p>The order for blocking requests is cURL, Streams, and finally Fsockopen.
+The order for non-blocking requests is cURL, Streams and Fsockopen().</p>
+
+<p>There are currently issues with "localhost" not resolving correctly with DNS. This may cause
+an error "failed to open stream: A connection attempt failed because the connected party did
+not properly respond after a period of time, or established connection failed because [the]
+connected host has failed to respond."</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to Request</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Request arguments</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::_get_first_available_transport()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_get_first_available_transport</span><span class="nb-faded-text">(
+          array $args, string $url
+              =
+              null
+          )
+        </span>
+        :
+          string|false</code><div class="description"><p class="short_description">Tests which transports are capable of supporting the request.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>array</td>
+<td><em><p>Request arguments</p></em></td>
+</tr>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL to Request</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|false</td>
+<td>Class name for the first transport that claims to support the request. False if no transport claims to support the request.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::block_request()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">block_request</span><span class="nb-faded-text">(
+          string $uri
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Block requests through the proxy.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Those who are behind a proxy and want to prevent access to certain hosts may do so. This will
+prevent plugins from working and core functionality, if you don't include api.wordpress.org.</p>
+
+<p>You block external URL requests by defining WP_HTTP_BLOCK_EXTERNAL as true in your wp-config.php
+file and this will only allow localhost and your blog to make requests. The constant
+WP_ACCESSIBLE_HOSTS will allow additional hosts to go through for requests. The format of the
+WP_ACCESSIBLE_HOSTS constant is a comma separated list of hostnames to allow, wildcard domains
+are supported, eg *.wordpress.org will allow for all subdomains of wordpress.org to be contacted.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$uri</th>
+<td>string</td>
+<td><em><p>URI of url.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True to block, false to allow.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://core.trac.wordpress.org/ticket/8927">Allow preventing external requests.</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://core.trac.wordpress.org/ticket/14636">Allow wildcard domains in WP_ACCESSIBLE_HOSTS</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::buildCookieHeader()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">buildCookieHeader</span><span class="nb-faded-text">(
+          array $r
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Takes the arguments for a ::request() and checks for the cookie array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If it's found, then it's assumed to contain WP_Http_Cookie objects, which are each parsed
+into strings and added to the Cookie: header (within the arguments array). Edits the array by
+reference.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$r</th>
+<td>array</td>
+<td><em><p>Full array of args passed into ::request()</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+<dt>Version</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::chunkTransferDecode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">chunkTransferDecode</span><span class="nb-faded-text">(
+          string $body
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Decodes chunk transfer-encoding, based off the HTTP 1.1 specification.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Based off the HTTP http_encoding_dechunk function. Does not support UTF-8. Does not support
+returning footer headers. Shouldn't be too difficult to support it though.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$body</th>
+<td>string</td>
+<td><em><p>Body content</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Chunked decoded body on success or raw body on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+<dt>Todo</dt>
+<dd>Add support for footer chunked headers.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::get()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Uses the GET HTTP method.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used for sending data that is expected to be in the body.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URI resource.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::head()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">head</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Uses the HEAD HTTP method.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used for sending data that is expected to be in the body.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URI resource.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::post()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">post</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Uses the POST HTTP method.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used for sending data that is expected to be in the body.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URI resource.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::processHeaders()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">processHeaders</span><span class="nb-faded-text">(
+          string|array $headers
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Transform header string into an array.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If an array is given then it is assumed to be raw header data with numeric keys with the
+headers as the values. No headers must be passed that were already processed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$headers</th>
+<td>string|array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Processed string headers. If duplicate headers are encountered, Then a numbered array is returned as the value of that header-key.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::processResponse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">processResponse</span><span class="nb-faded-text">(
+          string $strResponse
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Parses the responses and splits the parts into headers and body.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$strResponse</th>
+<td>string</td>
+<td><em><p>The full response string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Array with 'headers' and 'body' keys.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http::request()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">request</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array|object</code><div class="description"><p class="short_description">Send a HTTP request to a URI.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The body and headers are part of the arguments. The 'body' argument is for the body and will
+accept either a string or an array. The 'headers' argument should be an array, but a string
+is acceptable. If the 'body' argument is an array, then it will automatically be escaped
+using http_build_query().</p>
+
+<p>The only URI that are supported in the HTTP Transport implementation are the HTTP and HTTPS
+protocols. HTTP and HTTPS are assumed so the server might not know how to handle the send
+headers. Other protocols are unsupported and most likely will fail.</p>
+
+<p>The defaults are 'method', 'timeout', 'redirection', 'httpversion', 'blocking' and
+'user-agent'.</p>
+
+<p>Accepted 'method' values are 'GET', 'POST', and 'HEAD', some transports technically allow
+others, but should not be assumed. The 'timeout' is used to sent how long the connection
+should stay open before failing when no response. 'redirection' is used to track how many
+redirects were taken and used to sent the amount for other transports, but not all transports
+accept setting that value.</p>
+
+<p>The 'httpversion' option is used to sent the HTTP version and accepted values are '1.0', and
+'1.1' and should be a string. Version 1.1 is not supported, because of chunk response. The
+'user-agent' option is the user-agent and is used to replace the default user-agent, which is
+'WordPress/WP_Version', where WP_Version is the value from $wp_version.</p>
+
+<p>'blocking' is the default, which is used to tell the transport, whether it should halt PHP
+while it performs the request or continue regardless. Actually, that isn't entirely correct.
+Blocking mode really just means whether the fread should just pull what it can whenever it
+gets bytes or if it should wait until it has enough in the buffer to read or finishes reading
+the entire content. It doesn't actually always mean that PHP will continue going after making
+the request.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URI resource.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array|object</td>
+<td>Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Todo</dt>
+<dd>Refactor this code. The code in this method extends the scope of its original purpose
+and should be refactored to allow for cleaner abstraction and reduce duplication of the
+code. One suggestion is to create a class specifically for the arguments, however
+preliminary refactoring to this affect has affect more than just the scope of the
+arguments. Something to ponder at least.
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http_Cookie" class="anchor"></a><h2 class="class">\WP_Http_Cookie<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">Internal representation of a single cookie.</p>
+<div class="long-description"><p>Returned cookies are represented using this class, and when cookies are set, if they are not
+already a WP_Http_Cookie() object, then they are turned into one.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Todo</dt>
+<dd>The WordPress convention is to use underscores instead of camelCase for function and method
+names. Need to switch to use underscores instead for the methods.
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Http_Cookie::$domain" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$domain</span>= ''
+                </code><div class="description">
+<p class="short-description">Cookie Domain.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::$expires" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$expires</span>= ''
+                </code><div class="description">
+<p class="short-description">When the cookie expires.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::$name" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$name</span>= ''
+                </code><div class="description">
+<p class="short-description">Cookie name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::$path" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$path</span>= ''
+                </code><div class="description">
+<p class="short-description">Cookie URL path.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::$value" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight">$value</span>= ''
+                </code><div class="description">
+<p class="short-description">Cookie value.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http_Cookie::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          string|array $data
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets up this cookie object.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The parameter $data should be either an associative array containing the indices names below
+or a header string detailing it.</p>
+
+<p>If it's an array, it should include the following elements:</p>
+
+<ol>
+<li>Name</li>
+<li>Value - should NOT be urlencoded already.</li>
+<li>Expires - (optional) String or int (UNIX timestamp).</li>
+<li>Path (optional)</li>
+<li>Domain (optional)</li>
+</ol>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$data</th>
+<td>string|array</td>
+<td><em><p>Raw cookie data.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::getFullHeader()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFullHeader</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve cookie header for usage in the rest of the WordPress HTTP API.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::getHeaderValue()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getHeaderValue</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convert cookie name and value back to header string.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Header encoded cookie name and value.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Cookie::test()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">test</span><span class="nb-faded-text">(
+          string $url
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Confirms that it's OK to send this cookie to the URL checked against.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Decision is based on RFC 2109/2965, so look there for details on validity.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URL you intend to send this cookie to</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>TRUE if allowed, FALSE otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http_Curl" class="anchor"></a><h2 class="class">\WP_Http_Curl<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">HTTP request method uses Curl extension to retrieve the url.</p>
+<div class="long-description"><p>Requires the Curl extension to be installed.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Http_Curl::$headers" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
+                 <span class="highlight">$headers</span>= ''''
+                </code><div class="description">
+<p class="short-description">Temporary header storage for use with streaming to a file.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http_Curl::request()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">request</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Send a HTTP request to a URI using cURL extension.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>'headers', 'body', 'response', 'cookies' and 'filename' keys.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Curl::stream_headers()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">stream_headers</span><span class="nb-faded-text">(
+           $handle,  $headers
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Grab the headers of the cURL request</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Each header is sent individually to this callback, so we append to the $header property for temporary storage</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$handle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$headers</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Curl::test()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">test</span><span class="nb-faded-text">(
+           $args
+              =
+              array(
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Whether this class can be used for retrieving an URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>False means this class can not be used, true means it can.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http_Encoding" class="anchor"></a><h2 class="class">\WP_Http_Encoding<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">Implementation for deflate and gzip transfer encodings.</p>
+<div class="long-description"><p>Includes RFC 1950, RFC 1951, and RFC 1952.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http_Encoding::accept_encoding()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">accept_encoding</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">What encoding types to accept and their priority values.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Types of encoding to accept.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::compatible_gzinflate()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compatible_gzinflate</span><span class="nb-faded-text">(
+          string $gzData
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Decompression of deflated string while staying compatible with the majority of servers.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Certain Servers will return deflated data with headers which PHP's gziniflate()
+function cannot handle out of the box. The following function lifted from
+http://au2.php.net/manual/en/function.gzinflate.php#77336 will attempt to deflate
+the various return forms used.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$gzData</th>
+<td>string</td>
+<td><em><p>String to decompress.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Link</dt>
+<dd>
+<a href="http://au2.php.net/manual/en/function.gzinflate.php#77336">http://au2.php.net/manual/en/function.gzinflate.php#77336</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::compress()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compress</span><span class="nb-faded-text">(
+          string $raw, int $level
+              =
+              9, string $supports
+              =
+              null
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Compress raw string using the deflate format.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Supports the RFC 1951 standard.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$raw</th>
+<td>string</td>
+<td><em><p>String to compress.</p></em></td>
+</tr>
+<tr>
+<th>$level</th>
+<td>int</td>
+<td><em><p>Optional, default is 9. Compression level, 9 is highest.</p></em></td>
+</tr>
+<tr>
+<th>$supports</th>
+<td>string</td>
+<td><em><p>Optional, not used. When implemented it will choose the right compression based on what the server supports.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::content_encoding()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">content_encoding</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">What encoding the content used when it was compressed to send in the headers.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Content-Encoding string to send in the header.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::decompress()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">decompress</span><span class="nb-faded-text">(
+          string $compressed, int $length
+              =
+              null
+          )
+        </span>
+        :
+          string|bool</code><div class="description"><p class="short_description">Decompression of deflated string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Will attempt to decompress using the RFC 1950 standard, and if that fails
+then the RFC 1951 standard deflate will be attempted. Finally, the RFC
+1952 standard gzip decode will be attempted. If all fail, then the
+original compressed string will be returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$compressed</th>
+<td>string</td>
+<td><em><p>String to decompress.</p></em></td>
+</tr>
+<tr>
+<th>$length</th>
+<td>int</td>
+<td><em><p>The optional length of the compressed data.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|bool</td>
+<td>False on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::is_available()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">is_available</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether decompression and compression are supported by the PHP version.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Each function is tested instead of checking for the zlib extension, to
+ensure that the functions all exist in the PHP version and aren't
+disabled.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Encoding::should_decode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">should_decode</span><span class="nb-faded-text">(
+          array|string $headers
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether the content be decoded based on the headers.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$headers</th>
+<td>array|string</td>
+<td><em><p>All of the available headers.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http_Fsockopen" class="anchor"></a><h2 class="class">\WP_Http_Fsockopen<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">HTTP request method uses fsockopen function to retrieve the url.</p>
+<div class="long-description"><p>This would be the preferred method, but the fsockopen implementation has the most overhead of all
+the HTTP transport implementations.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http_Fsockopen::request()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">request</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Send a HTTP request to a URI using fsockopen().</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Does not support non-blocking mode.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>URI resource.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>'headers', 'body', 'response', 'cookies' and 'filename' keys.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-http.html#%5CWP_Http::request">\WP_Http::request</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Fsockopen::test()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">test</span><span class="nb-faded-text">(
+           $args
+              =
+              array(
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Whether this class can be used for retrieving an URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>False means this class can not be used, true means it can.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<a id="\WP_Http_Streams" class="anchor"></a><h2 class="class">\WP_Http_Streams<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\HTTP</small><p class="short-description">HTTP request method uses Streams to retrieve the url.</p>
+<div class="long-description"><p>Requires PHP 5.0+ and uses fopen with stream context. Requires that 'allow_url_fopen' PHP setting
+to be enabled.</p>
+
+<p>Second preferred method for getting the URL, for PHP 5.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Http_Streams::request()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">request</span><span class="nb-faded-text">(
+          string $url, \str|array $args
+              =
+              array(
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Send a HTTP request to a URI using streams with fopen().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>\str|array</td>
+<td><em><p>Optional. Override the defaults.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>'headers', 'body', 'response', 'cookies' and 'filename' keys.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Http_Streams::test()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">test</span><span class="nb-faded-text">(
+           $args
+              =
+              array(
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Whether this class can be used for retrieving an URL.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>False means this class can not be used, true means it can.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+<dt>Static</dt>
+<dd>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

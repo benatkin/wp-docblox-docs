@@ -1,0 +1,6930 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/deprecated.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Deprecated functions from past WordPress versions. You shouldn't use these
+functions and look for the alternatives instead. The functions will be
+removed in a later version.</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Deprecated
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::__ngettext()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__ngettext</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve the plural or single form based on the amount.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use _n()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_n()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::__ngettext_noop()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">__ngettext_noop</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register plural strings in POT file, but don't translate them.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use _n_noop()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_n_noop()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_c()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_c</span><span class="nb-faded-text">(
+          string $text, string $domain
+              =
+              'default'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve translated string with vertical bar context</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Quite a few times, there will be collisions with similar translatable text
+found in more than two places but with different translated context.</p>
+
+<p>In order to use the separate contexts, the _c() function is used and the
+translatable string uses a pipe ('|') which has the context the string is in.</p>
+
+<p>When the translated string is returned, it is everything before the pipe, not
+including the pipe character. If there is no pipe in the translated text then
+everything is returned.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to translate</p></em></td>
+</tr>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>Optional. Domain to retrieve the translated text</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Translated context string without pipe</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use _x()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_x()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::_nc()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">_nc</span><span class="nb-faded-text">(
+           $single,  $plural,  $number,  $domain
+              =
+              'default'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">A version of _n(), which supports contexts.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Strips everything from the translation after the last bar.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$single</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$plural</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$number</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$domain</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use _nx()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_nx()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_n()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_c()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.7.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::attribute_escape()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">attribute_escape</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escaping for HTML attributes.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use esc_attr()
+         
+    </dd>
+<dt>See</dt>
+<dd>\esc_attr()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.6
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::automatic_feed_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">automatic_feed_links</span><span class="nb-faded-text">(
+          boolean $add
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enable/disable automatic general feed link outputting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$add</th>
+<td>boolean</td>
+<td><em><p>Optional, default is true. Add or remove links. Defaults to true.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use add_theme_support( 'automatic-feed-links' )
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::clean_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">clean_url</span><span class="nb-faded-text">(
+          string $url, array $protocols
+              =
+              null, string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Checks and cleans a URL.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A number of characters are removed from the URL. If the URL is for displaying
+(the default behaviour) ampersands are also replaced. The 'clean_url' filter
+is applied to the returned cleaned URL.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL to be cleaned.</p></em></td>
+</tr>
+<tr>
+<th>$protocols</th>
+<td>array</td>
+<td><em><p>Optional. An array of acceptable protocols.</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional. How the URL will be used. Default is 'display'.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The cleaned $url after the 'clean_url' filter is applied.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use esc_url()
+         
+    </dd>
+<dt>See</dt>
+<dd>\Alias
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_rss()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_rss</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Return link to the post RSS feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.2
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_post_comments_feed_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_post_comments_feed_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::comments_rss_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">comments_rss_link</span><span class="nb-faded-text">(
+          string $link_text
+              =
+              'Comments RSS'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print RSS comment feed link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link_text</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use post_comments_feed_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\post_comments_feed_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::create_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">create_user</span><span class="nb-faded-text">(
+          string $username, string $password, string $email
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">An alias of wp_create_user().</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>The user's username.</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>The user's password.</p>
+</em></td>
+</tr>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>The user's email (optional).</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The new user's ID.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_create_user()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_create_user()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::delete_usermeta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">delete_usermeta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key, mixed $meta_value
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove user meta data.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID.</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True deletion completed and false if user_id is not a number.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use delete_user_meta()
+         
+    </dd>
+<dt>See</dt>
+<dd>\delete_user_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::dropdown_cats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">dropdown_cats</span><span class="nb-faded-text">(
+          int $optionall
+              =
+              1, string $all
+              =
+              'All', string $orderby
+              =
+              'ID', string $order
+              =
+              'asc', int $show_last_update
+              =
+              0, int $show_count
+              =
+              0, int $hide_empty
+              =
+              1, bool $optionnone
+              =
+              false, int $selected
+              =
+              0, int $exclude
+              =
+              0
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$optionall</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$all</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$order</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$show_last_update</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$show_count</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$hide_empty</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$optionnone</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$selected</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$exclude</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_dropdown_categories()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_dropdown_categories()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::funky_javascript_callback()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">funky_javascript_callback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Callback used to change %uXXXX to &#YYY; syntax</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$matches</th>
+<td>array</td>
+<td><em><p>Single Match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>An HTML entity</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::funky_javascript_fix()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">funky_javascript_fix</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Fixes javascript bugs in browsers.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Converts unicode characters to HTML numbered entities.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to be made safe.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Fixed text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$is_macIE
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$is_winIE
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_alloptions()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_alloptions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve all autoload options, or all options if no autoloaded ones exist.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of all options.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_load_alloptions())
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_load_alloptions()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_archives()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_archives</span><span class="nb-faded-text">(
+          string $type
+              =
+              '', string $limit
+              =
+              '', string $format
+              =
+              'html', string $before
+              =
+              '', string $after
+              =
+              '', bool $show_post_count
+              =
+              false
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$show_post_count</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_archives()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_archives()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_attachment_icon()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_attachment_icon</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $fullsize
+              =
+              false, array $max_dims
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve HTML content of icon attachment image element.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$fullsize</th>
+<td>bool</td>
+<td><em><p>Optional, default to false. Whether to have full size image.</p></em></td>
+</tr>
+<tr>
+<th>$max_dims</th>
+<td>array</td>
+<td><em><p>Optional. Dimensions of image.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML content.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_attachment_image()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_attachment_image()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_attachment_icon_src()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_attachment_icon_src</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $fullsize
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve icon URL and Path.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$fullsize</th>
+<td>bool</td>
+<td><em><p>Optional, default to false. Whether to have full image.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Icon URL and full path to file, respectively.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_attachment_image_src()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_attachment_image_src()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_attachment_innerHTML()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_attachment_innerHTML</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $fullsize
+              =
+              false, array $max_dims
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve HTML content of image element.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$fullsize</th>
+<td>bool</td>
+<td><em><p>Optional, default to false. Whether to have full size image.</p></em></td>
+</tr>
+<tr>
+<th>$max_dims</th>
+<td>array</td>
+<td><em><p>Optional. Dimensions of image.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_attachment_image()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_attachment_image()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_author_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_author_link</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              false, int $author_id, string $author_nicename
+              =
+              ''
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Returns or Prints link to the author's posts.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+<tr>
+<th>$author_id</th>
+<td>int</td>
+<td><em><p>Required.</p></em></td>
+</tr>
+<tr>
+<th>$author_nicename</th>
+<td>string</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_author_posts_url()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_author_posts_url()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_author_name()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_author_name</span><span class="nb-faded-text">(
+          int $auth_id
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the specified author's preferred display name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$auth_id</th>
+<td>int</td>
+<td><em><p>The ID of the author.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's display name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('display_name')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_author_rss_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_author_rss_link</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              false, int $author_id
+              =
+              1
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Print/Return link to author RSS feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$author_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_author_feed_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_author_feed_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_autotoggle()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_autotoggle</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Gets the auto_toggle setting.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>The category to get. If no category supplied uses 0</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Only returns 0.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>No alternative function available
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_boundary_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_boundary_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, string $excluded_categories
+              =
+              '', bool $start
+              =
+              true
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get boundary post relational link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Can either be start or end post relational link.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>string</td>
+<td><em><p>Optional. Excluded categories IDs.</p></em></td>
+</tr>
+<tr>
+<th>$start</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether display link to first or last post.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_category_children()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_category_children</span><span class="nb-faded-text">(
+          int $id, string $before
+              =
+              '/', string $after
+              =
+              '', array $visited
+              =
+              array(
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve category children list separated before and after the term IDs.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Category ID to retrieve children.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. Prepend before category term ID.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional, default is empty string. Append after category term ID.</p></em></td>
+</tr>
+<tr>
+<th>$visited</th>
+<td>array</td>
+<td><em><p>Optional. Category Term IDs that have already been added.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_term_children()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_term_children()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_category_rss_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_category_rss_link</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              false, int $cat_ID
+              =
+              1
+          )
+        </span>
+        :
+          string|null</code><div class="description"><p class="short_description">Print/Return link to category RSS2 feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$cat_ID</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_category_feed_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_category_feed_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_catname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_catname</span><span class="nb-faded-text">(
+          int $cat_ID
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the category name by the category ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_ID</th>
+<td>int</td>
+<td><em><p>Category ID</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>category name</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_cat_name()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_cat_name()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_commentdata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_commentdata</span><span class="nb-faded-text">(
+          int $comment_ID, int $no_cache
+              =
+              0, bool $include_unapproved
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Retrieve an array of comment data about comment $comment_ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment_ID</th>
+<td>int</td>
+<td><em><p>The ID of the comment</p></em></td>
+</tr>
+<tr>
+<th>$no_cache</th>
+<td>int</td>
+<td><em><p>Whether to use the cache (cast to bool)</p>
+</em></td>
+</tr>
+<tr>
+<th>$include_unapproved</th>
+<td>bool</td>
+<td><em><p>Whether to include unapproved comments</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>The comment data</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.7
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_comment()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_comment()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_index_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_index_rel_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get site index relational link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_link</span><span class="nb-faded-text">(
+          int $bookmark_id, string $output
+              =
+              OBJECT,  $filter
+              =
+              'raw'
+          )
+        </span>
+        :
+          object|array</code><div class="description"><p class="short_description">Retrieve bookmark data based on ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$bookmark_id</th>
+<td>int</td>
+<td><em><p>ID of link</p></em></td>
+</tr>
+<tr>
+<th>$output</th>
+<td>string</td>
+<td><em><p>OBJECT, ARRAY_N, or ARRAY_A</p></em></td>
+</tr>
+<tr>
+<th>$filter</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object|array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmark()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmark()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linkcatname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linkcatname</span><span class="nb-faded-text">(
+          int $id
+              =
+              0
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Gets the name of category by id.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>The category to get. If no category supplied uses 0</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_category()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_category()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linkobjects()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linkobjects</span><span class="nb-faded-text">(
+          int $category
+              =
+              0, string $orderby
+              =
+              'name', int $limit
+              =
+              0
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Gets an array of link objects associated with category n.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Usage:</p>
+
+<pre><code> $links = get_linkobjects(1);
+    if ($links) {
+        foreach ($links as $link) {
+            echo '<li>'.$link->link_name.'<br />'.$link->link_description.'</li>';
+        }
+    }
+</code></pre>
+
+<p>Fields are:</p>
+
+<ol>
+    <li>link_id</li>
+    <li>link_url</li>
+    <li>link_name</li>
+    <li>link_image</li>
+    <li>link_target</li>
+    <li>link_category</li>
+    <li>link_description</li>
+    <li>link_visible</li>
+    <li>link_owner</li>
+    <li>link_rating</li>
+    <li>link_updated</li>
+    <li>link_rel</li>
+    <li>link_notes</li>
+</ol>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$category</th>
+<td>int</td>
+<td><em><p>The category to use. If no category supplied uses all</p></em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>the order to output the links. E.g. 'id', 'name', 'url', 'description', or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>int</td>
+<td><em><p>Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linkobjectsbyname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linkobjectsbyname</span><span class="nb-faded-text">(
+          string $cat_name
+              =
+              "noname", string $orderby
+              =
+              'name', int $limit
+              =
+              -1
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Gets an array of link objects associated with category $cat_name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><pre><code> $links = get_linkobjectsbyname('fred');
+    foreach ($links as $link) {
+        echo '<li>'.$link->link_name.'</li>';
+    }
+</code></pre>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_name</th>
+<td>string</td>
+<td><em><p>The category name to use. If no match is found uses all.</p></em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>The order to output the links. E.g. 'id', 'name', 'url', 'description', or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>int</td>
+<td><em><p>Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linkrating()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linkrating</span><span class="nb-faded-text">(
+          object $link
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$link</th>
+<td>object</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use sanitize_bookmark_field()
+         
+    </dd>
+<dt>See</dt>
+<dd>\sanitize_bookmark_field()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_links</span><span class="nb-faded-text">(
+          int $category
+              =
+              -1, string $before
+              =
+              '', string $after
+              =
+              '<br />', string $between
+              =
+              ' ', bool $show_images
+              =
+              true, string $orderby
+              =
+              'name', bool $show_description
+              =
+              true, bool $show_rating
+              =
+              false, int $limit
+              =
+              -1, int $show_updated
+              =
+              1, bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          null|string</code><div class="description"><p class="short_description">Gets the links associated with category by id.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$category</th>
+<td>int</td>
+<td><em><p>The category to use. If no category supplied uses all</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>the html to output before the link</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>the html to output after the link</p></em></td>
+</tr>
+<tr>
+<th>$between</th>
+<td>string</td>
+<td><em><p>the html to output between the link/image and its description. Not used if no image or show_images == true</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_images</th>
+<td>bool</td>
+<td><em><p>whether to show images (if defined).</p>
+</em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>the order to output the links. E.g. 'id', 'name', 'url', 'description', or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_description</th>
+<td>bool</td>
+<td><em><p>whether to show the description if show_images=false/not defined.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_rating</th>
+<td>bool</td>
+<td><em><p>show rating stars/chars</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>int</td>
+<td><em><p>Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+<tr>
+<th>$show_updated</th>
+<td>int</td>
+<td><em><p>whether to show last updated timestamp</p></em></td>
+</tr>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em><p>whether to echo the results, or return them instead</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_links_list()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_links_list</span><span class="nb-faded-text">(
+          string $order
+              =
+              'name'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Output entire list of links by category.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Output a list of all links, listed by category, using the settings in
+$wpdb->linkcategories and output it as a nested HTML unordered list.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$order</th>
+<td>string</td>
+<td><em><p>Sort link categories by 'name' or 'id'</p>
+</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_links_withrating()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_links_withrating</span><span class="nb-faded-text">(
+          int $category
+              =
+              -1, string $before
+              =
+              '', string $after
+              =
+              '<br />', string $between
+              =
+              " ", bool $show_images
+              =
+              true, string $orderby
+              =
+              'id', bool $show_description
+              =
+              true, string $limit
+              =
+              -1, int $show_updated
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Gets the links associated with category n and display rating stars/chars.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$category</th>
+<td>int</td>
+<td><em><p>The category to use. If no category supplied uses all</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The html to output before the link</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The html to output after the link</p></em></td>
+</tr>
+<tr>
+<th>$between</th>
+<td>string</td>
+<td><em><p>The html to output between the link/image and it's description. Not used if no image or show_images == true</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_images</th>
+<td>bool</td>
+<td><em><p>Whether to show images (if defined).</p>
+</em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>The order to output the links. E.g. 'id', 'name', 'url', 'description', or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_description</th>
+<td>bool</td>
+<td><em><p>Whether to show the description if show_images=false/not defined.</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>string</td>
+<td><em><p>Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+<tr>
+<th>$show_updated</th>
+<td>int</td>
+<td><em><p>Whether to show last updated timestamp</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linksbyname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linksbyname</span><span class="nb-faded-text">(
+          string $cat_name
+              =
+              "noname", string $before
+              =
+              '', string $after
+              =
+              '<br />', string $between
+              =
+              " ", bool $show_images
+              =
+              true, string $orderby
+              =
+              'id', bool $show_description
+              =
+              true, bool $show_rating
+              =
+              false, int $limit
+              =
+              -1, int $show_updated
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Gets the links associated with category $cat_name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_name</th>
+<td>string</td>
+<td><em><p>Optional. The category name to use. If no match is found uses all.</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>Optional. The html to output before the link.</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>Optional. The html to output after the link.</p></em></td>
+</tr>
+<tr>
+<th>$between</th>
+<td>string</td>
+<td><em><p>Optional. The html to output between the link/image and it's description. Not used if no image or $show_images is true.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_images</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to show images (if defined).</p>
+</em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>Optional. The order to output the links. E.g. 'id', 'name', 'url', 'description' or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_description</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to show the description if show_images=false/not defined.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_rating</th>
+<td>bool</td>
+<td><em><p>Optional. Show rating stars/chars.</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>int</td>
+<td><em><p>Optional. Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+<tr>
+<th>$show_updated</th>
+<td>int</td>
+<td><em><p>Optional. Whether to show last updated timestamp</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_linksbyname_withrating()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_linksbyname_withrating</span><span class="nb-faded-text">(
+          string $cat_name
+              =
+              "noname", string $before
+              =
+              '', string $after
+              =
+              '<br />', string $between
+              =
+              " ", bool $show_images
+              =
+              true, string $orderby
+              =
+              'id', bool $show_description
+              =
+              true, int $limit
+              =
+              -1, int $show_updated
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Gets the links associated with category 'cat_name' and display rating stars/chars.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cat_name</th>
+<td>string</td>
+<td><em><p>The category name to use. If no match is found uses all</p></em></td>
+</tr>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em><p>The html to output before the link</p></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em><p>The html to output after the link</p></em></td>
+</tr>
+<tr>
+<th>$between</th>
+<td>string</td>
+<td><em><p>The html to output between the link/image and it's description. Not used if no image or show_images is true</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_images</th>
+<td>bool</td>
+<td><em><p>Whether to show images (if defined).</p>
+</em></td>
+</tr>
+<tr>
+<th>$orderby</th>
+<td>string</td>
+<td><em><p>the order to output the links. E.g. 'id', 'name', 'url', 'description', or 'rating'. Or maybe owner. If you start the name with an underscore the order will be reversed. You can also specify 'rand' as the order which will return links in a random order.</p>
+</em></td>
+</tr>
+<tr>
+<th>$show_description</th>
+<td>bool</td>
+<td><em><p>Whether to show the description if show_images=false/not defined</p>
+</em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>int</td>
+<td><em><p>Limit to X entries. If not specified, all entries are shown.</p></em></td>
+</tr>
+<tr>
+<th>$show_updated</th>
+<td>int</td>
+<td><em><p>Whether to show last updated timestamp</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_parent_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_parent_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get parent post relational link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_postdata()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_postdata</span><span class="nb-faded-text">(
+          int $postid
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Entire Post data.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$postid</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>1.5.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_post()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_post()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_profile()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_profile</span><span class="nb-faded-text">(
+           $field,  $user
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Retrieve user data based on field.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_settings()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_settings</span><span class="nb-faded-text">(
+          string $option
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Get value based on option.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$option</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_option()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_option()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_attachment_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_attachment_link</span><span class="nb-faded-text">(
+          int $id
+              =
+              0, bool $fullsize
+              =
+              false, array $max_dims
+              =
+              false, bool $permalink
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve HTML content of attachment image with link.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Optional. Post ID.</p></em></td>
+</tr>
+<tr>
+<th>$fullsize</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to use full size image.</p></em></td>
+</tr>
+<tr>
+<th>$max_dims</th>
+<td>array</td>
+<td><em><p>Optional. Max image dimensions.</p></em></td>
+</tr>
+<tr>
+<th>$permalink</th>
+<td>bool</td>
+<td><em><p>Optional, default is false. Whether to include permalink to image.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_attachment_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_attachment_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the ID of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The author's ID.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('ID')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_aim()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_aim</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the AIM address of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's AIM address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('aim')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_description()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_description</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the description of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's description.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('description')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_email</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the email of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's username.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('email')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_firstname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_firstname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the first name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's first name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('first_name')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_icq()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_icq</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the ICQ number of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's ICQ number.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('icq')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_lastname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_lastname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the last name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's last name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('last_name')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_login()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_login</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the login name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's login name (username).</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('login')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_msn()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_msn</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the MSN address of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's MSN address.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('msn')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_nickname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_nickname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the nickname of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's nickname.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('nickname')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_url</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the URL to the home page of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The URL to the author's page.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('url')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_the_author_yim()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_the_author_yim</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Retrieve the Yahoo! IM name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The author's Yahoo! IM name.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_the_author_meta('yim')
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_user_metavalues()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_metavalues</span><span class="nb-faded-text">(
+          array $ids
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Perform the query to get the $metavalues array(s) needed by _fill_user and _fill_many_users</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ids</th>
+<td>array</td>
+<td><em><p>User ID numbers list.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>of arrays. The array is indexed by user_id, containing $metavalues object arrays.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_usermeta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_usermeta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key
+              =
+              ''
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Retrieve user metadata.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If $user_id is not a number, then the function will fail over with a 'false'
+boolean return value. Other returned values depend on whether there is only
+one item to be returned, which be that single item type. If there is more
+than one metadata value, then it will be list of metadata values.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Optional. Metadata key.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_user_meta()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_user_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_usernumposts()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_usernumposts</span><span class="nb-faded-text">(
+           $userid
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Number of posts user has written.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userid</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use count_user_posts()
+         
+    </dd>
+<dt>See</dt>
+<dd>\count_user_posts()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_users_of_blog()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_users_of_blog</span><span class="nb-faded-text">(
+          int $id
+              =
+              ''
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Get users for the blog.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>For setups that use the multi-blog feature. Can be used outside of the
+multi-blog feature.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em><p>Blog ID.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>List of users that are part of that Blog ID</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.1.0
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wpdb
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$blog_id
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::gzip_compression()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">gzip_compression</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Unused function.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::index_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">index_rel_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational link for the site index.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_plugin_page()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_plugin_page</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Is the current admin page generated by a plugin?</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use global $plugin_page and/or get_plugin_page_hookname() hooks.
+         
+    </dd>
+<dt>Global</dt>
+<dd>$plugin_page
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_taxonomy()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_taxonomy</span><span class="nb-faded-text">(
+          string $taxonomy
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks that the taxonomy name exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>Name of taxonomy object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Whether the taxonomy exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use taxonomy_exists()
+         
+    </dd>
+<dt>See</dt>
+<dd>\taxonomy_exists()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::is_term()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">is_term</span><span class="nb-faded-text">(
+          int|string $term, string $taxonomy
+              =
+              '', int $parent
+              =
+              0
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Check if Term exists.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$term</th>
+<td>int|string</td>
+<td><em><p>The term to check</p></em></td>
+</tr>
+<tr>
+<th>$taxonomy</th>
+<td>string</td>
+<td><em><p>The taxonomy name to use</p></em></td>
+</tr>
+<tr>
+<th>$parent</th>
+<td>int</td>
+<td><em><p>ID of parent term under which to confine the exists search.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Get the term id or Term Object, if exists.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use term_exists()
+         
+    </dd>
+<dt>See</dt>
+<dd>\term_exists()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::js_escape()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">js_escape</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Escape single quotes, specialchar double quotes, and fix line endings.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The filter 'js_escape' is also applied by esc_js()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>The text to be escaped.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Escaped text.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use esc_js()
+         
+    </dd>
+<dt>See</dt>
+<dd>\esc_js()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.4
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::link_pages()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">link_pages</span><span class="nb-faded-text">(
+          string $before
+              =
+              '<br />', string $after
+              =
+              '<br />', string $next_or_number
+              =
+              'number', string $nextpagelink
+              =
+              'next page', string $previouspagelink
+              =
+              'previous page', string $pagelink
+              =
+              '%', string $more_file
+              =
+              ''
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Print list of pages based on arguments.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$next_or_number</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$nextpagelink</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$previouspagelink</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$pagelink</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$more_file</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_link_pages()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_link_pages()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::links_popup_script()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">links_popup_script</span><span class="nb-faded-text">(
+          string $text
+              =
+              'Links', int $width
+              =
+              400, int $height
+              =
+              400, string $file
+              =
+              'links.all.php', bool $count
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Show the link to the links popup and the number of links.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>the text of the link</p></em></td>
+</tr>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>the width of the popup window</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>the height of the popup window</p></em></td>
+</tr>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>the page to open in the popup window</p></em></td>
+</tr>
+<tr>
+<th>$count</th>
+<td>bool</td>
+<td><em><p>the number of links in the db</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>{@internal Use function instead is unknown}}
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::list_authors()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">list_authors</span><span class="nb-faded-text">(
+          bool $optioncount
+              =
+              false, bool $exclude_admin
+              =
+              true, bool $show_fullname
+              =
+              false, bool $hide_empty
+              =
+              true, string $feed
+              =
+              '', string $feed_image
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$optioncount</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$exclude_admin</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$show_fullname</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$hide_empty</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$feed_image</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_authors()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_authors()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::list_cats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">list_cats</span><span class="nb-faded-text">(
+          int $optionall
+              =
+              1, string $all
+              =
+              'All', string $sort_column
+              =
+              'ID', string $sort_order
+              =
+              'asc', string $file
+              =
+              '', bool $list
+              =
+              true, int $optiondates
+              =
+              0, int $optioncount
+              =
+              0, int $hide_empty
+              =
+              1, int $use_desc_for_title
+              =
+              1, bool $children
+              =
+              false, int $child_of
+              =
+              0, int $categories
+              =
+              0, int $recurse
+              =
+              0, string $feed
+              =
+              '', string $feed_image
+              =
+              '', string $exclude
+              =
+              '', bool $hierarchical
+              =
+              false
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$optionall</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$all</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$sort_column</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$sort_order</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$list</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$optiondates</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$optioncount</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$hide_empty</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$use_desc_for_title</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$children</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$child_of</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$categories</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$recurse</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$feed</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$feed_image</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$exclude</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$hierarchical</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_categories()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_categories()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::make_url_footnote()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">make_url_footnote</span><span class="nb-faded-text">(
+          string $content
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Strip HTML and put links at the bottom of stripped content.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Searches for all of the links, strips them out of the content, and places
+them at the bottom of the content with numbers.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Content to get links</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>HTML stripped out of content with links at the bottom.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::next_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">next_post</span><span class="nb-faded-text">(
+          string $format
+              =
+              '%', string $next
+              =
+              'next post: ', string $title
+              =
+              'yes', string $in_same_cat
+              =
+              'no', int $limitnext
+              =
+              1, string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints link to the next post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$next</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$limitnext</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use next_post_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\next_post_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::parent_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">parent_post_rel_link</span><span class="nb-faded-text">(
+           $title
+              =
+              '%title'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational link for parent item</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::permalink_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">permalink_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print the permalink of the current post in the loop.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>1.2
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_permalink()
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_permalink()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::permalink_single_rss()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">permalink_single_rss</span><span class="nb-faded-text">(
+          string $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print the permalink to the RSS feed.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$deprecated</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.3
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_permalink_rss()
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_permalink_rss()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::previous_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">previous_post</span><span class="nb-faded-text">(
+          string $format
+              =
+              '%', string $previous
+              =
+              'previous post: ', string $title
+              =
+              'yes', string $in_same_cat
+              =
+              'no', int $limitprev
+              =
+              1, string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints link to the previous post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$format</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$previous</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$limitprev</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use previous_post_link()
+         
+    </dd>
+<dt>See</dt>
+<dd>\previous_post_link()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_sidebar_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_sidebar_widget</span><span class="nb-faded-text">(
+          string|int $name, callback $output_callback, string $classname
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register widget for sidebar with backwards compatibility.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Allows $name to be an array that accepts either three elements to grab the
+first element and the third for the name or just uses the first element of
+the array for the name.</p>
+
+<p>Passes to {@link wp_register_sidebar_widget()} after argument list and
+backwards compatibility is complete.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string|int</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+<tr>
+<th>$output_callback</th>
+<td>callback</td>
+<td><em><p>Run when widget is called.</p></em></td>
+</tr>
+<tr>
+<th>$classname</th>
+<td>string</td>
+<td><em><p>Classname widget option.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_register_sidebar_widget()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_register_sidebar_widget()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::register_widget_control()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">register_widget_control</span><span class="nb-faded-text">(
+          int|string $name, callback $control_callback, int $width
+              =
+              '', int $height
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Registers widget control callback for customizing options.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Allows $name to be an array that accepts either three elements to grab the
+first element and the third for the name or just uses the first element of
+the array for the name.</p>
+
+<p>Passes to {@link wp_register_widget_control()} after the argument list has
+been compiled.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>int|string</td>
+<td><em><p>Sidebar ID.</p></em></td>
+</tr>
+<tr>
+<th>$control_callback</th>
+<td>callback</td>
+<td><em><p>Widget control callback to display and process form.</p></em></td>
+</tr>
+<tr>
+<th>$width</th>
+<td>int</td>
+<td><em><p>Widget width.</p></em></td>
+</tr>
+<tr>
+<th>$height</th>
+<td>int</td>
+<td><em><p>Widget height.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_register_widget_control()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_register_widget_control()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_url</span><span class="nb-faded-text">(
+          string $url, array $protocols
+              =
+              null
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Performs esc_url() for database or redirect usage.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$url</th>
+<td>string</td>
+<td><em><p>The URL to be cleaned.</p></em></td>
+</tr>
+<tr>
+<th>$protocols</th>
+<td>array</td>
+<td><em><p>An array of acceptable protocols.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The cleaned URL.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use esc_url_raw()
+         
+    </dd>
+<dt>See</dt>
+<dd>\esc_url_raw()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::sanitize_user_object()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">sanitize_user_object</span><span class="nb-faded-text">(
+          object|array $user, string $context
+              =
+              'display'
+          )
+        </span>
+        :
+          object|array</code><div class="description"><p class="short_description">Sanitize every user field.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the context is 'raw', then the user object or array will get minimal santization of the int fields.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>object|array</td>
+<td><em><p>The User Object or Array</p></em></td>
+</tr>
+<tr>
+<th>$context</th>
+<td>string</td>
+<td><em><p>Optional, default is 'display'. How to sanitize user fields.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object|array</td>
+<td>The now sanitized User Object or Array (will be the same type as $user)</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\sanitize_user_field()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::start_post_rel_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">start_post_rel_link</span><span class="nb-faded-text">(
+          string $title
+              =
+              '%title', bool $in_same_cat
+              =
+              false, string $excluded_categories
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display relational link for the first post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$title</th>
+<td>string</td>
+<td><em><p>Optional. Link title format.</p></em></td>
+</tr>
+<tr>
+<th>$in_same_cat</th>
+<td>bool</td>
+<td><em><p>Optional. Whether link should be in same category.</p></em></td>
+</tr>
+<tr>
+<th>$excluded_categories</th>
+<td>string</td>
+<td><em><p>Optional. Excluded categories IDs.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.8.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::start_wp()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">start_wp</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets up the WordPress Loop.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>1.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use The Loop - {@link http://codex.wordpress.org/The_Loop Use new WordPress Loop}
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_ID</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the ID of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('ID')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_aim()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_aim</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the AIM address of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('aim')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_description()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_description</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the description of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('description')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_email</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the email of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('email')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_firstname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_firstname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the first name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('first_name')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_icq()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_icq</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the ICQ number of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('icq')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_lastname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_lastname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the last name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('last_name')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_login()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_login</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the login name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('login')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_msn()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_msn</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the MSN address of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('msn')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_nickname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_nickname</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the nickname of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('nickname')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_url()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_url</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the URL to the home page of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('url')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_author_yim()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_author_yim</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the Yahoo! IM name of the author of the current post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_author_meta('yim')
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_author_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_category_ID()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_category_ID</span><span class="nb-faded-text">(
+          bool $echo
+              =
+              true
+          )
+        </span>
+        :
+          null|int</code><div class="description"><p class="short_description">Return or Print Category ID.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$echo</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>use get_the_category()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_category()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_category_head()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_category_head</span><span class="nb-faded-text">(
+          string $before
+              =
+              '', string $after
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Print category with optional text before and after.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$before</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$after</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>use get_the_category_by_ID()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_category_by_ID()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_content_rss()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_content_rss</span><span class="nb-faded-text">(
+          string $more_link_text
+              =
+              '(more...)', int|bool $stripteaser
+              =
+              0, string $more_file
+              =
+              '', int $cut
+              =
+              0, int $encode_html
+              =
+              0
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display the post content for the feed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>For encoding the html or the $encode_html parameter, there are three possible
+values. '0' will make urls footnotes and use make_url_footnote(). '1' will
+encode special characters and automatically display all of the content. The
+value of '2' will strip all HTML tags from the content.</p>
+
+<p>Also note that you cannot set the amount of words and not set the html
+encoding. If that is the case, then the html encoding will default to 2,
+which will strip all HTML tags.</p>
+
+<p>To restrict the amount of words of the content, you can use the cut
+parameter. If the content is less than the amount, then there won't be any
+dots added to the end. If there is content left over, then dots will be added
+and the rest of the content will be removed.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$more_link_text</th>
+<td>string</td>
+<td><em><p>Optional. Text to display when more content is available but not displayed.</p></em></td>
+</tr>
+<tr>
+<th>$stripteaser</th>
+<td>int|bool</td>
+<td><em><p>Optional. Default is 0.</p></em></td>
+</tr>
+<tr>
+<th>$more_file</th>
+<td>string</td>
+<td><em><p>Optional.</p></em></td>
+</tr>
+<tr>
+<th>$cut</th>
+<td>int</td>
+<td><em><p>Optional. Amount of words to keep for the content.</p></em></td>
+</tr>
+<tr>
+<th>$encode_html</th>
+<td>int</td>
+<td><em><p>Optional. How to encode the content.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.9.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use the_content_feed()
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_the_content()
+         
+    </dd>
+<dt>See</dt>
+<dd>\the_content_feed()
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Feed
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\apply_filters()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::the_editor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">the_editor</span><span class="nb-faded-text">(
+          string $content, string $id
+              =
+              'content', string $prev_id
+              =
+              'title', bool $media_buttons
+              =
+              true, int $tab_index
+              =
+              2,  $extended
+              =
+              true
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Display editor: TinyMCE, HTML, or both.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$content</th>
+<td>string</td>
+<td><em><p>Textarea content.</p></em></td>
+</tr>
+<tr>
+<th>$id</th>
+<td>string</td>
+<td><em><p>Optional, default is 'content'. HTML ID attribute value.</p>
+</em></td>
+</tr>
+<tr>
+<th>$prev_id</th>
+<td>string</td>
+<td><em><p>Optional, not used</p></em></td>
+</tr>
+<tr>
+<th>$media_buttons</th>
+<td>bool</td>
+<td><em><p>Optional, default is true. Whether to display media buttons.</p></em></td>
+</tr>
+<tr>
+<th>$tab_index</th>
+<td>int</td>
+<td><em><p>Optional, not used</p></em></td>
+</tr>
+<tr>
+<th>$extended</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::translate_with_context()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">translate_with_context</span><span class="nb-faded-text">(
+          string $text, string $domain
+              =
+              'default'
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Translates $text like translate(), but assumes that the text
+contains a context after its last vertical bar.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$text</th>
+<td>string</td>
+<td><em><p>Text to translate</p></em></td>
+</tr>
+<tr>
+<th>$domain</th>
+<td>string</td>
+<td><em><p>Domain to retrieve the translated text</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Translated text</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use _x()
+         
+    </dd>
+<dt>See</dt>
+<dd>\_x()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\translate()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unregister_sidebar_widget()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unregister_sidebar_widget</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Alias of {@link wp_unregister_sidebar_widget()}.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_unregister_sidebar_widget()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_unregister_sidebar_widget()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::unregister_widget_control()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">unregister_widget_control</span><span class="nb-faded-text">(
+          int|string $id
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Alias of {@link wp_unregister_widget_control()}.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|string</td>
+<td><em><p>Widget ID.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_unregister_widget_control()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_unregister_widget_control()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_category_cache()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_category_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update the categories cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function does not appear to be used anymore or does not appear to be
+needed. It might be a legacy function left over from when there was a need
+for updating the category cache.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always return True</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.1
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::update_usermeta()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">update_usermeta</span><span class="nb-faded-text">(
+          int $user_id, string $meta_key, mixed $meta_value
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Update metadata of user.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>There is no need to serialize values, they will be serialized if it is
+needed. The metadata key can only be a string with underscores. All else will
+be removed.</p>
+
+<p>Will remove the metadata, if the meta value is empty.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em><p>User ID</p></em></td>
+</tr>
+<tr>
+<th>$meta_key</th>
+<td>string</td>
+<td><em><p>Metadata key.</p></em></td>
+</tr>
+<tr>
+<th>$meta_value</th>
+<td>mixed</td>
+<td><em><p>Metadata value.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful update, false on failure.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use update_user_meta()
+         
+    </dd>
+<dt>See</dt>
+<dd>\update_user_meta()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_create_draft()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_create_draft</span><span class="nb-faded-text">(
+          int $user_id, int $blog_id
+              =
+              1, int $category_id
+              =
+              'None'
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can create a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+<tr>
+<th>$category_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_create_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_create_post</span><span class="nb-faded-text">(
+          int $user_id, int $blog_id
+              =
+              1, int $category_id
+              =
+              'None'
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can create a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+<tr>
+<th>$category_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_delete_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_delete_post</span><span class="nb-faded-text">(
+          int $user_id, int $post_id, int $blog_id
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can delete a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_delete_post_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_delete_post_comments</span><span class="nb-faded-text">(
+          int $user_id, int $post_id, int $blog_id
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can delete a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>returns true if $user_id can delete $post_id's comments</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_edit_post()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_edit_post</span><span class="nb-faded-text">(
+          int $user_id, int $post_id, int $blog_id
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can edit a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_edit_post_comments()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_edit_post_comments</span><span class="nb-faded-text">(
+          int $user_id, int $post_id, int $blog_id
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can delete a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>returns true if $user_id can edit $post_id's comments</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_edit_post_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_edit_post_date</span><span class="nb-faded-text">(
+          int $user_id, int $post_id, int $blog_id
+              =
+              1
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can delete a post.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>returns true if $user_id can edit $post_id's date</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_edit_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_edit_user</span><span class="nb-faded-text">(
+          int $user_id, int $other_user
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Can user can edit other user.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$other_user</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::user_can_set_post_date()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">user_can_set_post_date</span><span class="nb-faded-text">(
+          int $user_id, int $blog_id
+              =
+              1, int $category_id
+              =
+              'None'
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Whether user can set new posts' dates.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$blog_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+<tr>
+<th>$category_id</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use current_user_can()
+         
+    </dd>
+<dt>See</dt>
+<dd>\current_user_can()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_admin_bar_dashboard_view_site_menu()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_admin_bar_dashboard_view_site_menu</span><span class="nb-faded-text">(
+           $wp_admin_bar
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Add the "Dashboard"/"Visit Site" menu.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$wp_admin_bar</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.2.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_default_editor()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_default_editor</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Find out which editor should be displayed</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.5
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_class-wp-editor.html#%5CWP_Editor::wp_default_editor()">\WP_Editor::wp_default_editor()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_links()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_links</span><span class="nb-faded-text">(
+          string $args
+              =
+              ''
+          )
+        </span>
+        :
+          null|string</code><div class="description"><p class="short_description">Gets the links associated with category.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string</td>
+<td><em><p>a query string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\get_links()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_linksbyname()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_linksbyname</span><span class="nb-faded-text">(
+          string $category, string $args
+              =
+              ''
+          )
+        </span>
+        :
+          bool|null</code><div class="description"><p class="short_description">Gets the links associated with the named category.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$category</th>
+<td>string</td>
+<td><em><p>The category to use.</p></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|null</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_bookmarks()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_bookmarks()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_post_cats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_post_cats</span><span class="nb-faded-text">(
+          int $blogid
+              =
+              '1', int $post_ID
+              =
+              0
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blogid</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_get_post_categories()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_get_post_categories()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_list_cats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_list_cats</span><span class="nb-faded-text">(
+          string|array $args
+              =
+              ''
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td>string|array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_list_categories()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_list_categories()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_set_post_cats()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_set_post_cats</span><span class="nb-faded-text">(
+          int $blogid
+              =
+              '1', int $post_ID
+              =
+              0, array $post_categories
+              =
+              array(
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Sets the categories that the post id belongs to.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$blogid</th>
+<td>int</td>
+<td><em><p>Not used</p></em></td>
+</tr>
+<tr>
+<th>$post_ID</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$post_categories</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.1
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_set_post_categories()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_set_post_categories()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_specialchars()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_specialchars</span><span class="nb-faded-text">(
+           $string,  $quote_style
+              =
+              ENT_NOQUOTES,  $charset
+              =
+              false,  $double_encode
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Escaping for HTML blocks.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$string</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$quote_style</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$charset</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$double_encode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.8.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use esc_html()
+         
+    </dd>
+<dt>See</dt>
+<dd>\esc_html()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_timezone_supported()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_timezone_supported</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Check for PHP timezone support</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.2
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.9.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

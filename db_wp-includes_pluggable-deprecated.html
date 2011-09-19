@@ -1,0 +1,484 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/pluggable-deprecated.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Deprecated pluggable functions from past WordPress versions. You shouldn't use these
+functions and look for the alternatives instead. The functions will be removed in a
+later version.</p>
+<div class="long-description"><p>Deprecated warnings are also thrown if one of these functions is being defined by a plugin.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>See</dt>
+<dd>\pluggable.php
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Deprecated
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::get_user_by_email()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_user_by_email</span><span class="nb-faded-text">(
+          string $email
+          )
+        </span>
+        :
+          bool|object</code><div class="description"><p class="short_description">Retrieve user info by email.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$email</th>
+<td>string</td>
+<td><em><p>User's email address</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|object</td>
+<td>False on failure, User DB row object</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_user_by('email')
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::get_userdatabylogin()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">get_userdatabylogin</span><span class="nb-faded-text">(
+          string $user_login
+          )
+        </span>
+        :
+          bool|object</code><div class="description"><p class="short_description">Retrieve user info by login name.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user_login</th>
+<td>string</td>
+<td><em><p>User's username</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|object</td>
+<td>False on failure, User DB row object</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use get_user_by('login')
+         
+    </dd>
+<dt>Since</dt>
+<dd>0.71
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::set_current_user()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">set_current_user</span><span class="nb-faded-text">(
+          int|null $id, string $name
+              =
+              ''
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Changes the current user by ID or name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Set $id to null and specify a name if you do not know a user's ID.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>int|null</td>
+<td><em><p>User ID.</p></em></td>
+</tr>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>Optional. The user's username</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>returns wp_set_current_user()</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>3.0.0
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_set_current_user()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_set_current_user()
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_clearcookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_clearcookie</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Clears the authentication cookie, logging the user out. This function is deprecated.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_clear_auth_cookie()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_clear_auth_cookie()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_get_cookie_login()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_get_cookie_login</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Gets the user cookie login. This function is deprecated.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is deprecated and should no longer be extended as it won't be
+used anywhere in WordPress. Also, plugins shouldn't use it either.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns false</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>No alternative
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.3
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_login()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_login</span><span class="nb-faded-text">(
+          string $username, string $password, bool $deprecated
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Checks a users login information and logs them in if it checks out. This function is deprecated.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Use the global $error to get the reason why the login failed. If the username
+is blank, no error will be set, so assume blank username on that case.</p>
+
+<p>Plugins extending this function should also provide the global $error and set
+what the error is, so that those checking the global for why there was a
+failure can utilize it later.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>User's username</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>User's password</p>
+</em></td>
+</tr>
+<tr>
+<th>$deprecated</th>
+<td>bool</td>
+<td><em><p>Not used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False on login failure, true on successful check</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>Use wp_signon()
+         
+    </dd>
+<dt>Global</dt>
+<dd>string $error Error when false is returned
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.2.2
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_setcookie()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_setcookie</span><span class="nb-faded-text">(
+          string $username, string $password
+              =
+              '', bool $already_md5
+              =
+              false, string $home
+              =
+              '', string $siteurl
+              =
+              '', bool $remember
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets a cookie for a user who just logged in. This function is deprecated.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$username</th>
+<td>string</td>
+<td><em><p>The user's username</p>
+</em></td>
+</tr>
+<tr>
+<th>$password</th>
+<td>string</td>
+<td><em><p>Optional. The user's password</p>
+</em></td>
+</tr>
+<tr>
+<th>$already_md5</th>
+<td>bool</td>
+<td><em><p>Optional. Whether the password has already been through MD5</p></em></td>
+</tr>
+<tr>
+<th>$home</th>
+<td>string</td>
+<td><em><p>Optional. Will be used instead of COOKIEPATH if set</p></em></td>
+</tr>
+<tr>
+<th>$siteurl</th>
+<td>string</td>
+<td><em><p>Optional. Will be used instead of SITECOOKIEPATH if set</p></em></td>
+</tr>
+<tr>
+<th>$remember</th>
+<td>bool</td>
+<td><em><p>Optional. Remember that the user is logged in</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>2.5
+         
+    </dd>
+<dt>Deprecated</dt>
+<dd>Use wp_set_auth_cookie()
+         
+    </dd>
+<dt>See</dt>
+<dd>\wp_set_auth_cookie()
+         
+    </dd>
+<dt>Since</dt>
+<dd>1.5
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

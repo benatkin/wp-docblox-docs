@@ -1,0 +1,570 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-content/themes/twentyten/functions.php</h1>
+<div class="file-nav">
+<ul id="file-nav"><li><a href="#top">Global</a></li></ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">TwentyTen functions and definitions</p>
+<div class="long-description"><p>Sets up the theme and provides some helper functions. Some helper functions
+are used in the theme as custom template tags. Others are attached to action and
+filter hooks in WordPress to change core functionality.</p>
+
+<p>The first function, twentyten_setup(), sets up the theme by registering support
+for various features in WordPress, such as post thumbnails, navigation menus, and the like.</p>
+
+<p>When using a child theme (see http://codex.wordpress.org/Theme_Development and
+http://codex.wordpress.org/Child_Themes), you can override certain functions
+(those wrapped in a function_exists() call) by defining them first in your child theme's
+functions.php file. The child theme's functions.php file is included before the parent
+theme's file, so the child theme functions would be used.</p>
+
+<p>Functions that are not pluggable (not wrapped in function_exists()) are instead attached
+to a filter or action hook. The hook can be removed by using remove_action() or
+remove_filter() and you can attach your own function to the hook.</p>
+
+<p>We can remove the parent theme's hook only after it is attached, which means we need to
+wait until setting up the child theme:</p>
+
+<pre><code>add_action( 'after_setup_theme', 'my_child_theme_setup' );
+function my_child_theme_setup() {
+    // We are providing our own filter for excerpt_length (or using the unfiltered value)
+    remove_filter( 'excerpt_length', 'twentyten_excerpt_length' );
+    ...
+}
+</code></pre>
+
+<p>For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Twenty_Ten
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::twentyten_admin_header_style()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_admin_header_style</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Styles the header image displayed on the Appearance > Header admin panel.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Referenced via add_custom_image_header() in twentyten_setup().</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_auto_excerpt_more()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_auto_excerpt_more</span><span class="nb-faded-text">(
+           $more
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and twentyten_continue_reading_link().</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this in a child theme, remove the filter and add your own
+function tied to the excerpt_more filter hook.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$more</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>An ellipsis</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_comment()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_comment</span><span class="nb-faded-text">(
+           $comment,  $args,  $depth
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Template for comments and pingbacks.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this walker in a child theme without modifying the comments template
+simply create your own twentyten_comment(), and that function will be used instead.</p>
+
+<p>Used as a callback by wp_list_comments() for displaying the comments.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$comment</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$depth</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_continue_reading_link()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_continue_reading_link</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns a "Continue Reading" link for excerpts</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>"Continue Reading" link</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_custom_excerpt_more()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_custom_excerpt_more</span><span class="nb-faded-text">(
+           $output
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds a pretty "Continue Reading" link to custom post excerpts.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this link in a child theme, remove the filter and add your own
+function tied to the get_the_excerpt filter hook.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Excerpt with a pretty "Continue Reading" link</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_excerpt_length()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_excerpt_length</span><span class="nb-faded-text">(
+           $length
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Sets the post excerpt length to 40 characters.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this length in a child theme, remove the filter and add your own
+function tied to the excerpt_length filter hook.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$length</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_page_menu_args()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_page_menu_args</span><span class="nb-faded-text">(
+           $args
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this in a child theme, remove the filter and optionally add
+your own function tied to the wp_page_menu_args filter hook.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$args</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_posted_in()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_posted_in</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints HTML with meta information for the current post (category, tags and permalink).</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_posted_on()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_posted_on</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Prints HTML with meta information for the current post-date/time and author.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_remove_gallery_css()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_remove_gallery_css</span><span class="nb-faded-text">(
+           $css
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Deprecated way to remove inline styles printed when the gallery shortcode is used.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is no longer needed or used. Use the use_default_gallery_style
+filter instead, as seen above.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$css</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The gallery style filter, with the styles themselves removed.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Deprecated</dt>
+<dd>Deprecated in Twenty Ten 1.2 for WordPress 3.1
+         
+    </dd>
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_remove_recent_comments_style()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_remove_recent_comments_style</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Removes the default styles that are packaged with the Recent Comments widget.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override this in a child theme, remove the filter and optionally add your own
+function tied to the widgets_init action hook.</p>
+
+<p>This function uses a filter (show_recent_comments_widget_style) new in WordPress 3.1
+to remove the default style. Using Twenty Ten 1.2 in WordPress 3.0 will show the styles,
+but they won't have any effect on the widget in default Twenty Ten styling.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_setup()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_setup</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets up theme defaults and registers support for various WordPress features.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Note that this function is hooked into the after_setup_theme hook, which runs
+before the init hook. The init hook is too late for some features, such as indicating
+support post thumbnails.</p>
+
+<p>To override twentyten_setup() in a child theme, add your own twentyten_setup to your child theme's
+functions.php file.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_theme_support()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\register_nav_menus()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_custom_background()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_editor_style()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\load_theme_textdomain()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\add_custom_image_header()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\register_default_headers()
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\set_post_thumbnail_size()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::twentyten_widgets_init()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">twentyten_widgets_init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Register widgetized areas, including two sidebars and four widget-ready columns in the footer.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>To override twentyten_widgets_init() in a child theme, remove the action hook and add your own
+function tied to the init hook.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>Twenty Ten 1.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\register_sidebar
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>

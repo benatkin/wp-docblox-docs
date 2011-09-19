@@ -1,0 +1,1453 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DocBlox Documentation</title><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+
+      function filterElements()
+      {
+        inherited = !$('a#show-inherited').hasClass('deselected');
+        public    = !$('a#show-public').hasClass('deselected');
+        protected = !$('a#show-protected').hasClass('deselected');
+        private   = !$('a#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+        $('div.file-nav').show();
+
+        $('a#show-public, a#show-protected, a#show-private, a#show-inherited').click(function(){
+            $(this).toggleClass('deselected');
+            if ($(this).hasClass('deselected')) {
+              $(this).fadeTo('fast', '0.4');
+            } else {
+              $(this).fadeTo('fast', '1.0');
+            }
+            filterElements();
+            return false;
+        });
+        $('a#show-protected, a#show-private').click();
+
+      });
+      
+    </script><h1 class="file">wp-includes/cache.php</h1>
+<div class="file-nav">
+<ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CWP_Object_Cache">\WP_Object_Cache</a></li></ul>
+</li>
+</ul>
+<div style="float: right;padding-right: 20px;">
+              Show:
+              <a href="#" id="show-public"><img src="images/icons/visibility_public.png"></a><a href="#" id="show-protected"><img src="images/icons/visibility_protected.png"></a><a href="#" id="show-private"><img src="images/icons/visibility_private.png"></a><a href="#" id="show-inherited"><span class="attribute">inherited</span></a>
+</div>
+</div>
+<a name="top" class="anchor"></a><div id="file-description">
+<p class="short-description">Object Cache API</p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>Link</dt>
+<dd>
+<a href="http://codex.wordpress.org/Function_Reference/WP_Cache">http://codex.wordpress.org/Function_Reference/WP_Cache</a>
+         
+    </dd>
+<dt>Package</dt>
+<dd>WordPress
+         
+    </dd>
+<dt>Subpackage</dt>
+<dd>Cache
+         
+    </dd>
+</dl>
+<a name="functions" class="anchor"></a><h2>Functions</h2>
+<div>
+<a id="::wp_cache_add()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_add</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              '', int $expire
+              =
+              0
+          )
+        </span>
+        :
+          \unknown</code><div class="description"><p class="short_description">Adds data to the cache, if the cache key doesn't already exist.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>The cache key to use for retrieval later</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The data to add to the cache store</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group to add the cache to</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>When the cache data should be expired</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\unknown</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::add()">\WP_Object_Cache::add()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_add_global_groups()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_add_global_groups</span><span class="nb-faded-text">(
+          string|array $groups
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds a group or set of groups to the list of global groups.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$groups</th>
+<td>string|array</td>
+<td><em><p>A group or an array of groups to add</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_add_non_persistent_groups()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_add_non_persistent_groups</span><span class="nb-faded-text">(
+          string|array $groups
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds a group or set of groups to the list of non-persistent groups.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$groups</th>
+<td>string|array</td>
+<td><em><p>A group or an array of groups to add</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_close()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_close</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Closes the cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This function has ceased to do anything since WordPress 2.5. The
+functionality was removed along with the rest of the persistent cache. This
+does not mean that plugins can't implement this function when they need to
+make sure that the cache is cleaned up after WordPress no longer needs it.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns True</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_decr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_decr</span><span class="nb-faded-text">(
+          int|string $key, int $offset
+              =
+              1, string $group
+              =
+              ''
+          )
+        </span>
+        :
+          false|int</code><div class="description"><p class="short_description">Decrement numeric cache item's value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>The cache key to increment</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>int</td>
+<td><em><p>The amount by which to decrement the item's value. Default is 1.</p>
+</em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group the key is in.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>false|int</td>
+<td>False on failure, the item's new value on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::decr()">\WP_Object_Cache::decr()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_delete()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_delete</span><span class="nb-faded-text">(
+          int|string $key, string $group
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Removes the cache contents matching key and group.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What the contents in the cache are called</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where the cache contents are grouped</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True on successful removal, false on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::delete()">\WP_Object_Cache::delete()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_flush()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_flush</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Removes all cache items.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::flush()">\WP_Object_Cache::flush()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_get()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_get</span><span class="nb-faded-text">(
+          int|string $key, string $group
+              =
+              '', bool $force
+              =
+              false
+          )
+        </span>
+        :
+          bool|mixed</code><div class="description"><p class="short_description">Retrieves the cache contents from the cache by key and group.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What the contents in the cache are called</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where the cache contents are grouped</p></em></td>
+</tr>
+<tr>
+<th>$force</th>
+<td>bool</td>
+<td><em><p>Whether to force an update of the local cache from the persistent cache (default is false)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|mixed</td>
+<td>False on failure to retrieve contents or the cache contents on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::get()">\WP_Object_Cache::get()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_incr()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_incr</span><span class="nb-faded-text">(
+          int|string $key, int $offset
+              =
+              1, string $group
+              =
+              ''
+          )
+        </span>
+        :
+          false|int</code><div class="description"><p class="short_description">Increment numeric cache item's value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>The cache key to increment</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>int</td>
+<td><em><p>The amount by which to increment the item's value. Default is 1.</p>
+</em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group the key is in.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>false|int</td>
+<td>False on failure, the item's new value on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::incr()">\WP_Object_Cache::incr()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_init()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets up Object Cache Global and assigns it.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Global</dt>
+<dd>WP_Object_Cache $wp_object_cache WordPress Object Cache
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_replace()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_replace</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              '', int $expire
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Replaces the contents of the cache with new data.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What to call the contents in the cache</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The contents to store in the cache</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where to group the cache contents</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>When to expire the cache contents</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if cache key and group already exist, true on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::replace()">\WP_Object_Cache::replace()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_reset()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_reset</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Reset internal cache keys and structures.  If the cache backend uses global blog or site IDs as part of its cache keys,
+this function instructs the backend to reset those keys and perform any cleanup since blog or site IDs have changed since cache init.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.6.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="::wp_cache_set()" class="anchor"></a><div class="function ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/function.png" alt="function"><span class="highlight">wp_cache_set</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              '', int $expire
+              =
+              0
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Saves the data to the cache.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What to call the contents in the cache</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The contents to store in the cache</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where to group the cache contents</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>When to expire the cache contents</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if cache key and group already exist, true on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::set()">\WP_Object_Cache::set()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>\$wp_object_cache
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<a name="classes" class="anchor"></a><a id="\WP_Object_Cache" class="anchor"></a><h2 class="class">\WP_Object_Cache<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<small class="package"><b>Package: </b>WordPress\Cache</small><p class="short-description">WordPress Object Cache</p>
+<div class="long-description"><p>The WordPress Object Cache is used to save on trips to the database. The
+Object Cache stores all of the cache data to memory and makes the cache
+contents available by using a key, which is used to name and later retrieve
+the cache contents.</p>
+
+<p>The Object Cache can be replaced by other caching mechanisms by placing files
+in the wp-content folder which is looked at in wp-settings. If that file
+exists, then this file will not be included.</p>
+</div>
+<dl class="class-info">
+<dt>Since</dt>
+<dd>2.0
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\WP_Object_Cache::$cache" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$cache</span>= 'array ('
+                </code><div class="description">
+<p class="short-description">Holds the cached objects</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array (</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::$cache_hits" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$cache_hits</span>= '0'
+                </code><div class="description">
+<p class="short-description">The amount of times the cache data was already stored in the cache.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.5.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::$cache_misses" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight">$cache_misses</span>= '0'
+                </code><div class="description">
+<p class="short-description">Amount of times the cache did not have the request in cache</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::$global_groups" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">array
+                 <span class="highlight">$global_groups</span>= 'array('
+                </code><div class="description">
+<p class="short-description">List of global groups</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array(</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Access</dt>
+<dd>protected
+         
+    </dd>
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WP_Object_Cache::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          null|<a href="db_wp-includes_cache.html#%5CWP_Object_Cache">\WP_Object_Cache</a></code><div class="description"><p class="short_description">Sets up object properties; PHP 5 style constructor</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>null|<a href="db_wp-includes_cache.html#%5CWP_Object_Cache">\WP_Object_Cache</a>
+</td>
+<td>If cache is disabled, returns null.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::__destruct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__destruct</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Will save the object cache before object is completely destroyed.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called upon object destruction, which should be when PHP ends.</p>
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True value. Won't be used by PHP</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.8
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::add()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">add</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              'default', int $expire
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Adds data to the cache if it doesn't already exist.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What to call the contents in the cache</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The contents to store in the cache</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where to group the cache contents</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>When to expire the cache contents</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if cache key and group already exist, true on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::get">\WP_Object_Cache::get</a>
+         
+    </dd>
+<dt>Uses</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::set">\WP_Object_Cache::set</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::add_global_groups()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">add_global_groups</span><span class="nb-faded-text">(
+          array $groups
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the list of global groups.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$groups</th>
+<td>array</td>
+<td><em><p>List of groups that are global.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::decr()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">decr</span><span class="nb-faded-text">(
+          int|string $key, int $offset
+              =
+              1, string $group
+              =
+              'default'
+          )
+        </span>
+        :
+          false|int</code><div class="description"><p class="short_description">Decrement numeric cache item's value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>The cache key to increment</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>int</td>
+<td><em><p>The amount by which to decrement the item's value. Default is 1.</p>
+</em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group the key is in.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>false|int</td>
+<td>False on failure, the item's new value on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::delete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete</span><span class="nb-faded-text">(
+          int|string $key, string $group
+              =
+              'default', bool $force
+              =
+              false
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Remove the contents of the cache key in the group</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If the cache key does not exist in the group and $force parameter is set
+to false, then nothing will happen. The $force parameter is set to false
+by default.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What the contents in the cache are called</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where the cache contents are grouped</p></em></td>
+</tr>
+<tr>
+<th>$force</th>
+<td>bool</td>
+<td><em><p>Optional. Whether to force the unsetting of the cache key in the group</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if the contents weren't deleted and true on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::flush()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">flush</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Clears the object cache of all data</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::get()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get</span><span class="nb-faded-text">(
+          int|string $key, string $group
+              =
+              'default', string $force
+              =
+              false
+          )
+        </span>
+        :
+          bool|mixed</code><div class="description"><p class="short_description">Retrieves the cache contents, if it exists</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The contents will be first attempted to be retrieved by searching by the
+key in the cache group. If the cache is hit (success) then the contents
+are returned.</p>
+
+<p>On failure, the number of cache misses will be incremented.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What the contents in the cache are called</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where the cache contents are grouped</p></em></td>
+</tr>
+<tr>
+<th>$force</th>
+<td>string</td>
+<td><em><p>Whether to force a refetch rather than relying on the local cache (default is false)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool|mixed</td>
+<td>False on failure to retrieve contents or the cache contents on success</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::incr()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">incr</span><span class="nb-faded-text">(
+          int|string $key, int $offset
+              =
+              1, string $group
+              =
+              'default'
+          )
+        </span>
+        :
+          false|int</code><div class="description"><p class="short_description">Increment numeric cache item's value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>The cache key to increment</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>int</td>
+<td><em><p>The amount by which to increment the item's value. Default is 1.</p>
+</em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group the key is in.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>false|int</td>
+<td>False on failure, the item's new value on success.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.3.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::replace()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">replace</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              'default', int $expire
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Replace the contents in the cache, if contents already exist</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What to call the contents in the cache</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The contents to store in the cache</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where to group the cache contents</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>When to expire the cache contents</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>False if not exists, true if contents were replaced</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_wp-includes_cache.html#%5CWP_Object_Cache::set()">\WP_Object_Cache::set()</a>
+         
+    </dd>
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::reset()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reset</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Reset keys</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>3.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::set()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">set</span><span class="nb-faded-text">(
+          int|string $key, mixed $data, string $group
+              =
+              'default', int $expire
+              =
+              ''
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Sets the data contents into the cache</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The cache contents is grouped by the $group parameter followed by the
+$key. This allows for duplicate ids in unique groups. Therefore, naming of
+the group should be used with care and should follow normal function
+naming guidelines outside of core WordPress usage.</p>
+
+<p>The $expire parameter is not used, because the cache will automatically
+expire for each time a page is accessed and PHP finishes. The method is
+more for cache plugins which use files.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>int|string</td>
+<td><em><p>What to call the contents in the cache</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>mixed</td>
+<td><em><p>The contents to store in the cache</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>Where to group the cache contents</p></em></td>
+</tr>
+<tr>
+<th>$expire</th>
+<td>int</td>
+<td><em><p>Not Used</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Always returns true</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\WP_Object_Cache::stats()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">stats</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Echoes the stats of the caching.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Gives the cache hits, and cache misses. Also prints every cached group,
+key and the data.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Since</dt>
+<dd>2.0.0
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.14.1</a>.
+    </small></body></html>
